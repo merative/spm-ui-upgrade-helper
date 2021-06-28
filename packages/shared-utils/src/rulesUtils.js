@@ -62,6 +62,19 @@ const mergeAndSortRules = rulesJson => {
       SelectorReplace: [ ...rules.SelectorReplace, ...newRules.SelectorReplace ],
     };
   });
+
+  // Remove duplicates
+  rules.SelectorRemove = rules.SelectorRemove.filter((item, index, self) =>
+    index === self.findIndex(otherItem => (
+      item.value === otherItem.value
+    ))
+  );
+  rules.SelectorReplace = rules.SelectorReplace.filter((item, index, self) =>
+    index === self.findIndex(otherItem => (
+      item.value === otherItem.value && item.newValue === otherItem.newValue
+    ))
+  );
+
   rules.SelectorRemove.sort((a,b) => { return b.value.length - a.value.length;});
   rules.SelectorReplace.sort((a,b) => { return b.value.length - a.value.length;});
   return rules;

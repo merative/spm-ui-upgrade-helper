@@ -9,6 +9,10 @@
   ],
   "SelectorReplace": [
     {
+      "value": ".aaa",
+      "newValue": ".bbb"
+    },
+    {
       "value": ".ccc",
       "newValue": ".ddd"
     }

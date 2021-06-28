@@ -12,6 +12,7 @@ script:
   - yarn -v
   - cd packages/shared-utils
   - yarn install
+  - yarn test
   - cd ../css-rules-engine
   - yarn install
   - yarn test
