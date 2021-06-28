@@ -13,7 +13,6 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:extension.helloWorld",
 		"onCommand:extension.runUIUpgradeHelperCSS",
 		"onCommand:extension.runUIUpgradeHelperIcons",
 		"onCommand:extension.runUIUpgradeHelperJS"
@@ -21,10 +20,6 @@
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
-			{
-				"command": "extension.helloWorld",
-				"title": "Hello World"
-			},
 			{
 				"command": "extension.runUIUpgradeHelperCSS",
 				"title": "Run UI Upgrade Helper - CSS"
