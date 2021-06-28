@@ -6,7 +6,7 @@
   "author": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --inspect=0.0.0.0:5002 server.js",
+    "start": "nodemon server.js",
     "test": "jest"
   },
   "dependencies": {
