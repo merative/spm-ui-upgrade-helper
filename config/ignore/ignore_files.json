@@ -1,0 +1,29 @@
+{
+  "globs": [
+    "**/Editors/**",
+    "**/IntelligentEvidenceGathering/**",
+    "**/CitizenAccount/**",
+    "**/CitizenWorkspace/**",
+    "**/*CitizenPortal/**",
+    "**/ieg-*.css",
+    "**/banner-css-template.css",
+    "**/cp-*.css",
+    "**/cw-*.css",
+    "**/css-oneui-*.css",
+    "**/triage-styles*.css",
+    "**/citizenaccount*.css",
+    "**/lifeevents*.css",
+    "**/CitizenWorkspace*.css",
+    "**/application-banner*.css",
+    "**/custom-ua-pagination.css",
+    "**/EligibilityResult*.css",
+    "**/curam-extapp*.css",
+    "**/gumbo*.css",
+    "**/mobile-extapp*.css",
+    "**/ExternalApplication*.css",
+    "**/onlineappeals*.css",
+    "**/hcr-ieg.css"
+  ],
+  "tokens": [
+  ]
+}

@@ -1,0 +1,8 @@
+**/node_modules
+Dockerfile
+*.xlsx
+/_notes/
+/_old/
+/_scripts/
+**/yarn-error.log
+packages/**/server.js

@@ -1,2 +1,4 @@
-# spm-ui-upgrade-helper
-SPM UI Upgrade Helper
+# Getting started
+
+- [Customer guide](docs/customer_guide.md)
+- [Developer guide](docs/developer_guide.md)

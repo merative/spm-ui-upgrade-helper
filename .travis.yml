@@ -1,0 +1,16 @@
+language: node_js
+node_js:
+  - 12
+group: bluezone
+dist: xenial
+
+env:
+  - VER=`node -pe "require('./package.json')['version']"`
+
+script:
+  - node -v
+  - yarn -v
+  - yarn install
+  - cd packages/css-rules-engine
+  - yarn build
+  - yarn test

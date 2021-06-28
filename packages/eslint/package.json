@@ -1,0 +1,8 @@
+{
+    "name": "eslint-plugin-upgrade-helper",
+    "version": "1.0.0",
+    "main": "index.js",
+    "devDependencies": {
+        "eslint": "^7.17.0"
+    }
+}

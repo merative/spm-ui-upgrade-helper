@@ -1,0 +1,23 @@
+[
+  {
+    "package": "css-rules-engine",
+    "name": "UI Upgrade Helper - CSS",
+    "port": 4000,
+    "url": "http://localhost:4000/execute",
+    "commandName": "extension.runUIUpgradeHelperCSS"
+  },
+  {
+    "package": "icon-replacement",
+    "name": "UI Upgrade Helper - Icons",
+    "port": 4001,
+    "url": "http://localhost:4001/execute",
+    "commandName": "extension.runUIUpgradeHelperIcons"
+  },
+  {
+    "package": "js-rules-engine",
+    "name": "UI Upgrade Helper - JS",
+    "port": 4002,
+    "url": "http://localhost:4002/execute",
+    "commandName": "extension.runUIUpgradeHelperJS"
+  }
+]

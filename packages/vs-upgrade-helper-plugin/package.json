@@ -1,0 +1,62 @@
+{
+	"name": "vs-upgrade-helper-plugin",
+	"version": "0.0.0",
+	"license": "Apache-2.0",
+	"description": "",
+	"author": "",
+	"publisher": "ibm",
+	"repository": "https://github.com/Microsoft/vscode-extension-samples/helloworld-sample",
+	"engines": {
+		"vscode": "^1.34.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onCommand:extension.helloWorld",
+		"onCommand:extension.runUIUpgradeHelperCSS",
+		"onCommand:extension.runUIUpgradeHelperIcons",
+		"onCommand:extension.runUIUpgradeHelperJS"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "extension.helloWorld",
+				"title": "Hello World"
+			},
+			{
+				"command": "extension.runUIUpgradeHelperCSS",
+				"title": "Run UI Upgrade Helper - CSS"
+			},
+			{
+				"command": "extension.runUIUpgradeHelperIcons",
+				"title": "Run UI Upgrade Helper - Icons"
+			},
+			{
+				"command": "extension.runUIUpgradeHelperJS",
+				"title": "Run UI Upgrade Helper - Javascript"
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "yarn compile",
+		"compile": "tsc -p ./",
+		"lint": "eslint . --ext .ts,.tsx",
+		"watch": "tsc -watch -p ./",
+		"build": "vsce package"
+	},
+	"devDependencies": {
+		"@types/node": "^12.12.0",
+		"@types/vscode": "^1.34.0",
+		"@typescript-eslint/eslint-plugin": "^3.0.2",
+		"@typescript-eslint/parser": "^3.0.2",
+		"eslint": "^7.1.0",
+		"typescript": "^4.0.2",
+		"vsce": "^1.83.0"
+	},
+	"dependencies": {
+		"axios": "^0.21.1",
+		"yarn-deduplicate": "^3.1.0"
+	}
+}

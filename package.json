@@ -1,0 +1,30 @@
+{
+  "name": "ui-upgrade-helper",
+  "version": "1.0.0",
+  "license": "Apache-2.0",
+  "description": "",
+  "author": "",
+  "scripts": {
+    "install-all": "npm-run-all --sequential install:*",
+    "install:browser-app": "cd packages/browser-app && yarn install",
+    "install:code-generator": "cd packages/code-generator && yarn install",
+    "install:css-rules-engine": "cd packages/css-rules-engine && yarn install",
+    "install:icon-replacement": "cd packages/icon-replacement && yarn install",
+    "install:js-rules-engine": "cd packages/js-rules-engine && yarn install",
+    "install:shared-utils": "cd packages/shared-utils && yarn install",
+    "start": "lerna run start --scope @upgrade-helper/browser-app --scope @upgrade-helper/css-rules-engine --scope @upgrade-helper/icon-replacement --scope @upgrade-helper/js-rules-engine",
+    "generate-files": "node ./packages/code-generator/index.js",
+    "test": "lerna run test --ignore @upgrade-helper/skeleton"
+  },
+  "resolutions": {
+    "@types/react": "^16.8.0"
+  },
+  "devDependencies": {
+    "docker-tasks": "^0.1.42",
+    "eslint": "^7.20.0"
+  },
+  "dependencies": {
+    "lerna": "^3.22.1",
+    "npm-run-all": "^4.1.5"
+  }
+}

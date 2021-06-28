@@ -1,0 +1,44 @@
+{
+  "SelectorRemove": [
+    { "value": ".input.text" },
+    { "value": ".soria input" },
+    { "value": "input.password" },
+    { "value": "input.password-confirm" },
+    { "value": "input.password-field" },
+    { "value": "#Curam_WCSAClaimEst_create div.cluster table tbody td.field input.password" },
+    { "value": ".rtl input.text" },
+    { "value": ".rtl input.password" },
+    { "value": ".soria input.text::-ms-clear" },
+    { "value": ".soria input.password::-ms-clear" },
+    { "value": "body.curam.soria .calendar input" },
+    { "value": ".search-input-controls input.text" },
+    { "value": "body.mobile.curam.soria input.text" },
+    { "value": ".soria div.list td.field input.text" },
+    { "value": "body#Curam_frequency-editor input.text" },
+    { "value": "body.curam.soria .calendar input:hover" },
+    { "value": "body.curam.soria .calendar input:focus" },
+    { "value": "body.curam.soria div.list table td.codetable input" },
+    { "value": "body.curam.soria div.cluster table td.codetable input" },
+    { "value": ".rtl .soria div.list td.field input.text" },
+    { "value": "body.curam.soria .calendar input:disabled" },
+    { "value": "body#Curam_frequency-editor td input.text" },
+    { "value": ".rtl body#Curam_frequency-editor input.text" },
+    { "value": ".soria div.list td.field input.text.disabled" },
+    { "value": "body.curam#Curam_frequency-editor td input.text" },
+    { "value": "body.soria div.list table tbody td.field input.text" },
+    { "value": "body.rtl.curam#Curam_frequency-editor td input.text" },
+    { "value": "body.curam#Curam_frequency-editor td input.text:hover" },
+    { "value": "body.curam#Curam_frequency-editor td input.text:focus" },
+    { "value": "body.curam.soria div.list table tbody td.field input.text" },
+    { "value": "body.curam.soria div.list table tbody td.field input.text:hover" },
+    { "value": "body.curam.soria div.list table tbody td.field input.text:focus" },
+    { "value": "body.curam.soria div.list table tbody td.field input.text:disabled" },
+    { "value": "body.curam.soria.rtl div.list table tbody td.field input.text:focus" }
+  ],
+  "SelectorReplace": [
+    {
+      "value": "body#Curam_user-prefs-editor input.non-radio",
+      "newValue": "body#Curam_user-prefs-editor input.non-radio"
+    }
+  ]
+}

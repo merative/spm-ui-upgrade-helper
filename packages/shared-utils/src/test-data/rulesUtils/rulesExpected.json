@@ -1,0 +1,23 @@
+{
+  "SelectorRemove": [
+    {
+      "value": ".longer"
+    },
+    {
+      "value": ".long"
+    },
+    {
+      "value": ".foo"
+    }
+  ],
+  "SelectorReplace": [
+    {
+      "value": ".aaa",
+      "newValue": ".bbb"
+    },
+    {
+      "value": ".ccc",
+      "newValue": ".ddd"
+    }
+  ]
+}
