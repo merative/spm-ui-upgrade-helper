@@ -6,9 +6,8 @@
   "author": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --inspect=0.0.0.0:5009 server.js",
-    "test": "jest",
-    "build": "webpack --config webpack.config.js"
+    "start": "nodemon server.js",
+    "test": "jest"
   },
   "dependencies": {
     "express": "^4.17.1",
