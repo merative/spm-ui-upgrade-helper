@@ -67,4 +67,4 @@ const mergeAndSortRules = rulesJson => {
   return rules;
 }
 
-module.exports = { loadRules };
+module.exports = { loadRules, mergeAndSortRules };

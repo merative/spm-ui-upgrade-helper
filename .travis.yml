@@ -11,6 +11,8 @@ script:
   - node -v
   - yarn -v
   - yarn install
-  - cd packages/css-rules-engine
-  - yarn build
+  - yarn install-all
+  - cd ./packages/css-rules-engine
+  - yarn test
+  - cd ../js-rules-engine
   - yarn test

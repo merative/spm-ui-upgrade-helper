@@ -1,6 +1,6 @@
 const fileio = require("@folkforms/file-io");
 const fromMarkdown = require('mdast-util-from-markdown');
-const { mergeAndSortRules } = require("../../../shared-utils/src/mergeAndSortRules");
+const { mergeAndSortRules } = require("../../../shared-utils/src/rulesUtils");
 
 /**
  * Parses the given markdown files as test cases. See `example.md` for an explanation of the
