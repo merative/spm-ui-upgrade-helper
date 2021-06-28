@@ -12,7 +12,7 @@ _Note: Available to all customers._
 
 Customer pulls latest docker image from public Docker hub e.g.:
 
-1. Run `docker run -v /path/to/input/folder:/home/workspace/input -v /path/to/output/folder:/home/workspace/output /path/to/additional/rules:/home/workspace/rules @ibm/spm/ui-upgrade-helper_upgrade-helper`
+1. Run `docker run -p 3000:3000 -p 4000-4002:4000-4002 -v /path/to/input/folder:/home/workspace/input -v /path/to/output/folder:/home/workspace/output -v /path/to/additional/rules:/home/workspace/rules -v /path/to/additional/ignores:/home/workspace/ignore --name spm-ui-upgrade-helper @ibm/spm-ui-upgrade-helper:latest`
 
 ### Option 2 - Internal IBM Docker
 
@@ -20,35 +20,26 @@ _Note: Available to customers with IBM lab services on site only._
 
 Customer pulls latest docker image from internal IBM Docker hub e.g.:
 
-1. Run `docker run -v /path/to/input/folder:/home/workspace/input -v /path/to/output/folder:/home/workspace/output -v /path/to/additional/rules:/home/workspace/rules wh-govspm-docker-local.artifactory.swg-devops.com/artifactory/wh-govspm-docker-local/ui-upgrade-helper_upgrade-helper`
+1. Run `docker run -p 3000:3000 -p 4000-4002:4000-4002 -v /path/to/input/folder:/home/workspace/input -v /path/to/output/folder:/home/workspace/output -v /path/to/additional/rules:/home/workspace/rules -v /path/to/additional/ignores:/home/workspace/ignore --name ui-upgrade-helper ui-upgrade-helper:latest`
 
 ### Option 3 - Public Github
 
 _Note: Available to all customers, but more effort than option 1._
 
-1. Download code from https://github.com/IBM/SPM-UI-Upgrade-Helper
-2. Run `npm install`
-3. Run `docker-compose build`
-4. Run `docker-compose up`
+1. Download code from https://github.com/IBM/spm-ui-upgrade-helper
+2. Run `yarn install`
+3. Run `yarn docker-tasks build`
+4. Run `run.bat`/`run.sh`
 
-### Option 4 - Internal IBM Github
-
-_Note: Available to customers with IBM lab services on site only, but more effort than option 2._
-
-1. Download code from https://github.ibm.com/WH-GovSPM/UI-Upgrade-Helper
-2. Run `npm install`
-3. Run `docker-compose build`
-4. Run `docker-compose up`
-
-### Option 5
+### Option 4 - Standard Release Process
 
 _Note: Available to all customers, but more effort than options 1 & 3._
 
 - Release the tool as a new asset in the standard SPM way.
 - Customers download the tool from fix central.
-- Install steps are very similar to options 1-4.
+- Install steps are very similar to options 1-3.
 
-(Note: Release vehicle can still be a Docker image or source code.)
+(Note: Release vehicle can still be a Docker image.)
 
 ## Running the tool
 
