@@ -10,9 +10,12 @@ env:
 script:
   - node -v
   - yarn -v
+  - cd packages/shared-utils
   - yarn install
-  - yarn install-all
-  - cd ./packages/css-rules-engine
+  - yarn test
+  - cd ../css-rules-engine
+  - yarn install
   - yarn test
   - cd ../js-rules-engine
+  - yarn install
   - yarn test
