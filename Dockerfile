@@ -48,6 +48,7 @@ EXPOSE 4000-4002
 ENV SHELL=/bin/bash \
     THEIA_DEFAULT_PLUGINS=local-dir:/home/theia/plugins
 ENV USE_LOCAL_GIT true
+ENV GIT_DISCOVERY_ACROSS_FILESYSTEM 1
 USER theia
 RUN git config --global user.email "upgrade@helper.com"
 RUN echo "{\"recentRoots\":[\"/home/workspace\"]}" > /home/theia/.theia/recentworkspace.json

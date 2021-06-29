@@ -8,9 +8,6 @@ const fileio = require('@folkforms/file-io');
  */
 const removeOutputFolder = config => {
   const cwd = process.cwd();
-  // shell.rm("-rf", config.outputFolder);
-  // shell.rm("-rf", `${config.outputFolder}/.[!.]*`);
-  // shell.rm("-rf", `${config.outputFolder}/..?*`);
   shell.rm("-rf", `${config.outputFolder}/*`);
   shell.rm("-rf", `${config.outputFolder}/.git`);
   shell.mkdir('-p', config.outputFolder);
