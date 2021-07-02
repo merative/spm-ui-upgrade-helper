@@ -1,4 +1,4 @@
-<<< Back to the [customer guide](../customer_guide.md)
+[<<< Back to the customer guide](../customer_guide.md)
 
 # Rules
 
@@ -13,5 +13,6 @@ The following steps determine the order of the rules:
 
 ## Adding new Rules
 
-Customers can add new rules by creating an environment variable `ADDITIONAL_RULES` that points to a folder. Any `.json` files in this folder will be loaded, in addition to the default rules.
+Customers can add new rules by creating an environment variable `ADDITIONAL_RULES` that points to a folder. Any `.json` files in this folder will be loaded in addition to the default rules.
+
 For example: `set ADDITIONAL_RULES=.\my_rules` (Windows) or `export ADDITIONAL_RULES=./my_rules` (Mac).
