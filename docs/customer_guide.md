@@ -16,7 +16,7 @@ Once installed, you will need to allow Docker Desktop to access certain paths on
 
 ## Downloading the tool
 
-[Options](temp_options.md) (WIP)
+[Download options](temp_download_options.md) (WIP)
 
 ## Running the tool
 

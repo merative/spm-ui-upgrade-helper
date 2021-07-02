@@ -10,7 +10,7 @@ _Note: Available to all customers._
 
 Customer pulls latest docker image from public Docker hub e.g.:
 
-1. Run `docker run -p 3000:3000 -p 4000-4002:4000-4002 -v /path/to/input/folder:/home/workspace/input -v /path/to/output/folder:/home/workspace/output -v /path/to/additional/rules:/home/workspace/rules -v /path/to/additional/ignores:/home/workspace/ignore --name spm-ui-upgrade-helper @ibm/spm-ui-upgrade-helper:latest`
+1. Run `docker pull @ibm/spm-ui-upgrade-helper:latest`
 
 ## Option 2 - Internal IBM Docker
 
@@ -18,7 +18,7 @@ _Note: Available to customers with IBM lab services on site only._
 
 Customer pulls latest docker image from internal IBM Docker hub e.g.:
 
-1. Run `docker run -p 3000:3000 -p 4000-4002:4000-4002 -v /path/to/input/folder:/home/workspace/input -v /path/to/output/folder:/home/workspace/output -v /path/to/additional/rules:/home/workspace/rules -v /path/to/additional/ignores:/home/workspace/ignore --name ui-upgrade-helper ui-upgrade-helper:latest`
+1. Run `docker pull wh-govspm-docker-local.artifactory.swg-devops.com/artifactory/wh-govspm-docker-local/ui-upgrade-helper/ui-upgrade-helper:latest`
 
 ## Option 3 - Public Github
 
