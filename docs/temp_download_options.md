@@ -28,7 +28,7 @@ _Note: Available to all customers, but more effort than option 1._
 1. Download code from https://github.com/IBM/spm-ui-upgrade-helper
 2. Run `yarn install`
 3. Run `yarn docker-tasks build`
-4. Run `run.bat`/`run.sh`
+4. Run `customer.bat`/`customer.sh`
 
 ## Option 4 - Standard Release Process
 

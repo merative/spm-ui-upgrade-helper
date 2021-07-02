@@ -32,4 +32,4 @@ The `Dockerfile` copies the `.npmrc` file into the Docker environment, runs `yar
 1. Clone the repo with `git clone git@github.ibm.com:WH-GovSPM/UI-Upgrade-Helper.git`
 2. Run `yarn install`
 3. Build the container with `yarn docker-tasks build`
-4. Start the container with `run.bat` or `run.sh`
+4. Start the container with `dev.bat`/`dev.sh`

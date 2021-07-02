@@ -32,6 +32,8 @@ RUN addgroup theia && \
 RUN chmod g+rw /home && \
     mkdir -p /home/workspace/input && \
     mkdir -p /home/workspace/output && \
+    mkdir -p /home/workspace/rules && \
+    mkdir -p /home/workspace/ignore && \
     mkdir -p /home/theia/.theia && \
     mkdir -p /home/project && \
     chown -R theia:theia /home/theia && \
