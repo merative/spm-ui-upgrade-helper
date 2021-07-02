@@ -6,21 +6,17 @@
 
 [Options](temp_options.md) (WIP)
 
-## Setup (Windows)
+## Setup
 
-1. Install [Docker Desktop](https://docs.docker.com/docker-for-windows/install/)
+1. Install Docker Desktop for [Windows](https://docs.docker.com/docker-for-windows/install/) or [Mac](https://docs.docker.com/docker-for-mac/install/)
 
-Once installed, you will need to allow Docker Desktop to access certain paths on the local filesystem.
+Once installed, you will need to allow Docker Desktop to access certain paths on the local filesystem. These will be the folders that the tool will work on i.e. your SPM source code folder that will provide the input data, plus an output folder where it will write the modified data.
 
 2. Open Docker Desktop
 3. Click Settings > Resources > File Sharing
 4. Add the folder you want to share
 
 ![1. Open Docker Desktop, 2. Click the Settings button then Resources then File Sharing, 3. Add the folder you want to share with the Docker container](images/docker-volume-sharing.png "Docker volume sharing screenshot")
-
-## Setup (Mac)
-
-FIXME How to install Docker on Mac?
 
 ## Running the tool
 
