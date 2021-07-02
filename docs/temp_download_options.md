@@ -18,7 +18,8 @@ _Note: Available to customers with IBM lab services on site only._
 
 Customer pulls latest docker image from internal IBM Docker hub e.g.:
 
-1. Run `docker pull wh-govspm-docker-local.artifactory.swg-devops.com/artifactory/wh-govspm-docker-local/ui-upgrade-helper/ui-upgrade-helper:latest`
+1. Run `docker login wh-govspm-docker-local.artifactory.swg-devops.com`
+2. Run `docker pull wh-govspm-docker-local.artifactory.swg-devops.com/artifactory/wh-govspm-docker-local/ui-upgrade-helper/ui-upgrade-helper:latest`
 
 ## Option 3 - Public Github
 
