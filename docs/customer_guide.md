@@ -2,10 +2,6 @@
 
 # Customer Guide
 
-## Downloading the tool
-
-[Options](temp_options.md) (WIP)
-
 ## Setup
 
 1. Install Docker Desktop for [Windows](https://docs.docker.com/docker-for-windows/install/) or [Mac](https://docs.docker.com/docker-for-mac/install/)
@@ -17,6 +13,10 @@ Once installed, you will need to allow Docker Desktop to access certain paths on
 4. Add the folder you want to share
 
 ![1. Open Docker Desktop, 2. Click the Settings button then Resources then File Sharing, 3. Add the folder you want to share with the Docker container](images/docker-volume-sharing.png "Docker volume sharing screenshot")
+
+## Downloading the tool
+
+[Options](temp_options.md) (WIP)
 
 ## Running the tool
 
