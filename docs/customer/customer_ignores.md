@@ -2,7 +2,7 @@
 
 # Ignoring files
 
-Customers can ignore certain input files by creating an environment variable `ADDITIONAL_IGNORE` that points to a folder. Any `.json` files in this folder will be loaded in addition to the default list of ignored files.
+Customers can ignore certain input files by creating an environment variable `ADDITIONAL_IGNORE` that points to a folder. This variable will be picked up automatically by `customer.bat`. Any `.json` files in this folder will be loaded in addition to the default list of ignored files.
 
 For example: `set ADDITIONAL_RULES=.\my_ignores` (Windows) or `export ADDITIONAL_IGNORE=./my_ignores` (Mac).
 
