@@ -1,8 +1,8 @@
 [<<< Back to home](../README.md)
 
-# Customer Guide
+# Customer guide
 
-## Setup
+## Initial setup
 
 1. Install Docker Desktop for [Windows](https://docs.docker.com/docker-for-windows/install/) or [Mac](https://docs.docker.com/docker-for-mac/install/)
 
