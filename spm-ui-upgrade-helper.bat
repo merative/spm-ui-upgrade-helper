@@ -1,19 +1,19 @@
 @echo off
 setlocal
 
-::set INPUT_FOLDER=C:\git\spm-ui-upgrade-helper\workspace\input
-::set OUTPUT_FOLDER=C:\git\spm-ui-upgrade-helper\workspace\output
-
+set ERROR=
 if "%1" == "" (
   echo ERROR: Missing input folder argument
-  goto printHelpAndExit
-  exit /B 1
+  set ERROR=true
 )
 if "%2" == "" (
   echo ERROR: Missing output folder argument
-  goto printHelpAndExit
-  exit /B 1
+  set ERROR=true
 )
+if not "%ERROR%"=="" (
+  goto printHelpAndExit
+)
+
 set INPUT_FOLDER=%1
 set OUTPUT_FOLDER=%2
 
@@ -45,6 +45,7 @@ endlocal
 goto end
 
 :printHelpAndExit
-echo Usage: customer.bat <input folder> <output folder>
+echo Usage: spm-ui-upgrade-helper.bat ^<input folder^> ^<output folder^>
+exit /B 1
 
 :end

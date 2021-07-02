@@ -20,7 +20,7 @@ Once installed, you will need to allow Docker Desktop to access certain paths on
 
 ## Running the tool
 
-1. Start the tool using `customer.bat <input folder> <output folder>`.
+1. Start the tool using `spm-ui-upgrade-helper.bat <input folder> <output folder>`.
     - Note that Docker volume names MUST be absolute paths.
 2. Open your browser to http://localhost:3000
 3. Press `F1` or `cmd + shift + p`.
