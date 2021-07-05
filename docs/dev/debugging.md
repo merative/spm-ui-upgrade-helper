@@ -6,7 +6,7 @@
 
 If there is a problem with the docker container you can run
 
-    docker run --tty --interactive --entrypoint bash ui-upgrade-helper:latest
+    docker run --tty --interactive --entrypoint bash spm-ui-upgrade-helper:latest
 
 This will place you inside a new docker container where you can take a look around.
 

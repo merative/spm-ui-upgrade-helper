@@ -7,17 +7,17 @@ if "%UIUH_DEV%"=="true" (
   echo Dev Mode On
 ) else (
   set UIUH_DEV2=
-  echo Dev Mode Off (use set UIUH_DEV=true to turn it on)
+  echo Dev Mode Off ^(use set UIUH_DEV=true to turn it on^)
 )
 
-call docker stop ui-upgrade-helper
-call docker rm ui-upgrade-helper
+call docker stop spm-ui-upgrade-helper
+call docker rm spm-ui-upgrade-helper
 
 set INPUT_FOLDER=C:\git\spm-ui-upgrade-helper\workspace\input
 set OUTPUT_FOLDER=C:\git\spm-ui-upgrade-helper\workspace\output
 set ADDITIONAL_RULES=C:\git\spm-ui-upgrade-helper\workspace\rules
 set ADDITIONAL_IGNORE=C:\git\spm-ui-upgrade-helper\workspace\ignore
 
-call docker run -p 3000:3000 -p 4000-4002:4000-4002 %UIUH_DEV2% -v %INPUT_FOLDER%:/home/workspace/input -v %OUTPUT_FOLDER%:/home/workspace/output -v %ADDITIONAL_RULES%:/home/workspace/rules -v %ADDITIONAL_IGNORE%:/home/workspace/ignore --name ui-upgrade-helper ui-upgrade-helper:latest
+call docker run -p 3000:3000 -p 4000-4002:4000-4002 %UIUH_DEV2% -v %INPUT_FOLDER%:/home/workspace/input -v %OUTPUT_FOLDER%:/home/workspace/output -v %ADDITIONAL_RULES%:/home/workspace/rules -v %ADDITIONAL_IGNORE%:/home/workspace/ignore --name spm-ui-upgrade-helper spm-ui-upgrade-helper:latest
 
 endlocal

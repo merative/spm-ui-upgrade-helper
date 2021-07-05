@@ -36,9 +36,9 @@ echo     ADDITIONAL_RULES = %ADDITIONAL_RULES%
 echo     ADDITIONAL_IGNORE = %ADDITIONAL_IGNORE%
 echo.
 
-call docker stop ui-upgrade-helper
-call docker rm ui-upgrade-helper
-call docker run -p 3000:3000 -p 4000-4002:4000-4002 -v %INPUT_FOLDER%:/home/workspace/input -v %OUTPUT_FOLDER%:/home/workspace/output %ADDITIONAL_RULES_CMD% %ADDITIONAL_IGNORE_CMD% --name ui-upgrade-helper wh-govspm-docker-local.artifactory.swg-devops.com/artifactory/wh-govspm-docker-local/ui-upgrade-helper/ui-upgrade-helper:latest
+call docker stop spm-ui-upgrade-helper
+call docker rm spm-ui-upgrade-helper
+call docker run -p 3000:3000 -p 4000-4002:4000-4002 -v %INPUT_FOLDER%:/home/workspace/input -v %OUTPUT_FOLDER%:/home/workspace/output %ADDITIONAL_RULES_CMD% %ADDITIONAL_IGNORE_CMD% --name ui-upgrade-helper wh-govspm-docker-local.artifactory.swg-devops.com/artifactory/wh-govspm-docker-local/spm-ui-upgrade-helper/spm-ui-upgrade-helper:latest
 
 endlocal
 
