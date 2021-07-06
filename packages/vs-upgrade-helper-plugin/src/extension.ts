@@ -14,10 +14,10 @@ import functions from "./functions";
 export function activate(context: ExtensionContext) {
   // Use the console to output diagnostic information (console.log) and errors (console.error)
   // This line of code will only be executed once when your extension is activated
-  console.log("The extension upgrade helper is Active!");
+  console.log("The extension upgrade helper is active!");
 
   functions.forEach(func => {
-    const taskUpGradeHelper = commands.registerCommand(
+    const taskUpgradeHelper = commands.registerCommand(
       func.commandName,
       () => {
         window.withProgress(
@@ -41,6 +41,6 @@ export function activate(context: ExtensionContext) {
         );
       }
     );
-    context.subscriptions.push(taskUpGradeHelper);
+    context.subscriptions.push(taskUpgradeHelper);
   });
 }

@@ -22,15 +22,15 @@
 		"commands": [
 			{
 				"command": "extension.runUIUpgradeHelperCSS",
-				"title": "Run UI Upgrade Helper - CSS"
+				"title": "Run SPM UI Upgrade Helper - CSS"
 			},
 			{
 				"command": "extension.runUIUpgradeHelperIcons",
-				"title": "Run UI Upgrade Helper - Icons"
+				"title": "Run SPM UI Upgrade Helper - Icons"
 			},
 			{
 				"command": "extension.runUIUpgradeHelperJS",
-				"title": "Run UI Upgrade Helper - Javascript"
+				"title": "Run SPM UI Upgrade Helper - JS"
 			}
 		]
 	},

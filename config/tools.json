@@ -1,23 +1,20 @@
 [
   {
     "package": "css-rules-engine",
-    "name": "UI Upgrade Helper - CSS",
+    "name": "Run SPM UI Upgrade Helper - CSS",
     "port": 4000,
-    "commandName": "extension.runUIUpgradeHelperCSS",
-    "enabled": true
+    "commandName": "extension.runUIUpgradeHelperCSS"
   },
   {
     "package": "icon-replacement",
-    "name": "UI Upgrade Helper - Icons",
+    "name": "Run SPM UI Upgrade Helper - Icons",
     "port": 4001,
-    "commandName": "extension.runUIUpgradeHelperIcons",
-    "enabled": true
+    "commandName": "extension.runUIUpgradeHelperIcons"
   },
   {
     "package": "js-rules-engine",
-    "name": "UI Upgrade Helper - JS",
+    "name": "Run SPM UI Upgrade Helper - JS",
     "port": 4002,
-    "commandName": "extension.runUIUpgradeHelperJS",
-    "enabled": false
+    "commandName": "extension.runUIUpgradeHelperJS"
   }
 ]

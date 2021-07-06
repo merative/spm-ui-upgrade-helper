@@ -12,18 +12,15 @@ const nunjucks = require("nunjucks");
 const tools = fileio.readJson("config/tools.json");
 const serverJsTemplate = fileio.readLines("packages/code-generator/server.js.template").join("\n");
 tools.forEach(tool => {
-  if(tool.enabled) {
-    nunjucks.configure();
-    const outputData = nunjucks.renderString(serverJsTemplate, tool);
-    const outputFile = `packages/${tool.package}/server.js`;
-    fileio.writeLines(outputFile, outputData);
-  }
+  nunjucks.configure();
+  const outputData = nunjucks.renderString(serverJsTemplate, tool);
+  const outputFile = `packages/${tool.package}/server.js`;
+  fileio.writeLines(outputFile, outputData);
 });
 
 // Generate file containing function objects
 const functionsTemplate = fileio.readLines("packages/code-generator/functions.ts.template").join("\n");
 nunjucks.configure();
-const enabledTools = tools.filter(tool => tool.enabled);
-const functionsOutputData = nunjucks.renderString(functionsTemplate, { tools: enabledTools });
+const functionsOutputData = nunjucks.renderString(functionsTemplate, { tools });
 const functionsOutputFile = `packages/vs-upgrade-helper-plugin/src/functions.ts`;
 fileio.writeLines(functionsOutputFile, functionsOutputData);
