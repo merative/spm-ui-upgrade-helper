@@ -7,7 +7,6 @@
   ],
   "command": {
     "run": {
-      "stream": true,
       "parallel": true
     }
   }
