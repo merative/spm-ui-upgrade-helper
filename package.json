@@ -14,7 +14,7 @@
     "install:shared-utils": "cd packages/shared-utils && yarn install",
     "start": "lerna run start --scope @upgrade-helper/browser-app --scope @upgrade-helper/css-rules-engine --scope @upgrade-helper/icon-replacement --scope @upgrade-helper/js-rules-engine",
     "generate-files": "node ./packages/code-generator/index.js",
-    "test": "lerna run test --ignore @upgrade-helper/skeleton"
+    "test": "lerna run test --ignore @upgrade-helper/skeleton --ignore @upgrade-helper/icon-replacement"
   },
   "resolutions": {
     "@types/react": "^16.8.0"
