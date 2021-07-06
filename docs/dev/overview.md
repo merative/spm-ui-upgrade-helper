@@ -9,7 +9,7 @@
 ## Docker
 
 - The tool is run as a Docker container
-- `run.bat`/`run.sh` will map local folders to the Docker container thus allowing it access to the customer code
+- `dev.bat`/`dev.sh` will map local folders to the Docker container thus allowing it access to the customer code
 
 ## CSS Rules Engine
 

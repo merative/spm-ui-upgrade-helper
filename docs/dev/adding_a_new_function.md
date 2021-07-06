@@ -12,8 +12,8 @@ const execute = () => {
 module.exports = { execute };
 ```
 4. Update `package.json` `scripts: { start }` section to include the new function
-5. Update `run.bat`/`run.sh` to map the source code from the local machine to the docker container. This will allow you to recompile the code on the fly.
-6. Run the docker container using `run.bat`/`run.sh`
+5. Update `dev.bat`/`dev.sh` to map the source code from the local machine to the docker container. This will allow you to recompile the code on the fly.
+6. Run the docker container using `dev.bat`/`dev.sh`
 7. Open http://localhost:3000
 8. Press `ctrl + shift + p` or `F1`.
 9. Type `Run SPM UI Upgrade Helper - <function name>` and you should see your new function listed.
@@ -21,7 +21,7 @@ module.exports = { execute };
 
 FIXME Should we use a prefix or place all tools in a 'tools' folder so lerna can pick them up?
 
-FIXME Can we automatically map the source code in `run.bat`/`run.sh` if we are using `packages/tools-*`?
+FIXME Can we automatically map the source code in `dev.bat`/`dev.sh` if we are using `packages/tools-*`?
 
 ## Notes
 
