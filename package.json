@@ -22,10 +22,11 @@
   },
   "devDependencies": {
     "docker-tasks": "^0.1.42",
-    "eslint": "^7.20.0"
+    "eslint": "^7.20.0",
+    "gatsby": "^3.8.1",
+    "gh-pages": "^3.2.3"
   },
   "dependencies": {
-    "gh-pages": "^3.2.3",
     "lerna": "^3.22.1",
     "npm-run-all": "^4.1.5"
   }
