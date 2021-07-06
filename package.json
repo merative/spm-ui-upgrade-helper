@@ -15,7 +15,7 @@
     "start": "lerna run start --scope @upgrade-helper/browser-app --scope @upgrade-helper/css-rules-engine --scope @upgrade-helper/icon-replacement --scope @upgrade-helper/js-rules-engine",
     "generate-files": "node ./packages/code-generator/index.js",
     "test": "lerna run test --ignore @upgrade-helper/skeleton --ignore @upgrade-helper/icon-replacement",
-    "github-pages-deploy": "gatsby build --prefix-paths && gh-pages -d docs"
+    "github-pages-deploy": "gatsby build --prefix-paths && gh-pages -d public -r https://$GH_TOKEN@github.com/IBM/spm-ui-upgrade-helper.git"
   },
   "resolutions": {
     "@types/react": "^16.8.0"
