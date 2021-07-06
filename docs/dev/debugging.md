@@ -27,9 +27,9 @@ This will place you inside a new docker container where you can take a look arou
 
 ![3. Select the Run/Debug view. 4. Select "Run Extension" and click the play button.](images/debug_2.png "Debugging steps screenshot 2")
 
-5. A new window will open. Press ctrl + shift + p and select 'Run UI Upgrade Helper'.
+5. A new window will open. Press ctrl + shift + p and select 'Run SPM UI Upgrade Helper'.
 
-![5. A new window will open. Press ctrl + shift + p and select 'Run UI Upgrade Helper'.](images/debug_3.png "Debugging steps screenshot 3")
+![5. A new window will open. Press ctrl + shift + p and select 'Run SPM UI Upgrade Helper'.](images/debug_3.png "Debugging steps screenshot 3")
 
 6. In the original window you will see your breakpoints being hit and can debug as normal.
 

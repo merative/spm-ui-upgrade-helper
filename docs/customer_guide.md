@@ -24,7 +24,7 @@ Once installed, you will need to allow Docker Desktop to access certain paths on
     - Note that Docker volume names MUST be absolute paths.
 2. Open your browser to http://localhost:3000
 3. Press `F1` or `cmd + shift + p`.
-4. Type "Run UI Upgrade Helper". You should see multiple available functions.
+4. Type "Run SPM UI Upgrade Helper". You should see multiple available functions.
 5. Click the function you want to run.
 6. Wait a few minutes seconds for the tool to finish.
 7. The files in `INPUT_FOLDER` will be scanned and the results placed in `OUTPUT_FOLDER`.

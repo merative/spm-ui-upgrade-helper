@@ -9,11 +9,8 @@ import {
 import axios from "axios";
 import messages from "./messages";
 import functions from "./functions";
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
+// This method is invoked the first time any of the extensions are activated, and only once per session
 export function activate(context: ExtensionContext) {
-  // Use the console to output diagnostic information (console.log) and errors (console.error)
-  // This line of code will only be executed once when your extension is activated
   console.log("The extension upgrade helper is active!");
 
   functions.forEach(func => {
@@ -25,22 +22,38 @@ export function activate(context: ExtensionContext) {
             location: ProgressLocation.Notification,
             title: func.title,
           },
-          async (progress, token) => {
-            const interval = setInterval(function() {
-              const messagesArray = [messages.IN_EXECUTION, messages.SEARCHING_FILES];
-              const random = Math.floor(Math.random() * 2);
-              const message = messagesArray[random];
-              progress.report({ message });
-            }, 5000);
-
-            progress.report({ message: messages.STARTING_PLUGIN });
-            await axios.get(func.url);
-            progress.report({ message: messages.PROCESS_WAS_FINISHED });
-            clearInterval(interval);
-          }
+          async (progress: any, token: any) => {
+            execute(func.url, progress);
+          },
         );
       }
     );
     context.subscriptions.push(taskUpgradeHelper);
   });
+}
+
+/**
+ * Execute the given URL, which will trigger a tool that performs an upgrade task.
+ *
+ * @param url url to execute
+ * @param progress progress object that appears on screen
+ */
+const execute = async (url: string, progress: any) => {
+  const interval = setInterval(() => { animation(progress); }, 1000);
+  progress.report({ message: messages.STARTING_PLUGIN });
+  await axios.get(url);
+  progress.report({ message: messages.PROCESS_WAS_FINISHED });
+  clearInterval(interval);
+}
+
+/**
+ * Updates the progress report message with an animation.
+ *
+ * @param progress progress object that appears on screen
+ */
+const animation = (progress: any) => {
+  const messagesArray = [messages.IN_EXECUTION, messages.SEARCHING_FILES];
+  const random = Math.floor(Math.random() * 2);
+  const message = messagesArray[random];
+  progress.report({ message });
 }

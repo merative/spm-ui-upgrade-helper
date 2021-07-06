@@ -15,7 +15,7 @@ module.exports = { execute };
 5. Run the docker container using `run.bat`/`run.sh`
 6. Open http://localhost:3000
 7. Press `ctrl + shift + p` or `F1`.
-8. Type `Run UI Upgrade Helper - <function name>` and you should see your new function listed.
+8. Type `Run SPM UI Upgrade Helper - <function name>` and you should see your new function listed.
 9. Click the function and you should see the docker container's log print "Hello, world!"
 
 FIXME Root package.json lerna command needs to be updated (Should we use a prefix or place all tools in a 'tools' folder so lerna can pick them up?)
