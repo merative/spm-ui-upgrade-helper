@@ -32,6 +32,7 @@ const execute = () => {
         delete appliedRules[filename];
       }
     });
+    console.log(`${Object.keys(appliedRules).length} files were modified`);
     utils.writeFilesToDisk(config, prettified);
     utils.commitFiles(config.outputFolder, "feat(*): prettify files");
     utils.writeFilesToDisk(config, appliedRules);
