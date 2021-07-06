@@ -19,4 +19,5 @@ script:
   - cd ../js-rules-engine
   - yarn install
   - yarn test
+  - cd ../..
   - yarn github-pages-deploy
