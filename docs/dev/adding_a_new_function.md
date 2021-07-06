@@ -11,16 +11,17 @@ const execute = () => {
 }
 module.exports = { execute };
 ```
-4. Update `run.bat`/`run.sh` to map the source code from the local machine to the docker container. This will allow you to recompile the code on the fly.
-5. Run the docker container using `run.bat`/`run.sh`
-6. Open http://localhost:3000
-7. Press `ctrl + shift + p` or `F1`.
-8. Type `Run SPM UI Upgrade Helper - <function name>` and you should see your new function listed.
-9. Click the function and you should see the docker container's log print "Hello, world!"
+4. Update `package.json` `scripts: { start }` section to include the new function
+5. Update `run.bat`/`run.sh` to map the source code from the local machine to the docker container. This will allow you to recompile the code on the fly.
+6. Run the docker container using `run.bat`/`run.sh`
+7. Open http://localhost:3000
+8. Press `ctrl + shift + p` or `F1`.
+9. Type `Run SPM UI Upgrade Helper - <function name>` and you should see your new function listed.
+10. Click the function and you should see the docker container's log print "Hello, world!"
 
-FIXME Root package.json lerna command needs to be updated (Should we use a prefix or place all tools in a 'tools' folder so lerna can pick them up?)
+FIXME Should we use a prefix or place all tools in a 'tools' folder so lerna can pick them up?
 
-FIXME Can I automatically map `run.bat`/`run.sh` by mapping `packages/tools-*`?
+FIXME Can we automatically map the source code in `run.bat`/`run.sh` if we are using `packages/tools-*`?
 
 ## Notes
 
