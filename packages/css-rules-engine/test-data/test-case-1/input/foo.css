@@ -1,0 +1,7 @@
+.soria input.text::-ms-clear {
+  background-color: red;
+}
+
+.foo {
+  background-color: green;
+}

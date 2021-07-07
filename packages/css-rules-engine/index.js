@@ -8,10 +8,10 @@ const utils = require("../shared-utils/sharedUtils");
  *
  * We prettify the files as a first step in order to make the final diff as clean as possible.
  */
-const execute = () => {
+const execute = (overrides = {}) => {
   try {
     // Initial setup
-    const config = utils.loadConfig();
+    const config = { ...utils.loadConfig(), ...overrides };
     utils.removeOutputFolder(config);
     utils.createGitRepo(config);
     const targetFiles = utils.addTargetFiles(config, "css");
