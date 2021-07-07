@@ -8,10 +8,10 @@ const utils = require("../shared-utils/sharedUtils");
  *
  * We prettify the files as a first step in order to make the final diff as clean as possible.
  */
-const execute = () => {
+const execute = (overrides = {}) => {
   try {
     // Initial setup
-    const config = utils.loadConfig();
+    const config = { ...utils.loadConfig(), ...overrides };
     utils.removeOutputFolder(config);
     utils.createGitRepo(config);
     const targetFiles = utils.addTargetFiles(config, "css");
@@ -27,7 +27,7 @@ const execute = () => {
       prettified[filename] = prettifyContents(contents, filename);
       appliedRules[filename] = applyRulesToContents(prettified[filename], rules, filename);
       // If there are no functional changes then undo the prettification of the file
-      if (utils.identicalArrays(prettified[filename], appliedRules[filename])) {
+      if (utils.identicalData(prettified[filename], appliedRules[filename])) {
         delete prettified[filename];
         delete appliedRules[filename];
       }
