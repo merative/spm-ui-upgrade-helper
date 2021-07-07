@@ -2,7 +2,7 @@ const { loadConfig } = require("./src/config");
 const { loadRules } = require("./src/rulesUtils");
 const { removeInvalidCSS, restoreInvalidCSS } = require("./src/invalidCss");
 const { removeOutputFolder,  createGitRepo, addTargetFiles, commitFiles } = require("./src/gitUtils");
-const { identicalArrays } = require("./src/identicalArrays");
+const { identicalData } = require("./src/identicalData");
 const { writeFilesToDisk } = require("./src/filesAndFolders");
 
 module.exports = {
@@ -18,8 +18,8 @@ module.exports = {
   createGitRepo,
   addTargetFiles,
   commitFiles,
-  // identicalArrays.js
-  identicalArrays,
+  // identicalData.js
+  identicalData,
   // filesAndFolders.js
   writeFilesToDisk,
 };

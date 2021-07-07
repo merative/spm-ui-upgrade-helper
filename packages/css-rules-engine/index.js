@@ -27,7 +27,7 @@ const execute = (overrides = {}) => {
       prettified[filename] = prettifyContents(contents, filename);
       appliedRules[filename] = applyRulesToContents(prettified[filename], rules, filename);
       // If there are no functional changes then undo the prettification of the file
-      if (utils.identicalArrays(prettified[filename], appliedRules[filename])) {
+      if (utils.identicalData(prettified[filename], appliedRules[filename])) {
         delete prettified[filename];
         delete appliedRules[filename];
       }
