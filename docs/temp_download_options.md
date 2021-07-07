@@ -1,4 +1,4 @@
-[<<< Back to the customer guide](../customer_guide.md)
+[<< Back to the customer guide](customer_guide.md)
 
 # Downloading the tool
 
