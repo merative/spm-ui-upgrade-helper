@@ -1937,7 +1937,7 @@ dir-glob@^2.2.2:
   dependencies:
     path-type "^3.0.0"
 
-docker-tasks@^0.1.42:
+docker-tasks@^0.1.44:
   version "0.1.44"
   resolved "https://registry.yarnpkg.com/docker-tasks/-/docker-tasks-0.1.44.tgz#59ebd40626deee455d9043122ca7d7ffd1f65677"
   integrity sha512-8w4Bx/8gZK2uuqxU0xGVpFqIpQbJ/9vTBcrWBvovh7S0vb0mFFMQUm5MxJnmn/cF0rTkdpUid/94UvckQytD3w==

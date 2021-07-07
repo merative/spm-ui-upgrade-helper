@@ -1,0 +1,10 @@
+#!/usr/bin/sh
+
+docker stop spm-ui-upgrade-helper
+docker rm spm-ui-upgrade-helper
+
+INPUT_FOLDER=/tmp/ui-upgrade-helper/input
+OUTPUT_FOLDER=/tmp/ui-upgrade-helper/output
+#ADDITIONAL_RULES=/tmp/ui-upgrade-helper/rules
+
+docker run -d -p 3000:3000 -p 4000:4000 -p 9229:9229 -v $INPUT_FOLDER:/home/workspace/input -v $OUTPUT_FOLDER:/home/workspace/output --name spm-ui-upgrade-helper @ibmcom/spm-ui-upgrade-helper:latest
