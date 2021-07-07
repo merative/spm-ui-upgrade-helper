@@ -1,5 +1,5 @@
 # Getting started
 
-- [Overview](docs/overview.md)
-- [Customer guide](docs/customer_guide.md)
-- [Developer guide](docs/developer_guide.md)
+- [Overview](overview.md)
+- [Customer guide](customer_guide.md)
+- [Developer guide](developer_guide.md)
