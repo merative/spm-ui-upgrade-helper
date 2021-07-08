@@ -29,8 +29,8 @@ const createGitRepo = config => {
 
 /**
  * Copies files from `config.inputFolder` to `config.outputFolder` if they match the given
- * extension(s). Copies all files if no extensions are provided. Files ignored via `config/ignore`
- * data will also be excluded.
+ * extension(s). Copies all files if `ext` is falsy. Files ignored via `config/ignore`
+ * data will always be excluded.
  *
  * For example:
  * - `createGitRepo(config)` => Create git repo and copy all files
@@ -39,27 +39,47 @@ const createGitRepo = config => {
  *
  * @param {object} config configuration object
  * @param {string} ext files ending in the given extension(s) will be included in the repository, or
- * all files if falsy.
+ * all files will be included if `ext` is falsy.
  */
 const addTargetFiles = (config, ...ext) => {
   console.log("Collecting input files");
-  const extensions = ext.length > 0 ? ext.map(item => `*.${item}`) : [ "*" ];
-  let inputFiles = [];
-  extensions.forEach(extension => {
-    const f = fileio.glob(`${config.inputFolder}/**/${extension}`);
-    inputFiles.push(f);
-  });
-  inputFiles = inputFiles.flat();
-  const countBefore = inputFiles.length;
-  console.log(`Found ${countBefore} files`);
+  const extensions = ext.length > 0 ? ext.map(item => `.${item}`) : null;
+
+  let startTime = new Date().getTime();
+  let inputFiles = fileio.glob(`${config.inputFolder}/**/*`);
+  let endTime = new Date().getTime();
+  console.log(`Initial search found ${inputFiles.length} files [${(endTime-startTime)/60000} minutes]`);
+
+  startTime = new Date().getTime();
+  if(extensions) {
+    inputFiles = inputFiles.filter(f => {
+      for(let i = 0; i < extensions.length; i++) {
+        if(f.endsWith(extensions[i])) {
+          return true;
+        }
+      }
+      return false;
+    });
+  }
+  endTime = new Date().getTime();
+  console.log(`Filtered down to ${inputFiles.length} files based on extensions: ${ext} [${endTime - startTime} ms]`);
+
+  startTime = new Date().getTime();
+  inputFiles = inputFiles.sort();
+  endTime = new Date().getTime();
+  console.log(`Sorted the files [${endTime - startTime} ms]`);
 
   // Remove ignored files
+  const countBeforeIgnore = inputFiles.length;
+  startTime = new Date().getTime();
   inputFiles = removeIgnoredFiles(config, inputFiles);
-  const countAfter = inputFiles.length;
-  console.log(`Ignored ${countBefore - countAfter} files`);
+  endTime = new Date().getTime();
+  const countAfterIgnore = inputFiles.length;
+  console.log(`Ignored ${countBeforeIgnore - countAfterIgnore} files [${endTime - startTime} ms]`);
 
   // Copy the files
-  console.log(`Copying ${inputFiles.length} files to output folder`);
+  console.log(`Copying final list of ${inputFiles.length} files to output folder`);
+  startTime = new Date().getTime();
   const outputFiles = [];
   inputFiles.forEach(file => {
     const destFile = file.replace(config.inputFolder, config.outputFolder);
@@ -68,9 +88,10 @@ const addTargetFiles = (config, ...ext) => {
     shell.cp(file, destFile);
     outputFiles.push(destFile);
   });
+  endTime = new Date().getTime();
+  console.log(`Finished copying [${endTime - startTime} ms]`);
   return outputFiles;
 }
-
 
 /**
  * Commits all files in the given folder to the Git repository.
@@ -79,6 +100,7 @@ const addTargetFiles = (config, ...ext) => {
  * @param {string} message commit message
  */
 const commitFiles = (folder, message) => {
+  console.log("Committing files");
   const cwd = process.cwd();
   shell.cd(folder);
   shell.exec(`git add .`);

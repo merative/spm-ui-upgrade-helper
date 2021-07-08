@@ -23,13 +23,22 @@ const execute = (overrides = {}) => {
     console.log(`Processing ${targetFiles.length} files`);
     targetFiles.forEach(filename => {
       const contents = fileio.readLines(filename).join("\n");
-      originals[filename] = contents;
-      prettified[filename] = prettifyContents(contents, filename);
-      appliedRules[filename] = applyRulesToContents(prettified[filename], rules, filename);
-      // If there are no functional changes then undo the prettification of the file
-      if (utils.identicalData(prettified[filename], appliedRules[filename])) {
-        delete prettified[filename];
-        delete appliedRules[filename];
+      try {
+        originals[filename] = contents;
+        prettified[filename] = prettifyContents(contents, filename);
+        appliedRules[filename] = applyRulesToContents(prettified[filename], rules, filename);
+        // If there are no functional changes then undo the prettification of the file
+        if (utils.identicalData(prettified[filename], appliedRules[filename])) {
+          delete prettified[filename];
+          delete appliedRules[filename];
+        }
+      } catch(err) {
+        console.log(`WARNING {`);
+        console.log(`  Message: Failed to parse file ${err.filename} line ${err.line} column ${err.column}`);
+        console.log(`  Reason: ${err.reason}`);
+        const split = contents.split("\n");
+        console.log(`  Hint: Line ${err.line} may contain invalid CSS: "${split[err.line - 1].trimEnd()}"`);
+        console.log(`}`);
       }
     });
     console.log(`${Object.keys(appliedRules).length} files were modified`);
@@ -69,17 +78,9 @@ const prettifyContents = (contents, filename) => {
  * @returns {string} the CSS data prettified
  */
 const prettify = (contents, filename) => {
-  try {
     const options = { silent: false, source: filename };
     const ast = css.parse(contents, options);
     return css.stringify(ast);
-  } catch(err) {
-    console.log(`ERROR: Failed to parse file ${err.filename} line ${err.line} column ${err.column}`);
-    console.log(`Reason: ${err.reason}`);
-    const split = contents.split("\n");
-    console.log(`This line may contain invalid CSS: ${split[err.line - 1]}`);
-    throw new Error(`${err.reason} in ${err.filename}:${err.line}:${err.column}`);
-  }
 }
 
 /**
