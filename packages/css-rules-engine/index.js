@@ -33,7 +33,7 @@ const execute = (overrides = {}) => {
           delete appliedRules[filename];
         }
       } catch(err) {
-        console.log(`ERROR {`);
+        console.log(`WARNING {`);
         console.log(`  Message: Failed to parse file ${err.filename} line ${err.line} column ${err.column}`);
         console.log(`  Reason: ${err.reason}`);
         const split = contents.split("\n");
