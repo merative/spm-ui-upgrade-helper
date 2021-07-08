@@ -4,12 +4,10 @@ WORKDIR /home/theia
 ADD *package.json .
 ADD lerna.json .
 ADD yarn.lock .
-COPY .npmrc packages/icon-replacement/.npmrc
 RUN yarn install
 ADD . .
 RUN yarn install
 RUN yarn install-all
-RUN rm -f packages/icon-replacement/.npmrc
 RUN yarn generate-files
 
 # vs-upgrade-helper-plugin

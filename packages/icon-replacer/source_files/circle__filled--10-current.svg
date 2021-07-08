@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10">
+  <defs>
+    <filter id="circle__filled--10-current-a">
+      <feColorMatrix in="SourceGraphic" values="0 0 0 0 0.058824 0 0 0 0 0.384314 0 0 0 0 0.996078 0 0 0 1.000000 0"/>
+    </filter>
+  </defs>
+  <g fill="none" fill-rule="evenodd" filter="url(#circle__filled--10-current-a)">
+    <circle cx="5" cy="5" r="4.375" fill="#000" fill-rule="nonzero"/>
+    <rect width="10" height="10"/>
+  </g>
+</svg>

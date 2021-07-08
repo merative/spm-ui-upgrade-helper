@@ -6,7 +6,7 @@
     "commandName": "extension.runUIUpgradeHelperCSS"
   },
   {
-    "package": "icon-replacement",
+    "package": "icon-replacer",
     "name": "Run SPM UI Upgrade Helper - Icons",
     "port": 4001,
     "commandName": "extension.runUIUpgradeHelperIcons"
