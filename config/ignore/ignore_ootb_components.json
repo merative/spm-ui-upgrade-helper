@@ -1,5 +1,6 @@
   {
   "tokens": [
+    "DevEnv/",
     "EJBServer/components/adbuildtools/",
     "EJBServer/components/AdvancedEvidenceSharing/",
     "EJBServer/components/Advisor/",
