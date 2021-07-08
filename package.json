@@ -20,7 +20,7 @@
     "@types/react": "^16.8.0"
   },
   "devDependencies": {
-    "docker-tasks": "^0.1.44",
+    "docker-tasks": "^0.1.46",
     "eslint": "^7.20.0"
   },
   "dependencies": {
