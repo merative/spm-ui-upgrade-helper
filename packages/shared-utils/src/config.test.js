@@ -8,6 +8,8 @@ test('config test with defaults', () => {
     rulesFolderAdditional: "/home/workspace/rules",
     ignorePatternsFolder: "../../config/ignore",
     ignorePatternsFolderAdditional: "/home/workspace/ignore",
+    iconReferenceExclude: ["zip", "class", "jpg", "jpeg", "gif", "png"],
+    verbose: false,
   }
 
   const actual = loadConfig();
@@ -23,6 +25,9 @@ test('config test with all overrides', () => {
     rulesFolderAdditional: "ddd",
     ignorePatternsFolder: "eee",
     ignorePatternsFolderAdditional: "fff",
+    iconReferenceExclude: "ggg",
+    verbose: "hhh",
+    
   }
   const expected = overrides;
 
@@ -37,6 +42,7 @@ test('config test with some overrides', () => {
     rulesFolderAdditional: "ddd",
     ignorePatternsFolder: "eee",
     ignorePatternsFolderAdditional: "fff",
+    verbose: "hhh",
   }
   const expected = {
     inputFolder: "/home/workspace/input",
@@ -45,6 +51,8 @@ test('config test with some overrides', () => {
     rulesFolderAdditional: "ddd",
     ignorePatternsFolder: "eee",
     ignorePatternsFolderAdditional: "fff",
+    iconReferenceExclude: ["zip", "class", "jpg", "jpeg", "gif", "png"],
+    verbose: "hhh",
   };
 
   const actual = loadConfig(overrides);
