@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17">
+  <defs>
+    <filter id="ti-circle__filled--17-completed-a">
+      <feColorMatrix in="SourceGraphic" values="0 0 0 0 0.086275 0 0 0 0 0.086275 0 0 0 0 0.086275 0 0 0 1.000000 0"/>
+    </filter>
+  </defs>
+  <g fill="none" fill-rule="evenodd" filter="url(#ti-circle__filled--17-completed-a)">
+    <circle cx="8.5" cy="8.5" r="7.438" fill="#000" fill-rule="nonzero"/>
+    <rect width="17" height="17"/>
+  </g>
+</svg>

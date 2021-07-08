@@ -1,5 +1,5 @@
 {
-  "name": "@upgrade-helper/icon-replacement",
+  "name": "@upgrade-helper/icon-replacer",
   "version": "0.0.0",
   "license": "Apache-2.0",
   "description": "",
@@ -10,13 +10,12 @@
     "test": "jest"
   },
   "dependencies": {
-    "@folkforms/file-io": "^0.2.2",
-    "@spm/bulk-image-updater": "^1.1.17",
     "express": "^4.17.1",
-    "nodemon": "^2.0.7",
-    "shelljs": "^0.8.4"
+    "fast-glob": "^3.2.6",
+    "nodemon": "^2.0.7"
   },
   "devDependencies": {
+    "chalk": "^4.1.1",
     "jest": "^27.0.5"
   }
 }
