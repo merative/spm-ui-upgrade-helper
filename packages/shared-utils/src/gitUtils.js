@@ -100,6 +100,7 @@ const addTargetFiles = (config, ...ext) => {
  * @param {string} message commit message
  */
 const commitFiles = (folder, message) => {
+  console.log("Committing files");
   const cwd = process.cwd();
   shell.cd(folder);
   shell.exec(`git add .`);
