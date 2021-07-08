@@ -5,7 +5,6 @@ const containsAnyToken = (path, tokens) => {
     const token = tokens[i];
     const index = path.indexOf(token);
     if(index != -1) {
-      console.log(`## ignoring (via token '${token}'): ${path}`);
       return true;
     }
   }
@@ -21,7 +20,6 @@ const removeIgnoredFiles = (config, inputFiles) => {
   ignoreFiles.forEach(filename => {
     const ignoreJson = fileio.readJson(filename);
     // Ignore tokens
-    console.log(`#### inputFiles = ${JSON.stringify(inputFiles)}`);
     if(ignoreJson.tokens && ignoreJson.tokens.length > 0) {
       for(let i = 0; i < inputFiles.length; i++) {
         if(containsAnyToken(inputFiles[i], ignoreJson.tokens)) {
@@ -38,7 +36,6 @@ const removeIgnoredFiles = (config, inputFiles) => {
         globbedFiles.forEach(globbedFile => {
           let index = inputFiles.indexOf(globbedFile);
           if(index !== -1) {
-            console.log(`## ignoring (via glob '${glob}'): ${inputFiles[index]}`);
             inputFiles.splice(index, 1);
           }
         });
