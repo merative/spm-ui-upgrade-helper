@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+  <g fill="none" fill-rule="evenodd">
+    <rect width="20" height="20"/>
+    <rect width="20" height="20"/>
+    <rect width="20" height="20"/>
+    <rect width="20" height="20"/>
+    <path fill="#DA1E28" d="M10,18.75 C5.1875,18.75 1.25,14.8125 1.25,10 C1.25,5.1875 5.1875,1.25 10,1.25 C14.8125,1.25 18.75,5.1875 18.75,10 C18.75,14.8125 14.8125,18.75 10,18.75 Z M13.75,6.25 L6.25,6.25 L6.25,13.75 L13.75,13.75 L13.75,6.25 Z"/>
+  </g>
+</svg>

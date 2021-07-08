@@ -14,6 +14,8 @@ const loadConfig = (overrides = {}) => {
     rulesFolderAdditional: overrides.rulesFolderAdditional || "/home/workspace/rules",
     ignorePatternsFolder: overrides.ignorePatternsFolder || "../../config/ignore",
     ignorePatternsFolderAdditional: overrides.ignorePatternsFolderAdditional || "/home/workspace/ignore",
+    iconReferenceExclude: overrides.iconReferenceExclude || ["zip", "class", "jpg", "jpeg", "gif", "png"],
+    verbose: overrides.verbose || false,
   };
   return config;
 }
