@@ -1,5 +1,6 @@
 const shell = require("shelljs");
 const fileio = require('@folkforms/file-io');
+const { removeIgnoredFiles } = require("./removeIgnoredFiles");
 
 /**
  * Removes the folder `config.outputFolder`.
@@ -70,41 +71,6 @@ const addTargetFiles = (config, ...ext) => {
   return outputFiles;
 }
 
-const removeIgnoredFiles = (config, inputFiles) => {
-  const ignoreFiles = [
-    fileio.glob(`${config.ignorePatternsFolder}/*.json`),
-    fileio.glob(`${config.ignorePatternsFolderAdditional}/*.json`),
-  ].flat();
-
-  ignoreFiles.forEach(filename => {
-    const ignoreJson = fileio.readJson(filename);
-    // Ignore globs
-    if(ignoreJson.globs && ignoreJson.globs.length > 0) {
-      ignoreJson.globs.forEach(pattern => {
-        const foundFiles = fileio.glob(`${config.inputFolder}/${pattern}`);
-        foundFiles.forEach(foundFile => {
-          let index = inputFiles.indexOf(foundFile);
-          if(index !== -1) {
-            inputFiles.splice(index, 1);
-          }
-        });
-      });
-    }
-    // Ignore tokens
-    for(let i = 0; i < inputFiles.length; i++) {
-      if(ignoreJson.tokens && ignoreJson.tokens.length > 0) {
-        ignoreJson.tokens.forEach(token => {
-          if(inputFiles[i].indexOf(token) != -1) {
-            inputFiles.splice(i, 1);
-            return;
-          }
-        });
-      }
-    }
-  });
-
-  return inputFiles;
-}
 
 /**
  * Commits all files in the given folder to the Git repository.
