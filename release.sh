@@ -1,10 +1,10 @@
 #!/usr/bin/sh
 
-echo ==== release.sh ====
-
-version=`git tag --points-at HEAD`
-if [ -z $version ]; then echo "No version tag found."; exit 0; fi
-echo found tag = $version
+tag=`git tag --points-at HEAD`
+if [ -z $tag ]; then echo "No version tag found."; exit 0; fi
+version=`echo $tag | cut -c 2-`
+echo tag is $tag
+echo version is $version
 
 yarn install
 if [ "$?" != 0 ]; then echo "Build Failed"; exit 1; fi
@@ -20,10 +20,9 @@ if [ "$?" != 0 ]; then echo "Build Failed"; exit 1; fi
 
 yarn docker-tasks release $version -n
 if [ "$?" != 0 ]; then echo "Build Failed"; exit 1; fi
+
 #docker image tag spm-ui-upgrade-helper:latest spm-ui-upgrade-helper:0.0.0
 #docker image tag spm-ui-upgrade-helper:latest wh-govspm-docker-local.artifactory.swg-devops.com/artifactory/wh-govspm-docker-local/spm-ui-upgrade-helper/spm-ui-upgrade-helper:0.0.0
 #docker image tag spm-ui-upgrade-helper:latest wh-govspm-docker-local.artifactory.swg-devops.com/artifactory/wh-govspm-docker-local/spm-ui-upgrade-helper/spm-ui-upgrade-helper:latest
 #docker image push wh-govspm-docker-local.artifactory.swg-devops.com/artifactory/wh-govspm-docker-local/spm-ui-upgrade-helper/spm-ui-upgrade-helper:0.0.0
 #docker image push wh-govspm-docker-local.artifactory.swg-devops.com/artifactory/wh-govspm-docker-local/spm-ui-upgrade-helper/spm-ui-upgrade-helper:latest
-
-echo "All done!"
