@@ -17,3 +17,13 @@ script:
   - cd ../js-rules-engine
   - yarn install
   - yarn test
+
+services:
+  - docker
+
+deploy:
+  provider: script
+  script: node release.sh
+  on:
+    all_branches: true
+    condition: $TRAVIS_BRANCH =~ ^v.*$
