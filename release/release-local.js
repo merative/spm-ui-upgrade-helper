@@ -20,6 +20,8 @@ const release = (shell, option, version) => {
     if(r.code != 0) { shell.exit(r.code); }
     r = shell.exec(`yarn docker-tasks build`);
     if(r.code != 0) { shell.exit(r.code); }
+    shell.echo("Build successful. You should now perform acceptance testing. Use dev.bat/dev.sh to run the docker container.");
+    shell.echo(`Once acceptance testing is finished use \`yarn release --ship ${version}\` to release.`);
     return 0;
   }
 
