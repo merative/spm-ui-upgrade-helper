@@ -10,3 +10,4 @@
 - [Adding new rules](dev/adding_new_rules.md)
 - [Adding a new function](dev/adding_a_new_function.md)
 - [Debugging](dev/debugging.md)
+- [Releasing](dev/releasing.md)
