@@ -12,7 +12,7 @@
 
 ## Notes
 
-- This process has to be run locally Due to a bug when building the Docker image in Travis.
+- This process has to be run locally due to a bug when building the Docker image in Travis.
 - Release branches such as `v0.0.1` are never merged back into `main`. If issues are found then the correct process is to fix them on `main` and cherry-pick the fixes into the `v0.0.1` branch. This reduces the risk of regression caused by forgetting to merge or merging incorrectly.
 - Ideally the step 2 acceptance testing should be 100% automated.
 - Uploading to Docker takes around 40 minutes.
