@@ -1,8 +1,10 @@
 #!/usr/bin/sh
 
-version=`git tag --points-at HEAD`
-if [ -z $version ]; then echo "No version tag found."; exit 0; fi
-echo found tag = $version
+tag=`git tag --points-at HEAD`
+if [ -z $tag ]; then echo "No version tag found."; exit 0; fi
+version=`echo $tag | cut -c 2-`
+echo tag is $tag
+echo version is $version
 
 yarn install
 if [ "$?" != 0 ]; then echo "Build Failed"; exit 1; fi
