@@ -8,14 +8,8 @@ env:
   - VER=`node -pe "require('./package.json')['version']"`
 
 script:
-  - cd packages/shared-utils
   - yarn install
-  - yarn test
-  - cd ../css-rules-engine
-  - yarn install
-  - yarn test
-  - cd ../js-rules-engine
-  - yarn install
+  - yarn install-all
   - yarn test
 
 services:
