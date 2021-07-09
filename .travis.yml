@@ -17,7 +17,7 @@ services:
 
 deploy:
   provider: script
-  script: node release.sh
+  script: sh release.sh
   on:
     all_branches: true
     condition: $TRAVIS_BRANCH =~ ^v.*$
