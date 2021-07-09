@@ -14,14 +14,17 @@
     "install:shared-utils": "cd packages/shared-utils && yarn install",
     "start": "lerna run start --scope @upgrade-helper/browser-app --scope @upgrade-helper/css-rules-engine --scope @upgrade-helper/icon-replacer --scope @upgrade-helper/js-rules-engine",
     "generate-files": "node ./packages/code-generator/index.js",
-    "test": "lerna run test --ignore @upgrade-helper/skeleton --ignore @upgrade-helper/icon-replacer"
+    "test": "lerna run test --ignore @upgrade-helper/skeleton --ignore @upgrade-helper/icon-replacer && yarn test-release-script",
+    "test-release-script": "jest ./release/.*.test.js",
+    "release": "node release/release-cli.js"
   },
   "resolutions": {
     "@types/react": "^16.8.0"
   },
   "devDependencies": {
     "docker-tasks": "^0.1.46",
-    "eslint": "^7.20.0"
+    "eslint": "^7.20.0",
+    "jest": "^27.0.6"
   },
   "dependencies": {
     "lerna": "^3.22.1",
