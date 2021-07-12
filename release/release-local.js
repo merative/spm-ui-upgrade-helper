@@ -29,7 +29,11 @@ const release = (shell, option, version) => {
     shell.echo("Shipping...");
     r = shell.exec("docker login wh-govspm-docker-local.artifactory.swg-devops.com");
     if(r.code != 0) { shell.exit(r.code); }
+    r = shell.exec(`echo { "version": "${version}" }>version.txt`);
+    if(r.code != 0) { shell.exit(r.code); }
     r = shell.exec(`yarn docker-tasks release ${version}`);
+    if(r.code != 0) { shell.exit(r.code); }
+    r = shell.exec(`yarn docker-tasks release latest`);
     if(r.code != 0) { shell.exit(r.code); }
     r = shell.exec(`git tag v${version}`);
     if(r.code != 0) { shell.exit(r.code); }

@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "commander": "^8.0.0",
-    "docker-tasks": "^0.1.46",
+    "docker-tasks": "^0.1.49",
     "eslint": "^7.20.0",
     "jest": "^27.0.6"
   },

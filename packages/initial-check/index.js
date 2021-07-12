@@ -5,10 +5,32 @@ const utils = require("../shared-utils/sharedUtils");
 const execute = overrides => {
   const config = { ...utils.loadConfig(), ...overrides };
 
-  // Test that the output folder is writeable
+  checkVersionNumber();
+  checkOutputFolderIsWritable(config);
+
+  console.log("Initial checks successful");
+}
+
+/**
+ * Looks for a version number in ../../version.txt just so we have a reference when using 'latest' versions.
+ */
+const checkVersionNumber = () => {
   try {
-    const testFile = `${config.outputFolder}/.test.txt`;
-    console.log(`Check 1: Writing a test file '${testFile}' to ensure output folder is writeable`);
+    const json = fileio.readJson("../../version.txt");
+    console.log(`Success: Found version number ${json.version}`);
+  } catch(err) {
+    console.log(`Warning: Version number not found (could not find version.txt)`);
+  }
+}
+
+/**
+ * Tests that the output folder is writeable.
+ *
+ * @param {*} config configuration object containing output folder path
+ */
+const checkOutputFolderIsWritable = config => {
+  const testFile = `${config.outputFolder}/.test.txt`;
+  try {
     const testData = [ "foo" ];
     fileio.writeLines(testFile, testData);
     fs.removeSync(testFile);
@@ -16,8 +38,7 @@ const execute = overrides => {
     console.log(`ERROR: Could not write test file to output folder. You may need to run \`chmod -R 777 <output folder>\` on the local machine.`);
     throw err;
   }
-
-  console.log("Initial check successful");
+  console.log(`Success: Wrote a test file '${testFile}' to ensure output folder is writeable`);
 }
 
 module.exports = { execute };
