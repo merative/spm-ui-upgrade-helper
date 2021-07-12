@@ -5,7 +5,7 @@
 ## Initial setup
 
 1. Set up a 7.0.11.0 development environment.
-2. Set up a V8 development environment.
+2. Set up a v8 development environment.
 3. Install Docker Desktop for [Windows](https://docs.docker.com/docker-for-windows/install/) or [Mac](https://docs.docker.com/docker-for-mac/install/).
 
 Once installed, you will need to allow Docker Desktop to access certain paths on the local filesystem. These will be the folders that the tool will work on i.e. your SPM source code folder that will provide the input data, plus an output folder where it will write the modified data.
@@ -22,23 +22,26 @@ Once installed, you will need to allow Docker Desktop to access certain paths on
 
 ## Running the tool
 
-1. Start the tool using `spm-ui-upgrade-helper.bat <input folder> <output folder>`.
-    - `<input folder>` will be your V7 development environment.
-    - `<output folder>` should be a temporary folder e.g. `c:\temp`.
+1. Download the batch file or shell script:
+    - `curl -L https://raw.githubusercontent.com/IBM/spm-ui-upgrade-helper/main/spm-ui-upgrade-helper.bat -o spm-ui-upgrade-helper.bat` (Windows)
+    - `curl -L https://raw.githubusercontent.com/IBM/spm-ui-upgrade-helper/main/spm-ui-upgrade-helper.sh -o spm-ui-upgrade-helper.sh` (Linux)
+        - If using Linux, make the shell script executable with `chmod +x spm-ui-upgrade-helper.sh`
+2. Start the tool using `spm-ui-upgrade-helper.bat <input folder> <output folder>` or `./spm-ui-upgrade-helper.sh <input folder> <output folder>`.
+    - `<input folder>` should be your 7.0.11.0 development environment (set it to the root folder as there are files in both webclient and EJBServer that the tool will touch)
+    - `<output folder>` should be a temporary folder e.g. `c:\temp\upgrade` or `/tmp/upgrade`.
     - `<output folder>` will be wiped, so be careful.
     - Note that Docker volume names MUST be absolute paths.
-2. Open your browser to http://localhost:3000
-3. Press `F1` or `cmd + shift + p`.
-4. Type "Run SPM UI Upgrade Helper". You should see multiple available functions.
-5. Click the function you want to run.
-6. Wait a few minutes seconds for the tool to finish.
+3. Open your browser to http://localhost:3000
+4. Press `F1` or `cmd + shift + p`.
+5. Type "Run SPM UI Upgrade Helper" and click on the shortcut.
+6. Wait a few minutes for the tool to finish.
 7. The files in `<input folder>` will be scanned and the results placed in `<output folder>`.
-8. Click the `Source Control: Git` button on the left sidebar to inspect the changes.
+8.  Click the `Source Control: Git` button on the left sidebar to inspect the changes.
 
 <img style="text-align:center" src="images/upgrade-helper.gif" width="500">
 
-9. Copy `<output folder>` into your V8 development environment.
-10. Build and test V8.
+9. Copy `<output folder>` into your v8 development environment.
+10. Build and test v8.
 
 ## Additional options
 
