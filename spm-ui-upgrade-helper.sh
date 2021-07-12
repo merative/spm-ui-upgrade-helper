@@ -10,7 +10,7 @@ if [[ -z "$2" ]]; then
   ERROR=true
 fi
 if [[ -n "$ERROR" ]]; then
-    echo Usage: spm-ui-upgrade-helper.bat \<input folder\> \<output folder\> [\<additional rules\>] [\<additional ignore\>]
+    echo Usage: ./spm-ui-upgrade-helper.sh \<input folder\> \<output folder\> [\<additional rules\>] [\<additional ignore\>]
     exit 1
 fi
 

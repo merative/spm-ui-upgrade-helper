@@ -2749,13 +2749,15 @@ dir-glob@^2.2.2:
   dependencies:
     path-type "^3.0.0"
 
-docker-tasks@^0.1.46:
-  version "0.1.46"
-  resolved "https://registry.yarnpkg.com/docker-tasks/-/docker-tasks-0.1.46.tgz#d1d8d23a33e2a7db20383eb675021c1a362551b7"
-  integrity sha512-rq2UQZB13OwrecinWC4bs53qHJrhjE+jNAXZ8R4ebdMiwdPXagNHfzXq5wcIO3z/vV8uzl+ohehhzSr1nLnvIw==
+docker-tasks@^0.1.49:
+  version "0.1.49"
+  resolved "https://registry.yarnpkg.com/docker-tasks/-/docker-tasks-0.1.49.tgz#8e34d56992a4d042caf3e1416fb1f9092531ca3e"
+  integrity sha512-v2fI6t21GRLnQ7swQSkNiH6DkaICCoQDEGL+GBPtDDmJzhiRT287mDjJzvdOfILBmX9Ip+RfCOrcgjTI60s88Q==
   dependencies:
+    dummy-shells "^0.0.4"
     fs-extra "^9.1.0"
     js-yaml "^4.0.0"
+    prettier "^2.3.2"
     shelljs "^0.8.4"
 
 doctrine@^3.0.0:
@@ -2785,6 +2787,11 @@ dot-prop@^5.1.0:
   integrity sha512-QM8q3zDe58hqUqjraQOmzZ1LIH9SWQJTlEKCH4kJ2oQvLZk7RbQXvtDM2XEq3fwkV9CCvvH4LA0AV+ogFsBM2Q==
   dependencies:
     is-obj "^2.0.0"
+
+dummy-shells@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/dummy-shells/-/dummy-shells-0.0.4.tgz#0167f1021132421cec14dbf074f727a8fa7fa663"
+  integrity sha512-UoG3XCnaH0JQdJSN8NKWmqZKyjCiLYas+UP7qN/nDgn/fv7VLJ+9TMKLevvscCHU/MhFeU/CGIlNS3hC0Eu8Ew==
 
 duplexer@^0.1.1:
   version "0.1.2"
@@ -6040,6 +6047,11 @@ prelude-ls@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.1.2.tgz#21932a549f5e52ffd9a827f570e04be62a97da54"
   integrity sha1-IZMqVJ9eUv/ZqCf1cOBL5iqX2lQ=
+
+prettier@^2.3.2:
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.3.2.tgz#ef280a05ec253712e486233db5c6f23441e7342d"
+  integrity sha512-lnJzDfJ66zkMy58OL5/NY5zp70S7Nz6KqcKkXYzn2tMVrNxvbqaBpg7H3qHaLxCJ5lNMsGuM8+ohS7cZrthdLQ==
 
 pretty-format@^27.0.6:
   version "27.0.6"
