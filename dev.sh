@@ -7,12 +7,17 @@ if [[ "$UIUH_DEV" == "true" ]]; then
       -v $PWD/packages/js-rules-engine:/home/theia/packages/js-rules-engine/ \
       -v $PWD/packages/shared-utils:/home/theia/packages/shared-utils/ \
       -v $PWD/config:/home/theia/config/
+  DETACH=false
   echo Dev Mode On
 else
   UIUH_DEV_CMD=
-  echo Dev Mode Off (use set UIUH_DEV=true to turn it on)
+  DETACH=true
+  echo Dev Mode Off (use export UIUH_DEV=true to turn it on)
 fi
 
+if [[ -z "$VERSION" ]]; then
+  VERSION=latest
+fi
 if [[ -z "$INPUT_FOLDER" ]]; then
   INPUT_FOLDER=$PWD/workspace/input
 fi
@@ -23,8 +28,7 @@ if [[ -z "$ADDITIONAL_RULES" ]]; then
   ADDITIONAL_RULES=$PWD/workspace/rules
 fi
 if [[ -z "$ADDITIONAL_IGNORE" ]]; then
-if "%ADDITIONAL_IGNORE%" == "" (
   ADDITIONAL_IGNORE=$PWD/workspace/ignore
 fi
 
-./spm-ui-upgrade-helper.sh $INPUT_FOLDER $OUTPUT_FOLDER $ADDITIONAL_RULES $ADDITIONAL_IGNORE
+./spm-ui-upgrade-helper.sh $VERSION $INPUT_FOLDER $OUTPUT_FOLDER $ADDITIONAL_RULES $ADDITIONAL_IGNORE
