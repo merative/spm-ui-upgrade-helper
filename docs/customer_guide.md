@@ -28,8 +28,9 @@ Once installed, you will need to allow Docker Desktop to access certain paths on
         - If using Linux, make the shell script executable with `chmod +x spm-ui-upgrade-helper.sh`
 2. Start the tool using `spm-ui-upgrade-helper.bat <input folder> <output folder>` or `./spm-ui-upgrade-helper.sh <input folder> <output folder>`.
     - `<input folder>` should be your 7.0.11.0 development environment (set it to the root folder as there are files in both webclient and EJBServer that the tool will touch)
-    - `<output folder>` should be a temporary folder e.g. `c:\temp\upgrade` or `/tmp/upgrade`.
+    - Run `chmod -R 777 <output folder>` so that Docker can interact with the output folder.
     - `<output folder>` will be wiped, so be careful.
+    - `<output folder>` should be a temporary folder e.g. `c:\temp\upgrade` or `/tmp/upgrade`.
     - Note that Docker volume names MUST be absolute paths.
 3. Open your browser to http://localhost:3000
 4. Press `F1` or `cmd + shift + p`.
