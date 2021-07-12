@@ -1,0 +1,20 @@
+{
+  "name": "@upgrade-helper/initial-check",
+  "version": "0.0.0",
+  "description": "Initial check that everything is set up correctly.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node start.js",
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@folkforms/file-io": "^0.2.2",
+    "fs-extra": "^10.0.0"
+  },
+  "devDependencies": {
+    "jest": "^27.0.6",
+    "shelljs": "^0.8.4"
+  }
+}
