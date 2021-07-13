@@ -9,7 +9,7 @@ div.cluster h3 {
   background-color: yellow;
 }
 
-/* We expect 'cluster' to be replaced with 'bx--cluster' */
+/* We expect 'div.cluster td.top' to be replaced with 'div.bx--cluster .top' */
 
 .soria div.cluster td.top {
   background-color: yellow;

@@ -18,18 +18,20 @@ const release = (shell, option, version) => {
     if(r.code != 0) { shell.exit(r.code); }
     r = shell.exec(`yarn generate-files`);
     if(r.code != 0) { shell.exit(r.code); }
-    r = shell.exec(`yarn docker-tasks build`);
+    r = shell.exec(`echo { "version": "${version}" }>version.json`);
     if(r.code != 0) { shell.exit(r.code); }
-    shell.echo("Build successful. You should now perform acceptance testing. Use dev.bat/dev.sh to run the docker container.");
-    shell.echo(`Once acceptance testing is finished use \`yarn release --ship ${version}\` to release.`);
+    r = shell.exec(`yarn build`);
+    if(r.code != 0) { shell.exit(r.code); }
+    shell.echo("");
+    shell.echo("Build successful. You should now perform acceptance testing. Use `yarn at:build` and `at.bat`/`at.sh` to test against generated acceptance test data.");
+    shell.echo("");
+    shell.echo(`Once acceptance testing is finished, use \`yarn release --ship ${version}\` to release.`);
     return 0;
   }
 
   if(option === "--ship") {
     shell.echo("Shipping...");
     r = shell.exec("docker login wh-govspm-docker-local.artifactory.swg-devops.com");
-    if(r.code != 0) { shell.exit(r.code); }
-    r = shell.exec(`echo { "version": "${version}" }>version.json`);
     if(r.code != 0) { shell.exit(r.code); }
     r = shell.exec(`yarn docker-tasks release ${version}`);
     if(r.code != 0) { shell.exit(r.code); }
