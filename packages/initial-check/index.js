@@ -12,14 +12,14 @@ const execute = overrides => {
 }
 
 /**
- * Looks for a version number in ../../version.txt just so we have a reference when using 'latest' versions.
+ * Looks for a version number in ../../version.json just so we have a reference when using 'latest' versions.
  */
 const checkVersionNumber = () => {
   try {
-    const json = fileio.readJson("../../version.txt");
+    const json = fileio.readJson("../../version.json");
     console.log(`Success: Found version number ${json.version}`);
   } catch(err) {
-    console.log(`Warning: Version number not found (could not find version.txt)`);
+    console.log(`Warning: Version number not found (could not find version.json)`);
   }
 }
 
