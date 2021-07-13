@@ -12,7 +12,7 @@ test('test that --start option runs the correct commands', () => {
     "yarn install",
     "yarn generate-files",
     "echo { \"version\": \"0.10.0\" }>version.json",
-    "yarn build",
+    "yarn build:release",
   ];
 
   release(dummyShell, "--start", "0.10.0");
@@ -28,6 +28,7 @@ test('test that --ship option runs the correct commands', () => {
     "yarn docker-tasks release latest",
     "git tag v0.10.0",
     "git push --tags",
+    "rm -f version.json",
   ];
 
   release(dummyShell, "--ship", "0.10.0");
