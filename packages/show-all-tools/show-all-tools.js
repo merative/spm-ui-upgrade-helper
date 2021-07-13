@@ -23,7 +23,7 @@ if(devMode === true) {
     package.activationEvents.push(`onCommand:${tool.commandName}`);
     package.contributes.commands.push({
       command: tool.commandName,
-      title: tool.name,
+      title: `${tool.name} (DEBUG)`,
     });
   });
 } else {

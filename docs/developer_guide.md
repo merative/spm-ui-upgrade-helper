@@ -8,6 +8,6 @@
 - [Running the tests](dev/tests.md)
 - [Coding](dev/coding.md)
 - [Adding new rules](dev/adding_new_rules.md)
-- [Adding a new function](dev/adding_a_new_function.md)
+- [Adding a new service](dev/adding_a_new_service.md)
 - [Debugging](dev/debugging.md)
 - [Releasing](dev/releasing.md)
