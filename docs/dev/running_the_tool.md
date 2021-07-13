@@ -2,7 +2,7 @@
 
 ## Running the tool
 
-1. Start the container (as above)
+1. Start the container using `dev.bat`/`dev.sh`
 2. Open your browser to http://localhost:3000
 3. Press `ctrl + shift + p` or `F1`
 4. Type "Run SPM UI Upgrade Helper" and click the appropriate tool

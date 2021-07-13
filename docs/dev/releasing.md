@@ -8,7 +8,7 @@
     - Acceptance test the branch
     - If issues are found, the correct process is to fix them on `main` and cherry-pick the fixes into the `v0.0.1` branch
 3. Run `yarn release --ship 0.0.1`
-    - This will push the latest image to Docker as `imageName:latest` and `imageName:0.0.1`, then tag the branch as `v0.0.1`
+    - This will push the latest image to Docker as `imageName:0.0.1` and `imageName:latest`, then tag the branch as `v0.0.1`
 
 ## Notes
 

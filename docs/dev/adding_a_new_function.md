@@ -11,18 +11,23 @@ const execute = () => {
 }
 module.exports = { execute };
 ```
-4. Update `package.json` `scripts: { start }` section to include the new function
-5. Update `dev.bat`/`dev.sh` to map the source code from the local machine to the docker container. This will allow you to recompile the code on the fly.
-6. Run the docker container using `dev.bat`/`dev.sh`
-7. Open http://localhost:3000
-8. Press `ctrl + shift + p` or `F1`.
-9. Type `Run SPM UI Upgrade Helper - <function name>` and you should see your new function listed.
-10. Click the function and you should see the docker container's log print "Hello, world!"
+4. Update `package.json` `scripts: { }` section to include `install:your-function`
+5. Update `package.json` `scripts: { start }` section to start the new function
+6. Update `dev.bat`/`dev.sh` to map the source code from the local machine to the Docker container. This will allow you to recompile the code on the fly.
+7. Run the Docker container using `dev.bat`/`dev.sh`
+8. Open http://localhost:3000
+9. Press `ctrl + shift + p` or `F1`.
+10. Type `Run SPM UI Upgrade Helper - <function name>` and you should see your new function listed.
+11. Click the function and you should see the Docker container's log print "Hello, world!"
 
-FIXME Should we use a prefix or place all tools in a 'tools' folder so lerna can pick them up?
+FIXME Should we use a prefix or place all services in a 'services' folder so lerna can pick them up?
 
-FIXME Can we automatically map the source code in `dev.bat`/`dev.sh` if we are using `packages/tools-*`?
+FIXME Can we automatically install a service `dev.bat`/`dev.sh` if we are using `packages/services-*`?
+
+FIXME If we remove sub-packages do we only need to install at the root?
+
+FIXME Can we automatically map the source code in `dev.bat`/`dev.sh` if we are using `packages/services-*`?
 
 ## Notes
 
-- When the docker container starts, the `code-generation` package uses the data in `config/tools.json` to generate functions which are stored in `packages/vs-upgrade-helper-plugin/src/functions.ts`. It will also generate a new `server.js` file in the specific package. You can run `yarn generate-files` from the root folde to test this out yourself.
+- When the Docker container starts, the `code-generation` package uses the data in `config/tools.json` to generate functions which are stored in `packages/vs-upgrade-helper-plugin/src/functions.ts`. It will also generate a new `server.js` file in the specific package. You can run `yarn generate-files` from the root folde to test this out yourself.
