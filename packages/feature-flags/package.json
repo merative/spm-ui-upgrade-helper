@@ -1,0 +1,18 @@
+{
+  "name": "@upgrade-helper/feature-flags",
+  "version": "0.0.0",
+  "description": "",
+  "main": "feature-flags.js",
+  "scripts": {
+    "feature-flags": "node feature-flags.js",
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@folkforms/file-io": "^0.2.2",
+    "commander": "^8.0.0",
+    "jest": "^27.0.6",
+    "json-format": "^1.0.1"
+  }
+}

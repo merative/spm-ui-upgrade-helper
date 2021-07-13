@@ -20,7 +20,7 @@ const release = (shell, option, version) => {
     if(r.code != 0) { shell.exit(r.code); }
     r = shell.exec(`echo { "version": "${version}" }>version.json`);
     if(r.code != 0) { shell.exit(r.code); }
-    r = shell.exec(`yarn build`);
+    r = shell.exec(`yarn build:release`);
     if(r.code != 0) { shell.exit(r.code); }
     shell.echo("");
     shell.echo("Build successful. You should now perform acceptance testing. Use `yarn at:build` and `at.bat`/`at.sh` to test against generated acceptance test data.");
@@ -40,6 +40,8 @@ const release = (shell, option, version) => {
     r = shell.exec(`git tag v${version}`);
     if(r.code != 0) { shell.exit(r.code); }
     r = shell.exec(`git push --tags`);
+    if(r.code != 0) { shell.exit(r.code); }
+    r = shell.exec(`rm -f version.json`);
     if(r.code != 0) { shell.exit(r.code); }
     return 0;
   }

@@ -1,20 +1,29 @@
 [
   {
+    "package": "main",
+    "name": "Run SPM UI Upgrade Helper",
+    "port": 4000,
+    "commandName": "extension.runUIUpgradeHelperMain"
+  },
+  {
     "package": "css-rules-engine",
     "name": "Run SPM UI Upgrade Helper - CSS",
-    "port": 4000,
-    "commandName": "extension.runUIUpgradeHelperCSS"
+    "port": 4001,
+    "commandName": "extension.runUIUpgradeHelperCSS",
+    "enabled": true
   },
   {
     "package": "icon-replacer",
     "name": "Run SPM UI Upgrade Helper - Icons",
-    "port": 4001,
-    "commandName": "extension.runUIUpgradeHelperIcons"
+    "port": 4002,
+    "commandName": "extension.runUIUpgradeHelperIcons",
+    "enabled": false
   },
   {
     "package": "js-rules-engine",
     "name": "Run SPM UI Upgrade Helper - JS",
-    "port": 4002,
-    "commandName": "extension.runUIUpgradeHelperJS"
+    "port": 4003,
+    "commandName": "extension.runUIUpgradeHelperJS",
+    "enabled": true
   }
 ]

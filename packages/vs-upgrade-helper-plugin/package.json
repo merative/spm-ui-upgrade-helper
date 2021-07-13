@@ -20,7 +20,7 @@
 		"commands": [
 			{
 				"command": "extension.runUIUpgradeHelperMain",
-				"title": "Run SPM UI Upgrade Helper - Main"
+				"title": "Run SPM UI Upgrade Helper"
 			}
 		]
 	},

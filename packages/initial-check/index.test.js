@@ -1,3 +1,3 @@
-test('dummy test', () => {
+test('initial-check dummy test', () => {
   expect(true).toEqual(true);
 });
