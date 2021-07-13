@@ -26,12 +26,13 @@ Once installed, you will need to allow Docker Desktop to access certain paths on
     - `curl -L https://raw.githubusercontent.com/IBM/spm-ui-upgrade-helper/main/spm-ui-upgrade-helper.bat -o spm-ui-upgrade-helper.bat` (Windows)
     - `curl -L https://raw.githubusercontent.com/IBM/spm-ui-upgrade-helper/main/spm-ui-upgrade-helper.sh -o spm-ui-upgrade-helper.sh` (Linux)
         - If using Linux, make the shell script executable with `chmod +x spm-ui-upgrade-helper.sh`
-2. Start the tool using `spm-ui-upgrade-helper.bat <input folder> <output folder>` or `./spm-ui-upgrade-helper.sh <input folder> <output folder>`.
-    - `<input folder>` should be your 7.0.11.0 development environment (set it to the root folder as there are files in both webclient and EJBServer that the tool will touch)
+2. Start the tool using `spm-ui-upgrade-helper.bat <version> <input folder> <output folder>` or `./spm-ui-upgrade-helper.sh <version> <input folder> <output folder>`.
+    - `<version>` is typically "latest".
+    - `<input folder>` should be your 7.0.11.0 development environment (set it to the root folder as there are files in both webclient and EJBServer that the tool will touch.)
     - Run `chmod -R 777 <output folder>` so that Docker can interact with the output folder.
     - `<output folder>` will be wiped, so be careful.
     - `<output folder>` should be a temporary folder e.g. `c:\temp\upgrade` or `/tmp/upgrade`.
-    - Note that Docker volume names MUST be absolute paths.
+    - Docker volume names such as the input and output folders MUST be absolute paths.
 3. Open your browser to http://localhost:3000
 4. Press `F1` or `cmd + shift + p`.
 5. Type "Run SPM UI Upgrade Helper" and click on the shortcut.
