@@ -2,7 +2,7 @@
 
 # Developer Guide
 
-- [Overview](dev/overview.md)
+- [Project Overview](dev/project_overview.md)
 - [Installation](dev/installation.md)
 - [Running the tool](dev/running_the_tool.md)
 - [Running the tests](dev/tests.md)

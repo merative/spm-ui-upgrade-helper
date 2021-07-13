@@ -13,5 +13,9 @@
 
 1. Clone the repo with `git clone git@github.com:IBM/spm-ui-upgrade-helper.git`
 2. Run `yarn install`
-3. Build the container with `yarn build`
+3. Build the container with `yarn build:dev`
 4. Start the container with `dev.bat`/`dev.sh`
+
+## Notes
+
+- There are two build commands: `build:dev` and `build:release`. The former will add shortcuts to all services so that they can be run individually.
