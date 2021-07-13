@@ -1,0 +1,16 @@
+.has-updates {
+  background-color: green;
+}
+
+/* We expect 'div.cluster h3' to be removed */
+
+.foo,
+div.cluster h3 {
+  background-color: yellow;
+}
+
+/* We expect 'cluster' to be replaced with 'bx--cluster' */
+
+.soria div.cluster td.top {
+  background-color: yellow;
+}
