@@ -6,6 +6,7 @@ const execute = overrides => {
   const config = { ...utils.loadConfig(), ...overrides };
 
   checkVersionNumber();
+  checkCommitHash();
   checkOutputFolderIsWritable(config);
 
   console.log("Initial checks successful");
@@ -20,6 +21,19 @@ const checkVersionNumber = () => {
     console.log(`Success: Found version number: ${json.version}`);
   } catch(err) {
     console.log(`Warning: Version number not found (could not find version.json)`);
+  }
+}
+
+/**
+ * Looks for a commit hash in ../../commit.json for traceability.
+ */
+const checkCommitHash = () => {
+  try {
+    const json = fileio.readJson("../../commit.json");
+    console.log(`Success: Found short commit hash: ${json.commit}`);
+    console.log(`Success: Found long commit hash: ${json.commitLong}`);
+  } catch(err) {
+    console.log(`Warning: Commit hash not found (could not find commit.json)`);
   }
 }
 
