@@ -8,11 +8,11 @@ if "%UIUH_DEV%"=="true" (
       -v C:\git\spm-ui-upgrade-helper\packages\js-rules-engine:/home/theia/packages/js-rules-engine/ ^
       -v C:\git\spm-ui-upgrade-helper\packages\shared-utils:/home/theia/packages/shared-utils/ ^
       -v C:\git\spm-ui-upgrade-helper\config:/home/theia/config/
-  set DETACH_CMD=
+  set DETACH=false
   echo Dev Mode On
 ) else (
   set UIUH_DEV_CMD=
-  set DETACH_CMD=--detach
+  set DETACH=true
   echo Dev Mode Off ^(use set UIUH_DEV=true to turn it on^)
 )
 
