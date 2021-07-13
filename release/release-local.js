@@ -18,6 +18,8 @@ const release = (shell, option, version) => {
     if(r.code != 0) { shell.exit(r.code); }
     r = shell.exec(`yarn generate-files`);
     if(r.code != 0) { shell.exit(r.code); }
+    r = shell.exec(`echo { "version": "${version}" }>version.json`);
+    if(r.code != 0) { shell.exit(r.code); }
     r = shell.exec(`yarn build`);
     if(r.code != 0) { shell.exit(r.code); }
     shell.echo("");
@@ -30,8 +32,6 @@ const release = (shell, option, version) => {
   if(option === "--ship") {
     shell.echo("Shipping...");
     r = shell.exec("docker login wh-govspm-docker-local.artifactory.swg-devops.com");
-    if(r.code != 0) { shell.exit(r.code); }
-    r = shell.exec(`echo { "version": "${version}" }>version.json`);
     if(r.code != 0) { shell.exit(r.code); }
     r = shell.exec(`yarn docker-tasks release ${version}`);
     if(r.code != 0) { shell.exit(r.code); }

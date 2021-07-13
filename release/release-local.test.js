@@ -11,6 +11,7 @@ test('test that --start option runs the correct commands', () => {
     "git push --set-upstream origin v0.10.0",
     "yarn install",
     "yarn generate-files",
+    "echo { \"version\": \"0.10.0\" }>version.json",
     "yarn build",
   ];
 
@@ -23,7 +24,6 @@ test('test that --start option runs the correct commands', () => {
 test('test that --ship option runs the correct commands', () => {
   const expected = [
     "docker login wh-govspm-docker-local.artifactory.swg-devops.com",
-    "echo { \"version\": \"0.10.0\" }>version.json",
     "yarn docker-tasks release 0.10.0",
     "yarn docker-tasks release latest",
     "git tag v0.10.0",
