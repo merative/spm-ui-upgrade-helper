@@ -1,8 +1,8 @@
 /**
- * If run with "true" as an argument, will modify ../plugins/package.json to include shortcuts for
+ * If run with "true" as an argument will modify ../plugins/package.json to include shortcuts for
  * all known tools, regardless of whether they are enabled or not.
  *
- * Note that ../plugins/package.json is a copy of ../vs-upgrade-helper-plugins/package.json.
+ * Note that the paths used here are different due to how the Dockerfile builds things.
  */
 const { program } = require("commander");
 const fileio = require("@folkforms/file-io");
@@ -10,7 +10,6 @@ const jsonFormat = require("json-format");
 
 program.parse();
 const devMode = program.args.length > 0 && !!program.args[0];
-console.log(`devMode = ${devMode}`);
 
 const packageFile = "../plugins/package.json";
 const package = fileio.readJson(packageFile);
@@ -28,7 +27,7 @@ if(devMode === true) {
     });
   });
 } else {
-  console.log("feature-flags: No args, using default configuration.");
+  console.log(`feature-flags: Argument was '${devMode}', using default configuration.`);
 }
 
 fileio.writeLines(packageFile, jsonFormat(package));
