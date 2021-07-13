@@ -1,0 +1,16 @@
+.has-updates {
+  background-color: green;
+}
+
+/* Remove 'div.cluster h3' */
+
+.foo,
+div.cluster h3 {
+  background-color: yellow;
+}
+
+/* Replace 'cluster' with 'bx--cluster' */
+
+.soria div.cluster td.top {
+  background-color: yellow;
+}
