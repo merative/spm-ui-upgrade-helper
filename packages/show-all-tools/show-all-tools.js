@@ -2,7 +2,7 @@
  * If run with "true" as an argument will modify ../plugins/package.json to include shortcuts for
  * all known tools, regardless of whether they are enabled or not.
  *
- * Note that the paths used here are different due to how the Dockerfile builds things.
+ * Note that the paths used here are different due to how the Dockerfile builds the code.
  */
 const { program } = require("commander");
 const fileio = require("@folkforms/file-io");
@@ -16,7 +16,7 @@ const package = fileio.readJson(packageFile);
 const tools = fileio.readJson("./tools.json");
 
 if(devMode === true) {
-  console.log(`feature-flags: Rewriting '${packageFile}' to include all tools`);
+  console.log(`show-all-tools: Rewriting '${packageFile}' to include all tools`);
   tools.forEach(tool => {
     if(tool.package === "main") { return; } // Skip main tool
 
@@ -27,7 +27,7 @@ if(devMode === true) {
     });
   });
 } else {
-  console.log(`feature-flags: Argument was '${devMode}', using default configuration.`);
+  console.log(`show-all-tools: Argument was '${devMode}', using default configuration.`);
 }
 
 fileio.writeLines(packageFile, jsonFormat(package));

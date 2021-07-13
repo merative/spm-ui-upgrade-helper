@@ -1,10 +1,10 @@
 {
-  "name": "@upgrade-helper/feature-flags",
+  "name": "@upgrade-helper/show-all-tools",
   "version": "0.0.0",
   "description": "",
-  "main": "feature-flags.js",
+  "main": "show-all-tools.js",
   "scripts": {
-    "feature-flags": "node feature-flags.js",
+    "show-all-tools": "node show-all-tools.js",
     "test": "jest"
   },
   "author": "",

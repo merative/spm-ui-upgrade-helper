@@ -19,13 +19,13 @@ ADD ./packages/vs-upgrade-helper-plugin/ .
 COPY --from=0 --chown=theia:theia \
     /home/theia/packages/vs-upgrade-helper-plugin/src/functions.ts \
     /home/plugins/packages/vs-upgrade-helper-plugin/src
-# Copy and run feature flags utility
-WORKDIR /home/feature-flags
-ADD ./packages/feature-flags/ .
+# Copy and run show-all-tools utility
+WORKDIR /home/show-all-tools
+ADD ./packages/show-all-tools/ .
 ADD ./config/tools.json ./tools.json
 ARG show_all_tools
 RUN yarn install
-RUN yarn feature-flags $show_all_tools
+RUN yarn show-all-tools $show_all_tools
 # Build plugins
 WORKDIR /home/plugins
 RUN yarn install
