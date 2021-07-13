@@ -8,11 +8,9 @@ if "%UIUH_DEV%"=="true" (
       -v C:\git\spm-ui-upgrade-helper\packages\js-rules-engine:/home/theia/packages/js-rules-engine/ ^
       -v C:\git\spm-ui-upgrade-helper\packages\shared-utils:/home/theia/packages/shared-utils/ ^
       -v C:\git\spm-ui-upgrade-helper\config:/home/theia/config/
-  set DETACH_CMD=
   echo Dev Mode On
 ) else (
   set UIUH_DEV_CMD=
-  set DETACH_CMD=--detach
   echo Dev Mode Off ^(use set UIUH_DEV=true to turn it on^)
 )
 
@@ -32,6 +30,22 @@ if "%ADDITIONAL_IGNORE%" == "" (
   set ADDITIONAL_IGNORE=C:\git\spm-ui-upgrade-helper\workspace\ignore
 )
 
-call spm-ui-upgrade-helper.bat %VERSION% %INPUT_FOLDER% %OUTPUT_FOLDER% %ADDITIONAL_RULES% %ADDITIONAL_IGNORE%
+set INPUT_FOLDER_CMD=-v %INPUT_FOLDER%:/home/workspace/input
+set OUTPUT_FOLDER_CMD=-v %OUTPUT_FOLDER%:/home/workspace/output
+set ADDITIONAL_RULES_CMD=-v %ADDITIONAL_RULES%:/home/workspace/rules
+set ADDITIONAL_IGNORE_CMD=-v %ADDITIONAL_IGNORE%:/home/workspace/ignore
+
+echo Starting spm-ui-upgrade-helper
+echo.
+echo     VERSION = %VERSION%
+echo     INPUT_FOLDER_CMD = %INPUT_FOLDER_CMD%
+echo     OUTPUT_FOLDER_CMD = %OUTPUT_FOLDER_CMD%
+echo     ADDITIONAL_RULES_CMD = %ADDITIONAL_RULES_CMD%
+echo     ADDITIONAL_IGNORE_CMD = %ADDITIONAL_IGNORE_CMD%
+echo.
+
+call docker stop spm-ui-upgrade-helper
+call docker rm spm-ui-upgrade-helper
+call docker run -p 3000:3000 -p 4000-4002:4000-4002 %UIUH_DEV_CMD% %INPUT_FOLDER_CMD% %OUTPUT_FOLDER_CMD% %ADDITIONAL_RULES_CMD% %ADDITIONAL_IGNORE_CMD% --name spm-ui-upgrade-helper spm-ui-upgrade-helper:%VERSION%
 
 endlocal

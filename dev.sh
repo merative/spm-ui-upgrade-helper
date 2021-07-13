@@ -7,11 +7,9 @@ if [[ "$UIUH_DEV" == "true" ]]; then
       -v $PWD/packages/js-rules-engine:/home/theia/packages/js-rules-engine/ \
       -v $PWD/packages/shared-utils:/home/theia/packages/shared-utils/ \
       -v $PWD/config:/home/theia/config/
-  DETACH=false
   echo Dev Mode On
 else
   UIUH_DEV_CMD=
-  DETACH=true
   echo Dev Mode Off (use export UIUH_DEV=true to turn it on)
 fi
 
@@ -31,4 +29,20 @@ if [[ -z "$ADDITIONAL_IGNORE" ]]; then
   ADDITIONAL_IGNORE=$PWD/workspace/ignore
 fi
 
-./spm-ui-upgrade-helper.sh $VERSION $INPUT_FOLDER $OUTPUT_FOLDER $ADDITIONAL_RULES $ADDITIONAL_IGNORE
+INPUT_FOLDER_CMD="-v $INPUT_FOLDER:/home/workspace/input"
+OUTPUT_FOLDER_CMD="-v $OUTPUT_FOLDER:/home/workspace/output"
+ADDITIONAL_RULES_CMD="-v $ADDITIONAL_RULES:/home/workspace/rules"
+ADDITIONAL_IGNORE_CMD="-v $ADDITIONAL_IGNORE:/home/workspace/ignore"
+
+echo Starting spm-ui-upgrade-helper
+echo
+echo     VERSION = $VERSION
+echo     INPUT_FOLDER_CMD = $INPUT_FOLDER_CMD
+echo     OUTPUT_FOLDER_CMD = $OUTPUT_FOLDER_CMD
+echo     ADDITIONAL_RULES_CMD = $ADDITIONAL_RULES_CMD
+echo     ADDITIONAL_IGNORE_CMD = $ADDITIONAL_IGNORE_CMD
+echo
+
+docker stop spm-ui-upgrade-helper
+docker rm spm-ui-upgrade-helper
+docker run -p 3000:3000 -p 4000-4002:4000-4002 $UIUH_DEV_CMD $INPUT_FOLDER_CMD $OUTPUT_FOLDER_CMD $ADDITIONAL_RULES_CMD $ADDITIONAL_IGNORE_CMD --name spm-ui-upgrade-helper spm-ui-upgrade-helper:$VERSION

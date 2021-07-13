@@ -5,6 +5,8 @@
   "description": "",
   "author": "",
   "scripts": {
+    "echo-commit": "node echo-commit.js",
+    "build": "yarn echo-commit && yarn docker-tasks build -p",
     "install-all": "npm-run-all --sequential install:*",
     "install:browser-app": "cd packages/browser-app && yarn install",
     "install:code-generator": "cd packages/code-generator && yarn install",
@@ -26,7 +28,8 @@
     "commander": "^8.0.0",
     "docker-tasks": "^0.1.49",
     "eslint": "^7.20.0",
-    "jest": "^27.0.6"
+    "jest": "^27.0.6",
+    "shelljs": "^0.8.4"
   },
   "dependencies": {
     "lerna": "^3.22.1",
