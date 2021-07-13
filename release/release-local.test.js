@@ -11,7 +11,7 @@ test('test that --start option runs the correct commands', () => {
     "git push --set-upstream origin v0.10.0",
     "yarn install",
     "yarn generate-files",
-    "yarn docker-tasks build",
+    "yarn build",
   ];
 
   release(dummyShell, "--start", "0.10.0");
