@@ -44,6 +44,12 @@ Once installed, you will need to allow Docker Desktop to access certain paths on
 9. Copy `<output folder>` into your v8 development environment.
 10. Build and test v8.
 
+## Errors
+
+To see the container logs run `docker logs spm-ui-upgrade-helper`.
+
+You can save the logs to a file using e.g. `docker logs spm-ui-upgrade-helper > /tmp/logs.txt`.
+
 ## Additional options
 
 In most cases, you can run this tool without modification, assuming that your SPM version is a standard installation.
