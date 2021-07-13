@@ -17,7 +17,7 @@ const execute = overrides => {
 const checkVersionNumber = () => {
   try {
     const json = fileio.readJson("../../version.json");
-    console.log(`Success: Found version number ${json.version}`);
+    console.log(`Success: Found version number: ${json.version}`);
   } catch(err) {
     console.log(`Warning: Version number not found (could not find version.json)`);
   }
@@ -38,7 +38,7 @@ const checkOutputFolderIsWritable = config => {
     console.log(`ERROR: Could not write test file to output folder. You may need to run \`chmod -R 777 <output folder>\` on the local machine.`);
     throw err;
   }
-  console.log(`Success: Wrote a test file '${testFile}' to ensure output folder is writeable`);
+  console.log(`Success: Wrote a test file to output folder to ensure it was writeable`);
 }
 
 module.exports = { execute };
