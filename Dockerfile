@@ -23,7 +23,7 @@ COPY --from=0 --chown=theia:theia \
 WORKDIR /home/feature-flags
 ADD ./packages/feature-flags/ .
 ADD ./config/tools.json ./tools.json
-ARG show_all_tools=false
+ARG show_all_tools
 RUN yarn install
 RUN yarn feature-flags $show_all_tools
 # Build plugins
