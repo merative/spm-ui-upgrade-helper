@@ -13,24 +13,14 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:extension.runUIUpgradeHelperCSS",
-		"onCommand:extension.runUIUpgradeHelperIcons",
-		"onCommand:extension.runUIUpgradeHelperJS"
+		"onCommand:extension.runUIUpgradeHelperMain"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "extension.runUIUpgradeHelperCSS",
-				"title": "Run SPM UI Upgrade Helper - CSS"
-			},
-			{
-				"command": "extension.runUIUpgradeHelperIcons",
-				"title": "Run SPM UI Upgrade Helper - Icons"
-			},
-			{
-				"command": "extension.runUIUpgradeHelperJS",
-				"title": "Run SPM UI Upgrade Helper - JS"
+				"command": "extension.runUIUpgradeHelperMain",
+				"title": "Run SPM UI Upgrade Helper - Main"
 			}
 		]
 	},
