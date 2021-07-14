@@ -1,0 +1,19 @@
+{
+  "name": "@upgrade-helper/service-main",
+  "version": "0.0.0",
+  "description": "Main service that triggers other services.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.7"
+  },
+  "devDependencies": {
+    "jest": "^27.0.5",
+    "test-with-data-folder": "^0.0.6"
+  }
+}

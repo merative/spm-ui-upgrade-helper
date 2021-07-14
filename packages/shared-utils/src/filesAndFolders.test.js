@@ -1,6 +1,14 @@
 const shelljs = require("shelljs");
 const fileio = require("@folkforms/file-io");
-const { writeFilesToDisk } = require("./filesAndFolders");
+const { loadConfig } = require("./config");
+const { writeFilesToDisk, globAllFiles, filterFiles } = require("./filesAndFolders");
+
+const overrides = {
+  inputFolder: "src/test-data/filesAndFolders/globAllFiles/input",
+  outputFolder: "src/test-data/filesAndFolders/globAllFiles/output",
+  ignorePatternsFolder: "src/test-data/filesAndFolders/globAllFiles/ignore",
+  ignorePatternsFolderAdditional: "src/test-data/filesAndFolders/globAllFiles/ignoreAdditional",
+}
 
 test('filesAndFolders failing test', () => {
   shelljs.rm("-rf", "./src/test-data/filesAndFolders/output");
@@ -25,4 +33,29 @@ test('filesAndFolders failing test', () => {
   expect(actual2).toEqual(files[filename2]);
 
   shelljs.rm("-rf", "./src/test-data/filesAndFolders/output");
+});
+
+test('filesAndFolders.globAllFiles test', () => {
+  const config = loadConfig(overrides);
+  const expected = [
+    "src/test-data/filesAndFolders/globAllFiles/input/bar.css",
+    "src/test-data/filesAndFolders/globAllFiles/input/bar.js",
+    "src/test-data/filesAndFolders/globAllFiles/input/foo.css",
+    "src/test-data/filesAndFolders/globAllFiles/input/foo.java",
+    "src/test-data/filesAndFolders/globAllFiles/input/foo.js",
+    "src/test-data/filesAndFolders/globAllFiles/input/foo.properties",
+  ].sort();
+
+  const actual = globAllFiles(config);
+
+  expect(actual).toEqual(expected);
+});
+
+test('filesAndFolders.filterFiles test', () => {
+  const files = [ "good.css", "bad.js", "bad.txt" ];
+  const expected = [ "good.css" ];
+
+  const actual = filterFiles(files, "css");
+
+  expect(actual).toEqual(expected);
 });

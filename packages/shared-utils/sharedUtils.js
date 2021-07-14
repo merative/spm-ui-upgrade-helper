@@ -1,9 +1,10 @@
 const { loadConfig } = require("./src/config");
 const { loadRules } = require("./src/rulesUtils");
 const { removeInvalidCSS, restoreInvalidCSS } = require("./src/invalidCss");
-const { removeOutputFolder,  createGitRepo, addTargetFiles, commitFiles } = require("./src/gitUtils");
+const { removeOutputFolder, createGitRepo, addTargetFiles, commitFiles } = require("./src/gitUtils");
 const { identicalData } = require("./src/identicalData");
-const { writeFilesToDisk } = require("./src/filesAndFolders");
+const { writeFilesToDisk, globAllFiles, filterFiles } = require("./src/filesAndFolders");
+const { removeIgnoredFiles } = require("./src/removeIgnoredFiles");
 
 module.exports = {
   // config.js
@@ -22,4 +23,8 @@ module.exports = {
   identicalData,
   // filesAndFolders.js
   writeFilesToDisk,
+  globAllFiles,
+  filterFiles,
+  // removeIgnoredFiles.js
+  removeIgnoredFiles,
 };

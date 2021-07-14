@@ -23,13 +23,17 @@ const execute = () => {
   //   }
   // });
 
+  const config = { ...utils.loadConfig(), ...overrides };
+  let targetFiles = config.inputFiles;
+
   try {
     // Initial setup
-    const config = utils.loadConfig();
-    utils.removeOutputFolder(config);
-    utils.createGitRepo(config);
-    const targetFiles = utils.addTargetFiles(config, "js");
-    utils.commitFiles(config.outputFolder, "feat(*): initial commit");
+    if(!config.skipSetup) {
+      utils.removeOutputFolder(config);
+      utils.createGitRepo(config);
+      targetFiles = utils.globAllFiles(config);
+    }
+    targetFiles = utils.filterFiles(targetFiles, "js");
 
     // Apply the rules to the files
     let count = 1;
@@ -48,6 +52,8 @@ const execute = () => {
       // const x2 = esprima.parseScript(contents.join("\n"));
       // console.log(`x2 = ${JSON.stringify(x2)}`);
     });
+
+    // Save changes
     utils.writeFilesToDisk(modified, config);
     // utils.commitFiles(config.outputFolder, "???");
     // utils.writeFilesToDisk(???, config);

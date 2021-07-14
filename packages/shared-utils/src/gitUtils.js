@@ -48,7 +48,7 @@ const addTargetFiles = (config, ...ext) => {
   let startTime = new Date().getTime();
   let inputFiles = fileio.glob(`${config.inputFolder}/**/*`);
   let endTime = new Date().getTime();
-  console.log(`Initial search found ${inputFiles.length} files [${Math.ceil((endTime-startTime)/60000)} minutes]`);
+  console.log(`(FIXME Remove this method) Initial search found ${inputFiles.length} files [${Math.ceil((endTime-startTime)/60000)} minutes]`);
 
   startTime = new Date().getTime();
   if(extensions) {
