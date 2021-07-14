@@ -54,9 +54,9 @@ const execute = () => {
     });
 
     // Save changes
-    utils.writeFilesToDisk(modified, config);
+    // utils.writeFilesToDisk(config, modified);
     // utils.commitFiles(config.outputFolder, "???");
-    // utils.writeFilesToDisk(???, config);
+    // utils.writeFilesToDisk(config, ???);
 
   } catch (error) {
     console.log(error);

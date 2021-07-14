@@ -24,6 +24,6 @@
     "name": "Run SPM UI Upgrade Helper - JS",
     "port": 4003,
     "commandName": "extension.runUIUpgradeHelperJS",
-    "enabled": true
+    "enabled": false
   }
 ]
