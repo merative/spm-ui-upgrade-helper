@@ -3,7 +3,7 @@ const { execute } = require("./index");
 
 const testToolOverrides = [
   {
-    "package": "main",
+    "package": "service-main",
     "name": "Run SPM UI Upgrade Helper",
     "port": 4000,
     "commandName": "extension.runUIUpgradeHelperMain",
