@@ -1,7 +1,8 @@
 const shelljs = require("shelljs");
 const fileio = require("@folkforms/file-io");
+const testWithDataFolder = require("test-with-data-folder");
 const { loadConfig } = require("./config");
-const { writeFilesToDisk, globAllFiles, filterFiles } = require("./filesAndFolders");
+const { writeFilesToDisk, globAllFiles, filterFiles, copyFilesToOutputFolder } = require("./filesAndFolders");
 
 const overrides = {
   inputFolder: "src/test-data/filesAndFolders/globAllFiles/input",
@@ -58,4 +59,19 @@ test('filesAndFolders.filterFiles test', () => {
   const actual = filterFiles(files, "css");
 
   expect(actual).toEqual(expected);
+});
+
+test('filesAndFolders.copyFilesToOutputFolder test', () => {
+  const inputFolder = "src/test-data/filesAndFolders/copyFilesToOutputFolder/input";
+  const expectedFolder = "src/test-data/filesAndFolders/copyFilesToOutputFolder/input"; // Same as input
+  const temporaryFolder = "src/test-data/filesAndFolders/copyFilesToOutputFolder/temp";
+
+  const inputFiles = fileio.glob(`${inputFolder}/**/*`);
+  const config = {
+    inputFolder,
+    outputFolder: temporaryFolder,
+  };
+  const testFunc = () => { copyFilesToOutputFolder(config, inputFiles); }
+
+  testWithDataFolder(testFunc, inputFolder, expectedFolder, temporaryFolder);
 });

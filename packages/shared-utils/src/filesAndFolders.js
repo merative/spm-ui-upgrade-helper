@@ -1,5 +1,6 @@
-const fs = require('fs-extra');
-const fileio = require('@folkforms/file-io');
+const fs = require("fs-extra");
+const fileio = require("@folkforms/file-io");
+const shell = require("shelljs");
 
 /**
  * Writes the given files to disk. Expects an object where the keys are the filenames and the values
@@ -61,8 +62,25 @@ const filterFiles = (files, ...ext) => {
   return files;
 }
 
+const copyFilesToOutputFolder = (config, inputFiles) => {
+  // Copy the files
+  console.log(`Copying ${inputFiles.length} files from input folder to output folder`);
+  startTime = new Date().getTime();
+  const outputFiles = [];
+  inputFiles.forEach(file => {
+    const destFile = file.replace(config.inputFolder, config.outputFolder);
+    const destFolder = destFile.substring(0, destFile.lastIndexOf('/'));
+    shell.mkdir('-p', destFolder);
+    shell.cp(file, destFile);
+    outputFiles.push(destFile);
+  });
+  endTime = new Date().getTime();
+  console.log(`Finished copying [${endTime - startTime} ms]`);
+}
+
 module.exports = {
   writeFilesToDisk,
   globAllFiles,
   filterFiles,
+  copyFilesToOutputFolder,
 };

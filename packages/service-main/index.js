@@ -16,6 +16,8 @@ const execute = (testConfigOverrides = {}, testToolOverrides = []) => {
     utils.createGitRepo(config);
     let inputFiles = utils.globAllFiles(config);
     inputFiles = utils.removeIgnoredFiles(config, inputFiles);
+    utils.copyFilesToOutputFolder(config, inputFiles);
+    utils.commitFiles(config.outputFolder, "Initial commit");
     const configOverrides = { skipSetup: true, inputFiles };
 
     tools.forEach(tool => {
@@ -25,8 +27,6 @@ const execute = (testConfigOverrides = {}, testToolOverrides = []) => {
         console.log(`Running tool '${tool.package}'`);
         const toolIndexFile = require(`../${tool.package}/index`);
         toolIndexFile.execute(configOverrides);
-      } else {
-        console.log(`Skipping tool '${tool.package}' as it was not enabled`);
       }
     });
 

@@ -3,7 +3,7 @@ const { loadRules } = require("./src/rulesUtils");
 const { removeInvalidCSS, restoreInvalidCSS } = require("./src/invalidCss");
 const { removeOutputFolder, createGitRepo, addTargetFiles, commitFiles } = require("./src/gitUtils");
 const { identicalData } = require("./src/identicalData");
-const { writeFilesToDisk, globAllFiles, filterFiles } = require("./src/filesAndFolders");
+const { writeFilesToDisk, globAllFiles, filterFiles, copyFilesToOutputFolder } = require("./src/filesAndFolders");
 const { removeIgnoredFiles } = require("./src/removeIgnoredFiles");
 
 module.exports = {
@@ -25,6 +25,7 @@ module.exports = {
   writeFilesToDisk,
   globAllFiles,
   filterFiles,
+  copyFilesToOutputFolder,
   // removeIgnoredFiles.js
   removeIgnoredFiles,
 };
