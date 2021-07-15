@@ -26,7 +26,7 @@ const execute = (testConfigOverrides = {}, testToolOverrides = []) => {
         const toolIndexFile = require(`../${tool.package}/index`);
         toolIndexFile.execute(configOverrides);
       } else {
-        console.log(`Skipping tool '${tool.package}'`);
+        console.log(`Skipping tool '${tool.package}' as it was not enabled`);
       }
     });
 
