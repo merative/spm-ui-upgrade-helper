@@ -10,7 +10,6 @@ test('test that --start option runs the correct commands', () => {
     "git checkout -b v0.10.0",
     "git push --set-upstream origin v0.10.0",
     "yarn install",
-    "yarn generate-files",
     "echo { \"version\": \"0.10.0\" }>version.json",
     "yarn build:release",
   ];
