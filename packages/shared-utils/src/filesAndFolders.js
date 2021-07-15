@@ -1,6 +1,6 @@
 const fs = require("fs-extra");
 const fileio = require("@folkforms/file-io");
-const shell = require("shelljs");
+const shelljs = require("shelljs");
 
 /**
  * Removes the folder `config.outputFolder`.
@@ -9,10 +9,10 @@ const shell = require("shelljs");
  */
 const removeOutputFolder = config => {
   const cwd = process.cwd();
-  shell.rm("-rf", `${config.outputFolder}/*`);
-  shell.rm("-rf", `${config.outputFolder}/.git`);
-  shell.mkdir('-p', config.outputFolder);
-  shell.cd(cwd);
+  shelljs.rm("-rf", `${config.outputFolder}/*`);
+  shelljs.rm("-rf", `${config.outputFolder}/.git`);
+  shelljs.mkdir('-p', config.outputFolder);
+  shelljs.cd(cwd);
 }
 
 /**
@@ -89,8 +89,8 @@ const copyFilesToOutputFolder = (config, inputFiles) => {
   inputFiles.forEach(file => {
     const destFile = file.replace(config.inputFolder, config.outputFolder);
     const destFolder = destFile.substring(0, destFile.lastIndexOf('/'));
-    shell.mkdir('-p', destFolder);
-    shell.cp(file, destFile);
+    shelljs.mkdir('-p', destFolder);
+    shelljs.cp(file, destFile);
     outputFiles.push(destFile);
   });
   endTime = new Date().getTime();

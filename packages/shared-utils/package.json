@@ -9,7 +9,9 @@
     "test": "jest"
   },
   "dependencies": {
-    "@folkforms/file-io": "^0.2.2"
+    "@folkforms/file-io": "^0.2.2",
+    "fs-extra": "^10.0.0",
+    "shelljs": "^0.8.4"
   },
   "devDependencies": {
     "jest": "^27.0.5",
