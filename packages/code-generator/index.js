@@ -29,7 +29,7 @@ tools.forEach(tool => {
   const outputData = nunjucks.renderString(tool.enabled ? serverJsTemplate : dummyServerJsTemplate, tool);
   const outputFile = `packages/${tool.package}/server.js`;
   fileio.writeLines(outputFile, outputData);
-  console.log(tool.enabled ? `code-generator: Generated server.js for '${tool.package}'` : `Generated dummy server.js for '${tool.package}'`);
+  console.log(devMode || tool.enabled ? `code-generator: Generated server.js for '${tool.package}'` : `Generated dummy server.js for '${tool.package}'`);
 });
 
 // Generate file containing function objects
