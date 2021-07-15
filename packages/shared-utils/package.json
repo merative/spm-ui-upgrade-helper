@@ -12,6 +12,7 @@
     "@folkforms/file-io": "^0.2.2"
   },
   "devDependencies": {
-    "jest": "^27.0.5"
+    "jest": "^27.0.5",
+    "test-with-data-folder": "^0.0.7"
   }
 }

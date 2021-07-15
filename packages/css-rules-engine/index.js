@@ -10,12 +10,16 @@ const utils = require("../shared-utils/sharedUtils");
  */
 const execute = (overrides = {}) => {
   try {
-    // Initial setup
     const config = { ...utils.loadConfig(), ...overrides };
-    utils.removeOutputFolder(config);
-    utils.createGitRepo(config);
-    const targetFiles = utils.addTargetFiles(config, "css");
-    utils.commitFiles(config.outputFolder, "feat(*): initial commit");
+    let targetFiles = config.files;
+
+    // Initial setup
+    if(!config.skipSetup) {
+      utils.removeOutputFolder(config);
+      utils.createGitRepo(config);
+      targetFiles = utils.globAllFiles(config);
+    }
+    targetFiles = utils.filterFiles(targetFiles, "css");
 
     // Apply the rules to the files
     const rules = utils.loadRules(config);
@@ -42,8 +46,11 @@ const execute = (overrides = {}) => {
       }
     });
     console.log(`${Object.keys(appliedRules).length} files were modified`);
-    utils.writeFilesToDisk(config, prettified);
-    utils.commitFiles(config.outputFolder, "feat(*): prettify files");
+
+    // FIXME Skipping prettifying stage as I suspect it will cause problems when running multiple tools
+    // Save changes
+    // utils.writeFilesToDisk(config, prettified);
+    // utils.commitFiles(config.outputFolder, "feat(*): css service - prettify files");
     utils.writeFilesToDisk(config, appliedRules);
 
   } catch (error) {

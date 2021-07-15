@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@folkforms/file-io": "^0.2.1",
+    "commander": "^8.0.0",
     "nunjucks": "^3.2.3"
   }
 }

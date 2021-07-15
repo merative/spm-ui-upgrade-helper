@@ -5,4 +5,4 @@ Dockerfile
 /_old/
 /_scripts/
 **/yarn-error.log
-packages/**/server.js
+*.bat
