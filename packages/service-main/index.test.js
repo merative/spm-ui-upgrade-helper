@@ -6,7 +6,8 @@ const testToolOverrides = [
     "package": "main",
     "name": "Run SPM UI Upgrade Helper",
     "port": 4000,
-    "commandName": "extension.runUIUpgradeHelperMain"
+    "commandName": "extension.runUIUpgradeHelperMain",
+    "enabled": true
   },
   {
     "package": "service-main/test-data/fake-tool-1",
@@ -28,7 +29,7 @@ const testToolOverrides = [
     "port": 4003,
     "commandName": "extension.runUIUpgradeHelperFakeTool3",
     "enabled": true
-  },
+  }
 ];
 
 const inputFolder = "./test-data/test-case-1/input";
