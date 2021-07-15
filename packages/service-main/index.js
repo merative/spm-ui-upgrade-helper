@@ -30,9 +30,6 @@ const execute = (testConfigOverrides = {}, testToolOverrides = []) => {
       }
     });
 
-    // Commit all changes
-    utils.commitFiles(config.outputFolder, "feat(*): changes");
-
   } catch (error) {
     console.log(error);
     return 1;
