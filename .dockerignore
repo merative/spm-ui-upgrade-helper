@@ -6,3 +6,4 @@ Dockerfile
 /_scripts/
 **/yarn-error.log
 packages/**/server.js
+*.bat
