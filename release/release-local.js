@@ -16,8 +16,6 @@ const release = (shell, option, version) => {
     shell.echo("Building...");
     r = shell.exec(`yarn install`);
     if(r.code != 0) { shell.exit(r.code); }
-    r = shell.exec(`yarn generate-files`);
-    if(r.code != 0) { shell.exit(r.code); }
     r = shell.exec(`echo { "version": "${version}" }>version.json`);
     if(r.code != 0) { shell.exit(r.code); }
     r = shell.exec(`yarn build:release`);
