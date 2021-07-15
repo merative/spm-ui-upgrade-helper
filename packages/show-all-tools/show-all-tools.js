@@ -18,7 +18,7 @@ const tools = fileio.readJson("./tools.json");
 if(devMode === true) {
   console.log(`show-all-tools: Rewriting '${packageFile}' to include all tools`);
   tools.forEach(tool => {
-    if(tool.package === "main") { return; } // Skip main tool
+    if(tool.package === "service-main") { return; } // Skip main tool
 
     package.activationEvents.push(`onCommand:${tool.commandName}`);
     package.contributes.commands.push({

@@ -19,7 +19,7 @@ const execute = (testConfigOverrides = {}, testToolOverrides = []) => {
     const configOverrides = { skipSetup: true, inputFiles };
 
     tools.forEach(tool => {
-      if(tool.package === "main") { return; } // Skip main tool
+      if(tool.package === "service-main") { return; } // Skip main tool
 
       if(tool.enabled) {
         console.log(`Running tool '${tool.package}'`);
