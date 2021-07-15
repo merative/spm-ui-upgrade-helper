@@ -8,7 +8,8 @@ RUN yarn install
 ADD . .
 RUN yarn install
 RUN yarn install-all
-RUN yarn generate-files
+ARG show_all_tools
+RUN yarn generate-files $show_all_tools
 
 # vs-upgrade-helper-plugin
 # The plugin does not support being created using lerna. It has to be a standalone project.
