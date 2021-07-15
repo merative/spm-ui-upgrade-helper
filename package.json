@@ -19,7 +19,7 @@
     "install:service-main": "cd packages/service-main && yarn install",
     "install:shared-utils": "cd packages/shared-utils && yarn install",
     "install:show-all-tools": "cd packages/show-all-tools && yarn install",
-    "start": "lerna run start --scope @upgrade-helper/initial-check && lerna run start --scope @upgrade-helper/browser-app --scope @upgrade-helper/service-main --scope @upgrade-helper/css-rules-engine --scope @upgrade-helper/icon-replacer --scope @upgrade-helper/js-rules-engine",
+    "start": "lerna run --scope @upgrade-helper/initial-check start && lerna run --scope @upgrade-helper/browser-app --scope @upgrade-helper/service-main --scope @upgrade-helper/css-rules-engine --scope @upgrade-helper/icon-replacer --scope @upgrade-helper/js-rules-engine start",
     "generate-files": "node ./packages/code-generator/index.js",
     "test": "lerna run test --ignore @upgrade-helper/skeleton --ignore @upgrade-helper/icon-replacer && yarn test-release-script",
     "test-release-script": "jest ./release/.*.test.js",
