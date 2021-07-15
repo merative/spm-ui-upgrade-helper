@@ -24,6 +24,8 @@ module.exports = { execute };
 
 FIXME (Step 4 & 5) Can we use a prefix or place all services in a 'services' folder so lerna can pick them up?
 
+FIXME (Step 4) Can we avoid step 4 and get the install for free if we are using a prefix like `packages/services-*`?
+
 FIXME (Step 4) If we remove sub-packages do we only need to install at the root?
 
 FIXME (Step 7) Can we automatically map the source code in `dev.bat`/`dev.sh` if we are using `packages/services-*`?
