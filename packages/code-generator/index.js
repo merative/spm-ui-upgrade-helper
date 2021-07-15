@@ -21,15 +21,15 @@ const tools = fileio.readJson("config/tools.json");
 // Filter to use only enabled tools, or all tools in dev mode
 let enabledTools = devMode ? tools : tools.filter(tool => tool.enabled);
 
-// Generate server.js for all enabled tools, and dummy-server.js for all disabled tools
+// Generate server.js for all enabled tools, and a dummy version for all disabled tools
 const serverJsTemplate = fileio.readLines("packages/code-generator/server.js.template").join("\n");
 const dummyServerJsTemplate = fileio.readLines("packages/code-generator/dummy-server.js.template").join("\n");
 tools.forEach(tool => {
   nunjucks.configure();
-  const outputData = nunjucks.renderString(tool.enabled ? serverJsTemplate : dummyServerJsTemplate, tool);
   const outputFile = `packages/${tool.package}/server.js`;
+  const outputData = nunjucks.renderString(tool.enabled ? serverJsTemplate : dummyServerJsTemplate, tool);
   fileio.writeLines(outputFile, outputData);
-  console.log(devMode || tool.enabled ? `code-generator: Generated server.js for '${tool.package}'` : `code-generator: Generated dummy server.js for '${tool.package}' as it was not enabled`);
+  console.log(`code-generator: Generated ${outputFile}${devMode || tool.enabled ? "" : " (dummy version as tool is not enabled)" }`);
 });
 
 // Generate file containing function objects
