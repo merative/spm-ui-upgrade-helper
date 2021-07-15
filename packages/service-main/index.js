@@ -25,7 +25,7 @@ const execute = (testConfigOverrides = {}, testToolOverrides = []) => {
       if(tool.package === "service-main") { return; } // Skip main tool
 
       if(tool.enabled) {
-        console.log(`Running tool '${tool.package}'`);
+        console.log(`==== Running tool '${tool.package}' ====`);
         const toolIndexFile = require(`../${tool.package}/index`);
         toolIndexFile.execute(configOverrides);
       }
