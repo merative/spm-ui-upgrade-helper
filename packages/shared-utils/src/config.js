@@ -17,7 +17,7 @@ const loadConfig = (overrides = {}) => {
     iconReferenceExclude: overrides.iconReferenceExclude || ["zip", "class", "jpg", "jpeg", "gif", "png"],
     verbose: overrides.verbose || false,
     skipSetup: overrides.skipSetup || false,
-    inputFiles: overrides.inputFiles || [],
+    files: overrides.files || [],
   };
   return config;
 }

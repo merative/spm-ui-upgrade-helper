@@ -11,7 +11,7 @@ const utils = require("../shared-utils/sharedUtils");
 const execute = (overrides = {}) => {
   try {
     const config = { ...utils.loadConfig(), ...overrides };
-    let targetFiles = config.inputFiles;
+    let targetFiles = config.files;
 
     // Initial setup
     if(!config.skipSetup) {

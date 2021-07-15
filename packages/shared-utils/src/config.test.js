@@ -11,7 +11,7 @@ test('config test with defaults', () => {
     iconReferenceExclude: ["zip", "class", "jpg", "jpeg", "gif", "png"],
     verbose: false,
     skipSetup: false,
-    inputFiles: [],
+    files: [],
   }
 
   const actual = loadConfig();
@@ -30,7 +30,7 @@ test('config test with all overrides', () => {
     iconReferenceExclude: "ggg",
     verbose: "hhh",
     skipSetup: true,
-    inputFiles: [],
+    files: [],
   }
   const expected = overrides;
 
@@ -57,7 +57,7 @@ test('config test with some overrides', () => {
     iconReferenceExclude: ["zip", "class", "jpg", "jpeg", "gif", "png"],
     verbose: "hhh",
     skipSetup: false,
-    inputFiles: [],
+    files: [],
   };
 
   const actual = loadConfig(overrides);

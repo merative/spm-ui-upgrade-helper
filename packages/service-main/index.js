@@ -18,7 +18,8 @@ const execute = (testConfigOverrides = {}, testToolOverrides = []) => {
     inputFiles = utils.removeIgnoredFiles(config, inputFiles);
     utils.copyFilesToOutputFolder(config, inputFiles);
     utils.commitFiles(config.outputFolder, "Initial commit");
-    const configOverrides = { skipSetup: true, inputFiles };
+    const files = utils.flipToOutputFiles(config, inputFiles);
+    const configOverrides = { skipSetup: true, files };
 
     tools.forEach(tool => {
       if(tool.package === "service-main") { return; } // Skip main tool

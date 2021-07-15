@@ -24,7 +24,7 @@ const execute = () => {
   // });
 
   const config = { ...utils.loadConfig(), ...overrides };
-  let targetFiles = config.inputFiles;
+  let targetFiles = config.files;
 
   try {
     // Initial setup

@@ -3,6 +3,19 @@ const fileio = require("@folkforms/file-io");
 const shell = require("shelljs");
 
 /**
+ * Removes the folder `config.outputFolder`.
+ *
+ * @param {object} config configuration object
+ */
+const removeOutputFolder = config => {
+  const cwd = process.cwd();
+  shell.rm("-rf", `${config.outputFolder}/*`);
+  shell.rm("-rf", `${config.outputFolder}/.git`);
+  shell.mkdir('-p', config.outputFolder);
+  shell.cd(cwd);
+}
+
+/**
  * Writes the given files to disk. Expects an object where the keys are the filenames and the values
  * are the file contents. The output filenames are the input filenames with `config.inputFolder`
  * replaced by `config.outputFolder`.
@@ -62,8 +75,14 @@ const filterFiles = (files, ...ext) => {
   return files;
 }
 
+/**
+ * Updates all of the files in `inputFiles` array to `config.outputFolder`, by updating
+ * `config.inputFolder` => `config.outputFolder`.
+ *
+ * @param {*} config configuration object
+ * @param {*} inputFiles list of input files
+ */
 const copyFilesToOutputFolder = (config, inputFiles) => {
-  // Copy the files
   console.log(`Copying ${inputFiles.length} files from input folder to output folder`);
   startTime = new Date().getTime();
   const outputFiles = [];
@@ -78,9 +97,31 @@ const copyFilesToOutputFolder = (config, inputFiles) => {
   console.log(`Finished copying [${endTime - startTime} ms]`);
 }
 
+/**
+ * Updates the path of all files in `inputFiles` array from `config.inputFolder` =>
+ * `config.outputFolder`.
+ *
+ * @param {*} config configuration object
+ * @param {*} inputFiles list of input files
+ */
+const flipToOutputFiles = (config, inputFiles) => {
+  console.log(`Updating paths from input folder to output folder`);
+  startTime = new Date().getTime();
+  const files = [];
+  inputFiles.forEach(file => {
+    const destFile = file.replace(config.inputFolder, config.outputFolder);
+    files.push(destFile);
+  });
+  endTime = new Date().getTime();
+  console.log(`Finished updating paths [${endTime - startTime} ms]`);
+  return files;
+}
+
 module.exports = {
+  removeOutputFolder,
   writeFilesToDisk,
   globAllFiles,
   filterFiles,
   copyFilesToOutputFolder,
+  flipToOutputFiles,
 };
