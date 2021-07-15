@@ -18,4 +18,4 @@
 
 ## Notes
 
-- There are two build commands: `build:dev` and `build:release`. The former will add shortcuts to all services so that they can be run individually.
+- There are two build commands: `build:dev` and `build:release`. The former will add development shortcuts to all services so that they can be run individually.
