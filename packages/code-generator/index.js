@@ -12,7 +12,7 @@ const fileio = require("@folkforms/file-io");
 const nunjucks = require("nunjucks");
 
 program.parse();
-const devMode = program.args.length > 0 && !!program.args[0];
+const devMode = program.args.length > 0 && program.args[0] == "true";
 console.log(`code-generator: devMode = ${devMode}`);
 
 // Generate server.js files
