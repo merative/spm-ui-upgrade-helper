@@ -18,7 +18,7 @@
     "install:js-rules-engine": "cd packages/js-rules-engine && yarn install",
     "install:service-main": "cd packages/service-main && yarn install",
     "install:shared-utils": "cd packages/shared-utils && yarn install",
-    "start": "lerna run start --scope @upgrade-helper/initial-check && lerna run start --scope @upgrade-helper/browser-app --scope @upgrade-helper/css-rules-engine --scope @upgrade-helper/icon-replacer --scope @upgrade-helper/js-rules-engine",
+    "start": "lerna run start --scope @upgrade-helper/initial-check && lerna run start --scope @upgrade-helper/browser-app --scope @upgrade-helper/service-main --scope @upgrade-helper/css-rules-engine --scope @upgrade-helper/icon-replacer --scope @upgrade-helper/js-rules-engine",
     "generate-files": "node ./packages/code-generator/index.js",
     "test": "lerna run test --ignore @upgrade-helper/skeleton --ignore @upgrade-helper/icon-replacer && yarn test-release-script",
     "test-release-script": "jest ./release/.*.test.js",
