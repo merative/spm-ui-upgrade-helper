@@ -43,9 +43,9 @@ const writeFilesToDisk = (config, files) => {
  */
 const globAllFiles = config => {
   console.log("Collecting input files");
-  let startTime = new Date().getTime();
+  const startTime = new Date().getTime();
   let inputFiles = fileio.glob(`${config.inputFolder}/**/*`);
-  let endTime = new Date().getTime();
+  const endTime = new Date().getTime();
   console.log(`Initial search found ${inputFiles.length} files [${Math.ceil((endTime-startTime)/60000)} minutes]`);
   return inputFiles;
 }
@@ -59,7 +59,7 @@ const globAllFiles = config => {
  */
 const filterFiles = (files, ...ext) => {
   const extensions = ext.length > 0 ? ext.map(item => `.${item}`) : null;
-  let startTime = new Date().getTime();
+  const startTime = new Date().getTime();
   if(extensions) {
     files = files.filter(f => {
       for(let i = 0; i < extensions.length; i++) {
@@ -70,7 +70,7 @@ const filterFiles = (files, ...ext) => {
       return false;
     });
   }
-  let endTime = new Date().getTime();
+  const endTime = new Date().getTime();
   console.log(`Filtered down to ${files.length} files based on extensions: ${ext} [${endTime - startTime} ms]`);
   return files;
 }
@@ -84,7 +84,7 @@ const filterFiles = (files, ...ext) => {
  */
 const copyFilesToOutputFolder = (config, inputFiles) => {
   console.log(`Copying ${inputFiles.length} files from input folder to output folder`);
-  startTime = new Date().getTime();
+  const startTime = new Date().getTime();
   const outputFiles = [];
   inputFiles.forEach(file => {
     const destFile = file.replace(config.inputFolder, config.outputFolder);
@@ -93,8 +93,8 @@ const copyFilesToOutputFolder = (config, inputFiles) => {
     shelljs.cp(file, destFile);
     outputFiles.push(destFile);
   });
-  endTime = new Date().getTime();
-  console.log(`Finished copying [${endTime - startTime} ms]`);
+  const endTime = new Date().getTime();
+  console.log(`Finished copying [${Math.ceil((endTime-startTime)/60000)} minutes]`);
 }
 
 /**
@@ -106,13 +106,13 @@ const copyFilesToOutputFolder = (config, inputFiles) => {
  */
 const flipToOutputFiles = (config, inputFiles) => {
   console.log(`Updating paths from input folder to output folder`);
-  startTime = new Date().getTime();
+  const startTime = new Date().getTime();
   const files = [];
   inputFiles.forEach(file => {
     const destFile = file.replace(config.inputFolder, config.outputFolder);
     files.push(destFile);
   });
-  endTime = new Date().getTime();
+  const endTime = new Date().getTime();
   console.log(`Finished updating paths [${endTime - startTime} ms]`);
   return files;
 }

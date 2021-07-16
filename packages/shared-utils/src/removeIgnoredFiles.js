@@ -12,6 +12,9 @@ const containsAnyToken = (path, tokens) => {
 }
 
 const removeIgnoredFiles = (config, inputFiles) => {
+  let startTime = new Date().getTime();
+  const countBeforeIgnore = inputFiles.length;
+
   const ignoreFiles = [
     fileio.glob(`${config.ignorePatternsFolder}/*.json`),
     fileio.glob(`${config.ignorePatternsFolderAdditional}/*.json`),
@@ -42,6 +45,9 @@ const removeIgnoredFiles = (config, inputFiles) => {
       });
     }
   });
+  const countAfterIgnore = inputFiles.length;
+  let endTime = new Date().getTime();
+  console.log(`Ignored ${countBeforeIgnore - countAfterIgnore} files [${endTime - startTime} ms]`);
 
   return inputFiles;
 }
