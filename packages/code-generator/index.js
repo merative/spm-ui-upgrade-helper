@@ -27,7 +27,7 @@ const dummyServerJsTemplate = fileio.readLines("packages/code-generator/dummy-se
 tools.forEach(tool => {
   nunjucks.configure();
   const outputFile = `packages/${tool.package}/server.js`;
-  const outputData = nunjucks.renderString(tool.enabled ? serverJsTemplate : dummyServerJsTemplate, tool);
+  const outputData = nunjucks.renderString(devMode || tool.enabled ? serverJsTemplate : dummyServerJsTemplate, tool);
   fileio.writeLines(outputFile, outputData);
   console.log(`code-generator: Generated ${outputFile}${devMode || tool.enabled ? "" : " (dummy version as tool is not enabled)" }`);
 });
