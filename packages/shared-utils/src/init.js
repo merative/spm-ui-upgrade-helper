@@ -3,21 +3,18 @@ const { removeOutputFolder, globAllFiles, copyFilesToOutputFolder, flipToOutputF
 const { removeIgnoredFiles } = require("./removeIgnoredFiles");
 
 /**
- * The init step will create a git repo in the output folder, glob up the input files, remove any
- * ignored files, copy the remaining files to the output folder and commit them, then add the
- * file paths to the config object
+ * The init step will wipe the output folder, create a git repo, glob up the input files, remove any
+ * ignored files from the list, copy the files to the output folder, commit them, then add the
+ * resulting file paths to the config object
  *
- * Tools should call the following code when they start:
+ * Tools MUST call the following code in their `execute` method:
  * ```
- *     const config = { ...utils.loadConfig(), ...overrides };
- *     utils.init(config);
+ * const execute = overrides => {
+ *   const config = { ...utils.loadConfig(), ...overrides };
+ *   utils.init(config);
  * ```
- * This means when a tool is run independently it will set up the output folder itself and glob the
- * files etc.
- *
- * When the main tool calls a tool it passes `{ skipInit: true, files }` as an override meaning the
- * `init` step is skipped. We don't want each tool deleting and recreating the output folder or to
- * have to glob the list of files over and over.
+ * This way when a tool is run independently it will do all the setup itself, but when it is called
+ * via the main tool the `init` code will be skipped, because the main tool has done it already.
  *
  * @param {*} config configuration object
  */
