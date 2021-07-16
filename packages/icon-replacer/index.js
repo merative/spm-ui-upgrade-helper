@@ -1,23 +1,17 @@
 const iconReplacer = require("./src/icon-replacer");
 const utils = require("../shared-utils/sharedUtils");
 
-const iconFolder = "/home/theia/packages/icon-replacer/source_files";
-const iconMappings = "/home/theia/packages/icon-replacer/icon_mappings.json";
+const execute = (overrides = {}) => {
+  const config = { ...utils.loadConfig(), ...overrides };
+  utils.init(config);
 
-const execute = () => {
-  // Initial setup
-  const config = utils.loadConfig();
-  utils.removeOutputFolder(config);
-  utils.createGitRepo(config);
-  const targetFiles = utils.addTargetFiles(config);
-  utils.commitFiles(config.outputFolder, "feat(*): initial commit");
+  const iconFolder = overrides.iconFolder || "/home/theia/packages/icon-replacer/source_files";
+  const iconMappings = overrides.iconMappings || "/home/theia/packages/icon-replacer/icon_mappings.json";
 
   iconReplacer.run(
-    config.outputFolder,
+    config,
     iconFolder,
     iconMappings,
-    config.iconReferenceExclude,
-    config.verbose
   );
 };
 
