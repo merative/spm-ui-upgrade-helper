@@ -8,17 +8,17 @@ const release = (shell, option, version) => {
   }
 
   if(option === "--start") {
-    shell.echo("Creating release branch...");
-    r = shell.exec(`git checkout -b v${version}`);
-    if(r.code != 0) { shell.exit(r.code); }
-    r = shell.exec(`git push --set-upstream origin v${version}`);
-    if(r.code != 0) { shell.exit(r.code); }
     shell.echo("Building...");
     r = shell.exec(`yarn install`);
     if(r.code != 0) { shell.exit(r.code); }
     r = shell.exec(`echo { "version": "${version}" }>version.json`);
     if(r.code != 0) { shell.exit(r.code); }
     r = shell.exec(`yarn build:release`);
+    if(r.code != 0) { shell.exit(r.code); }
+    shell.echo("Creating release branch...");
+    r = shell.exec(`git checkout -b v${version}`);
+    if(r.code != 0) { shell.exit(r.code); }
+    r = shell.exec(`git push --set-upstream origin v${version}`);
     if(r.code != 0) { shell.exit(r.code); }
     shell.echo("");
     shell.echo("Build successful. You should now perform acceptance testing. Use `yarn at:build` and `at.bat`/`at.sh` to test against generated acceptance test data.");

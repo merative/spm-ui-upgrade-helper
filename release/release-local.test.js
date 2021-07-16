@@ -7,11 +7,11 @@ afterEach(() => {
 
 test('test that --start option runs the correct commands', () => {
   const expected = [
-    "git checkout -b v0.10.0",
-    "git push --set-upstream origin v0.10.0",
     "yarn install",
     "echo { \"version\": \"0.10.0\" }>version.json",
     "yarn build:release",
+    "git checkout -b v0.10.0",
+    "git push --set-upstream origin v0.10.0",
   ];
 
   release(dummyShell, "--start", "0.10.0");
