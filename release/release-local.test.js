@@ -25,6 +25,8 @@ test('test that --ship option runs the correct commands', () => {
     "docker login wh-govspm-docker-local.artifactory.swg-devops.com",
     "yarn docker-tasks release 0.10.0",
     "yarn docker-tasks release latest",
+    "yarn docker-tasks release 0.10.0 --public",
+    "yarn docker-tasks release latest --public",
     "git tag v0.10.0",
     "git push --tags",
     "rm -f version.json",

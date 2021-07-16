@@ -35,6 +35,10 @@ const release = (shell, option, version) => {
     if(r.code != 0) { shell.exit(r.code); }
     r = shell.exec(`yarn docker-tasks release latest`);
     if(r.code != 0) { shell.exit(r.code); }
+    r = shell.exec(`yarn docker-tasks release ${version} --public`);
+    if(r.code != 0) { shell.exit(r.code); }
+    r = shell.exec(`yarn docker-tasks release latest --public`);
+    if(r.code != 0) { shell.exit(r.code); }
     r = shell.exec(`git tag v${version}`);
     if(r.code != 0) { shell.exit(r.code); }
     r = shell.exec(`git push --tags`);
