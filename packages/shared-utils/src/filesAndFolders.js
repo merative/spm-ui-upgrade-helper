@@ -94,7 +94,7 @@ const copyFilesToOutputFolder = (config, inputFiles) => {
     outputFiles.push(destFile);
   });
   endTime = new Date().getTime();
-  console.log(`Finished copying [${endTime - startTime} ms]`);
+  console.log(`Finished copying [${Math.ceil((endTime-startTime)/60000)} minutes]`);
 }
 
 /**
