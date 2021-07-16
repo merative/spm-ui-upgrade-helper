@@ -1,4 +1,4 @@
-const { testWithDataFolder } = require("test-with-data-folder");
+const testWithDataFolder = require("test-with-data-folder");
 const { execute } = require("./index");
 
 test('css-rules-engine test', () => {

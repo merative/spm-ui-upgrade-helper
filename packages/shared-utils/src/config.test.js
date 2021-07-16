@@ -10,7 +10,7 @@ test('config test with defaults', () => {
     ignorePatternsFolderAdditional: "/home/workspace/ignore",
     iconReferenceExclude: ["zip", "class", "jpg", "jpeg", "gif", "png"],
     verbose: false,
-    skipSetup: false,
+    skipInit: false,
     files: [],
   }
 
@@ -29,7 +29,7 @@ test('config test with all overrides', () => {
     ignorePatternsFolderAdditional: "fff",
     iconReferenceExclude: "ggg",
     verbose: "hhh",
-    skipSetup: true,
+    skipInit: true,
     files: [],
   }
   const expected = overrides;
@@ -56,7 +56,7 @@ test('config test with some overrides', () => {
     ignorePatternsFolderAdditional: "fff",
     iconReferenceExclude: ["zip", "class", "jpg", "jpeg", "gif", "png"],
     verbose: "hhh",
-    skipSetup: false,
+    skipInit: false,
     files: [],
   };
 
