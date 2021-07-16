@@ -15,11 +15,6 @@ const execute = (overrides = {}) => {
 
     // Initial setup
     let targetFiles = config.files;
-    // if(!config.skipSetup) {
-    //   utils.removeOutputFolder(config);
-    //   utils.createGitRepo(config);
-    //   targetFiles = utils.globAllFiles(config);
-    // }
     targetFiles = utils.filterFiles(targetFiles, "css");
 
     // Apply the rules to the files
