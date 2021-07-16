@@ -12,6 +12,7 @@ const {
   flipToOutputFiles
 } = require("./src/filesAndFolders");
 const { removeIgnoredFiles } = require("./src/removeIgnoredFiles");
+const { init } = require("./src/init");
 
 module.exports = {
   // config.js
@@ -35,4 +36,6 @@ module.exports = {
   flipToOutputFiles,
   // removeIgnoredFiles.js
   removeIgnoredFiles,
+  // init.js
+  init,
 };

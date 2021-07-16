@@ -11,14 +11,15 @@ const utils = require("../shared-utils/sharedUtils");
 const execute = (overrides = {}) => {
   try {
     const config = { ...utils.loadConfig(), ...overrides };
-    let targetFiles = config.files;
+    utils.init(config);
 
     // Initial setup
-    if(!config.skipSetup) {
-      utils.removeOutputFolder(config);
-      utils.createGitRepo(config);
-      targetFiles = utils.globAllFiles(config);
-    }
+    let targetFiles = config.files;
+    // if(!config.skipSetup) {
+    //   utils.removeOutputFolder(config);
+    //   utils.createGitRepo(config);
+    //   targetFiles = utils.globAllFiles(config);
+    // }
     targetFiles = utils.filterFiles(targetFiles, "css");
 
     // Apply the rules to the files

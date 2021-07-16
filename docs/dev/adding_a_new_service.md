@@ -6,9 +6,15 @@
 2. Your new service should be feature flagged off while it is being built by setting `enabled: false`. You will still be able to run it via a developer shortcut (see below.)
 3. Create a new package with an `index.js` file containing an `execute` method. This method will be triggered when the IDE shortcut is invoked.
 ```
-const execute = () => {
+const utils = require("../shared-utils/sharedUtils");
+
+const execute = overrides => {
+  const config = { ...utils.loadConfig(), ...overrides };
+  utils.init(config);
+
   console.log("Hello, world!");
 }
+
 module.exports = { execute };
 ```
 4. Update `package.json` `scripts: { }` section to include `install:your-service`
@@ -32,7 +38,8 @@ FIXME (Step 7) Can we automatically map the source code in `dev.bat`/`dev.sh` if
 
 ## Notes
 
+- The first two lines of config/init boilerplate allow the service to be run independently and as part of the main service.
 - To build and test your tool while keeping it hidden from the customer, `build:dev` generates additional shortcuts to every individual service, regardless if whether they are enabled or not.
-- `main-service` is triggered via the "Run SPM UI Upgrade Helper" shortcut. It will trigger all enabled tools.
+- `main-service` is triggered via the "Run SPM UI Upgrade Helper" shortcut. It will trigger enabled tools only.
 - When the Docker container starts, the `code-generation` package uses the data in `config/tools.json` to generate a `server.js` file for each package. It also generates Eclipse Theia plugins as `packages/vs-upgrade-helper-plugin/src/functions.ts`.
 - Flagging the features off during development means you can can continue to commit to `main` every day. This means no long-lived feature branches which means no painful merges, and if your branch breaks something you find out today.

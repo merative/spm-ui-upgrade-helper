@@ -9,18 +9,17 @@ const utils = require("../shared-utils/sharedUtils");
  */
 const execute = (testConfigOverrides = {}, testToolOverrides = []) => {
   try {
-    // Initial setup
-    const tools = testToolOverrides.length > 0 ? testToolOverrides : fileio.readJson("../../config/tools.json");
+    // Load configuration (and apply any test overrides provided)
     const config = { ...utils.loadConfig(), ...testConfigOverrides };
-    utils.removeOutputFolder(config);
-    utils.createGitRepo(config);
-    let inputFiles = utils.globAllFiles(config);
-    inputFiles = utils.removeIgnoredFiles(config, inputFiles);
-    utils.copyFilesToOutputFolder(config, inputFiles);
-    utils.commitFiles(config.outputFolder, "Initial commit");
-    const files = utils.flipToOutputFiles(config, inputFiles);
-    const configOverrides = { skipSetup: true, files };
+    const tools = testToolOverrides.length > 0 ? testToolOverrides : fileio.readJson("../../config/tools.json");
 
+    // Init the output folder and set config.files
+    utils.init(config);
+
+    // Pass configuration to the individual tools so we can tell them to skip the init step
+    const configOverrides = { ...config, skipInit: true };
+
+    // Execute all the tools
     tools.forEach(tool => {
       if(tool.package === "service-main") { return; } // Skip main tool
 
