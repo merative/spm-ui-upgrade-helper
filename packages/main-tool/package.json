@@ -1,5 +1,5 @@
 {
-  "name": "@upgrade-helper/service-main",
+  "name": "@upgrade-helper/main-tool",
   "version": "0.0.0",
   "description": "Main service that triggers other services.",
   "main": "index.js",

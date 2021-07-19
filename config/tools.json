@@ -1,6 +1,6 @@
 [
   {
-    "package": "service-main",
+    "package": "main-tool",
     "name": "Run SPM UI Upgrade Helper",
     "port": 4000,
     "commandName": "extension.runUIUpgradeHelperMain",

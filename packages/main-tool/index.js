@@ -21,7 +21,7 @@ const execute = (testConfigOverrides = {}, testToolOverrides = []) => {
 
     // Execute all the tools
     tools.forEach(tool => {
-      if(tool.package === "service-main") { return; } // Skip main tool
+      if(tool.package === "main-tool") { return; } // Skip main tool
 
       if(tool.enabled) {
         console.log(`==== Running tool '${tool.package}' ====`);
