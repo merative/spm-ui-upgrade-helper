@@ -4,15 +4,16 @@
  * number change. Also generates `packages/vs-upgrade-helper-plugin/src/functions.ts` with the
  * details of the functions so that they will be included as IDE shortcuts.
  *
- * If run with "true" as an argument will run for all known tools, regardless of whether they are
- * enabled or not.
+ * Create a dummy server.js for tools that are not enabled. If run with "--dev" as an argument it
+ * will create a real server.js for all known tools, regardless of whether they are enabled or not.
  */
 const { program } = require("commander");
 const fileio = require("@folkforms/file-io");
 const nunjucks = require("nunjucks");
 
+program.option("-d, --dev");
 program.parse();
-const devMode = program.args.length > 0 && program.args[0] == "true";
+const devMode = program.opts().dev;
 console.log(`code-generator: devMode = ${devMode}`);
 
 // Generate server.js files
@@ -32,7 +33,8 @@ tools.forEach(tool => {
   console.log(`code-generator: Generated ${outputFile}${devMode || tool.enabled ? "" : " (dummy version as tool is not enabled)" }`);
 });
 
-// Generate file containing function objects
+// Generate file containing function objects. This will only show enabled tools. Later,
+// show-all-tools may add dev shortcuts for other tools.
 const functionsTemplate = fileio.readLines("packages/code-generator/functions.ts.template").join("\n");
 nunjucks.configure();
 const functionsOutputData = nunjucks.renderString(functionsTemplate, { tools: enabledTools });
