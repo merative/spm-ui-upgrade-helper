@@ -2,7 +2,7 @@
 
 # This is for mapping local development code onto the docker image so you can watch for changes
 if [[ "$UIUH_DEV" == "true" ]]; then
-  UIUH_DEV_CMD=-v $PWD/packages/service-main:/home/theia/packages/service-main/ \
+  UIUH_DEV_CMD=-v $PWD/packages/main-tool:/home/theia/packages/main-tool/ \
       -v $PWD/packages/css-rules-engine:/home/theia/packages/css-rules-engine/ \
       -v $PWD/packages/icon-replacer:/home/theia/packages/icon-replacer/ \
       -v $PWD/packages/js-rules-engine:/home/theia/packages/js-rules-engine/ \

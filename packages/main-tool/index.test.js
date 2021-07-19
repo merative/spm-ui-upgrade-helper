@@ -3,28 +3,28 @@ const { execute } = require("./index");
 
 const testToolOverrides = [
   {
-    "package": "service-main",
+    "package": "main-tool",
     "name": "Run SPM UI Upgrade Helper",
     "port": 4000,
     "commandName": "extension.runUIUpgradeHelperMain",
     "enabled": true
   },
   {
-    "package": "service-main/test-data/fake-tool-1",
+    "package": "main-tool/test-data/fake-tool-1",
     "name": "Run SPM UI Upgrade Helper - Fake Tool 1",
     "port": 4001,
     "commandName": "extension.runUIUpgradeHelperFakeTool1",
     "enabled": true
   },
   {
-    "package": "service-main/test-data/fake-tool-2-disabled",
+    "package": "main-tool/test-data/fake-tool-2-disabled",
     "name": "Run SPM UI Upgrade Helper - Fake Tool 2",
     "port": 4002,
     "commandName": "extension.runUIUpgradeHelperFakeTool2",
     "enabled": false
   },
   {
-    "package": "service-main/test-data/fake-tool-3",
+    "package": "main-tool/test-data/fake-tool-3",
     "name": "Run SPM UI Upgrade Helper - Fake Tool 3",
     "port": 4003,
     "commandName": "extension.runUIUpgradeHelperFakeTool3",
@@ -40,7 +40,7 @@ const testConfigOverrides = {
   outputFolder: temporaryFolder,
 };
 
-test('service-main index test', () => {
+test('main-tool index test', () => {
   const testFunc = () => { execute(testConfigOverrides, testToolOverrides); };
   testWithDataFolder(testFunc, inputFolder, expectedFolder, temporaryFolder);
 });
