@@ -9,17 +9,12 @@ const release = (shell, option, version) => {
 
   if(option === "--start") {
     shell.echo("Building...");
-    r = shell.exec(`yarn install`);
-    if(r.code != 0) { shell.exit(r.code); }
-    r = shell.exec(`echo { "version": "${version}" }>version.json`);
-    if(r.code != 0) { shell.exit(r.code); }
-    r = shell.exec(`yarn build:release`);
-    if(r.code != 0) { shell.exit(r.code); }
+    exec(shell, `yarn install`);
+    exec(shell, `echo { "version": "${version}" }>version.json`);
+    exec(shell, `yarn build:release`);
     shell.echo("Creating release branch...");
-    r = shell.exec(`git checkout -b v${version}`);
-    if(r.code != 0) { shell.exit(r.code); }
-    r = shell.exec(`git push --set-upstream origin v${version}`);
-    if(r.code != 0) { shell.exit(r.code); }
+    exec(shell, `git checkout -b v${version}`);
+    exec(shell, `git push --set-upstream origin v${version}`);
     shell.echo("");
     shell.echo("Build successful. You should now perform acceptance testing. Use `yarn at:build` and `at.bat`/`at.sh` to test against generated acceptance test data.");
     shell.echo("");
@@ -29,27 +24,24 @@ const release = (shell, option, version) => {
 
   if(option === "--ship") {
     shell.echo("Shipping...");
-    r = shell.exec("docker login wh-govspm-docker-local.artifactory.swg-devops.com");
-    if(r.code != 0) { shell.exit(r.code); }
-    r = shell.exec(`yarn docker-tasks release ${version}`);
-    if(r.code != 0) { shell.exit(r.code); }
-    r = shell.exec(`yarn docker-tasks release latest`);
-    if(r.code != 0) { shell.exit(r.code); }
-    r = shell.exec(`yarn docker-tasks release ${version} --public`);
-    if(r.code != 0) { shell.exit(r.code); }
-    r = shell.exec(`yarn docker-tasks release latest --public`);
-    if(r.code != 0) { shell.exit(r.code); }
-    r = shell.exec(`git tag v${version}`);
-    if(r.code != 0) { shell.exit(r.code); }
-    r = shell.exec(`git push --tags`);
-    if(r.code != 0) { shell.exit(r.code); }
-    r = shell.exec(`rm -f version.json`);
-    if(r.code != 0) { shell.exit(r.code); }
+    exec(shell, "docker login wh-govspm-docker-local.artifactory.swg-devops.com");
+    exec(shell, `yarn docker-tasks release ${version}`);
+    exec(shell, `yarn docker-tasks release latest`);
+    exec(shell, `yarn docker-tasks release ${version} --public`);
+    exec(shell, `yarn docker-tasks release latest --public`);
+    exec(shell, `git tag v${version}`);
+    exec(shell, `git push --tags`);
+    exec(shell, `rm -f version.json`);
     return 0;
   }
 
   shell.echo(`ERROR: Unknown option: '${option}'`);
   return 1;
+}
+
+const exec = (shell, cmd) => {
+  const r = shell.exec(cmd);
+  if(r.code != 0) { shell.exit(r.code); }
 }
 
 module.exports = release;
