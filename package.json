@@ -16,7 +16,7 @@
     "install:icon-replacer": "cd packages/icon-replacer && yarn install",
     "install:initial-check": "cd packages/initial-check && yarn install",
     "install:js-rules-engine": "cd packages/js-rules-engine && yarn install",
-    "install:main-tool": "cd packages/main && yarn install",
+    "install:main-tool": "cd packages/main-tool && yarn install",
     "install:shared-utils": "cd packages/shared-utils && yarn install",
     "install:show-all-tools": "cd packages/show-all-tools && yarn install",
     "start": "lerna run --scope @upgrade-helper/initial-check start && lerna run --scope @upgrade-helper/browser-app --scope @upgrade-helper/main-tool --scope @upgrade-helper/css-rules-engine --scope @upgrade-helper/icon-replacer --scope @upgrade-helper/js-rules-engine start",
