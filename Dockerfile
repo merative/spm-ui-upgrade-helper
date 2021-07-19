@@ -1,34 +1,38 @@
 ARG NODE_VERSION=12.18.3
-FROM node:${NODE_VERSION} as packages
+FROM node:${NODE_VERSION} AS install-root
 WORKDIR /home/theia
+ADD LICENSE LICENSE
+ADD README.md README.md
 ADD package.json package.json
 ADD lerna.json lerna.json
 ADD yarn.lock yarn.lock
+RUN yarn install
+
+FROM install-root AS install-packages
+WORKDIR /home/theia
 ADD packages packages
 ADD config config
-ADD LICENSE LICENSE
-ADD README.md README.md
-ADD *.json .
-RUN yarn install
 RUN yarn install-all
-ARG show_all_tools
-RUN yarn generate-files $show_all_tools
+
+# commit.json is at the top of the layers because it changes frequently
+FROM install-packages AS copy-json
+ADD *.json .
 
 # vs-upgrade-helper-plugin
 # The plugin does not support being created using lerna. It has to be a standalone project.
 ARG NODE_VERSION=12.18.3
-FROM node:${NODE_VERSION} as plugins
+FROM node:${NODE_VERSION} AS plugins
 WORKDIR /home/plugins
 ADD ./packages/vs-upgrade-helper-plugin/ .
-COPY --from=packages --chown=theia:theia \
+COPY --from=install-packages --chown=theia:theia \
     /home/theia/packages/vs-upgrade-helper-plugin/src/functions.ts \
     /home/plugins/packages/vs-upgrade-helper-plugin/src
 # Copy and run show-all-tools utility
 WORKDIR /home/show-all-tools
 ADD ./packages/show-all-tools/ .
 ADD ./config/tools.json ./tools.json
-ARG show_all_tools
 RUN yarn install
+ARG show_all_tools
 RUN yarn show-all-tools $show_all_tools
 # Build plugins
 WORKDIR /home/plugins
@@ -40,7 +44,7 @@ FROM theiaide/theia:1.14.0 as theia
 RUN mkdir -p /home/theia/.theia
 RUN echo "{\"recentRoots\":[\"/home/workspace\"]}" > /home/theia/.theia/recentworkspace.json
 
-FROM node:${NODE_VERSION}-alpine
+FROM node:${NODE_VERSION}-alpine AS final
 # See : https://github.com/theia-ide/theia-apps/issues/34
 RUN addgroup theia && \
     adduser -G theia -s /bin/sh -D theia;
@@ -57,7 +61,7 @@ RUN chmod g+rw /home && \
 RUN apk add --no-cache git openssh bash
 ENV HOME /home/theia
 WORKDIR /home/theia
-COPY --from=packages --chown=theia:theia /home/theia /home/theia
+COPY --from=copy-json --chown=theia:theia /home/theia /home/theia
 COPY --from=plugins --chown=theia:theia /home/plugins/*.vsix /home/theia/plugins/
 COPY --from=theia --chown=theia:theia /home/theia /home/theia/packages/browser-app
 RUN cp -R /home/theia/packages/browser-app/plugins/* /home/theia/plugins/
