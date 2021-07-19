@@ -10,21 +10,21 @@ const testToolOverrides = [
     "enabled": true
   },
   {
-    "package": "main-tool/test-data/fake-tool-1",
+    "package": "main-tool/test-data/stubs/fake-tool-1",
     "name": "Run SPM UI Upgrade Helper - Fake Tool 1",
     "port": 4001,
     "commandName": "extension.runUIUpgradeHelperFakeTool1",
     "enabled": true
   },
   {
-    "package": "main-tool/test-data/fake-tool-2-disabled",
+    "package": "main-tool/test-data/stubs/fake-tool-2-disabled",
     "name": "Run SPM UI Upgrade Helper - Fake Tool 2",
     "port": 4002,
     "commandName": "extension.runUIUpgradeHelperFakeTool2",
     "enabled": false
   },
   {
-    "package": "main-tool/test-data/fake-tool-3",
+    "package": "main-tool/test-data/stubs/fake-tool-3",
     "name": "Run SPM UI Upgrade Helper - Fake Tool 3",
     "port": 4003,
     "commandName": "extension.runUIUpgradeHelperFakeTool3",
