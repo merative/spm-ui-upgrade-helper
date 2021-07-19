@@ -4780,10 +4780,10 @@ test-exclude@^6.0.0:
     glob "^7.1.4"
     minimatch "^3.0.4"
 
-test-with-data-folder@^0.0.7:
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/test-with-data-folder/-/test-with-data-folder-0.0.7.tgz#d3be583f1cffc42cc78f662cae29994bd6712c2a"
-  integrity sha512-tVQ4Qcg56ec2GcPqvphh224WAuSHZeQfmUWWaFjEz0e9Yx5OnbNxGqMNDDf8ksmC/CLHcHlz9ug9sK9/Dox3nA==
+test-with-data-folder@^0.0.8:
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/test-with-data-folder/-/test-with-data-folder-0.0.8.tgz#ad42869d8bf277e131b261eefa91cc3575f5ddc1"
+  integrity sha512-ZHaNTs+tT3ajMu8fb5gOMxR9jXDrosUOztdcXUMxDeZuwTPmW1XceG/OaCDpEl7ACylc1Zvq+iXIT4A3jMaYVg==
   dependencies:
     "@folkforms/file-io" "^0.2.2"
     shelljs "^0.8.4"
