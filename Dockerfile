@@ -32,8 +32,8 @@ WORKDIR /home/show-all-tools
 ADD ./packages/show-all-tools/ .
 ADD ./config/tools.json ./tools.json
 RUN yarn install
-ARG show_all_tools
-RUN yarn show-all-tools $show_all_tools
+ARG dev_mode
+RUN yarn show-all-tools $dev_mode
 # Build plugins
 WORKDIR /home/plugins
 RUN yarn install
