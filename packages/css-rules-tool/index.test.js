@@ -1,7 +1,7 @@
 const testWithDataFolder = require("test-with-data-folder");
 const { execute } = require("./index");
 
-test('css-rules-engine test', () => {
+test('css-rules-tool test', () => {
   // Define paths
   const inputFolder = "./test-data/test-case-1/input";
   const expectedFolder = "./test-data/test-case-1/expected";
