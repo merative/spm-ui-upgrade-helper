@@ -36,6 +36,10 @@ RUN yarn install
 RUN yarn compile
 RUN yarn build
 
+FROM theiaide/theia:1.14.0 as theia
+RUN mkdir -p /home/theia/.theia
+RUN echo "{\"recentRoots\":[\"/home/workspace\"]}" > /home/theia/.theia/recentworkspace.json
+
 FROM node:${NODE_VERSION}-alpine
 # See : https://github.com/theia-ide/theia-apps/issues/34
 RUN addgroup theia && \
@@ -55,6 +59,7 @@ ENV HOME /home/theia
 WORKDIR /home/theia
 COPY --from=packages --chown=theia:theia /home/theia /home/theia
 COPY --from=plugins --chown=theia:theia /home/plugins/*.vsix /home/theia/plugins/
+COPY --from=theia --chown=theia:theia /home/theia /home/theia/packages/browser-app
 RUN cp -R /home/theia/packages/browser-app/plugins/* /home/theia/plugins/
 EXPOSE 3000
 EXPOSE 4000-4002
@@ -64,5 +69,4 @@ ENV USE_LOCAL_GIT true
 ENV GIT_DISCOVERY_ACROSS_FILESYSTEM 1
 USER theia
 RUN git config --global user.email "upgrade@helper.com"
-RUN echo "{\"recentRoots\":[\"/home/workspace\"]}" > /home/theia/.theia/recentworkspace.json
 ENTRYPOINT [ "yarn", "start" ]

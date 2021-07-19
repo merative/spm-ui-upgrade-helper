@@ -5,8 +5,8 @@ const execute = (overrides = {}) => {
   const config = { ...utils.loadConfig(), ...overrides };
   utils.init(config);
 
-  const iconFolder = overrides.iconFolder || "/home/theia/packages/icon-replacer/source_files";
-  const iconMappings = overrides.iconMappings || "/home/theia/packages/icon-replacer/icon_mappings.json";
+  const iconFolder = overrides.iconFolder || "/home/theia/packages/icon-replacer-tool/source_files";
+  const iconMappings = overrides.iconMappings || "/home/theia/packages/icon-replacer-tool/icon_mappings.json";
 
   iconReplacer.run(
     config,

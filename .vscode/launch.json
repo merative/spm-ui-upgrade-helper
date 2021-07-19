@@ -23,18 +23,18 @@
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
       "skipFiles": ["<node_internals>/**/*.js"],
-      "cwd": "${workspaceRoot}/packages/css-rules-engine/"
+      "cwd": "${workspaceRoot}/packages/css-rules-tool/"
     },
     {
       "type": "node",
       "request": "launch",
       "name": "Mocha applyRules.test.js",
       "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
-      "args": ["--timeout", "999999", "--colors", "${workspaceFolder}/packages/css-rules-engine/tests/applyRules.test.js"],
+      "args": ["--timeout", "999999", "--colors", "${workspaceFolder}/packages/css-rules-tool/tests/applyRules.test.js"],
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
       "skipFiles": ["<node_internals>/**/*.js"],
-      "cwd": "${workspaceRoot}/packages/css-rules-engine/"
+      "cwd": "${workspaceRoot}/packages/css-rules-tool/"
     }
   ]
 }

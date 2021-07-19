@@ -13,9 +13,9 @@
 - The tool is run as a Docker container.
 - `spm-ui-upgrade-helper.bat`/`spm-ui-upgrade-helper.sh` will map local folders to the Docker container thus allowing it access to the customer code.
 
-## CSS Rules Engine
+## CSS Rules Tool
 
-- Located in `packages/css-rules-engine`
+- Located in `packages/css-rules-tool`
 - Running this tool does the following:
   1. Creates an empty git repo in the output folder
   2. Adds the customer CSS

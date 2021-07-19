@@ -4,9 +4,9 @@ setlocal
 :: This is for mapping local development code onto the docker image so you can watch for changes
 if "%UIUH_DEV%"=="true" (
   set UIUH_DEV_CMD=-v C:\git\spm-ui-upgrade-helper\packages\main-tool:/home/theia/packages/main-tool/ ^
-      -v C:\git\spm-ui-upgrade-helper\packages\css-rules-engine:/home/theia/packages/css-rules-engine/ ^
-      -v C:\git\spm-ui-upgrade-helper\packages\icon-replacer:/home/theia/packages/icon-replacer/ ^
-      -v C:\git\spm-ui-upgrade-helper\packages\js-rules-engine:/home/theia/packages/js-rules-engine/ ^
+      -v C:\git\spm-ui-upgrade-helper\packages\css-rules-tool:/home/theia/packages/css-rules-tool/ ^
+      -v C:\git\spm-ui-upgrade-helper\packages\icon-replacer-tool:/home/theia/packages/icon-replacer-tool/ ^
+      -v C:\git\spm-ui-upgrade-helper\packages\js-rules-tool:/home/theia/packages/js-rules-tool/ ^
       -v C:\git\spm-ui-upgrade-helper\packages\shared-utils:/home/theia/packages/shared-utils/ ^
       -v C:\git\spm-ui-upgrade-helper\config:/home/theia/config/
   echo Dev Mode On
