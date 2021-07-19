@@ -5,7 +5,8 @@ const { loadConfig } = require("./config");
 const {
   writeFilesToDisk,
   globAllFiles,
-  filterFiles,
+  keepFiles,
+  removeFiles,
   copyFilesToOutputFolder,
   flipToOutputFiles
 } = require("./filesAndFolders");
@@ -17,7 +18,7 @@ const overrides = {
   ignorePatternsFolderAdditional: "src/test-data/filesAndFolders/globAllFiles/ignoreAdditional",
 }
 
-test('filesAndFolders failing test', () => {
+test('filesAndFolders.writeFilesToDisk failing test', () => {
   shelljs.rm("-rf", "./src/test-data/filesAndFolders/output");
   shelljs.mkdir("-p", "./src/test-data/filesAndFolders/output");
   const config = {
@@ -58,11 +59,20 @@ test('filesAndFolders.globAllFiles test', () => {
   expect(actual).toEqual(expected);
 });
 
-test('filesAndFolders.filterFiles test', () => {
+test('filesAndFolders.keepFiles test', () => {
   const files = [ "good.css", "bad.js", "bad.txt" ];
   const expected = [ "good.css" ];
 
-  const actual = filterFiles(files, "css");
+  const actual = keepFiles(files, "css");
+
+  expect(actual).toEqual(expected);
+});
+
+test('filesAndFolders.removeFiles test', () => {
+  const files = [ "bad.css", "good.js", "bad.txt" ];
+  const expected = [ "good.js" ];
+
+  const actual = removeFiles(files, "css", "txt");
 
   expect(actual).toEqual(expected);
 });

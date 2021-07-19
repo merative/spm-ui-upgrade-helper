@@ -15,7 +15,7 @@ const execute = (overrides = {}) => {
 
     // Initial setup
     let targetFiles = config.files;
-    targetFiles = utils.filterFiles(targetFiles, "css");
+    targetFiles = utils.keepFiles(targetFiles, "css");
 
     // Apply the rules to the files
     const rules = utils.loadRules(config);

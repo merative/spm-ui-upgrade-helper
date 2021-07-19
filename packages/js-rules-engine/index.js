@@ -33,7 +33,7 @@ const execute = () => {
       utils.createGitRepo(config);
       targetFiles = utils.globAllFiles(config);
     }
-    targetFiles = utils.filterFiles(targetFiles, "js");
+    targetFiles = utils.keepFiles(targetFiles, "js");
 
     // Apply the rules to the files
     let count = 1;

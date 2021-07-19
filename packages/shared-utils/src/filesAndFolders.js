@@ -51,13 +51,12 @@ const globAllFiles = config => {
 }
 
 /**
- * Filters the given array by the given list of extensions.
+ * Filters the given array by keeping only the files with any of the given list of extensions.
  *
  * @param {array} files list of files to filter
- * @param {string} ext files ending in the given extension(s) will be included in the repository, or
- * all files will be included if `ext` is falsy or zero-length.
+ * @param {string} ext files ending in the given extension(s) will be kept in the list
  */
-const filterFiles = (files, ...ext) => {
+const keepFiles = (files, ...ext) => {
   const extensions = ext.length > 0 ? ext.map(item => `.${item}`) : null;
   const startTime = new Date().getTime();
   if(extensions) {
@@ -69,9 +68,37 @@ const filterFiles = (files, ...ext) => {
       }
       return false;
     });
+  } else {
+    throw new Error("You must supply a list of extensions e.g. 'keepFiles(files, \"css\", \"js\")'");
   }
   const endTime = new Date().getTime();
-  console.log(`Filtered down to ${files.length} files based on extensions: ${ext} [${endTime - startTime} ms]`);
+  console.log(`Filtered down to ${files.length} files by keeping only files with extensions: ${ext} [${endTime - startTime} ms]`);
+  return files;
+}
+
+/**
+ * Filters the given array by removing any files with any of the given list of extensions.
+ *
+ * @param {array} files list of files to filter
+ * @param {string} ext files ending in the given extension(s) will be removed from the list
+ */
+const removeFiles = (files, ...ext) => {
+  const extensions = ext.length > 0 ? ext.map(item => `.${item}`) : null;
+  const startTime = new Date().getTime();
+  if(extensions) {
+    files = files.filter(f => {
+      for(let i = 0; i < extensions.length; i++) {
+        if(f.endsWith(extensions[i])) {
+          return false;
+        }
+      }
+      return true;
+    });
+  } else {
+    throw new Error("You must supply a list of extensions e.g. 'removeFiles(files, \"css\", \"js\")'");
+  }
+  const endTime = new Date().getTime();
+  console.log(`Filtered down to ${files.length} files by removing files with extensions: ${ext} [${endTime - startTime} ms]`);
   return files;
 }
 
@@ -121,7 +148,8 @@ module.exports = {
   removeOutputFolder,
   writeFilesToDisk,
   globAllFiles,
-  filterFiles,
+  keepFiles,
+  removeFiles,
   copyFilesToOutputFolder,
   flipToOutputFiles,
 };
