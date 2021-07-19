@@ -40,9 +40,8 @@ RUN yarn install
 RUN yarn compile
 RUN yarn build
 
+# Reference theia here because we will want to copy from it later
 FROM theiaide/theia:1.14.0 as theia
-RUN mkdir -p /home/theia/.theia
-RUN echo "{\"recentRoots\":[\"/home/workspace\"]}" > /home/theia/.theia/recentworkspace.json
 
 FROM node:${NODE_VERSION}-alpine AS final
 # See : https://github.com/theia-ide/theia-apps/issues/34
