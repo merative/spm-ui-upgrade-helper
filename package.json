@@ -6,7 +6,7 @@
   "author": "",
   "scripts": {
     "echo-commit": "node echo-commit.js",
-    "build:dev": "yarn echo-commit && yarn generate-files true && yarn docker-tasks build -p --build-arg show_all_tools=true",
+    "build:dev": "yarn echo-commit && yarn generate-files --dev && yarn docker-tasks build -p --build-arg dev_mode=true",
     "build:release": "yarn echo-commit && yarn generate-files && yarn docker-tasks build -p",
     "at:build": "node acceptance-tests/scripts/generate-acceptance-test-data.js",
     "install-all": "npm-run-all --sequential install:*",
