@@ -23,7 +23,8 @@
     "start-tools": "lerna run --scope @upgrade-helper/*-tool start && yarn start-theia",
     "start": "yarn initial-check && npm-run-all --parallel start-theia start-tools",
     "generate-files": "node ./packages/code-generator/index.js",
-    "test": "lerna run test && yarn test:release",
+    "test": "lerna run test && yarn test:shared-utils && yarn test:release",
+    "test:shared-utils": "cd packages/shared-utils && yarn test",
     "test:release": "jest ./release/.*.test.js",
     "release": "node release/release-cli.js"
   },
