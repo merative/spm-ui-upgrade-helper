@@ -7,7 +7,8 @@ const {
   removeOutputFolder,
   writeFilesToDisk,
   globAllFiles,
-  filterFiles,
+  keepFiles,
+  removeFiles,
   copyFilesToOutputFolder,
   flipToOutputFiles
 } = require("./src/filesAndFolders");
@@ -31,7 +32,8 @@ module.exports = {
   removeOutputFolder,
   writeFilesToDisk,
   globAllFiles,
-  filterFiles,
+  keepFiles,
+  removeFiles,
   copyFilesToOutputFolder,
   flipToOutputFiles,
   // removeIgnoredFiles.js
