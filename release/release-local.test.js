@@ -8,6 +8,7 @@ afterEach(() => {
 test('test that --start option runs the correct commands', () => {
   const expected = [
     "yarn install",
+    "yarn test",
     "echo { \"version\": \"0.10.0\" }>version.json",
     "yarn build:release",
     "git checkout -b v0.10.0",

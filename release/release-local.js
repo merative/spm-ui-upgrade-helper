@@ -10,6 +10,7 @@ const release = (shell, option, version) => {
   if(option === "--start") {
     shell.echo("Building...");
     exec(shell, `yarn install`);
+    exec(shell, `yarn test`);
     exec(shell, `echo { "version": "${version}" }>version.json`);
     exec(shell, `yarn build:release`);
     shell.echo("Creating release branch...");
