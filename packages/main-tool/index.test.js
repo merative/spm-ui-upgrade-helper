@@ -1,3 +1,4 @@
+const fs = require("fs-extra");
 const fileio = require("@folkforms/file-io");
 const testWithDataFolder = require("test-with-data-folder");
 const { execute } = require("./index");
@@ -20,10 +21,15 @@ const runTest = folder => {
   const expectedFolder = `${folder}/expected`;
   const temporaryFolder = `${folder}/temp`;
   const testToolsOverride = fileio.readJson(`${folder}/tools.json`);
-  const testConfigOverrides = {
+  let testConfigOverrides = {
     inputFolder,
     outputFolder: temporaryFolder,
   };
+  const additionalConfigOverridesFile = `${folder}/config.json`;
+  if(fs.existsSync(additionalConfigOverridesFile)) {
+    const testAdditionalConfigOverrides = fileio.readJson(additionalConfigOverridesFile);
+    testConfigOverrides = { ...testConfigOverrides, ...testAdditionalConfigOverrides };
+  }
 
   const testFunc = () => { execute(testConfigOverrides, testToolsOverride); };
 

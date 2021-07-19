@@ -1,0 +1,24 @@
+.has-updates {
+  background-color: green;
+}
+
+/* Expect 'div.cluster h3' to be removed. */
+
+.foo,
+div.cluster h3 {
+  background-color: yellow;
+}
+
+/*
+ * css-rules-tool:
+ * Old CSS selector: div.cluster td.top
+ * New CSS selector: div.bx--cluster .top
+ *
+ * icon-replacer-tool:
+ * Old background-image: "../../Week_Blue60_20px.png"
+ * New background-image: "../../calendar__week20--enabled.svg"
+ */
+
+.soria div.cluster td.top {
+  background-image: "../../calendar__week20--enabled.svg";
+}
