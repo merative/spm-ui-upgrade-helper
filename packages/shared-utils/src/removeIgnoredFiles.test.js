@@ -7,6 +7,7 @@ const overrides = {
   outputFolder: "./src/test-data/removeIgnoredFiles/output",
   ignorePatternsFolder: "src/test-data/removeIgnoredFiles/ignore",
   ignorePatternsFolderAdditional: "src/test-data/removeIgnoredFiles/ignoreAdditional",
+  quiet: true,
 }
 
 test('removeIgnoredFiles test 1', () => {

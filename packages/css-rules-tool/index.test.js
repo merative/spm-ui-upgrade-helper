@@ -9,6 +9,7 @@ test('css-rules-tool test', () => {
   const configOverrides = {
     inputFolder,
     outputFolder: temporaryFolder,
+    quiet: true,
   };
 
   // Define the function under test

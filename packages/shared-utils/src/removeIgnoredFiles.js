@@ -47,7 +47,7 @@ const removeIgnoredFiles = (config, inputFiles) => {
   });
   const countAfterIgnore = inputFiles.length;
   let endTime = new Date().getTime();
-  console.log(`Ignored ${countBeforeIgnore - countAfterIgnore} files [${endTime - startTime} ms]`);
+  console.info(`Ignored ${countBeforeIgnore - countAfterIgnore} files [${endTime - startTime} ms]`);
 
   return inputFiles;
 }

@@ -12,11 +12,6 @@ const utils = require("../../shared-utils/sharedUtils");
  * @param {string} mapPath Relative path to properties file that maps old image filenames to new image filenames.
  */
 function run(config, sourceDir, mapPath) {
-  // Suppress embedded console info logs.
-  if (config.verbose === false) {
-    console.info = () => {};
-  }
-
   const start = Date.now();
 
   const mappings = io.getIconMappings(mapPath); // get icon mappings
@@ -30,7 +25,7 @@ function run(config, sourceDir, mapPath) {
     const mapping = engine.getMapping(name, mappings); // check if mapping exists for file
 
     if (mapping) {
-      console.info(`{${chalk.magenta(iconFile)} > ${chalk.magenta(mapping)}}`);
+      console.info(`${chalk.magenta(iconFile)} > ${chalk.magenta(mapping)}`);
 
       // replace the target icon with the source file specified in the mapping
       io.replaceIconFile(iconFile, mapping, sourceDir);

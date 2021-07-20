@@ -20,11 +20,16 @@ const { removeIgnoredFiles } = require("./removeIgnoredFiles");
  */
 const init = config => {
   if(config.skipInit) {
-    console.log("Skipping init step");
+    console.info("Skipping init step");
     return;
   }
 
-  console.log("Initializing output folder");
+  // Turn off info messages (typically used during unit tests)
+  if(config.quiet) {
+    console.info = () => {};
+  }
+
+  console.info("Initializing output folder");
   removeOutputFolder(config);
   createGitRepo(config);
   let inputFiles = globAllFiles(config);

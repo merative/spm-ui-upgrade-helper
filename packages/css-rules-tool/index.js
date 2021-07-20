@@ -20,7 +20,7 @@ const execute = (overrides = {}) => {
     // Apply the rules to the files
     const rules = utils.loadRules(config);
     const originals = {}, prettified = {}, appliedRules = {};
-    console.log(`Processing ${targetFiles.length} files`);
+    console.info(`Processing ${targetFiles.length} files`);
     targetFiles.forEach(filename => {
       const contents = fileio.readLines(filename).join("\n");
       try {
@@ -33,15 +33,15 @@ const execute = (overrides = {}) => {
           delete appliedRules[filename];
         }
       } catch(err) {
-        console.log(`WARNING {`);
-        console.log(`  Message: Failed to parse file ${err.filename} line ${err.line} column ${err.column}`);
-        console.log(`  Reason: ${err.reason}`);
+        console.warn(`WARNING {`);
+        console.warn(`  Message: Failed to parse file ${err.filename} line ${err.line} column ${err.column}`);
+        console.warn(`  Reason: ${err.reason}`);
         const split = contents.split("\n");
-        console.log(`  Hint: Line ${err.line} may contain invalid CSS: "${split[err.line - 1].trimEnd()}"`);
-        console.log(`}`);
+        console.warn(`  Hint: Line ${err.line} may contain invalid CSS: "${split[err.line - 1].trimEnd()}"`);
+        console.warn(`}`);
       }
     });
-    console.log(`${Object.keys(appliedRules).length} files were modified`);
+    console.info(`${Object.keys(appliedRules).length} files were modified`);
 
     // FIXME Skipping prettifying stage as I suspect it will cause problems when running multiple tools
     // Save changes
@@ -50,11 +50,11 @@ const execute = (overrides = {}) => {
     utils.writeFilesToDisk(config, appliedRules);
 
   } catch (error) {
-    console.log(error);
+    console.error(error);
     process.exit(1);
   }
 
-  console.log("All done!");
+  console.info("All done!");
 }
 
 // FIXME Merge this method with the method below...
