@@ -75,3 +75,11 @@ See the [rules page](customer/customer_rules.md) for steps to add new rules.
 ### Ignoring files
 
 See the [ignoring files page](customer/customer_ignores.md) for steps to ignore certain files and folders.
+
+## Troubleshooting
+
+- Make sure you are logged in to Docker (run `docker login` or `docker login wh-govspm-docker-local.artifactory.swg-devops.com`)
+- Make sure folders are shared in Docker Desktop
+- Delete `<output folder>` and try again
+- Make sure you have run `chmod -R 777 <output folder>` so that Docker can write to it
+- Don't refresh http://localhost:3000/#/home/workspace, instead go to http://localhost:3000
