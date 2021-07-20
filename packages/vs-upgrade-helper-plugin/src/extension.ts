@@ -23,27 +23,17 @@ export function activate(context: ExtensionContext) {
             title: func.title,
           },
           async (progress: any, token: any) => {
-            execute(func.url, progress);
+            const interval = setInterval(() => { animation(progress); }, 1000);
+            progress.report({ message: messages.STARTING_PLUGIN });
+            await axios.get(func.url);
+            progress.report({ message: messages.PROCESS_WAS_FINISHED });
+            clearInterval(interval);
           },
         );
       }
     );
     context.subscriptions.push(taskUpgradeHelper);
   });
-}
-
-/**
- * Execute the given URL, which will trigger a tool that performs an upgrade task.
- *
- * @param url url to execute
- * @param progress progress object that appears on screen
- */
-const execute = async (url: string, progress: any) => {
-  const interval = setInterval(() => { animation(progress); }, 1000);
-  progress.report({ message: messages.STARTING_PLUGIN });
-  await axios.get(url);
-  progress.report({ message: messages.PROCESS_WAS_FINISHED });
-  clearInterval(interval);
 }
 
 /**
@@ -56,4 +46,4 @@ const animation = (progress: any) => {
   const random = Math.floor(Math.random() * 2);
   const message = messagesArray[random];
   progress.report({ message });
-}
+};
