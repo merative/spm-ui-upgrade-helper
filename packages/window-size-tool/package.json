@@ -1,0 +1,26 @@
+{
+  "name": "@upgrade-helper/window-size-tool",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.1",
+    "express": "^4.17.1",
+    "fast-glob": "^3.2.5",
+    "nodemon": "^2.0.12",
+    "xmldom": "^0.6.0",
+    "xpath": "0.0.32"
+  },
+  "devDependencies": {
+    "@folkforms/file-io": "^0.2.3",
+    "fs-extra": "^10.0.0",
+    "jest": "^27.0.6",
+    "test-with-data-folder": "^0.0.9"
+  }
+}

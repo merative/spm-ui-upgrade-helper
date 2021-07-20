@@ -13,6 +13,8 @@ const execute = (overrides = {}) => {
     iconFolder,
     iconMappings,
   );
+
+  console.log("icon-replacer-tool finished");
 };
 
 module.exports = { execute };

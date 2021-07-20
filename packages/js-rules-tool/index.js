@@ -63,7 +63,7 @@ const execute = () => {
     process.exit(1);
   }
 
-  console.log("All done!");
+  console.log("js-rules-tool finished");
 }
 
 module.exports = { execute };
