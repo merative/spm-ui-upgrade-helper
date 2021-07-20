@@ -24,18 +24,18 @@ const execute = (testConfigOverrides = {}, testToolOverrides = []) => {
       if(tool.package === "main-tool") { return; } // Skip main tool
 
       if(tool.enabled) {
-        console.log(`==== Running tool '${tool.package}' ====`);
+        console.info(`==== Running tool '${tool.package}' ====`);
         const toolIndexFile = require(`../${tool.package}/index`);
         toolIndexFile.execute(configOverrides);
       }
     });
 
   } catch (error) {
-    console.log(error);
+    console.error(error);
     return 1;
   }
 
-  console.log("All done!");
+  console.info("All done!");
 }
 
 module.exports = { execute };

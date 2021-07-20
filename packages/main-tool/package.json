@@ -17,6 +17,6 @@
   "devDependencies": {
     "fs-extra": "^10.0.0",
     "jest": "^27.0.5",
-    "test-with-data-folder": "^0.0.8"
+    "test-with-data-folder": "^0.0.9"
   }
 }

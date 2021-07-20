@@ -16,6 +16,7 @@ const overrides = {
   outputFolder: "src/test-data/filesAndFolders/globAllFiles/output",
   ignorePatternsFolder: "src/test-data/filesAndFolders/globAllFiles/ignore",
   ignorePatternsFolderAdditional: "src/test-data/filesAndFolders/globAllFiles/ignoreAdditional",
+  quiet: true,
 }
 
 test('filesAndFolders.writeFilesToDisk failing test', () => {
@@ -24,6 +25,7 @@ test('filesAndFolders.writeFilesToDisk failing test', () => {
   const config = {
     inputFolder: "./src/test-data/filesAndFolders/input",
     outputFolder: "./src/test-data/filesAndFolders/output",
+    quiet: true,
   }
   const filename1 = "./src/test-data/filesAndFolders/input/foo.txt";
   const filename2 = "./src/test-data/filesAndFolders/input/bar.txt";
@@ -86,6 +88,7 @@ test('filesAndFolders.copyFilesToOutputFolder test', () => {
   const config = {
     inputFolder,
     outputFolder: temporaryFolder,
+    quiet: true,
   };
   const testFunc = () => { copyFilesToOutputFolder(config, inputFiles); }
 
@@ -98,6 +101,7 @@ test('filesAndFolders.flipToOutputFiles test', () => {
   const config = {
     inputFolder: "input",
     outputFolder: "output",
+    quiet: true,
   }
 
   const actual = flipToOutputFiles(config, input);

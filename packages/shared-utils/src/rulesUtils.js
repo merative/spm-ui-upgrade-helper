@@ -12,9 +12,9 @@ const loadRules = config => {
 
   const rulesFiles2 = fileio.glob(`${config.rulesFolderAdditional}/*.json`);
   if(rulesFiles2.length > 0) {
-    console.log(`Found ${rulesFiles2.length} additional rules files: ${rulesFiles2}`);
+    console.info(`Found ${rulesFiles2.length} additional rules files: ${rulesFiles2}`);
   } else {
-    console.log(`Found 0 additional rules files`);
+    console.info(`Found 0 additional rules files`);
   }
   rulesFiles2.forEach(file => rulesJson.push(readRulesFile(file)));
 

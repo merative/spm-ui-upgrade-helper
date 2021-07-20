@@ -42,11 +42,11 @@ const writeFilesToDisk = (config, files) => {
  * @param {object} config configuration object
  */
 const globAllFiles = config => {
-  console.log("Collecting input files");
+  console.info("Collecting input files");
   const startTime = new Date().getTime();
   let inputFiles = fileio.glob(`${config.inputFolder}/**/*`);
   const endTime = new Date().getTime();
-  console.log(`Initial search found ${inputFiles.length} files [${Math.ceil((endTime-startTime)/60000)} minutes]`);
+  console.info(`Initial search found ${inputFiles.length} files [${Math.ceil((endTime-startTime)/60000)} minutes]`);
   return inputFiles;
 }
 
@@ -57,6 +57,8 @@ const globAllFiles = config => {
  * @param {string} ext files ending in the given extension(s) will be kept in the list
  */
 const keepFiles = (files, ...ext) => {
+  // Flatten 'ext' for times when we pass an array instead of a spread
+  ext = ext.flat();
   const extensions = ext.length > 0 ? ext.map(item => `.${item}`) : null;
   const startTime = new Date().getTime();
   if(extensions) {
@@ -72,7 +74,7 @@ const keepFiles = (files, ...ext) => {
     throw new Error("You must supply a list of extensions e.g. 'keepFiles(files, \"css\", \"js\")'");
   }
   const endTime = new Date().getTime();
-  console.log(`Filtered down to ${files.length} files by keeping only files with extensions: ${ext} [${endTime - startTime} ms]`);
+  console.info(`Filtered down to ${files.length} files by keeping only files with extensions: ${ext.join(", ")} [${endTime - startTime} ms]`);
   return files;
 }
 
@@ -83,6 +85,8 @@ const keepFiles = (files, ...ext) => {
  * @param {string} ext files ending in the given extension(s) will be removed from the list
  */
 const removeFiles = (files, ...ext) => {
+  // Flatten 'ext' for times when we pass an array instead of a spread
+  ext = ext.flat();
   const extensions = ext.length > 0 ? ext.map(item => `.${item}`) : null;
   const startTime = new Date().getTime();
   if(extensions) {
@@ -98,7 +102,7 @@ const removeFiles = (files, ...ext) => {
     throw new Error("You must supply a list of extensions e.g. 'removeFiles(files, \"css\", \"js\")'");
   }
   const endTime = new Date().getTime();
-  console.log(`Filtered down to ${files.length} files by removing files with extensions: ${ext} [${endTime - startTime} ms]`);
+  console.info(`Filtered down to ${files.length} files by removing files with extensions: ${ext.join(", ")} [${endTime - startTime} ms]`);
   return files;
 }
 
@@ -110,7 +114,7 @@ const removeFiles = (files, ...ext) => {
  * @param {*} inputFiles list of input files
  */
 const copyFilesToOutputFolder = (config, inputFiles) => {
-  console.log(`Copying ${inputFiles.length} files from input folder to output folder`);
+  console.info(`Copying ${inputFiles.length} files from input folder to output folder`);
   const startTime = new Date().getTime();
   const outputFiles = [];
   inputFiles.forEach(file => {
@@ -121,7 +125,7 @@ const copyFilesToOutputFolder = (config, inputFiles) => {
     outputFiles.push(destFile);
   });
   const endTime = new Date().getTime();
-  console.log(`Finished copying [${Math.ceil((endTime-startTime)/60000)} minutes]`);
+  console.info(`Finished copying [${Math.ceil((endTime-startTime)/60000)} minutes]`);
 }
 
 /**
@@ -132,7 +136,7 @@ const copyFilesToOutputFolder = (config, inputFiles) => {
  * @param {*} inputFiles list of input files
  */
 const flipToOutputFiles = (config, inputFiles) => {
-  console.log(`Updating paths from input folder to output folder`);
+  console.info(`Updating paths from input folder to output folder`);
   const startTime = new Date().getTime();
   const files = [];
   inputFiles.forEach(file => {
@@ -140,7 +144,7 @@ const flipToOutputFiles = (config, inputFiles) => {
     files.push(destFile);
   });
   const endTime = new Date().getTime();
-  console.log(`Finished updating paths [${endTime - startTime} ms]`);
+  console.info(`Finished updating paths [${endTime - startTime} ms]`);
   return files;
 }
 

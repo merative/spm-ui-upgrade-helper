@@ -20,14 +20,14 @@ const createGitRepo = config => {
  */
 const commitFiles = (folder, message) => {
   const startTime = new Date().getTime();
-  console.log("Committing files");
+  console.info("Committing files");
   const cwd = process.cwd();
   shell.cd(folder);
   shell.exec(`git add .`);
   shell.exec(`git commit --quiet --message "${message}"`);
   shell.cd(cwd);
   const endTime = new Date().getTime();
-  console.log(`Finished committing files [${Math.ceil((endTime-startTime)/60000)} minutes]`);
+  console.info(`Finished committing files [${Math.ceil((endTime-startTime)/60000)} minutes]`);
 };
 
 module.exports = {

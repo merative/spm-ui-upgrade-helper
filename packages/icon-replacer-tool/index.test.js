@@ -24,6 +24,7 @@ const runTest = folder => {
     outputFolder: actualFolder,
     iconMappings: "./icon_mappings.json",
     iconFolder: "./source_files",
+    quiet: true,
   };
 
   const testFunc = () => { execute(overrides); };

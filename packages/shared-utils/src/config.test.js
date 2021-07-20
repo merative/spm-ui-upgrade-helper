@@ -8,8 +8,8 @@ test('config test with defaults', () => {
     rulesFolderAdditional: "/home/workspace/rules",
     ignorePatternsFolder: "../../config/ignore",
     ignorePatternsFolderAdditional: "/home/workspace/ignore",
-    iconReferenceExclude: ["zip", "class", "jpg", "jpeg", "gif", "png"],
-    verbose: false,
+    iconReplacerExclude: ["zip", "class", "jpg", "jpeg", "gif", "png"],
+    quiet: false,
     skipInit: false,
     files: [],
   }
@@ -27,8 +27,8 @@ test('config test with all overrides', () => {
     rulesFolderAdditional: "ddd",
     ignorePatternsFolder: "eee",
     ignorePatternsFolderAdditional: "fff",
-    iconReferenceExclude: "ggg",
-    verbose: "hhh",
+    iconReplacerExclude: "ggg",
+    quiet: true,
     skipInit: true,
     files: [],
   }
@@ -45,7 +45,7 @@ test('config test with some overrides', () => {
     rulesFolderAdditional: "ddd",
     ignorePatternsFolder: "eee",
     ignorePatternsFolderAdditional: "fff",
-    verbose: "hhh",
+    quiet: true,
   }
   const expected = {
     inputFolder: "/home/workspace/input",
@@ -54,8 +54,8 @@ test('config test with some overrides', () => {
     rulesFolderAdditional: "ddd",
     ignorePatternsFolder: "eee",
     ignorePatternsFolderAdditional: "fff",
-    iconReferenceExclude: ["zip", "class", "jpg", "jpeg", "gif", "png"],
-    verbose: "hhh",
+    iconReplacerExclude: ["zip", "class", "jpg", "jpeg", "gif", "png"],
+    quiet: true,
     skipInit: false,
     files: [],
   };
