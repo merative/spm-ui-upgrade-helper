@@ -16,7 +16,7 @@ Core and Multiple Other Components
 
 ## How to tell if you are affected
 
-Customers using SPMs font-faces in their CSS will be affected by this migration. Perform a search across all components for the following. If any references are found in your code base, then you are affected.
+Customers using SPMs font-faces in their CSS are affected by this migration. Perform a search across all components for the following. If any references are found in your code base, then you are affected.
 
 - helvetica-neue-ibm.css
 - HelvNeueLightforIBM
@@ -33,7 +33,7 @@ These SPM font variables were deprecated in a previous release and are now being
 - HelvNeueMediumforIBM
 - HelvNeueBoldforIBM
 
-Any instances of the above variables in custom code should be replaced with one of the following generic font-faces as outlined below. Alternatively, one of the unmodifiable infrastructure properties described for Step 2b may be used for non-IEG components. The recommended approach is option 2b for non-IEG components when the font-family specified by IBM is desired.
+Any instances of the above variables in custom code should be replaced with one of the following generic font-faces. Alternatively, one of the unmodifiable infrastructure properties described for Step 2b may be used for non-IEG components. The recommended approach is option 2b for non-IEG components when the font-family specified by IBM is desired.
 
 - MainRegularFontforIBM
 - MainBoldFontforIBM
@@ -74,7 +74,7 @@ All components should be checked for references to the removed values and update
 
 This section is an optional step that can be made to CSS attributes. These properties can be used instead of the literal SPM font-faces used above in step 2a.  Please note that this option cannot be used for CSS that is applied to IEG pages. For IEG pages use option 2a.
 
-In implementing this option, you will make use of SPMs internal infrastructure properties to leverage the unmodifiable SPM value for your font family. The advantage of using these properties is that they will automatically inherit changes to the SPM font family value, should any changes be made to it in the future.
+In implementing this option, you use SPMs internal infrastructure properties to leverage the unmodifiable SPM value for your font family. The advantage of using these properties is that they automatically inherit changes to the SPM font family value, should any changes be made to it in the future.
 
 When using these properties, they should replace the entire font-family value rather than only replacing the SPM font-face as done in 2a.
 
