@@ -28,11 +28,11 @@ const execute = overrides => {
     const outputDocument = engine.applyRules(document, file, rules, config2.sizes); // generate output files based on rules
 
     // FIXME Check if there were actually changes
-    outputFiles[file] = outputDocument;
+    outputFiles[file] = serializer.serializeToString(outputDocument);
   });
 
-  console.log(`#### outputFiles = ${JSON.stringify(outputFiles)}`);
   // utils2.writeUIMFiles(config.outputFolder, outputFiles); // write transformed files to target directory
+  utils.writeFilesToDisk(config, outputFiles);
 
   console.info("window-size-tool finished");
 };
