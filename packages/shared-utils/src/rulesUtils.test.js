@@ -1,6 +1,15 @@
 const fileio = require("@folkforms/file-io");
 const { loadRules } = require("./rulesUtils");
 
+let info = console.info;
+beforeEach(() => {
+  console.info = () => {};
+});
+
+afterEach(() => {
+  console.info = info;
+});
+
 test('ruleUtils test', () => {
   const overrides = {
     rulesFolder: "./src/test-data/rulesUtils/rulesFolder",
