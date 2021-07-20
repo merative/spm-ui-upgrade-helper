@@ -16,7 +16,7 @@ const package = fileio.readJson(packageFile);
 const tools = fileio.readJson("./tools.json");
 
 if(devMode === true) {
-  console.log(`show-all-tools: Rewriting '${packageFile}' to include all tools`);
+  console.log(`show-dev-shortcuts: Rewriting '${packageFile}' to include all tools`);
   tools.forEach(tool => {
     if(tool.package === "main-tool") { return; } // Skip main tool
 
@@ -27,7 +27,7 @@ if(devMode === true) {
     });
   });
 } else {
-  console.log(`show-all-tools: Argument was '${devMode}', using default configuration.`);
+  console.log(`show-dev-shortcuts: Argument was '${devMode}', using default configuration.`);
 }
 
 fileio.writeLines(packageFile, jsonFormat(package));

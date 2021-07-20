@@ -17,7 +17,7 @@
     "install:js-rules-tool": "cd packages/js-rules-tool && yarn install",
     "install:main-tool": "cd packages/main-tool && yarn install",
     "install:shared-utils": "cd packages/shared-utils && yarn install",
-    "install:show-all-tools": "cd packages/show-all-tools && yarn install",
+    "install:show-dev-shortcuts": "cd packages/show-dev-shortcuts && yarn install",
     "initial-check": "cd packages/initial-check && yarn start",
     "start-theia": "node /home/theia/packages/browser-app/src-gen/backend/main.js /home/workspace --hostname=0.0.0.0",
     "start-tools": "lerna run --scope @upgrade-helper/*-tool start && yarn start-theia",
