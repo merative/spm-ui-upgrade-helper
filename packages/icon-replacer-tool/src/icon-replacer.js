@@ -47,16 +47,20 @@ function run(config, sourceDir, mapPath) {
   );
 
   // glob all other files from target directory (minus some excluded filetypes)
-  const files = utils.readAllFiles(config.outputFolder, config.iconReferenceExclude);
+  // const files = utils.readAllFiles(config.outputFolder, config.iconReplacerExclude);
+  const files = sharedUtils.removeFiles(config.files, config.iconReplacerExclude);
   // console.log(`#### files = ${JSON.stringify(files)}`);
   files.forEach((file) => {
+    // FIXME Do we have a utility for this already?
     const prevContent = utils.readFileContent(file); // read globbed files content
     const nextContent = engine.updateIconReferences(prevContent, mappings); // check if file contains references to update
 
     // if a file is updated with new references, write that content back to file
     if (nextContent) {
-      console.info(chalk.cyan(`${file.relativeDirectory}/${file.name}`));
+      // console.info(chalk.cyan(`${file.relativeDirectory}/${file.name}`));
+      console.info(chalk.cyan(`${file}`));
 
+      // FIXME Do we have a utility for this already?
       utils.writeFileContent(file, nextContent);
     }
   });

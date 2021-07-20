@@ -146,7 +146,7 @@ function readFileContent(file) {
   let content = null;
 
   try {
-    content = fs.readFileSync(file.path, "utf8");
+    content = fs.readFileSync(file, "utf8");
   } catch (err) {
     console.error(err);
   }
@@ -162,7 +162,7 @@ function readFileContent(file) {
  */
 function writeFileContent(file, content) {
   try {
-    fs.writeFileSync(file.path, content);
+    fs.writeFileSync(file, content);
   } catch (err) {
     console.error(err);
   }

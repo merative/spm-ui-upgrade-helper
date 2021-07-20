@@ -57,6 +57,8 @@ const globAllFiles = config => {
  * @param {string} ext files ending in the given extension(s) will be kept in the list
  */
 const keepFiles = (files, ...ext) => {
+  // Flatten 'ext' for times when we pass an array instead of a spread
+  ext = ext.flat();
   const extensions = ext.length > 0 ? ext.map(item => `.${item}`) : null;
   const startTime = new Date().getTime();
   if(extensions) {
@@ -83,8 +85,11 @@ const keepFiles = (files, ...ext) => {
  * @param {string} ext files ending in the given extension(s) will be removed from the list
  */
 const removeFiles = (files, ...ext) => {
+  // Flatten 'ext' for times when we pass an array instead of a spread
+  ext = ext.flat();
   const extensions = ext.length > 0 ? ext.map(item => `.${item}`) : null;
   const startTime = new Date().getTime();
+  console.log(`#### extentions = ${JSON.stringify(extensions)}`);
   if(extensions) {
     files = files.filter(f => {
       for(let i = 0; i < extensions.length; i++) {
