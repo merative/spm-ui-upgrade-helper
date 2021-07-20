@@ -11,6 +11,15 @@ const {
   flipToOutputFiles
 } = require("./filesAndFolders");
 
+let info = console.info;
+beforeEach(() => {
+  console.info = () => {};
+});
+
+afterEach(() => {
+  console.info = info;
+});
+
 const overrides = {
   inputFolder: "src/test-data/filesAndFolders/globAllFiles/input",
   outputFolder: "src/test-data/filesAndFolders/globAllFiles/output",

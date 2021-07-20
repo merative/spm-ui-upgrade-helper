@@ -30,7 +30,7 @@ const checkVersionNumber = () => {
 const checkCommitHash = () => {
   try {
     const json = fileio.readJson("../../commit.json");
-    console.log(`Success: Found short commit hash: ${json.commit}`);
+    console.log(`Success: Found commit hash: ${json.commit}`);
     console.log(`Success: Found long commit hash: ${json.commitLong}`);
   } catch(err) {
     console.log(`Warning: Commit hash not found (could not find commit.json)`);

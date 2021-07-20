@@ -2,12 +2,20 @@ const fileio = require("@folkforms/file-io");
 const { loadConfig } = require("./config");
 const { removeIgnoredFiles } = require("./removeIgnoredFiles");
 
+let info = console.info;
+beforeEach(() => {
+  console.info = () => {};
+});
+
+afterEach(() => {
+  console.info = info;
+});
+
 const overrides = {
   inputFolder: "./src/test-data/removeIgnoredFiles/input",
   outputFolder: "./src/test-data/removeIgnoredFiles/output",
   ignorePatternsFolder: "src/test-data/removeIgnoredFiles/ignore",
   ignorePatternsFolderAdditional: "src/test-data/removeIgnoredFiles/ignoreAdditional",
-  quiet: true,
 }
 
 test('removeIgnoredFiles test 1', () => {
