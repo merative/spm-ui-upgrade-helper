@@ -23,7 +23,11 @@ export function activate(context: ExtensionContext) {
             title: func.title,
           },
           async (progress: any, token: any) => {
-            execute(func.url, progress);
+            const interval = setInterval(() => { animation(progress); }, 1000);
+            progress.report({ message: messages.STARTING_PLUGIN });
+            await axios.get(func.url);
+            progress.report({ message: messages.PROCESS_WAS_FINISHED });
+            clearInterval(interval);
           },
         );
       }
@@ -32,19 +36,7 @@ export function activate(context: ExtensionContext) {
   });
 }
 
-/**
- * Execute the given URL, which will trigger a tool that performs an upgrade task.
- *
- * @param url url to execute
- * @param progress progress object that appears on screen
- */
-const execute = async (url: string, progress: any) => {
-  const interval = setInterval(() => { animation(progress); }, 1000);
-  progress.report({ message: messages.STARTING_PLUGIN });
-  await axios.get(url);
-  progress.report({ message: messages.PROCESS_WAS_FINISHED });
-  clearInterval(interval);
-}
+let count = 0;
 
 /**
  * Updates the progress report message with an animation.
@@ -52,8 +44,7 @@ const execute = async (url: string, progress: any) => {
  * @param progress progress object that appears on screen
  */
 const animation = (progress: any) => {
-  const messagesArray = [messages.IN_EXECUTION, messages.SEARCHING_FILES];
-  const random = Math.floor(Math.random() * 2);
-  const message = messagesArray[random];
+  const message = `${messages.SEARCHING_FILES} (${count} seconds)`;
   progress.report({ message });
-}
+  count++;
+};
