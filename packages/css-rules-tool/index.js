@@ -54,7 +54,7 @@ const execute = (overrides = {}) => {
     process.exit(1);
   }
 
-  console.info("All done!");
+  console.info("css-rules-tool finished");
 }
 
 // FIXME Merge this method with the method below...

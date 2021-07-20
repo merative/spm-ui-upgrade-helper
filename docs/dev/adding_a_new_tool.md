@@ -18,17 +18,18 @@ const execute = overrides => {
 
 module.exports = { execute };
 ```
-4. Update `package.json` `scripts: { }` section to include `install:your-tool`.
-5. Update `package.json` `scripts: { start }` section to start the new tool.
-6. Run `yarn build:dev` to build the Docker image. This will include a shortcut to run your new tool on its own.
-7. Update `dev.bat`/`dev.sh` to map the source code from the local machine to the Docker container. This will allow you to recompile the code on the fly.
-8. Run the Docker container using `dev.bat`/`dev.sh`
-9. Open http://localhost:3000
-10. Press `ctrl + shift + p` or `F1`.
-11. Type `Run SPM UI Upgrade Helper - <your tool name> (DEBUG)` and you should see your new tool listed.
-12. Click the tool and you should see the Docker container's log print "Hello, world!"
-13. Implement code for your tool.
-14. When you are ready to release your tool to the customer, set `enabled: true` in `config/tools.json`. This will cause it to be run as part of the main tool.
+4. Run `yarn add express nodemon`. These packages will be required later.
+5. Update `package.json` `scripts: { }` section to include `install:your-tool`.
+6. Update `package.json` `scripts: { start }` section to start the new tool.
+7. Run `yarn build:dev` to build the Docker image. This will include a shortcut to run your new tool on its own.
+8. Update `dev.bat`/`dev.sh` to map the source code from the local machine to the Docker container. This will allow you to recompile the code on the fly.
+9. Run the Docker container using `dev.bat`/`dev.sh`
+10. Open http://localhost:3000
+11. Press `ctrl + shift + p` or `F1`.
+12. Type `Run SPM UI Upgrade Helper - <your tool name> (DEBUG)` and you should see your new tool listed.
+13. Click the tool and you should see the Docker container's log print "Hello, world!"
+14. Implement code for your tool.
+15. When you are ready to release your tool to the customer, set `enabled: true` in `config/tools.json`. This will cause it to be run as part of the main tool.
 
 ## Notes
 

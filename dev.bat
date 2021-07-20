@@ -8,6 +8,7 @@ if "%UIUH_DEV%"=="true" (
       -v C:\git\spm-ui-upgrade-helper\packages\icon-replacer-tool:/home/theia/packages/icon-replacer-tool/ ^
       -v C:\git\spm-ui-upgrade-helper\packages\js-rules-tool:/home/theia/packages/js-rules-tool/ ^
       -v C:\git\spm-ui-upgrade-helper\packages\shared-utils:/home/theia/packages/shared-utils/ ^
+      -v C:\git\spm-ui-upgrade-helper\packages\window-size-tool:/home/theia/packages/window-size-tool/ ^
       -v C:\git\spm-ui-upgrade-helper\config:/home/theia/config/
   echo Dev Mode On
 ) else (

@@ -7,6 +7,7 @@ if [[ "$UIUH_DEV" == "true" ]]; then
       -v $PWD/packages/icon-replacer-tool:/home/theia/packages/icon-replacer-tool/ \
       -v $PWD/packages/js-rules-tool:/home/theia/packages/js-rules-tool/ \
       -v $PWD/packages/shared-utils:/home/theia/packages/shared-utils/ \
+      -v $PWD/packages/window-size-tool:/home/theia/packages/window-size-tool/ \
       -v $PWD/config:/home/theia/config/
   echo Dev Mode On
 else

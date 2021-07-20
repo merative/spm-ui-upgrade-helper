@@ -1,0 +1,11 @@
+[
+  {
+    "width": "< 950",
+    "terms": [
+      "count(/*/LIST/*) >= 6",
+      "/*/CLUSTER/@NUM_COLS >= 3",
+      "count(/*/CLUSTER[@NUM_COLS>1]/LIST) > 0"
+    ],
+    "target": "lg"
+  }
+]

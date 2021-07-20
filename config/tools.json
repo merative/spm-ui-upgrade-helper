@@ -26,5 +26,12 @@
     "port": 4003,
     "commandName": "extension.runUIUpgradeHelperJS",
     "enabled": false
+  },
+  {
+    "package": "window-size-tool",
+    "name": "Run SPM UI Upgrade Helper - Window Size",
+    "port": 4004,
+    "commandName": "extension.runUIUpgradeHelperWindowSize",
+    "enabled": false
   }
 ]
