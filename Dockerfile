@@ -27,13 +27,13 @@ ADD ./packages/vs-upgrade-helper-plugin/ .
 COPY --from=install-packages --chown=theia:theia \
     /home/theia/packages/vs-upgrade-helper-plugin/src/functions.ts \
     /home/plugins/packages/vs-upgrade-helper-plugin/src
-# Copy and run show-all-tools utility
-WORKDIR /home/show-all-tools
-ADD ./packages/show-all-tools/ .
+# Copy and run show-dev-shortcuts utility
+WORKDIR /home/show-dev-shortcuts
+ADD ./packages/show-dev-shortcuts/ .
 ADD ./config/tools.json ./tools.json
 RUN yarn install
 ARG dev_mode
-RUN yarn show-all-tools $dev_mode
+RUN yarn show-dev-shortcuts $dev_mode
 # Build plugins
 WORKDIR /home/plugins
 RUN yarn install

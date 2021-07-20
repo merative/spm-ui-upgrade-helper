@@ -1,10 +1,10 @@
 {
-  "name": "@upgrade-helper/show-all-tools",
+  "name": "@upgrade-helper/show-dev-shortcuts",
   "version": "0.0.0",
   "description": "",
-  "main": "show-all-tools.js",
+  "main": "show-dev-shortcuts.js",
   "scripts": {
-    "show-all-tools": "node show-all-tools.js",
+    "show-dev-shortcuts": "node show-dev-shortcuts.js",
     "test": "jest"
   },
   "author": "",

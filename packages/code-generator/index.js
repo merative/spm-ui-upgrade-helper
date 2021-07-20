@@ -34,7 +34,7 @@ tools.forEach(tool => {
 });
 
 // Generate file containing function objects. This will only show enabled tools. Later,
-// show-all-tools may add dev shortcuts for other tools.
+// show-dev-shortcuts may add dev shortcuts for other tools.
 const functionsTemplate = fileio.readLines("packages/code-generator/functions.ts.template").join("\n");
 nunjucks.configure();
 const functionsOutputData = nunjucks.renderString(functionsTemplate, { tools: enabledTools });
