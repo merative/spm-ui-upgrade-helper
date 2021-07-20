@@ -20,17 +20,18 @@ function run(config, sourceDir, mapPath) {
 
   // glob icon files from target directory
   const iconFiles = utils.keepFiles(config.files, "png", "svg");
+  let modifiedIconCount = 0;
   iconFiles.forEach((iconFile) => {
     const name = iconFile.substring(iconFile.lastIndexOf("/") + 1);
     const mapping = engine.getMapping(name, mappings); // check if mapping exists for file
 
     if (mapping) {
-      console.info(`${chalk.magenta(iconFile)} > ${chalk.magenta(mapping)}`);
-
       // replace the target icon with the source file specified in the mapping
       io.replaceIconFile(iconFile, mapping, sourceDir);
+      modifiedIconCount++;
     }
   });
+  console.info(`Found and replaced ${modifiedIconCount} icon files`);
 
   console.info(
     `Searching for icon ${chalk.magenta("references")} to update...`
@@ -38,17 +39,18 @@ function run(config, sourceDir, mapPath) {
 
   // glob all other files from target directory (minus some excluded filetypes)
   const files = utils.removeFiles(config.files, config.iconReplacerExclude);
+  let modifiedFileCount = 0;
   files.forEach((file) => {
     const prevContent = fileio.readLines(file).join("\n"); // read globbed files content
     const nextContent = engine.updateIconReferences(prevContent, mappings); // check if file contains references to update
 
     // if a file is updated with new references, write that content back to file
     if (nextContent) {
-      console.info(chalk.cyan(`${file}`));
-
       fileio.writeLines(file, nextContent);
+      modifiedFileCount++;
     }
   });
+  console.info(`Modified contents of ${modifiedFileCount} files`);
 
   const end = Date.now();
   const date = new Date(end - start);
