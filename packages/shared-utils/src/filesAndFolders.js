@@ -89,7 +89,6 @@ const removeFiles = (files, ...ext) => {
   ext = ext.flat();
   const extensions = ext.length > 0 ? ext.map(item => `.${item}`) : null;
   const startTime = new Date().getTime();
-  console.log(`#### extentions = ${JSON.stringify(extensions)}`);
   if(extensions) {
     files = files.filter(f => {
       for(let i = 0; i < extensions.length; i++) {

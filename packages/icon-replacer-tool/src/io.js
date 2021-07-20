@@ -107,72 +107,8 @@ function replaceIconFile(path, mapping, iconsFolder) {
   copyFile(iconPath, nextPath);
 }
 
-/**
- * 
- *
- * @param {string} inputFolder .
- * @param {array} extensions .
- * @returns .
- */
-function concatPatterns(inputFolder, extensions) {
-  return extensions.map((extension) => {
-    return `${inputFolder}/**/*.${extension}`;
-  });
-}
-
-/**
- * 
- *
- * @param {string} inputFolder .
- * @param {array} extensions .
- * @returns .
- */
-function readAllFiles(inputFolder, extensions) {
-  const pattern = `${inputFolder}/**/*`;
-  const ignore = concatPatterns(inputFolder, extensions);
-
-  const files = readFiles(inputFolder, pattern, ignore);
-
-  return files;
-}
-
-/**
- * Gets the contents of the file specified.
- *
- * @param {object} file Object representing a globbed file.
- * @returns Contents of file specified as a string.
- */
-function readFileContent(file) {
-  let content = null;
-
-  try {
-    content = fs.readFileSync(file, "utf8");
-  } catch (err) {
-    console.error(err);
-  }
-
-  return content;
-}
-
-/**
- * 
- *
- * @param {object} file Object representing a globbed file.
- * @param {string} content .
- */
-function writeFileContent(file, content) {
-  try {
-    fs.writeFileSync(file, content);
-  } catch (err) {
-    console.error(err);
-  }
-}
-
 module.exports = {
   getIconMappings,
   readIconFiles,
   replaceIconFile,
-  readAllFiles,
-  readFileContent,
-  writeFileContent,
 };

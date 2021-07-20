@@ -1,7 +1,8 @@
 const chalk = require("chalk");
-const utils = require("./io");
+const io = require("./io");
 const engine = require("./engine");
-const sharedUtils = require("../../shared-utils/sharedUtils");
+const fileio = require("@folkforms/file-io");
+const utils = require("../../shared-utils/sharedUtils");
 
 /**
  * Run the bulk image updater script.
@@ -18,27 +19,21 @@ function run(config, sourceDir, mapPath) {
 
   const start = Date.now();
 
-  const mappings = utils.getIconMappings(mapPath); // get icon mappings
+  const mappings = io.getIconMappings(mapPath); // get icon mappings
 
   console.info(`Searching for icon ${chalk.magenta("files")} to replace...`);
 
   // glob icon files from target directory
-  // const iconFiles = utils.readIconFiles(config.outputFolder);
-  const iconFiles = sharedUtils.keepFiles(config.files, "png", "svg");
-  // console.log(`#### iconFiles = ${JSON.stringify(iconFiles)}`);
+  const iconFiles = utils.keepFiles(config.files, "png", "svg");
   iconFiles.forEach((iconFile) => {
     const name = iconFile.substring(iconFile.lastIndexOf("/") + 1);
     const mapping = engine.getMapping(name, mappings); // check if mapping exists for file
 
     if (mapping) {
-      // console.info(
-      //   chalk.cyan(`${iconFile.relativeDirectory}/`) +
-      //     `{${chalk.magenta(iconFile.name)} > ${chalk.magenta(mapping)}}`
-      // );
       console.info(`{${chalk.magenta(iconFile)} > ${chalk.magenta(mapping)}}`);
 
       // replace the target icon with the source file specified in the mapping
-      utils.replaceIconFile(iconFile, mapping, sourceDir);
+      io.replaceIconFile(iconFile, mapping, sourceDir);
     }
   });
 
@@ -47,21 +42,16 @@ function run(config, sourceDir, mapPath) {
   );
 
   // glob all other files from target directory (minus some excluded filetypes)
-  // const files = utils.readAllFiles(config.outputFolder, config.iconReplacerExclude);
-  const files = sharedUtils.removeFiles(config.files, config.iconReplacerExclude);
-  // console.log(`#### files = ${JSON.stringify(files)}`);
+  const files = utils.removeFiles(config.files, config.iconReplacerExclude);
   files.forEach((file) => {
-    // FIXME Do we have a utility for this already?
-    const prevContent = utils.readFileContent(file); // read globbed files content
+    const prevContent = fileio.readLines(file).join("\n"); // read globbed files content
     const nextContent = engine.updateIconReferences(prevContent, mappings); // check if file contains references to update
 
     // if a file is updated with new references, write that content back to file
     if (nextContent) {
-      // console.info(chalk.cyan(`${file.relativeDirectory}/${file.name}`));
       console.info(chalk.cyan(`${file}`));
 
-      // FIXME Do we have a utility for this already?
-      utils.writeFileContent(file, nextContent);
+      fileio.writeLines(file, nextContent);
     }
   });
 
