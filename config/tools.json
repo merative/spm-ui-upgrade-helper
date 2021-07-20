@@ -18,7 +18,7 @@
     "name": "Run SPM UI Upgrade Helper - Icons",
     "port": 4002,
     "commandName": "extension.runUIUpgradeHelperIcons",
-    "enabled": false
+    "enabled": true
   },
   {
     "package": "js-rules-tool",
