@@ -1,4 +1,4 @@
-[<< Back to the customer guide](../customer_guide.md)
+[<< Back to the UI Upgrade Helper guide](../ui_upgrade_helper_guide.md)
 
 # Rules
 

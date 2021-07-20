@@ -13,8 +13,12 @@
 
 1. Clone the repo with `git clone git@github.com:IBM/spm-ui-upgrade-helper.git`
 2. Run `yarn install`
-3. Build the container with `yarn build:dev`
-4. Start the container with `dev.bat`/`dev.sh`
+3. Run the following commands (not strictly necessary but it will greatly speed up the Docker build)
+    - `docker pull theiaide/theia:1.14.0`
+    - `docker pull node:12.18.3`
+    - `docker pull node:12.18.3-alpine`
+4. Build the container with `yarn build:dev`
+5. Start the container with `dev.bat`/`dev.sh`
 
 ## Notes
 

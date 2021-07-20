@@ -1,6 +1,6 @@
 [<< Back to the developer guide](../developer_guide.md)
 
-## Running the tool
+## Running the UI Upgrade Helper tool
 
 1. Start the container using `dev.bat`/`dev.sh`
 2. Open your browser to http://localhost:3000

@@ -1,6 +1,6 @@
 [<< Back to home](index.md)
 
-# Customer guide
+# UI Upgrade Helper Guide
 
 ## Initial setup
 
@@ -18,7 +18,15 @@ Once installed, you will need to allow Docker Desktop to access certain paths on
 
 ## Downloading the tool
 
-[Download options](temp_download_options.md) (WIP)
+### Option 1: Public Docker Hub
+
+1. Run `docker login`
+2. Run `docker pull docker.io/ibmcom/spm-ui-upgrade-helper:latest`
+
+### Option 2: Internal IBM Docker Hub
+
+1. Run `docker login wh-govspm-docker-local.artifactory.swg-devops.com`
+2. Run `docker pull wh-govspm-docker-local.artifactory.swg-devops.com/artifactory/wh-govspm-docker-local/spm-ui-upgrade-helper/spm-ui-upgrade-helper:latest`
 
 ## Running the tool
 
@@ -26,13 +34,16 @@ Once installed, you will need to allow Docker Desktop to access certain paths on
     - `curl -L https://raw.githubusercontent.com/IBM/spm-ui-upgrade-helper/main/spm-ui-upgrade-helper.bat -o spm-ui-upgrade-helper.bat` (Windows)
     - `curl -L https://raw.githubusercontent.com/IBM/spm-ui-upgrade-helper/main/spm-ui-upgrade-helper.sh -o spm-ui-upgrade-helper.sh` (Linux)
         - If using Linux, make the shell script executable with `chmod +x spm-ui-upgrade-helper.sh`
-2. Start the tool using `spm-ui-upgrade-helper.bat <version> <input folder> <output folder>` or `./spm-ui-upgrade-helper.sh <version> <input folder> <output folder>`.
-    - `<version>` is typically "latest".
-    - `<input folder>` should be your 7.0.11.0 development environment (set it to the root folder as there are files in both webclient and EJBServer that the tool will touch.)
-    - Run `chmod -R 777 <output folder>` so that Docker can interact with the output folder.
-    - `<output folder>` will be wiped, so be careful.
-    - `<output folder>` should be a temporary folder e.g. `c:\temp\upgrade` or `/tmp/upgrade`.
-    - Docker volume names such as the input and output folders MUST be absolute paths.
+2. Start the tool:
+    - `spm-ui-upgrade-helper.bat <version> <input folder> <output folder>` (Windows)
+    - `./spm-ui-upgrade-helper.sh <version> <input folder> <output folder>` (Linux)
+    - Notes:
+        - `<version>` is typically "latest".
+        - `<input folder>` should be your 7.0.11.0 development environment (set it to the root folder as there are files in both webclient and EJBServer that the tool will touch.)
+        - Run `chmod -R 777 <output folder>` so that Docker can interact with the output folder.
+        - `<output folder>` should be a temporary folder e.g. `c:\temp\upgrade` or `/tmp/upgrade`.
+        - `<output folder>` will be wiped, so be careful.
+        - The input and output folders MUST be absolute paths.
 3. Open your browser to http://localhost:3000
 4. Press `F1` or `cmd + shift + p`.
 5. Type "Run SPM UI Upgrade Helper" and click on the shortcut.
@@ -42,7 +53,7 @@ Once installed, you will need to allow Docker Desktop to access certain paths on
 
 <img style="text-align:center" src="images/upgrade-helper.gif" width="500">
 
-9. Copy `<output folder>` into your v8 development environment.
+9. Copy the contents of `<output folder>` into your v8 development environment.
 10. Build and test v8.
 
 ## Errors
