@@ -12,7 +12,7 @@ const sharedUtils = require("../../shared-utils/sharedUtils");
  */
 function run(config, sourceDir, mapPath) {
   // Suppress embedded console info logs.
-  if (!config.verbose) {
+  if (config.verbose === false) {
     console.info = () => {};
   }
 
@@ -23,18 +23,22 @@ function run(config, sourceDir, mapPath) {
   console.info(`Searching for icon ${chalk.magenta("files")} to replace...`);
 
   // glob icon files from target directory
-  const iconFiles = utils.readIconFiles(config.outputFolder);
+  // const iconFiles = utils.readIconFiles(config.outputFolder);
+  const iconFiles = sharedUtils.keepFiles(config.files, "png", "svg");
+  // console.log(`#### iconFiles = ${JSON.stringify(iconFiles)}`);
   iconFiles.forEach((iconFile) => {
-    const mapping = engine.getMapping(iconFile.name, mappings); // check if mapping exists for file
+    const name = iconFile.substring(iconFile.lastIndexOf("/") + 1);
+    const mapping = engine.getMapping(name, mappings); // check if mapping exists for file
 
     if (mapping) {
-      console.info(
-        chalk.cyan(`${iconFile.relativeDirectory}/`) +
-          `{${chalk.magenta(iconFile.name)} > ${chalk.magenta(mapping)}}`
-      );
+      // console.info(
+      //   chalk.cyan(`${iconFile.relativeDirectory}/`) +
+      //     `{${chalk.magenta(iconFile.name)} > ${chalk.magenta(mapping)}}`
+      // );
+      console.info(`{${chalk.magenta(iconFile)} > ${chalk.magenta(mapping)}}`);
 
       // replace the target icon with the source file specified in the mapping
-      utils.replaceIconFile(iconFile.path, mapping, sourceDir);
+      utils.replaceIconFile(iconFile, mapping, sourceDir);
     }
   });
 
@@ -44,6 +48,7 @@ function run(config, sourceDir, mapPath) {
 
   // glob all other files from target directory (minus some excluded filetypes)
   const files = utils.readAllFiles(config.outputFolder, config.iconReferenceExclude);
+  // console.log(`#### files = ${JSON.stringify(files)}`);
   files.forEach((file) => {
     const prevContent = utils.readFileContent(file); // read globbed files content
     const nextContent = engine.updateIconReferences(prevContent, mappings); // check if file contains references to update
