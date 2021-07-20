@@ -36,14 +36,15 @@ export function activate(context: ExtensionContext) {
   });
 }
 
+let count = 0;
+
 /**
  * Updates the progress report message with an animation.
  *
  * @param progress progress object that appears on screen
  */
 const animation = (progress: any) => {
-  const messagesArray = [messages.IN_EXECUTION, messages.SEARCHING_FILES];
-  const random = Math.floor(Math.random() * 2);
-  const message = messagesArray[random];
+  const message = `${messages.SEARCHING_FILES} (${count} seconds)`;
   progress.report({ message });
+  count++;
 };
