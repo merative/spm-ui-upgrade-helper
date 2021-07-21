@@ -220,6 +220,7 @@
 /webclient/components/WorkspaceServices/
 /webclient/components/YouthServices/
 
+base_checksums.txt
 **/.project
 **/.classpath
 **/ieg-css-template-rtl.css
