@@ -8,11 +8,14 @@
 2. Set up a v8 development environment.
 3. Install Docker Desktop for [Windows](https://docs.docker.com/docker-for-windows/install/) or [Mac](https://docs.docker.com/docker-for-mac/install/).
 
+## Docker Desktop setup
+
 Once installed, you will need to allow Docker Desktop to access certain paths on the local filesystem. These will be the folders that the tool will work on i.e. your SPM source code folder that will provide the input data, plus an output folder where it will write the modified data.
 
-4. Open Docker Desktop.
-5. Click Settings > Resources > File Sharing.
-6. Add the folder you want to share.
+1. Open Docker Desktop.
+2. Click Settings > Resources > File Sharing.
+3. Share your 7.0.11.0 development environment folder
+4. Share a temporary folder, e.g. `/tmp/upgrade` or `c:\temp\upgrade`
 
 ![1. Open Docker Desktop, 2. Click the Settings button then Resources then File Sharing, 3. Add the folder you want to share with the Docker container](images/docker-volume-sharing.png "Docker volume sharing screenshot")
 
