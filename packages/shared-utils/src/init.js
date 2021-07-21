@@ -29,6 +29,14 @@ const init = config => {
     console.info = () => {};
   }
 
+  // Remove "./" paths as they will cause problems later when trying to ignore files
+  config.inputFolder = config.inputFolder.startsWith("./")
+    ? config.inputFolder.substring(2)
+    : config.inputFolder;
+  config.outputFolder = config.outputFolder.startsWith("./")
+    ? config.outputFolder.substring(2)
+    : config.outputFolder;
+
   console.info("Initializing output folder");
   removeOutputFolder(config);
   createGitRepo(config);
@@ -36,7 +44,7 @@ const init = config => {
   inputFiles = removeIgnoredFiles(config, inputFiles);
   copyFilesToOutputFolder(config, inputFiles);
   commitFiles(config.outputFolder, "Initial commit");
-  const files = flipToOutputFiles(config, inputFiles);
+  let files = flipToOutputFiles(config, inputFiles);
   config.files = files;
 }
 

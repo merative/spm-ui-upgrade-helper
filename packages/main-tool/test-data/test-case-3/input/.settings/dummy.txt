@@ -1,0 +1,1 @@
+Dummy file to simulate a .settings folder. This should be ignored by the test.
