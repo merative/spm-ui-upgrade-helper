@@ -1,5 +1,8 @@
-  {
+{
   "tokens": [
+    "/.git",
+    "/.settings",
+    "/.metadata",
     "/.keepfolder",
     "/ieg-css-template-rtl.css",
     "/ieg-css-template.css",
