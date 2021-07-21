@@ -50,7 +50,7 @@ function run(config, sourceDir, mapPath) {
       modifiedFileCount++;
     }
   });
-  console.info(`Modified contents of ${modifiedFileCount} files`);
+  console.info(`${modifiedFileCount} files were modified`);
 
   const end = Date.now();
   const date = new Date(end - start);
