@@ -20,7 +20,7 @@
     "install:show-dev-shortcuts": "cd packages/show-dev-shortcuts && yarn install",
     "install:window-size-tool": "cd packages/window-size-tool && yarn install",
     "initial-check": "cd packages/initial-check && yarn start",
-    "start-theia": "node /home/theia/packages/browser-app/src-gen/backend/main.js /home/workspace --hostname=0.0.0.0",
+    "start-theia": "node /home/theia/packages/browser-app/src-gen/backend/main.js /home/workspace/output --hostname=0.0.0.0",
     "start-tools": "lerna run --scope @upgrade-helper/*-tool start && yarn start-theia",
     "start": "yarn initial-check && npm-run-all --parallel start-theia start-tools",
     "generate-files": "node ./packages/code-generator/index.js",
