@@ -27,11 +27,6 @@ if "%4" == "" (
 ) else (
   set ADDITIONAL_RULES_CMD=-v %4:/home/workspace/rules
 )
-if "%5" == "" (
-  set ADDITIONAL_IGNORE_CMD=
-) else (
-  set ADDITIONAL_IGNORE_CMD=-v %5:/home/workspace/ignore
-)
 
 :: Detach by default
 if "%DETACH%" == "false" (
@@ -46,7 +41,6 @@ echo     VERSION = %VERSION%
 echo     INPUT_FOLDER_CMD = %INPUT_FOLDER_CMD%
 echo     OUTPUT_FOLDER_CMD = %OUTPUT_FOLDER_CMD%
 echo     ADDITIONAL_RULES_CMD = %ADDITIONAL_RULES_CMD%
-echo     ADDITIONAL_IGNORE_CMD = %ADDITIONAL_IGNORE_CMD%
 echo     DETACH_CMD = %DETACH_CMD%
 echo.
 
@@ -55,7 +49,7 @@ call docker rm spm-ui-upgrade-helper
 echo Logging in to wh-govspm-docker-local.artifactory.swg-devops.com...
 call docker login wh-govspm-docker-local.artifactory.swg-devops.com
 call docker pull wh-govspm-docker-local.artifactory.swg-devops.com/artifactory/wh-govspm-docker-local/spm-ui-upgrade-helper/spm-ui-upgrade-helper:%VERSION%
-call docker run %DETACH_CMD% -p 3000:3000 -p 4000-4002:4000-4002 %UIUH_DEV_CMD% %INPUT_FOLDER_CMD% %OUTPUT_FOLDER_CMD% %ADDITIONAL_RULES_CMD% %ADDITIONAL_IGNORE_CMD% --name spm-ui-upgrade-helper wh-govspm-docker-local.artifactory.swg-devops.com/artifactory/wh-govspm-docker-local/spm-ui-upgrade-helper/spm-ui-upgrade-helper:%VERSION%
+call docker run %DETACH_CMD% -p 3000:3000 -p 4000-4002:4000-4002 %UIUH_DEV_CMD% %INPUT_FOLDER_CMD% %OUTPUT_FOLDER_CMD% %ADDITIONAL_RULES_CMD% --name spm-ui-upgrade-helper wh-govspm-docker-local.artifactory.swg-devops.com/artifactory/wh-govspm-docker-local/spm-ui-upgrade-helper/spm-ui-upgrade-helper:%VERSION%
 call docker ps
 endlocal
 

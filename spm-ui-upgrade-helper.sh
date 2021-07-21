@@ -27,11 +27,6 @@ if [[ -z "$4" ]]; then
 else
   ADDITIONAL_RULES_CMD="-v $4:/home/workspace/rules"
 fi
-if [[ -z "$5" ]]; then
-  ADDITIONAL_IGNORE_CMD=
-else
-  ADDITIONAL_IGNORE_CMD="-v $5:/home/workspace/ignore"
-fi
 
 if [[ "$DETACH" == "false" ]]; then
   DETACH_CMD=
@@ -45,7 +40,6 @@ echo     VERSION = $VERSION
 echo     INPUT_FOLDER_CMD = $INPUT_FOLDER_CMD
 echo     OUTPUT_FOLDER_CMD = $OUTPUT_FOLDER_CMD
 echo     ADDITIONAL_RULES_CMD = $ADDITIONAL_RULES_CMD
-echo     ADDITIONAL_IGNORE_CMD = $ADDITIONAL_IGNORE_CMD
 echo     DETACH_CMD = $DETACH_CMD
 echo
 
@@ -61,7 +55,6 @@ docker run $DETACH_CMD -p 3000:3000 -p 4000-4002:4000-4002 \
     $INPUT_FOLDER_CMD \
     $OUTPUT_FOLDER_CMD \
     $ADDITIONAL_RULES_CMD \
-    $ADDITIONAL_IGNORE_CMD \
     --name spm-ui-upgrade-helper \
     wh-govspm-docker-local.artifactory.swg-devops.com/artifactory/wh-govspm-docker-local/spm-ui-upgrade-helper/spm-ui-upgrade-helper:$VERSION
 if [ "$?" != 0 ]; then echo "Error: Could not run $VERSION version."; exit 1; fi

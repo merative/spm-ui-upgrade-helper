@@ -2,23 +2,12 @@
 
 # Ignoring files
 
-Customers can ignore certain input files by creating an environment variable `ADDITIONAL_IGNORE` that points to a folder. This variable will be picked up automatically by `spm-ui-upgrade-helper.bat`. Any `.json` files in this folder will be loaded in addition to the default list of ignored files.
+Customers can ignore certain files by creating a file called `.spm-uiuh-ignore` containing patterns to ignore. It follows the same rules as a [.gitignore](http://git-scm.com/docs/gitignore) file. All paths are relative to the `.spm-uiuh-ignore` file location.
 
-For example: `set ADDITIONAL_RULES=.\my_ignores` (Windows) or `export ADDITIONAL_IGNORE=./my_ignores` (Mac).
+## Example .spm-uiuh-ignore file
 
-## Structure of an ignore file
+    # Ignore files in /EJBServer/components/Foo
+    /EJBServer/components/Foo
 
-    {
-      "tokens": [
-        "/bar.txt"
-      ],
-      "globs": [
-        "**/Foo/**"
-      ]
-    }
-
-## Notes
-
-- NB: Use of tokens is preferred for performance reasons. Use of multiple globs may have a significant performance impact.
-- When the files are being processed, any file paths that contain a token from the `tokens` array or match a glob from the `globs` array will be ignored.
-- Due to differences between Docker and the local file system, relative paths at the input folder level are required, e.g. use `weblient/components/...` or `EJBServer/components/...`.
+    # Ignore .xyz files:
+    **/*.xyz
