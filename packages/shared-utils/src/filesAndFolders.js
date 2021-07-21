@@ -8,6 +8,7 @@ const shelljs = require("shelljs");
  * @param {object} config configuration object
  */
 const removeOutputFolder = config => {
+  console.info("Deleting output folder");
   const cwd = process.cwd();
   shelljs.rm("-rf", `${config.outputFolder}/*`);
   shelljs.rm("-rf", `${config.outputFolder}/.git`);
