@@ -1,0 +1,5 @@
+# Ignore all 'should-be-ignored.css' files
+**/should-be-ignored.css
+
+# Ignore all files in 'bar' directory
+/bar/

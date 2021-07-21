@@ -63,6 +63,21 @@ const copyFiles = (file, count) => {
   }
 }
 
+/**
+ * Adds some ignored files and a `.spm-uiuh-ignore` file.
+ */
+const addIgnoredFiles = () => {
+  // This file will be ignored by OOTB ignores
+  const folder1 = "acceptance-tests/input/.git";
+  shelljs.mkdir(folder1);
+  shelljs.cp("acceptance-tests/scripts/dummy-files/should-be-ignored.css", folder1);
+  // This file will be ignored by the .spm-uiuh-ignore file we have added
+  const folder2 = "acceptance-tests/input/foo";
+  shelljs.mkdir("-p", folder2);
+  shelljs.cp("acceptance-tests/scripts/dummy-files/should-be-ignored.css", folder2);
+  shelljs.cp("acceptance-tests/scripts/dummy-files/.spm-uiuh-ignore", "acceptance-tests/input");
+}
+
 shelljs.rm("-rf", `acceptance-tests/input`);
 shelljs.rm("-rf", `acceptance-tests/output`);
 shelljs.mkdir(`acceptance-tests/input`);
@@ -73,3 +88,4 @@ addFiles("has-updates-css.css", hasUpdatesCssCount);
 addFiles("has-updates-icons.properties", hasUpdatesIconsCount);
 addFiles("has-updates-css-and-icons.css", hasUpdatesCssAndIconsCount);
 copyFiles("Chevron_Down_Blue30_10px.png", actualIconFiles);
+addIgnoredFiles();
