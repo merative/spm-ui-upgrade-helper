@@ -35,6 +35,7 @@ const execute = (testConfigOverrides = {}, testToolOverrides = []) => {
     return 1;
   }
 
+  console.info("====");
   console.info("All done!");
 }
 
