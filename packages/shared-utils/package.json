@@ -11,6 +11,7 @@
   "dependencies": {
     "@folkforms/file-io": "^0.2.2",
     "fs-extra": "^10.0.0",
+    "ignore": "^5.1.8",
     "shelljs": "^0.8.4"
   },
   "devDependencies": {

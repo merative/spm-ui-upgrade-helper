@@ -1,55 +1,32 @@
-const fileio = require('@folkforms/file-io');
-
-const containsAnyToken = (path, tokens) => {
-  for(let i = 0; i < tokens.length; i++) {
-    const token = tokens[i];
-    const index = path.indexOf(token);
-    if(index != -1) {
-      return true;
-    }
-  }
-  return false;
-}
+const fileio = require("@folkforms/file-io");
+const fs = require("fs-extra");
+const ignore = require("ignore");
+const path = require('path');
 
 const removeIgnoredFiles = (config, inputFiles) => {
   let startTime = new Date().getTime();
   const countBeforeIgnore = inputFiles.length;
 
-  const ignoreFiles = [
-    fileio.glob(`${config.ignorePatternsFolder}/*.json`),
-    fileio.glob(`${config.ignorePatternsFolderAdditional}/*.json`),
-  ].flat();
+  let relativePaths = inputFiles.map(f => path.relative(config.inputFolder, f));
+  relativePaths = relativePaths.map(f => f.replace(/\\/g, "/"));
 
-  ignoreFiles.forEach(filename => {
-    const ignoreJson = fileio.readJson(filename);
-    // Ignore tokens
-    if(ignoreJson.tokens && ignoreJson.tokens.length > 0) {
-      for(let i = 0; i < inputFiles.length; i++) {
-        if(containsAnyToken(inputFiles[i], ignoreJson.tokens)) {
-          inputFiles.splice(i, 1);
-          i--;
-        }
-      }
-    }
-    // Ignore globs
-    if(ignoreJson.globs && ignoreJson.globs.length > 0) {
-      ignoreJson.globs.forEach(pattern => {
-        const glob = `${config.inputFolder}/${pattern}`;
-        const globbedFiles = fileio.glob(glob);
-        globbedFiles.forEach(globbedFile => {
-          let index = inputFiles.indexOf(globbedFile);
-          if(index !== -1) {
-            inputFiles.splice(index, 1);
-          }
-        });
-      });
-    }
-  });
-  const countAfterIgnore = inputFiles.length;
+  const ignoreFileOOTBContents = fileio.readLines(config.ignorePatternsFile);
+  const ignoreFileCustomer = `${config.inputFolder}/.spm-uiuh-ignore`;
+  const ignoreFileCustomerContents = fs.existsSync(ignoreFileCustomer)
+    ? fileio.readLines(ignoreFileCustomer)
+    : [];
+  const allIgnores = [ ignoreFileOOTBContents, ignoreFileCustomerContents ].flat();
+
+  const ig = ignore().add(allIgnores);
+  relativePaths = ig.filter(relativePaths);
+
+  const absolutePaths = relativePaths.map(f => `${config.inputFolder}/${f}`);
+
+  const countAfterIgnore = absolutePaths.length;
   let endTime = new Date().getTime();
   console.info(`Ignored ${countBeforeIgnore - countAfterIgnore} files [${endTime - startTime} ms]`);
 
-  return inputFiles;
+  return absolutePaths;
 }
 
 module.exports = { removeIgnoredFiles };

@@ -1,4 +1,4 @@
-# Test Case 2
+# Main Tool Test Case 2
 
 Tests `main-tool` when running both `css-rules-tool` and `icon-replacer-tool`.
 

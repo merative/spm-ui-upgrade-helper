@@ -1,4 +1,4 @@
-# Test Case 1
+# Main Tool Test Case 1
 
 Tests that `main-tool` only calls tools that are enabled.
 

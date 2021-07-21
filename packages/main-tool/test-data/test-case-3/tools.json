@@ -1,0 +1,9 @@
+[
+  {
+    "package": "css-rules-tool",
+    "name": "Run SPM UI Upgrade Helper - CSS",
+    "port": 4001,
+    "commandName": "extension.runUIUpgradeHelperCSS",
+    "enabled": true
+  }
+]

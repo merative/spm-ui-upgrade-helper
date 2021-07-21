@@ -19,6 +19,6 @@
   },
   "devDependencies": {
     "jest": "^26.0.1",
-    "test-with-data-folder": "^0.0.8"
+    "test-with-data-folder": "^0.0.9"
   }
 }

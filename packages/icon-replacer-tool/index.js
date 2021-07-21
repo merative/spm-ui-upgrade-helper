@@ -14,7 +14,7 @@ const execute = (overrides = {}) => {
     iconMappings,
   );
 
-  console.log("icon-replacer-tool finished");
+  console.info("icon-replacer-tool finished");
 };
 
 module.exports = { execute };
