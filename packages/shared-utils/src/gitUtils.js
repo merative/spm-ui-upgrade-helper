@@ -9,6 +9,7 @@ const createGitRepo = config => {
   const cwd = process.cwd();
   shell.cd(config.outputFolder);
   shell.exec(`git init`);
+  shell.exec(`git config gc.auto 0`);
   shell.cd(cwd);
 }
 
