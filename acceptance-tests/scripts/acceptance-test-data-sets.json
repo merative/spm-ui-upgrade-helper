@@ -1,6 +1,7 @@
 {
   "kitchen-sink": {
-    "filesPerFolder": 50,
+    "numFolders": 50,
+    "folderDepth": 5,
     "filesWithNoUpdates": 300,
     "filesWithCssUpdates": 7,
     "filesWithIconUpdates": 4,
@@ -8,7 +9,8 @@
     "filesWithCssAndIconUpdates": 2
   },
   "icon-replacer-performance": {
-    "filesPerFolder": 200,
+    "numFolders": 50,
+    "folderDepth": 5,
     "filesWithNoUpdates": 6000,
     "filesWithCssUpdates": 0,
     "filesWithIconUpdates": 10,
