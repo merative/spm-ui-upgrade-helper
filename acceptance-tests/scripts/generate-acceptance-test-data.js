@@ -2,14 +2,16 @@ const fileio = require("@folkforms/file-io");
 const shelljs = require("shelljs");
 const { Command } = require('commander');
 
+const allDataSets = fileio.readJson("acceptance-tests/scripts/acceptance-test-data-sets.json");
+
 const program = new Command();
 program
   .name("yarn at:build")
   .addHelpText('before', '\nGenerates acceptance test data for release testing.\n') 
-  .argument("<data-set>", "Name of data set to use. See acceptance-tests/scripts/acceptance-test-data-sets.json.")
+  .argument("<dataset>", "Name of dataset to use. See acceptance-tests/scripts/acceptance-test-data-sets.json.")
+  .showHelpAfterError(`Possible dataset values: ${Object.keys(allDataSets).join(", ")}.\nSee acceptance-tests/scripts/acceptance-test-data-sets.json.`)
   .parse();
 
-const allDataSets = fileio.readJson("acceptance-tests/scripts/acceptance-test-data-sets.json");
 const data = allDataSets[program.args[0]];
 
 /**
