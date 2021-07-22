@@ -2,6 +2,7 @@ const chalk = require("chalk");
 const io = require("./io");
 const engine = require("./engine");
 const fileio = require("@folkforms/file-io");
+const shelljs = require("shelljs");
 const utils = require("../../shared-utils/sharedUtils");
 
 /**
@@ -46,6 +47,7 @@ function run(config, sourceDir, mapPath) {
 
     // if a file is updated with new references, write that content back to file
     if (nextContent) {
+      shelljs.mkdir("-p", file.substring(0, file.lastIndexOf("/")));
       fileio.writeLines(file, nextContent);
       modifiedFileCount++;
     }
