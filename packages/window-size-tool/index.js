@@ -1,5 +1,4 @@
-const utils2 = require("./src/utils");
-const config2 = require("./config");
+const windowSizeToolConfig = require("./config");
 const engine = require("./src/engine");
 const fileio = require("@folkforms/file-io");
 const utils = require("../shared-utils/sharedUtils");
@@ -15,23 +14,23 @@ const execute = overrides => {
   const parser = new xmldom.DOMParser();
   const serializer = new xmldom.XMLSerializer();
 
-  // const inputFiles = utils2.readUIMFiles(config.inputFolder); // get UIM files from target directory
   const inputFiles = utils.keepFiles(config.files, "uim", "vim");
-  const rules = utils2.getRules(config2.rulesFile); // get rules objects
+  const rules = fileio.readJson(windowSizeToolConfig.rulesFile);
 
   let outputFiles = {};
-
   inputFiles.forEach(file => {
     const contents = fileio.readLines(file).join("\n");
     const document = parser.parseFromString(contents);
 
-    const outputDocument = engine.applyRules(document, file, rules, config2.sizes); // generate output files based on rules
+    const outputDocument = engine.applyRules(document, file, rules, windowSizeToolConfig.sizes);
 
-    // FIXME Check if there were actually changes
-    outputFiles[file] = serializer.serializeToString(outputDocument);
+    // Only mark the files as 'for writing' if the contents changed
+    const newContents = serializer.serializeToString(outputDocument)
+    if(contents !== newContents) {
+      outputFiles[file] = newContents;
+    }
   });
 
-  // utils2.writeUIMFiles(config.outputFolder, outputFiles); // write transformed files to target directory
   utils.writeFilesToDisk(config, outputFiles);
 
   console.info("window-size-tool finished");

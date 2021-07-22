@@ -1,4 +1,3 @@
-const fs = require("fs-extra");
 const fileio = require("@folkforms/file-io");
 const testWithDataFolder = require("test-with-data-folder");
 const { execute } = require("./index");
@@ -8,7 +7,7 @@ const { execute } = require("./index");
  */
 const testCaseFolders = fileio.glob("test-data/test-case-*", { onlyDirectories: true, deep: 1 });
 testCaseFolders.forEach(folder => {
-  test(`modal-window-size-tool test (from: ${folder})`, () => {
+  test(`window-size-tool test (from: ${folder})`, () => {
     runTest(folder);
   });
 });
@@ -25,11 +24,6 @@ const runTest = folder => {
     outputFolder: temporaryFolder,
     quiet: true,
   };
-  // const additionalConfigOverridesFile = `${folder}/config.json`;
-  // if(fs.existsSync(additionalConfigOverridesFile)) {
-  //   const testAdditionalConfigOverrides = fileio.readJson(additionalConfigOverridesFile);
-  //   testConfigOverrides = { ...testConfigOverrides, ...testAdditionalConfigOverrides };
-  // }
 
   const testFunc = () => { execute(testConfigOverrides); };
 

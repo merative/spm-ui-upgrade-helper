@@ -1,8 +1,6 @@
 const chalk = require("chalk");
 const xp = require("xpath");
 
-const utils = require("./utils");
-
 // Accepted relational operators for width comparisons.
 const OPERATORS = {
   LESS_THAN: "<",
@@ -155,8 +153,14 @@ function applyRules(document, name, rules, sizes) {
       if (pass) {
         const windowOptions = getWindowOptions(document);
 
-        windowOptions.width = sizes[rule.target];
-        windowOptions.size = rule.target;
+        // This is where we can flip between pixels and size attribute
+        const usePixelWidths = true;
+        if(usePixelWidths) {
+          windowOptions.width = sizes[rule.target];
+        } else {
+          delete windowOptions.width;
+          windowOptions.size = rule.target;
+        }
 
         setWindowOptions(document, windowOptions);
       }
