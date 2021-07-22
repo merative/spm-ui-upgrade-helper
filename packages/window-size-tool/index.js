@@ -26,8 +26,11 @@ const execute = overrides => {
 
     const outputDocument = engine.applyRules(document, file, rules, config2.sizes); // generate output files based on rules
 
-    // FIXME Check if there were actually changes
-    outputFiles[file] = serializer.serializeToString(outputDocument);
+    // Only write the file if the contents changed
+    const newContents = serializer.serializeToString(outputDocument)
+    if(contents !== newContents) {
+      outputFiles[file] = newContents;
+    }
   });
 
   // utils2.writeUIMFiles(config.outputFolder, outputFiles); // write transformed files to target directory
