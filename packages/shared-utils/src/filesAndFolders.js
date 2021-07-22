@@ -47,7 +47,7 @@ const globAllFiles = config => {
   const startTime = new Date().getTime();
   let inputFiles = fileio.glob(`${config.inputFolder}/**/*`);
   const endTime = new Date().getTime();
-  console.info(`Initial search found ${inputFiles.length} files [${Math.ceil((endTime-startTime)/60000)} minutes]`);
+  console.info(`Collecting input files found ${inputFiles.length} files [${Math.ceil((endTime-startTime)/60000)} minutes]`);
   return inputFiles;
 }
 
@@ -126,7 +126,7 @@ const copyFilesToOutputFolder = (config, inputFiles) => {
     outputFiles.push(destFile);
   });
   const endTime = new Date().getTime();
-  console.info(`Finished copying [${Math.ceil((endTime-startTime)/60000)} minutes]`);
+  console.info(`Copying finished [${Math.ceil((endTime-startTime)/60000)} minutes]`);
 }
 
 /**
