@@ -1,20 +1,22 @@
-/**
- * Generates acceptance test data.
- */
+const fileio = require("@folkforms/file-io");
 const shelljs = require("shelljs");
+const { Command } = require('commander');
 
-const filesPerFolder = 50;
-const noUpdatesCssCount = 300;
-const hasUpdatesCssCount = 7;
-const hasUpdatesIconsCount = 4;
-const actualIconFiles = 2;
-const hasUpdatesCssAndIconsCount = 2;
+const program = new Command();
+program
+  .name("yarn at:build")
+  .addHelpText('before', '\nGenerates acceptance test data for release testing.\n') 
+  .argument("<data-set>", "Name of data set to use. See acceptance-tests/scripts/acceptance-test-data-sets.json.")
+  .parse();
+
+const allDataSets = fileio.readJson("acceptance-tests/scripts/acceptance-test-data-sets.json");
+const data = allDataSets[program.args[0]];
 
 // Create dummy files with no changes
 folder = -1;
 const addUnchangedFiles = count => {
   for(let i = 0; i < count; i++) {
-    if(i % filesPerFolder === 0) {
+    if(i % data.filesPerFolder === 0) {
       folder++;
       shelljs.mkdir("-p", `acceptance-tests/input/${folder}`);
     }
@@ -83,9 +85,9 @@ shelljs.rm("-rf", `acceptance-tests/output`);
 shelljs.mkdir(`acceptance-tests/input`);
 shelljs.mkdir(`acceptance-tests/output`);
 
-addUnchangedFiles(noUpdatesCssCount);
-addFiles("has-updates-css.css", hasUpdatesCssCount);
-addFiles("has-updates-icons.properties", hasUpdatesIconsCount);
-addFiles("has-updates-css-and-icons.css", hasUpdatesCssAndIconsCount);
-copyFiles("Chevron_Down_Blue30_10px.png", actualIconFiles);
+addUnchangedFiles(data.filesWithNoUpdates);
+addFiles("has-updates-css.css", data.filesWithCssUpdates);
+addFiles("has-updates-icons.properties", data.filesWithIconUpdates);
+copyFiles("Chevron_Down_Blue30_10px.png", data.iconFilesToUpdate);
+addFiles("has-updates-css-and-icons.css", data.filesWithCssAndIconUpdates);
 addIgnoredFiles();
