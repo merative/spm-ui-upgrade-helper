@@ -1,8 +1,6 @@
 const chalk = require("chalk");
 const xp = require("xpath");
 
-const utils = require("./utils");
-
 // Accepted relational operators for width comparisons.
 const OPERATORS = {
   LESS_THAN: "<",

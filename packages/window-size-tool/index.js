@@ -1,4 +1,3 @@
-const utils2 = require("./src/utils");
 const config2 = require("./config");
 const engine = require("./src/engine");
 const fileio = require("@folkforms/file-io");
@@ -17,7 +16,7 @@ const execute = overrides => {
 
   // const inputFiles = utils2.readUIMFiles(config.inputFolder); // get UIM files from target directory
   const inputFiles = utils.keepFiles(config.files, "uim", "vim");
-  const rules = utils2.getRules(config2.rulesFile); // get rules objects
+  const rules = fileio.readJson(config2.rulesFile); // get rules objects
 
   let outputFiles = {};
 
