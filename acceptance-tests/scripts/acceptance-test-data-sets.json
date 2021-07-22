@@ -9,8 +9,8 @@
     "filesWithCssAndIconUpdates": 2
   },
   "icon-replacer-performance": {
-    "numFolders": 50,
-    "folderDepth": 5,
+    "numFolders": 6000,
+    "folderDepth": 10,
     "filesWithNoUpdates": 6000,
     "filesWithCssUpdates": 0,
     "filesWithIconUpdates": 10,
