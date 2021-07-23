@@ -29,6 +29,11 @@ const init = config => {
     console.info = () => {};
   }
 
+  // Turn off debug messages by default
+  if(!config.debug) {
+    console.debug = () => {};
+  }
+  
   // Remove "./" paths as they will cause problems later when trying to ignore files
   config.inputFolder = config.inputFolder.startsWith("./")
     ? config.inputFolder.substring(2)

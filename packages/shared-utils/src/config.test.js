@@ -9,6 +9,7 @@ test('config test with defaults', () => {
     ignorePatternsFile: "../../config/.spm-uiuh-ignore",
     iconReplacerExclude: ["zip", "class", "jpg", "jpeg", "gif", "png"],
     quiet: false,
+    debug: true,
     skipInit: false,
     files: [],
   }
@@ -27,6 +28,7 @@ test('config test with all overrides', () => {
     ignorePatternsFile: "eee",
     iconReplacerExclude: "ggg",
     quiet: true,
+    debug: false,
     skipInit: true,
     files: [],
   }
@@ -52,6 +54,7 @@ test('config test with some overrides', () => {
     ignorePatternsFile: "eee",
     iconReplacerExclude: ["zip", "class", "jpg", "jpeg", "gif", "png"],
     quiet: true,
+    debug: true,
     skipInit: false,
     files: [],
   };

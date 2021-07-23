@@ -23,6 +23,7 @@ const runTest = folder => {
     inputFolder,
     outputFolder: temporaryFolder,
     quiet: true,
+    debug: false,
   };
 
   const testFunc = () => { execute(testConfigOverrides); };
