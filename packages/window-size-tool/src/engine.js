@@ -95,7 +95,7 @@ function checkWidth(document, rule) {
     pass = evaluateInequality(pageWidth, ruleWidth, operator);
   }
 
-  console.info(
+  console.debug(
     `\t${
       pass ? chalk.green(pass) : chalk.red(pass)
     }\t <-\twidth: ${chalk.magenta(
@@ -122,7 +122,7 @@ function checkRule(document, rule) {
 
       pass = pass || result;
 
-      console.info(
+      console.debug(
         `\t${
           result ? chalk.green(result) : chalk.red(result)
         }\t <-\t${chalk.magenta(xPath)}`
@@ -142,15 +142,17 @@ function checkRule(document, rule) {
  * @returns Array of UIM files transformed by rules.
  */
 function applyRules(document, name, rules, sizes) {
-  console.info(`filename: ${chalk.cyan(name)}`);
+  console.debug(`filename: ${chalk.cyan(name)}`);
+  let hasChanges = false;
 
   rules.forEach((rule, index) => {
-    console.info(`\trule\t\t${chalk.yellow(index + 1)}`);
+    console.debug(`\trule\t\t${chalk.yellow(index + 1)}`);
 
     if (checkWidth(document, rule)) {
       const pass = checkRule(document, rule);
 
       if (pass) {
+        hasChanges = true;
         const windowOptions = getWindowOptions(document);
 
         // This is where we can flip between pixels and size attribute
@@ -167,7 +169,7 @@ function applyRules(document, name, rules, sizes) {
     }
   });
 
-  return document;
+  return { document, hasChanges };
 }
 
 module.exports = { applyRules };

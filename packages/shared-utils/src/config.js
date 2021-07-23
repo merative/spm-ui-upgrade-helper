@@ -15,6 +15,7 @@ const loadConfig = (overrides = {}) => {
     ignorePatternsFile: overrides.ignorePatternsFile || "../../config/.spm-uiuh-ignore",
     iconReplacerExclude: overrides.iconReplacerExclude || ["zip", "class", "jpg", "jpeg", "gif", "png"],
     quiet: overrides.quiet || false,
+    debug: overrides.debug === false ? false : true,
     skipInit: overrides.skipInit || false,
     files: overrides.files || [],
   };
