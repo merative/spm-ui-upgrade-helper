@@ -43,10 +43,7 @@ const execute = (overrides = {}) => {
     });
     console.info(`${Object.keys(appliedRules).length} files were modified`);
 
-    // FIXME Skipping prettifying stage as I suspect it will cause problems when running multiple tools
     // Save changes
-    // utils.writeFilesToDisk(config, prettified);
-    // utils.commitFiles(config.outputFolder, "feat(*): css service - prettify files");
     utils.writeFilesToDisk(config, appliedRules);
 
   } catch (error) {
