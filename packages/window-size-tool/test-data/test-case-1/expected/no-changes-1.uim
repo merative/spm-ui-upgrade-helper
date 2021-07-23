@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  This page should not be changed, not even the formatting.
+-->
+<PAGE
+  PAGE_ID="no-changes-1"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="file://Curam/UIMSchema.xsd"
+>
+  <PAGE_TITLE>
+    <CONNECT>
+      <SOURCE
+        NAME="TEXT"
+        PROPERTY="PageTitle.StaticText1"
+      />
+    </CONNECT>
+  </PAGE_TITLE>
+
+  <SERVER_INTERFACE
+    CLASS="SomeClass"
+    NAME="DISPLAY"
+    OPERATION="someOperation"
+    PHASE="DISPLAY"
+  />
+  
+  <PAGE_PARAMETER NAME="someParamName"/>
+   
+  <CONNECT>
+    <SOURCE
+      NAME="PAGE"
+      PROPERTY="someParamName"
+    />
+    <TARGET
+      NAME="DISPLAY"
+      PROPERTY="key$someParamName"
+    />
+  </CONNECT>
+  	
+  <CLUSTER 
+  	SHOW_LABELS="false"
+  	STYLE="outer-cluster-borderless" 
+  	DESCRIPTION="Cluster.Description.SomeDescription"
+  >
+   	  
+     <FIELD>
+	     <CONNECT>
+		      <SOURCE
+		        NAME="DISPLAY"
+		        PROPERTY="someProperty"
+		      />
+	    </CONNECT>
+  	</FIELD>
+ 
+  </CLUSTER> 
+</PAGE>

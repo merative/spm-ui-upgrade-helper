@@ -20,14 +20,13 @@ const execute = overrides => {
   let outputFiles = {};
   inputFiles.forEach(file => {
     const contents = fileio.readLines(file).join("\n");
-    const document = parser.parseFromString(contents);
+    const originalDocument = parser.parseFromString(contents);
 
-    const outputDocument = engine.applyRules(document, file, rules, windowSizeToolConfig.sizes);
+    const { document, hasChanges } = engine.applyRules(originalDocument, file, rules, windowSizeToolConfig.sizes);
 
     // Only mark the files as 'for writing' if the contents changed
-    const newContents = serializer.serializeToString(outputDocument)
-    if(contents !== newContents) {
-      outputFiles[file] = newContents;
+    if(hasChanges) {
+      outputFiles[file] = serializer.serializeToString(document);
     }
   });
 

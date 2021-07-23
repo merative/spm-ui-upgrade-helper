@@ -143,6 +143,7 @@ function checkRule(document, rule) {
  */
 function applyRules(document, name, rules, sizes) {
   console.info(`filename: ${chalk.cyan(name)}`);
+  let hasChanges = false;
 
   rules.forEach((rule, index) => {
     console.info(`\trule\t\t${chalk.yellow(index + 1)}`);
@@ -151,6 +152,7 @@ function applyRules(document, name, rules, sizes) {
       const pass = checkRule(document, rule);
 
       if (pass) {
+        hasChanges = true;
         const windowOptions = getWindowOptions(document);
 
         // This is where we can flip between pixels and size attribute
@@ -167,7 +169,7 @@ function applyRules(document, name, rules, sizes) {
     }
   });
 
-  return document;
+  return { document, hasChanges };
 }
 
 module.exports = { applyRules };
