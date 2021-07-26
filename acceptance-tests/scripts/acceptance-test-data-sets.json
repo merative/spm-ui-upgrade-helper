@@ -1,20 +1,18 @@
 {
   "kitchen-sink": {
-    "numFolders": 50,
-    "folderDepth": 5,
-    "filesWithNoUpdates": 300,
-    "filesWithCssUpdates": 7,
-    "filesWithIconUpdates": 4,
-    "iconFilesToUpdate": 2,
-    "filesWithCssAndIconUpdates": 2
+    "totalFiles": 300,
+    "maxFolderDepth": 5,
+    "cssUpdates": 7,
+    "iconUpdates": 4,
+    "iconFiles": 2,
+    "cssAndIconUpdates": 2
   },
   "icon-replacer-performance": {
-    "numFolders": 6000,
-    "folderDepth": 10,
-    "filesWithNoUpdates": 6000,
-    "filesWithCssUpdates": 0,
-    "filesWithIconUpdates": 10,
-    "iconFilesToUpdate": 0,
-    "filesWithCssAndIconUpdates": 0
+    "totalFiles": 6000,
+    "maxFolderDepth": 10,
+    "cssUpdates": 0,
+    "iconUpdates": 10,
+    "iconFiles": 0,
+    "cssAndIconUpdates": 0
   }
 }
