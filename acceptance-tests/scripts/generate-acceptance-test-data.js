@@ -20,13 +20,13 @@ const data = allDataSets[program.args[0]];
  * @param {*} numFolders total number of folders
  * @param {*} folderDepth maximum folder depth
  */
-const createFolders = (numFolders, folderDepth) => {
+const createFolders = (totalFiles, maxFolderDepth) => {
   const folders = [];
-  const topLevelFolders = numFolders / folderDepth;
+  const topLevelFolders = totalFiles / maxFolderDepth;
   let count = 0;
   let path = "";
   for(let i = 0 ; i < topLevelFolders; i++) {
-    for(let j = 0 ; j < data.folderDepth; j++) {
+    for(let j = 0 ; j < data.maxFolderDepth; j++) {
       path += `${count}/`;
       folders.push(path);
       count++;
@@ -45,7 +45,8 @@ const createFolders = (numFolders, folderDepth) => {
  * @param {*} count number of files to add
  * @param {*} folders list of folders
  */
-const addUnchangedFiles = (count, folders) => {
+const addUnchangedFiles = folders => {
+  const count = data.totalFiles - fileCount;
   for(let i = 0; i < count; i++) {
     shelljs.cp("acceptance-tests/scripts/dummy-files/no-updates.css", `acceptance-tests/input/${folders[folderIndex]}/no-updates-${i}.css`);
     folderIndex++;
@@ -77,6 +78,7 @@ const getFilenameWithIndex = (file, index) => {
 const addFiles = (file, count, folders) => {
   for(let i = 0; i < count; i++) {
     shelljs.cp(`acceptance-tests/scripts/dummy-files/${file}`, `acceptance-tests/input/${folders[folderIndex]}/${getFilenameWithIndex(file, i)}`);
+    fileCount++;
     folderIndex++;
     if(folderIndex >= folders.length) {
       folderIndex = 0;
@@ -93,6 +95,7 @@ const addFiles = (file, count, folders) => {
 const copyFiles = (file, count, folders) => {
   for(let i = 0; i < count; i++) {
     shelljs.cp(`acceptance-tests/scripts/dummy-files/${file}`, `acceptance-tests/input/${folders[folderIndex]}/${file}`);
+    fileCount++;
     folderIndex++;
     if(folderIndex >= folders.length) {
       folderIndex = 0;
@@ -120,11 +123,12 @@ shelljs.rm("-rf", `acceptance-tests/output`);
 shelljs.mkdir(`acceptance-tests/input`);
 shelljs.mkdir(`acceptance-tests/output`);
 
+let fileCount = 0;
 let folderIndex = 0;
-const folders = createFolders(data.numFolders, data.folderDepth);
-addUnchangedFiles(data.filesWithNoUpdates, folders);
-addFiles("has-updates-css.css", data.filesWithCssUpdates, folders);
-addFiles("has-updates-icons.properties", data.filesWithIconUpdates, folders);
-copyFiles("Chevron_Down_Blue30_10px.png", data.iconFilesToUpdate, folders);
-addFiles("has-updates-css-and-icons.css", data.filesWithCssAndIconUpdates, folders);
+const folders = createFolders(data.totalFiles, data.maxFolderDepth);
+addFiles("has-updates-css.css", data.cssUpdates, folders);
+addFiles("has-updates-icons.properties", data.iconUpdates, folders);
+copyFiles("Chevron_Down_Blue30_10px.png", data.iconFiles, folders);
+addFiles("has-updates-css-and-icons.css", data.cssAndIconUpdates, folders);
+addUnchangedFiles(folders);
 addIgnoredFiles();
