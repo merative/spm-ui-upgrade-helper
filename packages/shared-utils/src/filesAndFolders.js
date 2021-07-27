@@ -81,7 +81,7 @@ const keepFiles = (files, ...ext) => {
     throw new Error("You must supply a list of extensions e.g. 'keepFiles(files, \"css\", \"js\")'");
   }
   const endTime = new Date().getTime();
-  console.info(`Filtered down to ${files.length} files by keeping only files with extensions: ${ext.join(", ")} [${endTime - startTime} ms]`);
+  console.info(`Filtered down to ${files.length} files by keeping extensions '${ext.join(", ")}' [${endTime - startTime} ms]`);
   return files;
 }
 
@@ -109,7 +109,7 @@ const removeFiles = (files, ...ext) => {
     throw new Error("You must supply a list of extensions e.g. 'removeFiles(files, \"css\", \"js\")'");
   }
   const endTime = new Date().getTime();
-  console.info(`Filtered down to ${files.length} files with extensions '${ext.join(", ")}' only [${endTime - startTime} ms]`);
+  console.info(`Filtered down to ${files.length} files by removing extensions '${ext.join(", ")}' [${endTime - startTime} ms]`);
   return files;
 }
 
