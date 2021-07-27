@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Expect width=600 to change to width=1000.
+-->
 <PAGE PAGE_ID="realistic-file-no-changes" WINDOW_OPTIONS="width=600,height=300" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="CuramUIMSchema">
   <PAGE_TITLE>
     <CONNECT>
