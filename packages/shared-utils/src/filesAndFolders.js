@@ -53,7 +53,7 @@ const globAllFiles = config => {
   });
   inputFiles = inputFiles.flat();
   const endTime = new Date().getTime();
-  console.info(`Collecting input files found ${inputFiles.length} files [${Math.ceil((endTime-startTime)/60000)} minutes]`);
+  console.info(`Collecting input files found ${inputFiles.length} files [${Math.ceil((endTime-startTime)/1000)} seconds]`);
   return inputFiles;
 }
 
@@ -109,7 +109,7 @@ const removeFiles = (files, ...ext) => {
     throw new Error("You must supply a list of extensions e.g. 'removeFiles(files, \"css\", \"js\")'");
   }
   const endTime = new Date().getTime();
-  console.info(`Filtered down to ${files.length} files by removing files with extensions: ${ext.join(", ")} [${endTime - startTime} ms]`);
+  console.info(`Filtered down to ${files.length} files with extensions '${ext.join(", ")}' only [${endTime - startTime} ms]`);
   return files;
 }
 
@@ -132,7 +132,7 @@ const copyFilesToOutputFolder = (config, inputFiles) => {
     outputFiles.push(destFile);
   });
   const endTime = new Date().getTime();
-  console.info(`Copying finished [${Math.ceil((endTime-startTime)/60000)} minutes]`);
+  console.info(`Copying finished [${Math.ceil((endTime-startTime)/1000)} seconds]`);
 }
 
 /**
@@ -151,7 +151,7 @@ const flipToOutputFiles = (config, inputFiles) => {
     files.push(destFile);
   });
   const endTime = new Date().getTime();
-  console.info(`Finished updating paths [${endTime - startTime} ms]`);
+  console.info(`Updating paths finished [${endTime - startTime} ms]`);
   return files;
 }
 
