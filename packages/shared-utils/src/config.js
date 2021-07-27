@@ -16,9 +16,8 @@ const loadConfig = (overrides = {}) => {
     skipInit: overrides.skipInit || false,
     files: overrides.files || [],
 
-    // FIXME Move the files into css-rules-tool since they are not shared
     cssRulesTool: {
-      rulesFolder: overrides.cssRulesTool && overrides.cssRulesTool.rulesFolder || "../../config/rules",
+      rulesFolder: overrides.cssRulesTool && overrides.cssRulesTool.rulesFolder || "../css-rules-tool/rules",
       rulesFolderAdditional: overrides.cssRulesTool && overrides.cssRulesTool.rulesFolderAdditional || "/home/workspace/rules",
     },
 

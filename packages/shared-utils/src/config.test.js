@@ -10,7 +10,7 @@ test('config test with defaults', () => {
     skipInit: false,
     files: [],
     cssRulesTool: {
-      rulesFolder: "../../config/rules",
+      rulesFolder: "../css-rules-tool/rules",
       rulesFolderAdditional: "/home/workspace/rules",
     },
     iconReplacerToolExclude: ["zip", "class", "jpg", "jpeg", "gif", "png"],
