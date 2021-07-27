@@ -34,12 +34,10 @@ function run(config, sourceDir, mapPath) {
   });
   console.info(`Found and replaced ${modifiedIconCount} icon files`);
 
-  console.info(
-    `Searching for icon ${chalk.magenta("references")} to update...`
-  );
+  console.info(`Searching for icon ${chalk.magenta("references")} to update...`);
 
   // glob all other files from target directory (minus some excluded filetypes)
-  const files = utils.removeFiles(config.files, config.iconReplacerExclude);
+  const files = utils.removeFiles(config.files, config.iconReplacerTool.exclude);
   let modifiedFileCount = 0;
   files.forEach((file) => {
     const prevContent = fileio.readLines(file).join("\n"); // read globbed files content

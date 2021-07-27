@@ -1,4 +1,4 @@
-const windowSizeToolConfig = require("./config");
+const sizes = require("./sizes");
 const engine = require("./src/engine");
 const fileio = require("@folkforms/file-io");
 const utils = require("../shared-utils/sharedUtils");
@@ -15,14 +15,14 @@ const execute = overrides => {
   const serializer = new xmldom.XMLSerializer();
 
   const inputFiles = utils.keepFiles(config.files, "uim", "vim");
-  const rules = fileio.readJson(config.windowSizeToolRules);
+  const rules = fileio.readJson(config.windowSizeTool.rules);
 
   let outputFiles = {};
   inputFiles.forEach(file => {
     const contents = fileio.readLines(file).join("\n");
     const originalDocument = parser.parseFromString(contents);
 
-    const { document, hasChanges } = engine.applyRules(originalDocument, file, rules, windowSizeToolConfig.sizes);
+    const { document, hasChanges } = engine.applyRules(originalDocument, file, rules, sizes);
 
     // Only mark the files as 'for writing' if the contents changed
     if(hasChanges) {

@@ -12,8 +12,10 @@ afterEach(() => {
 
 test('ruleUtils test', () => {
   const overrides = {
-    rulesFolder: "./src/test-data/rulesUtils/rulesFolder",
-    rulesFolderAdditional: "./src/test-data/rulesUtils/rulesFolderAdditional",
+    cssRulesTool: {
+      rulesFolder: "./src/test-data/rulesUtils/rulesFolder",
+      rulesFolderAdditional: "./src/test-data/rulesUtils/rulesFolderAdditional",
+    },
     quiet: true,
   }
   const expected = fileio.readJson("./src/test-data/rulesUtils/rulesExpected.json");

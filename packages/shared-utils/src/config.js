@@ -10,21 +10,20 @@ const loadConfig = (overrides = {}) => {
     inputFolder: overrides.inputFolder || "/home/workspace/input",
     outputFolder: overrides.outputFolder || "/home/workspace/output",
     ignorePatternsFile: overrides.ignorePatternsFile || "../../config/.spm-uiuh-ignore",
-
     quiet: overrides.quiet || false,
     debug: overrides.debug === false ? false : true,
     skipInit: overrides.skipInit || false,
     files: overrides.files || [],
-
-    // FIXME Rename to cssRulesToolFiles or similar
-    // FIXME Move the files into css-rules-tool since they are not shared
-    rulesFolder: overrides.rulesFolder || "../../config/rules",
-    rulesFolderAdditional: overrides.rulesFolderAdditional || "/home/workspace/rules",
-
-    // FIXME Rename to iconReplacerToolExclude
-    iconReplacerExclude: overrides.iconReplacerExclude || ["zip", "class", "jpg", "jpeg", "gif", "png"],
-
-    windowSizeToolRules: overrides.windowSizeToolRules || "../window-size-tool/rules.json",
+    cssRulesTool: {
+      rulesFolder: overrides.cssRulesTool && overrides.cssRulesTool.rulesFolder || "../css-rules-tool/rules",
+      rulesFolderAdditional: overrides.cssRulesTool && overrides.cssRulesTool.rulesFolderAdditional || "/home/workspace/rules",
+    },
+    iconReplacerTool: {
+      exclude: overrides.iconReplacerTool && overrides.iconReplacerTool.exclude || ["zip", "class", "jpg", "jpeg", "gif", "png"],
+    },
+    windowSizeTool: {
+      rules: overrides.windowSizeTool && overrides.windowSizeTool.rules || "../window-size-tool/rules.json",
+    },
   };
   return config;
 }

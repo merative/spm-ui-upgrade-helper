@@ -9,10 +9,16 @@ test('config test with defaults', () => {
     debug: true,
     skipInit: false,
     files: [],
-    rulesFolder: "../../config/rules",
-    rulesFolderAdditional: "/home/workspace/rules",
-    iconReplacerExclude: ["zip", "class", "jpg", "jpeg", "gif", "png"],
-    windowSizeToolRules: "../window-size-tool/rules.json",
+    cssRulesTool: {
+      rulesFolder: "../css-rules-tool/rules",
+      rulesFolderAdditional: "/home/workspace/rules",
+    },
+    iconReplacerTool: {
+      exclude: ["zip", "class", "jpg", "jpeg", "gif", "png"],
+    },
+    windowSizeTool: {
+      rules: "../window-size-tool/rules.json",
+    },
   }
 
   const actual = loadConfig();
@@ -29,10 +35,16 @@ test('config test with all overrides', () => {
     debug: false,
     skipInit: true,
     files: [],
-    rulesFolder: "ccc",
-    rulesFolderAdditional: "ddd",
-    iconReplacerExclude: "ggg",
-    windowSizeToolRules: "../window-size-tool/rules.json",
+    cssRulesTool: {
+      rulesFolder: "ccc",
+      rulesFolderAdditional: "ddd",
+    },
+    iconReplacerTool: {
+      exclude: "ggg",
+    },
+    windowSizeTool: {
+      rules: "hhh",
+    },
   }
   const expected = overrides;
 
@@ -44,9 +56,10 @@ test('config test with all overrides', () => {
 test('config test with some overrides', () => {
   const overrides = {
     ignorePatternsFile: "eee",
-    rulesFolder: "ccc",
-    rulesFolderAdditional: "ddd",
     quiet: true,
+    cssRulesTool: {
+      rulesFolderAdditional: "ddd",
+    },
   }
   const expected = {
     inputFolder: "/home/workspace/input",
@@ -56,10 +69,16 @@ test('config test with some overrides', () => {
     debug: true,
     skipInit: false,
     files: [],
-    rulesFolder: "ccc",
-    rulesFolderAdditional: "ddd",
-    iconReplacerExclude: ["zip", "class", "jpg", "jpeg", "gif", "png"],
-    windowSizeToolRules: "../window-size-tool/rules.json",
+    cssRulesTool: {
+      rulesFolder: "../css-rules-tool/rules",
+      rulesFolderAdditional: "ddd",
+    },
+    iconReplacerTool: {
+      exclude: ["zip", "class", "jpg", "jpeg", "gif", "png"],
+    },
+    windowSizeTool: {
+      rules: "../window-size-tool/rules.json",
+    },
   };
 
   const actual = loadConfig(overrides);
