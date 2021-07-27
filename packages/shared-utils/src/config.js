@@ -21,8 +21,7 @@ const loadConfig = (overrides = {}) => {
     rulesFolder: overrides.rulesFolder || "../../config/rules",
     rulesFolderAdditional: overrides.rulesFolderAdditional || "/home/workspace/rules",
 
-    // FIXME Rename to iconReplacerToolExclude
-    iconReplacerExclude: overrides.iconReplacerExclude || ["zip", "class", "jpg", "jpeg", "gif", "png"],
+    iconReplacerToolExclude: overrides.iconReplacerToolExclude || ["zip", "class", "jpg", "jpeg", "gif", "png"],
 
     windowSizeToolRules: overrides.windowSizeToolRules || "../window-size-tool/rules.json",
   };

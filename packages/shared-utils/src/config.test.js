@@ -11,7 +11,7 @@ test('config test with defaults', () => {
     files: [],
     rulesFolder: "../../config/rules",
     rulesFolderAdditional: "/home/workspace/rules",
-    iconReplacerExclude: ["zip", "class", "jpg", "jpeg", "gif", "png"],
+    iconReplacerToolExclude: ["zip", "class", "jpg", "jpeg", "gif", "png"],
     windowSizeToolRules: "../window-size-tool/rules.json",
   }
 
@@ -31,7 +31,7 @@ test('config test with all overrides', () => {
     files: [],
     rulesFolder: "ccc",
     rulesFolderAdditional: "ddd",
-    iconReplacerExclude: "ggg",
+    iconReplacerToolExclude: "ggg",
     windowSizeToolRules: "../window-size-tool/rules.json",
   }
   const expected = overrides;
@@ -58,7 +58,7 @@ test('config test with some overrides', () => {
     files: [],
     rulesFolder: "ccc",
     rulesFolderAdditional: "ddd",
-    iconReplacerExclude: ["zip", "class", "jpg", "jpeg", "gif", "png"],
+    iconReplacerToolExclude: ["zip", "class", "jpg", "jpeg", "gif", "png"],
     windowSizeToolRules: "../window-size-tool/rules.json",
   };
 
