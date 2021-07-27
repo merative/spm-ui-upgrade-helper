@@ -12,15 +12,27 @@
 
 - The tool is run as a Docker container.
 - `spm-ui-upgrade-helper.bat`/`spm-ui-upgrade-helper.sh` will map local folders to the Docker container thus allowing it access to the customer code.
+- `dev.bat`/`dev.sh` will map code to the Docker container allowing you to edit and test code on the fly.
 
-## CSS Rules Tool
+## Tools
 
-- Located in `packages/css-rules-tool`
+### Main Tool
+
+- Located in `packages/main-tool`
 - Running this tool does the following:
-  1. Creates an empty git repo in the output folder
-  2. Adds the customer CSS
-  3. Iterates over all the customer CSS files
-  4. Any files that need functional modifications will be prettified first
-  5. The prettified files are committed
-  6. The functional modifications are then applied and placed in the git repo (but not committed)
-  7. The git repo in Eclipse Theia will now show the functional changes
+    - Calls `packages/shared-utils/src/init.js`
+        - Creates an empty git repo in the output folder
+        - Adds the target files
+        - Commits the target files
+    - Iterates through `config/tools.json` and activates any tools that have `enabled: true`
+    - The git repo in Eclipse Theia will now show the functional changes
+
+### CSS Rules Tool
+
+- Iterates over customer CSS files and applies the rules codified in `packages/css-rules-tool/rules/*.json`.
+
+### Icon Replacer Tool
+
+- Loads icon replacement mappings from `packages/icon-replacer-tool/icon-mappings.json`.
+- Iterates over customer files and replaces any references to old icons with new icons.
+- It will also replace any icon files that it finds.

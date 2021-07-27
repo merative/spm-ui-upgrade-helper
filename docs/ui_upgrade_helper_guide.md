@@ -49,7 +49,7 @@ Once installed, you will need to allow Docker Desktop to access certain paths on
         - The input and output folders MUST be absolute paths.
 3. Open your browser to http://localhost:3000
 4. Press `F1` or `cmd + shift + p`.
-5. Type "Run SPM UI Upgrade Helper" and click on the shortcut.
+5. Type `Run SPM UI Upgrade Helper` and click on the shortcut.
 6. Wait a few minutes for the tool to finish.
 7. The files in `<input folder>` will be scanned and the results placed in `<output folder>`.
 8.  Click the `Source Control: Git` button on the left sidebar to inspect the changes.
