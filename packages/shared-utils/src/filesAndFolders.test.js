@@ -23,6 +23,7 @@ afterEach(() => {
 const overrides = {
   inputFolder: "src/test-data/filesAndFolders/globAllFiles/input",
   outputFolder: "src/test-data/filesAndFolders/globAllFiles/output",
+  globs: [ "**/*" ],
   ignorePatternsFolder: "src/test-data/filesAndFolders/globAllFiles/ignore",
   ignorePatternsFolderAdditional: "src/test-data/filesAndFolders/globAllFiles/ignoreAdditional",
   quiet: true,

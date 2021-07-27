@@ -22,6 +22,7 @@ const runTest = folder => {
   const overrides = {
     inputFolder,
     outputFolder: actualFolder,
+    globs: [ "**/*" ],
     iconMappings: "./icon_mappings.json",
     iconFolder: "./source_files",
     quiet: true,

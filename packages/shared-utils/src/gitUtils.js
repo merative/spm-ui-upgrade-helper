@@ -28,7 +28,7 @@ const commitFiles = (folder, message) => {
   shell.exec(`git commit --quiet --message "${message}"`);
   shell.cd(cwd);
   const endTime = new Date().getTime();
-  console.info(`Finished committing files [${Math.ceil((endTime-startTime)/60000)} minutes]`);
+  console.info(`Committing files finished [${Math.ceil((endTime-startTime)/1000)} seconds]`);
 };
 
 module.exports = {

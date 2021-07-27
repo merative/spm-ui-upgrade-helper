@@ -4,6 +4,7 @@ test('config test with defaults', () => {
   const expected = {
     inputFolder: "/home/workspace/input",
     outputFolder: "/home/workspace/output",
+    globs: [ "EJBServer/components/**/*", "webclient/components/**/*" ],
     ignorePatternsFile: "../../config/.spm-uiuh-ignore",
     quiet: false,
     debug: true,
@@ -30,6 +31,7 @@ test('config test with all overrides', () => {
   const overrides = {
     inputFolder: "aaa",
     outputFolder: "bbb",
+    globs: [ "Foo/**/*" ],
     ignorePatternsFile: "eee",
     quiet: true,
     debug: false,
@@ -64,6 +66,7 @@ test('config test with some overrides', () => {
   const expected = {
     inputFolder: "/home/workspace/input",
     outputFolder: "/home/workspace/output",
+    globs: [ "EJBServer/components/**/*", "webclient/components/**/*" ],
     ignorePatternsFile: "eee",
     quiet: true,
     debug: true,

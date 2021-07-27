@@ -21,6 +21,7 @@ function run(config, sourceDir, mapPath) {
 
   // glob icon files from target directory
   const iconFiles = utils.keepFiles(config.files, "png", "svg");
+  console.info(`Processing ${iconFiles.length} files`);
   let modifiedIconCount = 0;
   iconFiles.forEach((iconFile) => {
     const name = iconFile.substring(iconFile.lastIndexOf("/") + 1);
