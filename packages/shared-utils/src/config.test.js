@@ -4,14 +4,15 @@ test('config test with defaults', () => {
   const expected = {
     inputFolder: "/home/workspace/input",
     outputFolder: "/home/workspace/output",
-    rulesFolder: "../../config/rules",
-    rulesFolderAdditional: "/home/workspace/rules",
     ignorePatternsFile: "../../config/.spm-uiuh-ignore",
-    iconReplacerExclude: ["zip", "class", "jpg", "jpeg", "gif", "png"],
     quiet: false,
     debug: true,
     skipInit: false,
     files: [],
+    rulesFolder: "../../config/rules",
+    rulesFolderAdditional: "/home/workspace/rules",
+    iconReplacerExclude: ["zip", "class", "jpg", "jpeg", "gif", "png"],
+    windowSizeToolRules: "../window-size-tool/rules.json",
   }
 
   const actual = loadConfig();
@@ -23,14 +24,15 @@ test('config test with all overrides', () => {
   const overrides = {
     inputFolder: "aaa",
     outputFolder: "bbb",
-    rulesFolder: "ccc",
-    rulesFolderAdditional: "ddd",
     ignorePatternsFile: "eee",
-    iconReplacerExclude: "ggg",
     quiet: true,
     debug: false,
     skipInit: true,
     files: [],
+    rulesFolder: "ccc",
+    rulesFolderAdditional: "ddd",
+    iconReplacerExclude: "ggg",
+    windowSizeToolRules: "../window-size-tool/rules.json",
   }
   const expected = overrides;
 
@@ -41,22 +43,23 @@ test('config test with all overrides', () => {
 
 test('config test with some overrides', () => {
   const overrides = {
+    ignorePatternsFile: "eee",
     rulesFolder: "ccc",
     rulesFolderAdditional: "ddd",
-    ignorePatternsFile: "eee",
     quiet: true,
   }
   const expected = {
     inputFolder: "/home/workspace/input",
     outputFolder: "/home/workspace/output",
-    rulesFolder: "ccc",
-    rulesFolderAdditional: "ddd",
     ignorePatternsFile: "eee",
-    iconReplacerExclude: ["zip", "class", "jpg", "jpeg", "gif", "png"],
     quiet: true,
     debug: true,
     skipInit: false,
     files: [],
+    rulesFolder: "ccc",
+    rulesFolderAdditional: "ddd",
+    iconReplacerExclude: ["zip", "class", "jpg", "jpeg", "gif", "png"],
+    windowSizeToolRules: "../window-size-tool/rules.json",
   };
 
   const actual = loadConfig(overrides);
