@@ -45,7 +45,13 @@ const writeFilesToDisk = (config, files) => {
 const globAllFiles = config => {
   console.info("Collecting input files");
   const startTime = new Date().getTime();
-  let inputFiles = fileio.glob(`${config.inputFolder}/**/*`);
+  let inputFiles = [];
+  config.globs.forEach(glob => {
+    const path = `${config.inputFolder}/${glob}`;
+    const files = fileio.glob(path);
+    inputFiles.push(files);
+  });
+  inputFiles = inputFiles.flat();
   const endTime = new Date().getTime();
   console.info(`Collecting input files found ${inputFiles.length} files [${Math.ceil((endTime-startTime)/60000)} minutes]`);
   return inputFiles;

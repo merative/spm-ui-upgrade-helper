@@ -9,6 +9,8 @@ const loadConfig = (overrides = {}) => {
   const config = {
     inputFolder: overrides.inputFolder || "/home/workspace/input",
     outputFolder: overrides.outputFolder || "/home/workspace/output",
+    // Globs will have `inputFolder` prepended, i.e. `${inputFolder}/${glob}`
+    globs: overrides.globs || [ "EJBServer/components/**/*", "webclient/components/**/*" ],
     ignorePatternsFile: overrides.ignorePatternsFile || "../../config/.spm-uiuh-ignore",
     quiet: overrides.quiet || false,
     debug: overrides.debug === false ? false : true,

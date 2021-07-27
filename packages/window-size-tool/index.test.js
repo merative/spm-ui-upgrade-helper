@@ -22,6 +22,7 @@ const runTest = folder => {
   let testConfigOverrides = {
     inputFolder,
     outputFolder: temporaryFolder,
+    globs: [ "**/*" ],
     quiet: true,
     debug: false,
   };

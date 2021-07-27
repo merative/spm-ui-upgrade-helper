@@ -9,6 +9,7 @@ test('css-rules-tool test', () => {
   const configOverrides = {
     inputFolder,
     outputFolder: temporaryFolder,
+    globs: [ "**/*" ],
     quiet: true,
   };
 
