@@ -16,10 +16,11 @@ const loadConfig = (overrides = {}) => {
     skipInit: overrides.skipInit || false,
     files: overrides.files || [],
 
-    // FIXME Rename to cssRulesToolFiles or similar
     // FIXME Move the files into css-rules-tool since they are not shared
-    rulesFolder: overrides.rulesFolder || "../../config/rules",
-    rulesFolderAdditional: overrides.rulesFolderAdditional || "/home/workspace/rules",
+    cssRulesTool: {
+      rulesFolder: overrides.cssRulesTool && overrides.cssRulesTool.rulesFolder || "../../config/rules",
+      rulesFolderAdditional: overrides.cssRulesTool && overrides.cssRulesTool.rulesFolderAdditional || "/home/workspace/rules",
+    },
 
     iconReplacerToolExclude: overrides.iconReplacerToolExclude || ["zip", "class", "jpg", "jpeg", "gif", "png"],
 

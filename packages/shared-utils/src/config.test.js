@@ -9,8 +9,10 @@ test('config test with defaults', () => {
     debug: true,
     skipInit: false,
     files: [],
-    rulesFolder: "../../config/rules",
-    rulesFolderAdditional: "/home/workspace/rules",
+    cssRulesTool: {
+      rulesFolder: "../../config/rules",
+      rulesFolderAdditional: "/home/workspace/rules",
+    },
     iconReplacerToolExclude: ["zip", "class", "jpg", "jpeg", "gif", "png"],
     windowSizeToolRules: "../window-size-tool/rules.json",
   }
@@ -29,8 +31,10 @@ test('config test with all overrides', () => {
     debug: false,
     skipInit: true,
     files: [],
-    rulesFolder: "ccc",
-    rulesFolderAdditional: "ddd",
+    cssRulesTool: {
+      rulesFolder: "ccc",
+      rulesFolderAdditional: "ddd",
+    },
     iconReplacerToolExclude: "ggg",
     windowSizeToolRules: "../window-size-tool/rules.json",
   }
@@ -44,9 +48,11 @@ test('config test with all overrides', () => {
 test('config test with some overrides', () => {
   const overrides = {
     ignorePatternsFile: "eee",
-    rulesFolder: "ccc",
-    rulesFolderAdditional: "ddd",
     quiet: true,
+    cssRulesTool: {
+      rulesFolder: "ccc",
+      rulesFolderAdditional: "ddd",
+    },
   }
   const expected = {
     inputFolder: "/home/workspace/input",
@@ -56,8 +62,10 @@ test('config test with some overrides', () => {
     debug: true,
     skipInit: false,
     files: [],
-    rulesFolder: "ccc",
-    rulesFolderAdditional: "ddd",
+    cssRulesTool: {
+      rulesFolder: "ccc",
+      rulesFolderAdditional: "ddd",
+    },
     iconReplacerToolExclude: ["zip", "class", "jpg", "jpeg", "gif", "png"],
     windowSizeToolRules: "../window-size-tool/rules.json",
   };

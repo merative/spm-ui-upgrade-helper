@@ -7,10 +7,10 @@ const fileio = require('@folkforms/file-io');
 const loadRules = config => {
   const rulesJson = [];
 
-  const rulesFiles1 = fileio.glob(`${config.rulesFolder}/*.json`);
+  const rulesFiles1 = fileio.glob(`${config.cssRulesTool.rulesFolder}/*.json`);
   rulesFiles1.forEach(file => rulesJson.push(readRulesFile(file)));
 
-  const rulesFiles2 = fileio.glob(`${config.rulesFolderAdditional}/*.json`);
+  const rulesFiles2 = fileio.glob(`${config.cssRulesTool.rulesFolderAdditional}/*.json`);
   if(rulesFiles2.length > 0) {
     console.info(`Found ${rulesFiles2.length} additional rules files: ${rulesFiles2}`);
   } else {
