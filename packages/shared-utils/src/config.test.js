@@ -43,7 +43,7 @@ test('config test with all overrides', () => {
       exclude: "ggg",
     },
     windowSizeTool: {
-      rules: "../window-size-tool/rules.json",
+      rules: "hhh",
     },
   }
   const expected = overrides;
@@ -58,7 +58,6 @@ test('config test with some overrides', () => {
     ignorePatternsFile: "eee",
     quiet: true,
     cssRulesTool: {
-      rulesFolder: "ccc",
       rulesFolderAdditional: "ddd",
     },
   }
@@ -71,7 +70,7 @@ test('config test with some overrides', () => {
     skipInit: false,
     files: [],
     cssRulesTool: {
-      rulesFolder: "ccc",
+      rulesFolder: "../css-rules-tool/rules",
       rulesFolderAdditional: "ddd",
     },
     iconReplacerTool: {
