@@ -15,7 +15,7 @@ const execute = overrides => {
   const serializer = new xmldom.XMLSerializer();
 
   const inputFiles = utils.keepFiles(config.files, "uim", "vim");
-  const rules = fileio.readJson(config.windowSizeToolRules);
+  const rules = fileio.readJson(config.windowSizeTool.rules);
 
   let outputFiles = {};
   inputFiles.forEach(file => {

@@ -37,7 +37,7 @@ function run(config, sourceDir, mapPath) {
   console.info(`Searching for icon ${chalk.magenta("references")} to update...`);
 
   // glob all other files from target directory (minus some excluded filetypes)
-  const files = utils.removeFiles(config.files, config.iconReplacerToolExclude);
+  const files = utils.removeFiles(config.files, config.iconReplacerTool.exclude);
   let modifiedFileCount = 0;
   files.forEach((file) => {
     const prevContent = fileio.readLines(file).join("\n"); // read globbed files content

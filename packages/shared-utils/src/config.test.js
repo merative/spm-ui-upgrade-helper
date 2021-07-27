@@ -13,8 +13,12 @@ test('config test with defaults', () => {
       rulesFolder: "../css-rules-tool/rules",
       rulesFolderAdditional: "/home/workspace/rules",
     },
-    iconReplacerToolExclude: ["zip", "class", "jpg", "jpeg", "gif", "png"],
-    windowSizeToolRules: "../window-size-tool/rules.json",
+    iconReplacerTool: {
+      exclude: ["zip", "class", "jpg", "jpeg", "gif", "png"],
+    },
+    windowSizeTool: {
+      rules: "../window-size-tool/rules.json",
+    },
   }
 
   const actual = loadConfig();
@@ -35,8 +39,12 @@ test('config test with all overrides', () => {
       rulesFolder: "ccc",
       rulesFolderAdditional: "ddd",
     },
-    iconReplacerToolExclude: "ggg",
-    windowSizeToolRules: "../window-size-tool/rules.json",
+    iconReplacerTool: {
+      exclude: "ggg",
+    },
+    windowSizeTool: {
+      rules: "../window-size-tool/rules.json",
+    },
   }
   const expected = overrides;
 
@@ -66,8 +74,12 @@ test('config test with some overrides', () => {
       rulesFolder: "ccc",
       rulesFolderAdditional: "ddd",
     },
-    iconReplacerToolExclude: ["zip", "class", "jpg", "jpeg", "gif", "png"],
-    windowSizeToolRules: "../window-size-tool/rules.json",
+    iconReplacerTool: {
+      exclude: ["zip", "class", "jpg", "jpeg", "gif", "png"],
+    },
+    windowSizeTool: {
+      rules: "../window-size-tool/rules.json",
+    },
   };
 
   const actual = loadConfig(overrides);
