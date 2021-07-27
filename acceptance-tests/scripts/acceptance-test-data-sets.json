@@ -5,7 +5,8 @@
     "cssUpdates": 7,
     "iconUpdates": 4,
     "iconFiles": 2,
-    "cssAndIconUpdates": 2
+    "cssAndIconUpdates": 2,
+    "windowSizeUpdates": 3
   },
   "icon-replacer-performance": {
     "totalFiles": 6000,
@@ -13,6 +14,7 @@
     "cssUpdates": 0,
     "iconUpdates": 10,
     "iconFiles": 0,
-    "cssAndIconUpdates": 0
+    "cssAndIconUpdates": 0,
+    "windowSizeUpdates": 0
   }
 }
