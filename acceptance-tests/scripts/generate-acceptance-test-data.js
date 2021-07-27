@@ -34,7 +34,8 @@ const createFolders = (totalFiles, maxFolderDepth) => {
     path = "";
   }
   for(let i = 0 ; i < folders.length; i++) {
-    shelljs.mkdir("-p", `acceptance-tests/input/${folders[i]}`);
+    shelljs.mkdir("-p", `${componentFolder}/${folders[i]}`);
+    folders[i] = folders[i].substring(0, folders[i].length - 1);
   }
   return folders;
 }
@@ -48,7 +49,7 @@ const createFolders = (totalFiles, maxFolderDepth) => {
 const addUnchangedFiles = folders => {
   const count = data.totalFiles - fileCount;
   for(let i = 0; i < count; i++) {
-    shelljs.cp("acceptance-tests/scripts/dummy-files/no-updates.css", `acceptance-tests/input/${folders[folderIndex]}/no-updates-${i}.css`);
+    shelljs.cp("acceptance-tests/scripts/dummy-files/no-updates.css", `${componentFolder}/${folders[folderIndex]}/no-updates-${i}.css`);
     folderIndex++;
     if(folderIndex >= folders.length) {
       folderIndex = 0;
@@ -77,7 +78,9 @@ const getFilenameWithIndex = (file, index) => {
  */
 const addFiles = (file, count, folders) => {
   for(let i = 0; i < count; i++) {
-    shelljs.cp(`acceptance-tests/scripts/dummy-files/${file}`, `acceptance-tests/input/${folders[folderIndex]}/${getFilenameWithIndex(file, i)}`);
+    const src = `acceptance-tests/scripts/dummy-files/${file}`;
+    const dest = `${componentFolder}/${folders[folderIndex]}/${getFilenameWithIndex(file, i)}`;
+    shelljs.cp(src, dest);
     fileCount++;
     folderIndex++;
     if(folderIndex >= folders.length) {
@@ -94,7 +97,7 @@ const addFiles = (file, count, folders) => {
  */
 const copyFiles = (file, count, folders) => {
   for(let i = 0; i < count; i++) {
-    shelljs.cp(`acceptance-tests/scripts/dummy-files/${file}`, `acceptance-tests/input/${folders[folderIndex]}/${file}`);
+    shelljs.cp(`acceptance-tests/scripts/dummy-files/${file}`, `${componentFolder}/${folders[folderIndex]}/${file}`);
     fileCount++;
     folderIndex++;
     if(folderIndex >= folders.length) {
@@ -108,20 +111,21 @@ const copyFiles = (file, count, folders) => {
  */
 const addIgnoredFiles = () => {
   // This file will be ignored by OOTB ignores
-  const folder1 = "acceptance-tests/input/.git";
+  const folder1 = `acceptance-tests/input/.git`;
   shelljs.mkdir(folder1);
   shelljs.cp("acceptance-tests/scripts/dummy-files/should-be-ignored.css", folder1);
   // This file will be ignored by the .spm-uiuh-ignore file we have added
-  const folder2 = "acceptance-tests/input/foo";
+  const folder2 = `acceptance-tests/input/foo`;
   shelljs.mkdir("-p", folder2);
   shelljs.cp("acceptance-tests/scripts/dummy-files/should-be-ignored.css", folder2);
   shelljs.cp("acceptance-tests/scripts/dummy-files/.spm-uiuh-ignore", "acceptance-tests/input");
 }
 
-shelljs.rm("-rf", `acceptance-tests/input`);
-shelljs.rm("-rf", `acceptance-tests/output`);
-shelljs.mkdir(`acceptance-tests/input`);
-shelljs.mkdir(`acceptance-tests/output`);
+shelljs.rm("-rf", "acceptance-tests/input");
+shelljs.rm("-rf", "acceptance-tests/output");
+const componentFolder = "acceptance-tests/input/webclient/components/Foo";
+shelljs.mkdir("-p", componentFolder);
+shelljs.mkdir("acceptance-tests/output");
 
 let fileCount = 0;
 let folderIndex = 0;
