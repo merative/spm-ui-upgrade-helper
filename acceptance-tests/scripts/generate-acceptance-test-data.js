@@ -130,5 +130,7 @@ addFiles("has-updates-css.css", data.cssUpdates, folders);
 addFiles("has-updates-icons.properties", data.iconUpdates, folders);
 copyFiles("Chevron_Down_Blue30_10px.png", data.iconFiles, folders);
 addFiles("has-updates-css-and-icons.css", data.cssAndIconUpdates, folders);
+addFiles("has-updates.uim", data.windowSizeUpdates, folders);
+addFiles("no-updates.uim", 1, folders);
 addUnchangedFiles(folders);
 addIgnoredFiles();
