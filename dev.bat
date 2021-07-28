@@ -38,6 +38,6 @@ echo.
 
 call docker stop spm-ui-upgrade-helper
 call docker rm spm-ui-upgrade-helper
-call docker run -p 3000:3000 -p 4000-4002:4000-4002 %UIUH_DEV_CMD% %INPUT_FOLDER_CMD% %OUTPUT_FOLDER_CMD% --name spm-ui-upgrade-helper spm-ui-upgrade-helper:%VERSION%
+call docker run -p 3000:3000 -p 4000-4004:4000-4004 %UIUH_DEV_CMD% %INPUT_FOLDER_CMD% %OUTPUT_FOLDER_CMD% --name spm-ui-upgrade-helper spm-ui-upgrade-helper:%VERSION%
 
 endlocal

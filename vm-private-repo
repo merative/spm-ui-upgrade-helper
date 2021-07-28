@@ -6,4 +6,4 @@ docker rm spm-ui-upgrade-helper
 INPUT_FOLDER=/tmp/uiuh/input
 OUTPUT_FOLDER=/tmp/uiuh/output
 
-docker run -d -p 3000:3000 -p 4000-4002:4000-4002 -v $INPUT_FOLDER:/home/workspace/input -v $OUTPUT_FOLDER:/home/workspace/output --name spm-ui-upgrade-helper wh-govspm-docker-local.artifactory.swg-devops.com/artifactory/wh-govspm-docker-local/spm-ui-upgrade-helper/spm-ui-upgrade-helper:latest
+docker run -d -p 3000:3000 -p 4000-4004:4000-4004 -v $INPUT_FOLDER:/home/workspace/input -v $OUTPUT_FOLDER:/home/workspace/output --name spm-ui-upgrade-helper wh-govspm-docker-local.artifactory.swg-devops.com/artifactory/wh-govspm-docker-local/spm-ui-upgrade-helper/spm-ui-upgrade-helper:latest
