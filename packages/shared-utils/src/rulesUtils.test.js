@@ -14,7 +14,6 @@ test('ruleUtils test', () => {
   const overrides = {
     cssRulesTool: {
       rulesFolder: "./src/test-data/rulesUtils/rulesFolder",
-      rulesFolderAdditional: "./src/test-data/rulesUtils/rulesFolderAdditional",
     },
     quiet: true,
   }

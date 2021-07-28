@@ -12,7 +12,6 @@ test('config test with defaults', () => {
     files: [],
     cssRulesTool: {
       rulesFolder: "../css-rules-tool/rules",
-      rulesFolderAdditional: "/home/workspace/rules",
     },
     iconReplacerTool: {
       exclude: ["zip", "class", "jpg", "jpeg", "gif", "png"],
@@ -39,7 +38,6 @@ test('config test with all overrides', () => {
     files: [],
     cssRulesTool: {
       rulesFolder: "ccc",
-      rulesFolderAdditional: "ddd",
     },
     iconReplacerTool: {
       exclude: "ggg",
@@ -60,7 +58,6 @@ test('config test with some overrides', () => {
     ignorePatternsFile: "eee",
     quiet: true,
     cssRulesTool: {
-      rulesFolderAdditional: "ddd",
     },
   }
   const expected = {
@@ -74,7 +71,6 @@ test('config test with some overrides', () => {
     files: [],
     cssRulesTool: {
       rulesFolder: "../css-rules-tool/rules",
-      rulesFolderAdditional: "ddd",
     },
     iconReplacerTool: {
       exclude: ["zip", "class", "jpg", "jpeg", "gif", "png"],

@@ -18,7 +18,6 @@ const loadConfig = (overrides = {}) => {
     files: overrides.files || [],
     cssRulesTool: {
       rulesFolder: overrides.cssRulesTool && overrides.cssRulesTool.rulesFolder || "../css-rules-tool/rules",
-      rulesFolderAdditional: overrides.cssRulesTool && overrides.cssRulesTool.rulesFolderAdditional || "/home/workspace/rules",
     },
     iconReplacerTool: {
       exclude: overrides.iconReplacerTool && overrides.iconReplacerTool.exclude || ["zip", "class", "jpg", "jpeg", "gif", "png"],
