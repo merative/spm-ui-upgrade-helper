@@ -7,7 +7,7 @@
 - [Running the tool](dev/running_the_tool.md)
 - [Running the tests](dev/tests.md)
 - [Coding](dev/coding.md)
-- [Adding new rules](dev/adding_new_rules.md)
 - [Adding a new tool](dev/adding_a_new_tool.md)
+- [Adding new rules to the css-rules-tool](dev/adding_new_rules.md)
 - [Debugging](dev/debugging.md)
 - [Releasing](dev/releasing.md)

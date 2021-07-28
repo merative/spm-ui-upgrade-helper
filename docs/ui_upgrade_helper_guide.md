@@ -69,11 +69,7 @@ You can save the logs to a file using e.g. `docker logs spm-ui-upgrade-helper > 
 
 In most cases, you can run this tool without modification, assuming that your SPM version is a standard installation.
 
-If your installation is non-standard, you might need to update rules or ignore files to suit your customer environment.
-
-### Rules
-
-See the [rules page](customer/customer_rules.md) for steps to add new rules.
+If your installation is non-standard, you might need to update the ignore files to suit your customer environment.
 
 ### Ignoring files
 

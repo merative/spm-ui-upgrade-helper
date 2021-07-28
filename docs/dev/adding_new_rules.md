@@ -4,4 +4,4 @@
 
 OOTB rules are stored in the `packages/config/rules` folder.
 
-See the [customer guide on rules](../customer/customer_rules.md) for details on the ordering of the rules.
+See the [css-rules-tool guide](../overview.md) for details on the ordering of the rules.
