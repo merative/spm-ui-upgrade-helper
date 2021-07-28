@@ -7,7 +7,7 @@ const { execute } = require("./index");
  */
 const testCaseFolders = fileio.glob("test-data/test-case-*", { onlyDirectories: true, deep: 1 });
 testCaseFolders.forEach(folder => {
-  test(`icon replacer test (from: ${folder})`, () => {
+  test(`icon-replacer-tool test (from: ${folder})`, () => {
     runTest(folder);
   });
 });
@@ -18,11 +18,11 @@ testCaseFolders.forEach(folder => {
 const runTest = folder => {
   const inputFolder = `${folder}/input`;
   const expectedFolder = `${folder}/expected`;
-  const actualFolder = `${folder}/temp`;
+  const temporaryFolder = `${folder}/temp`;
   const overrides = {
     inputFolder,
-    outputFolder: actualFolder,
-    globs: [ "**/*" ],
+    outputFolder: temporaryFolder,
+    globs: [ "**" ],
     iconMappings: "./icon_mappings.json",
     iconFolder: "./source_files",
     quiet: true,
@@ -30,5 +30,5 @@ const runTest = folder => {
 
   const testFunc = () => { execute(overrides); };
 
-  testWithDataFolder(testFunc, inputFolder, expectedFolder, actualFolder);
+  testWithDataFolder(testFunc, inputFolder, expectedFolder, temporaryFolder);
 }

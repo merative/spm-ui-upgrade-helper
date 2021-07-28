@@ -3,7 +3,6 @@
 /.git/
 /.settings/
 /.metadata/
-/.keepfolder/
 /.DS_Store/
 /DevEnv/
 /JDE/
@@ -233,6 +232,7 @@
 /webclient/components/YouthServices/
 
 base_checksums.txt
+**/.keepfolder
 **/.project
 **/.classpath
 **/ieg-css-template-rtl.css

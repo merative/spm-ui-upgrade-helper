@@ -1,3 +1,3 @@
-# Icon Replacer Test Case 2
+# icon-replacer-tool test case 2
 
-Test that the program does not break if there is nothing to change.
+Test that the program does not break if there are files but they do not contain any changes.
