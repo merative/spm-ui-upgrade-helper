@@ -25,24 +25,19 @@ if "%INPUT_FOLDER%" == "" (
 if "%OUTPUT_FOLDER%" == "" (
   set OUTPUT_FOLDER=C:\git\spm-ui-upgrade-helper\workspace\output
 )
-if "%ADDITIONAL_RULES%" == "" (
-  set ADDITIONAL_RULES=C:\git\spm-ui-upgrade-helper\workspace\rules
-)
 
 set INPUT_FOLDER_CMD=-v %INPUT_FOLDER%:/home/workspace/input
 set OUTPUT_FOLDER_CMD=-v %OUTPUT_FOLDER%:/home/workspace/output
-set ADDITIONAL_RULES_CMD=-v %ADDITIONAL_RULES%:/home/workspace/rules
 
 echo Starting spm-ui-upgrade-helper
 echo.
 echo     VERSION = %VERSION%
 echo     INPUT_FOLDER_CMD = %INPUT_FOLDER_CMD%
 echo     OUTPUT_FOLDER_CMD = %OUTPUT_FOLDER_CMD%
-echo     ADDITIONAL_RULES_CMD = %ADDITIONAL_RULES_CMD%
 echo.
 
 call docker stop spm-ui-upgrade-helper
 call docker rm spm-ui-upgrade-helper
-call docker run -p 3000:3000 -p 4000-4002:4000-4002 %UIUH_DEV_CMD% %INPUT_FOLDER_CMD% %OUTPUT_FOLDER_CMD% %ADDITIONAL_RULES_CMD% --name spm-ui-upgrade-helper spm-ui-upgrade-helper:%VERSION%
+call docker run -p 3000:3000 -p 4000-4002:4000-4002 %UIUH_DEV_CMD% %INPUT_FOLDER_CMD% %OUTPUT_FOLDER_CMD% --name spm-ui-upgrade-helper spm-ui-upgrade-helper:%VERSION%
 
 endlocal

@@ -24,22 +24,17 @@ fi
 if [[ -z "$OUTPUT_FOLDER" ]]; then
   OUTPUT_FOLDER=$PWD/workspace/output
 fi
-if [[ -z "$ADDITIONAL_RULES" ]]; then
-  ADDITIONAL_RULES=$PWD/workspace/rules
-fi
 
 INPUT_FOLDER_CMD="-v $INPUT_FOLDER:/home/workspace/input"
 OUTPUT_FOLDER_CMD="-v $OUTPUT_FOLDER:/home/workspace/output"
-ADDITIONAL_RULES_CMD="-v $ADDITIONAL_RULES:/home/workspace/rules"
 
 echo Starting spm-ui-upgrade-helper
 echo
 echo     VERSION = $VERSION
 echo     INPUT_FOLDER_CMD = $INPUT_FOLDER_CMD
 echo     OUTPUT_FOLDER_CMD = $OUTPUT_FOLDER_CMD
-echo     ADDITIONAL_RULES_CMD = $ADDITIONAL_RULES_CMD
 echo
 
 docker stop spm-ui-upgrade-helper
 docker rm spm-ui-upgrade-helper
-docker run -p 3000:3000 -p 4000-4002:4000-4002 $UIUH_DEV_CMD $INPUT_FOLDER_CMD $OUTPUT_FOLDER_CMD $ADDITIONAL_RULES_CMD --name spm-ui-upgrade-helper spm-ui-upgrade-helper:$VERSION
+docker run -p 3000:3000 -p 4000-4002:4000-4002 $UIUH_DEV_CMD $INPUT_FOLDER_CMD $OUTPUT_FOLDER_CMD --name spm-ui-upgrade-helper spm-ui-upgrade-helper:$VERSION
