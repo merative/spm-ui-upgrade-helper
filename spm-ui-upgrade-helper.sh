@@ -22,16 +22,10 @@ VERSION=$1
 INPUT_FOLDER_CMD="-v $2:/home/workspace/input"
 OUTPUT_FOLDER_CMD="-v $3:/home/workspace/output"
 
-if [[ -z "$4" ]]; then
-  ADDITIONAL_RULES_CMD=
-else
-  ADDITIONAL_RULES_CMD="-v $4:/home/workspace/rules"
-fi
-
-if [[ "$DETACH" == "false" ]]; then
-  DETACH_CMD=
-else
+if [[ "$DETACH" == "true" ]]; then
   DETACH_CMD=--detach
+else
+  DETACH_CMD=
 fi
 
 echo Starting spm-ui-upgrade-helper
@@ -39,7 +33,6 @@ echo
 echo     VERSION = $VERSION
 echo     INPUT_FOLDER_CMD = $INPUT_FOLDER_CMD
 echo     OUTPUT_FOLDER_CMD = $OUTPUT_FOLDER_CMD
-echo     ADDITIONAL_RULES_CMD = $ADDITIONAL_RULES_CMD
 echo     DETACH_CMD = $DETACH_CMD
 echo
 
@@ -54,8 +47,6 @@ docker run $DETACH_CMD -p 3000:3000 -p 4000-4004:4000-4004 \
     $UIUH_DEV_CMD \
     $INPUT_FOLDER_CMD \
     $OUTPUT_FOLDER_CMD \
-    $ADDITIONAL_RULES_CMD \
     --name spm-ui-upgrade-helper \
     wh-govspm-docker-local.artifactory.swg-devops.com/artifactory/wh-govspm-docker-local/spm-ui-upgrade-helper/spm-ui-upgrade-helper:$VERSION
 if [ "$?" != 0 ]; then echo "Error: Could not run $VERSION version."; exit 1; fi
-docker ps
