@@ -19,11 +19,6 @@ const { removeIgnoredFiles } = require("./removeIgnoredFiles");
  * @param {*} config configuration object
  */
 const init = config => {
-  if(config.skipInit) {
-    console.info("Skipping init step");
-    return;
-  }
-
   // Turn off info messages (typically used during unit tests)
   if(config.quiet) {
     console.info = () => {};
@@ -33,7 +28,13 @@ const init = config => {
   if(!config.debug) {
     console.debug = () => {};
   }
-  
+
+  // Skip init sometimes (typically when tools are run via the main tool, and during unit tests)
+  if(config.skipInit) {
+    console.info("Skipping init step");
+    return;
+  }
+
   // Remove "./" paths as they will cause problems later when trying to ignore files
   config.inputFolder = config.inputFolder.startsWith("./")
     ? config.inputFolder.substring(2)

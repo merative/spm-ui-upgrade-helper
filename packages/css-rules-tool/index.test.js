@@ -1,16 +1,25 @@
+const fileio = require("@folkforms/file-io");
 const testWithDataFolder = require("test-with-data-folder");
 const { execute } = require("./index");
 
-test('css-rules-tool test', () => {
+const testCaseFolders = fileio.glob("test-data/test-case-*", { onlyDirectories: true, deep: 1 });
+testCaseFolders.forEach(folder => {
+  test(`css-rules-tool test (from: ${folder})`, () => {
+    runTest(folder);
+  });
+});
+
+const runTest = folder => {
   // Define paths
-  const inputFolder = "./test-data/test-case-1/input";
-  const expectedFolder = "./test-data/test-case-1/expected";
-  const temporaryFolder = "./test-data/test-case-1/temp";
+  const inputFolder = `${folder}/input`;
+  const expectedFolder = `${folder}/expected`;
+  const temporaryFolder = `${folder}/temp`;
   const configOverrides = {
     inputFolder,
     outputFolder: temporaryFolder,
     globs: [ "**/*" ],
     quiet: true,
+    skipInit: true,
   };
 
   // Define the function under test
@@ -18,4 +27,4 @@ test('css-rules-tool test', () => {
 
   // Run the test
   testWithDataFolder(testFunction, inputFolder, expectedFolder, temporaryFolder);
-});
+}
