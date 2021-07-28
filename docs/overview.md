@@ -16,6 +16,36 @@ Scans customer stylesheets and updates the CSS selectors to match the changes we
 
 - Iterates over customer CSS files and applies the rules codified in [packages/css-rules-tool/rules/*.json](https://github.com/IBM/spm-ui-upgrade-helper/tree/main/packages/css-rules-tool/rules).
 
+Example rules file:
+
+    {
+      "SelectorRemove": [
+        { "value": ".delete-this-selector" },
+        { "value": ".delete-this-selector .and-this" }
+        { "value": ".delete-this-selector .and-this-as-well" }
+      ],
+      "SelectorReplace": [
+        {
+          "value": ".foo .qux",
+          "newValue": ".bar .qux"
+        }
+      ]
+    }
+
+All of the values in `SelectorRemove` will be deleted. The values in `SelectorReplace` will be replaced by `newValue`. The order in which the rules are applied is described below.
+
+#### Ordering of rules
+
+The following steps determine the order of the rules:
+
+- All OOTB rules are loaded.
+- The rules are sorted by length, with the longest items first, inside each of their respective categories `SelectorRemove` and `SelectorReplace`.
+- The `SelectorRemove` rules are applied first, followed by the `SelectorReplace` rules.
+
+#### Updating the OOTB rules
+
+If you want to update the OOTB rules so other customers have access to them, [open a PR](https://github.com/IBM/spm-ui-upgrade-helper).
+
 ### Icon Replacer Tool
 
 Scans customer files for references to v7 icons and replaces them with their v8 counterparts.
