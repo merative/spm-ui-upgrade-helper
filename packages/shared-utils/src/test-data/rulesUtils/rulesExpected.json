@@ -4,9 +4,6 @@
       "value": ".longer"
     },
     {
-      "value": ".long"
-    },
-    {
       "value": ".foo"
     }
   ],
@@ -14,10 +11,6 @@
     {
       "value": ".aaa",
       "newValue": ".bbb"
-    },
-    {
-      "value": ".ccc",
-      "newValue": ".ddd"
     }
   ]
 }
