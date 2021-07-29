@@ -1,6 +1,6 @@
-# Window Size Tool Test Case 1
+# window-size-tool test case 1
 
-Tests the main set of rules we have encoded in `rules.json`.
+Tests the first rule we have encoded in `rules.json`.
 
     if ( width attribute < 950 AND (
       count LIST elements >= 6
