@@ -10,10 +10,10 @@ div.cluster h3 {
 }
 
 /*
- * Old: div.cluster td.top
- * New: div.bx--cluster .top
+ * Old: .cluster p.description
+ * New: .list p.description
  */
 
-.soria div.cluster td.top {
+.cluster p.description {
   background-color: yellow;
 }

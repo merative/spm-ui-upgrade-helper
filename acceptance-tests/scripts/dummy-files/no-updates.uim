@@ -22,9 +22,9 @@
     OPERATION="someOperation"
     PHASE="DISPLAY"
   />
-  
+
   <PAGE_PARAMETER NAME="someParamName"/>
-   
+
   <CONNECT>
     <SOURCE
       NAME="PAGE"
@@ -35,21 +35,19 @@
       PROPERTY="key$someParamName"
     />
   </CONNECT>
-  	
+
   <CLUSTER 
   	SHOW_LABELS="false"
   	STYLE="outer-cluster-borderless" 
   	DESCRIPTION="Cluster.Description.SomeDescription"
   >
-   	  
-     <FIELD>
-	     <CONNECT>
-		      <SOURCE
-		        NAME="DISPLAY"
-		        PROPERTY="someProperty"
-		      />
-	    </CONNECT>
-  	</FIELD>
- 
+    <FIELD>
+      <CONNECT>
+        <SOURCE
+          NAME="DISPLAY"
+          PROPERTY="someProperty"
+        />
+      </CONNECT>
+    </FIELD>
   </CLUSTER> 
 </PAGE>
