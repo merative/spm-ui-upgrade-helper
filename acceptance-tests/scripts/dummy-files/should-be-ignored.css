@@ -11,10 +11,10 @@ div.cluster h3 {
 
 /*
  * Ordinarily we would expect the following changes, but instead this file should be ignored.
- * Old: div.cluster td.top
- * New: div.bx--cluster .top
+ * Old: .cluster p.description
+ * New: .list p.description
  */
 
-.soria div.cluster td.top {
+.cluster p.description {
   background-color: yellow;
 }

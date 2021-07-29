@@ -6,7 +6,7 @@
     </CONNECT>
   </PAGE_TITLE>
 
-  <SERVER_INTERFACE CLASS="PersonAdmin" NAME="DISPLAY1" OPERATION="read" PHASE="DISPLAY"/> 
+  <SERVER_INTERFACE CLASS="PersonAdmin" NAME="DISPLAY1" OPERATION="read" PHASE="DISPLAY"/>
   <SERVER_INTERFACE CLASS="PersonAdmin" NAME="ACTION1" OPERATION="modify" PHASE="ACTION"/>
   <SERVER_INTERFACE CLASS="MockProcess" NAME="ACTION2" OPERATION="insert" PHASE="ACTION"/>
 
@@ -59,7 +59,7 @@
       </FIELD>
     </CONTAINER>
   </CLUSTER>
-  
+
   <CLUSTER NUM_COLS="1" TITLE="Cluster.Title.Input3">
     <CONTAINER LABEL="Container.Label.Date">
       <FIELD LABEL="Field.Label.Date" WIDTH="60">
@@ -75,7 +75,7 @@
 	        <TARGET NAME="ACTION2" PROPERTY="bool"/>
 	      </CONNECT>
       </FIELD>
-    </CONTAINER> 
+    </CONTAINER>
   </CLUSTER>
 
   <CLUSTER NUM_COLS="1" TITLE="Cluster.Title.Input4">
@@ -91,6 +91,6 @@
       <CONNECT>
         <TARGET NAME="ACTION2" PROPERTY="bool"/>
       </CONNECT>
-    </FIELD>        
+    </FIELD>
   </CLUSTER>
 </PAGE>

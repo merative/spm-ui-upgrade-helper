@@ -11,14 +11,14 @@ div.cluster h3 {
 
 /*
  * css-rules-tool:
- * Old CSS selector: div.cluster td.top
- * New CSS selector: div.bx--cluster .top
+ * Old CSS selector: .cluster p.description
+ * New CSS selector: .list p.description
  *
  * icon-replacer-tool:
  * Old background-image: "../../Week_Blue60_20px.png"
  * New background-image: "../../calendar__week20--enabled.svg"
  */
 
-.soria div.cluster td.top {
+.cluster p.description {
   background-image: "../../Week_Blue60_20px.png";
 }
