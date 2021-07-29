@@ -119,6 +119,10 @@ const addIgnoredFiles = () => {
   shelljs.mkdir("-p", folder2);
   shelljs.cp("acceptance-tests/scripts/dummy-files/should-be-ignored.css", folder2);
   shelljs.cp("acceptance-tests/scripts/dummy-files/.spm-uiuh-ignore", "acceptance-tests/input");
+  // Test language packs are ignored
+  const folder3 = `acceptance-tests/input/webclient/components/TestLanguagePack_aa`;
+  shelljs.mkdir("-p", folder3);
+  shelljs.cp("acceptance-tests/scripts/dummy-files/should-be-ignored.css", folder3);
 }
 
 shelljs.rm("-rf", "acceptance-tests/input");
