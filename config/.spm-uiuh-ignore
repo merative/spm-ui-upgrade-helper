@@ -1,5 +1,8 @@
 **/.spm-uiuh-ignore
 
+# Ignore language packs
+**/*_??/**
+
 /.git/
 /.settings/
 /.metadata/
