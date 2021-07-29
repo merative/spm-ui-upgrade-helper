@@ -20,3 +20,4 @@ version.json
 commit.json
 ab.bat
 test-*.bat
+pr.rb
