@@ -14,7 +14,7 @@ if [[ -z "$3" ]]; then
   ERROR=true
 fi
 if [[ -n "$ERROR" ]]; then
-    echo Usage: ./spm-ui-upgrade-helper.sh \<version\> \<input folder\> \<output folder\> [\<additional rules\>] [\<additional ignore\>]
+    echo Usage: ./spm-ui-upgrade-helper.sh \<version\> \<input folder\> \<output folder\>
     exit 1
 fi
 
