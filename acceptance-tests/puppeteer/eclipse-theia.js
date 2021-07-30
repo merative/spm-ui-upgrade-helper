@@ -14,13 +14,13 @@ const clickExplorer = async () => {
 const clickSourceControlGit = async () => {
   const selector = '//li[@id="shell-tab-scm-view-container"]';
   await utils.click(selector);
-  await _waitForSidebarTitle("SOURCE CONTROL: GIT");
+  await _waitForSidebarTitle("SOURCE CONTROL:");
 }
 
 const _waitForSidebarTitle = async (title) => {
   await utils.getPage().waitForFunction(
     `document.getElementsByClassName("theia-sidepanel-title").length > 0` +
-    `&& document.getElementsByClassName("theia-sidepanel-title")[0].innerText === "${title}"`,
+    `&& document.getElementsByClassName("theia-sidepanel-title")[0].innerText.startsWith("${title}")`,
     { timeout: 5000 }
   );
 }
