@@ -12,7 +12,7 @@ if [[ "$UIUH_DEV" == "true" ]]; then
   echo Dev Mode On
 else
   UIUH_DEV_CMD=
-  echo Dev Mode Off (use export UIUH_DEV=true to turn it on)
+  echo "Dev Mode Off (use export UIUH_DEV=true to turn it on)"
 fi
 
 if [[ -z "$VERSION" ]]; then
