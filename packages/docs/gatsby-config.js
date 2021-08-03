@@ -9,5 +9,5 @@ module.exports = {
       resolve: "gatsby-theme-carbon"
     }
   ],
-  pathPrefix: 'IBM/spm-ui-upgrade-helper',
+  pathPrefix: 'spm-ui-upgrade-helper',
 };
