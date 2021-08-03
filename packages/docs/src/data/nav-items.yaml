@@ -1,12 +1,36 @@
-- title: Foo
+- title: Getting started
   pages:
-    - title: fooX title
-      path: /foo/fooX
-    - title: fooY title
-      path: /foo/fooY
-- title: Bar
+    - path: /
+- title: Overview
   pages:
-    - title: barX title
-      path: /bar/barX
-    - title: barY title
-      path: /bar/barY
+    - path: /overview
+- title: UI upgrade helper guide
+  pages:
+    - title: Setup
+      path: /customer/customer_setup
+    - title: Customer font replacement
+      path: /customer/customer_font_replacement
+    - title: Ignoring files
+      path: /customer/customer_ignores
+- title: UI upgrade helper developer guide
+  pages:
+    - title: Developer guide
+      path: /dev/developer_guide
+    - title: Adding a new tool
+      path: /dev/adding_a_new_tool
+    - title: Adding new CSS rules
+      path: /dev/adding_new_rules
+    - title: Coding
+      path: /dev/coding
+    - title: Debugging
+      path: /dev/debugging
+    - title: Installation
+      path: /dev/installation
+    - title: Project overview
+      path: /dev/project_overview
+    - title: Releasing
+      path: /dev/releasing
+    - title: Running the tool
+      path: /dev/running_the_tool
+    - title: Tests
+      path: /dev/tests

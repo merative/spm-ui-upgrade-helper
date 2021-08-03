@@ -1,8 +1,8 @@
-[<< Back to the developer guide](../developer_guide)
+[<< Back to the developer guide](developer_guide)
 
-# Project Overview
+# Project overview
 
-## Front End
+## Front end
 
 - Eclipse Theia is our front-end. It is an IDE inside the browser.
 - We have added plugins to Eclipse Theia that appear as new `F1` shortcuts (the same as `F1` in VSCode.)
@@ -16,7 +16,7 @@
 
 ## Tools
 
-### Main Tool
+### Main tool
 
 - Located in `packages/main-tool`
 - Running this tool does the following:
@@ -27,11 +27,11 @@
     - Iterates through `config/tools.json` and activates any tools that have `enabled: true`
     - The git repo in Eclipse Theia will now show the functional changes
 
-### CSS Rules Tool
+### CSS rules tool
 
 - Iterates over customer CSS files and applies the rules codified in `packages/css-rules-tool/rules/*.json`.
 
-### Icon Replacer Tool
+### Icon replacer tool
 
 - Loads icon replacement mappings from `packages/icon-replacer-tool/icon-mappings.json`.
 - Iterates over customer files and replaces any references to old icons with new icons.

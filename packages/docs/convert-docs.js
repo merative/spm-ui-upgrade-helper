@@ -2,8 +2,9 @@ const fileio = require("@folkforms/file-io");
 const shelljs = require("shelljs");
 
 /**
- * Converts markdown documents from a standard format to the Gatsby format. Specifically replaces
- * the heading level 1 title with "title: heading" attribute.
+ * Copies files from "<root>/docs" folder to "<root>/packages/docs/src/pages" folder. Also converts
+ * markdown documents from a standard format to the Gatsby format. It replaces the heading level 1
+ * titles with "title: heading" attributes.
  *
  * @param {*} overrides overrides used for testing
  */
@@ -17,40 +18,27 @@ const convertDocs = overrides => {
     fileio.copyFolder(docsFolder, outputFolder);
   }
   modifyFiles(outputFolder);
-  //generateNavItems(outputFolder);
 }
 
 const modifyFiles = outputFolder => {
   const files = fileio.glob(`${outputFolder}/**/*.md`);
   files.forEach(file => {
     let contents = fileio.readLines(file);
+    if(contents[0].startsWith("[<<")) {
+      contents.splice(0, 1);
+    }
+    while(contents[0].trim().length == 0) {
+      contents.splice(0, 1);
+    }
     contents = contents.map(line => {
-      if(line.startsWith("[<<")) {
-        line = "";
-      }
       if(line.startsWith("# ")) {
         line = ["---", `title: ${line.substring(2)}`, "---"];
       }
       return line;
     });
     contents = contents.flat();
-    contents = removeEmptyLinesAtStart(contents);
     fileio.writeLines(file, contents);
   });
-}
-
-const removeEmptyLinesAtStart = contents => {
-  let firstNonEmpty = -1;
-  for(let i = 0; i < contents.length; i++) {
-    if(contents[i].length > 0) {
-      firstNonEmpty = i;
-      break;
-    }
-  }
-  if(firstNonEmpty != -1) {
-    contents.splice(0, firstNonEmpty);
-  }
-  return contents;
 }
 
 module.exports = convertDocs;

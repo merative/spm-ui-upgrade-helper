@@ -1,6 +1,6 @@
-[<< Back to the developer guide](../developer_guide)
+[<< Back to the developer guide](developer_guide)
 
-## Tests
+# Tests
 
 To run all tests, run `yarn test` from the root folder.
 

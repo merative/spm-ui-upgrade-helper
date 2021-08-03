@@ -1,4 +1,4 @@
-[<< Back to the developer guide](../developer_guide)
+[<< Back to the developer guide](developer_guide)
 
 # Adding a new tool
 

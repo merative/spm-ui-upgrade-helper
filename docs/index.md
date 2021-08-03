@@ -1,7 +1,7 @@
 # Getting started
 
 - [Overview](overview)
-- [UI Upgrade Helper Guide](ui_upgrade_helper_guide)
+- [UI Upgrade Helper Guide](customer/customer_setup)
 - [Customer Font Replacement Guide](customer/customer_font_replacement)
 - [Repository](https://github.com/IBM/spm-ui-upgrade-helper)
-- [UI Upgrade Helper Developer's Guide](developer_guide)
+- [UI Upgrade Helper Developer's Guide](dev/developer_guide)
