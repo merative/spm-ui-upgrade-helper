@@ -9,5 +9,6 @@
 - [Coding](coding)
 - [Adding a new tool](adding_a_new_tool)
 - [Adding new rules to the css-rules-tool](adding_new_rules)
+- [Documentation](documentation)
 - [Debugging](debugging)
 - [Releasing](releasing)

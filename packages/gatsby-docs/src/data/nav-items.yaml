@@ -16,21 +16,23 @@
   pages:
     - title: Developer guide
       path: /dev/developer_guide
-    - title: Adding a new tool
-      path: /dev/adding_a_new_tool
-    - title: Adding new CSS rules
-      path: /dev/adding_new_rules
-    - title: Coding
-      path: /dev/coding
-    - title: Debugging
-      path: /dev/debugging
-    - title: Installation
-      path: /dev/installation
     - title: Project overview
       path: /dev/project_overview
-    - title: Releasing
-      path: /dev/releasing
+    - title: Installation
+      path: /dev/installation
     - title: Running the tool
       path: /dev/running_the_tool
     - title: Tests
       path: /dev/tests
+    - title: Coding
+      path: /dev/coding
+    - title: Adding a new tool
+      path: /dev/adding_a_new_tool
+    - title: Adding new CSS rules
+      path: /dev/adding_new_rules
+    - title: Documentation
+      path: /dev/documentation
+    - title: Debugging
+      path: /dev/debugging
+    - title: Releasing
+      path: /dev/releasing

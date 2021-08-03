@@ -22,10 +22,10 @@
 - Running this tool does the following:
     - Calls `packages/shared-utils/src/init.js`
         - Creates an empty git repo in the output folder
-        - Adds the target files
-        - Commits the target files
+        - Copies potential target files to the output folder
+        - Commits the copied files so that we can use Git to diff them if they change
     - Iterates through `config/tools.json` and activates any tools that have `enabled: true`
-    - The git repo in Eclipse Theia will now show the functional changes
+    - The "Source Control: Git" tab in Eclipse Theia shows the diff of the changes
 
 ### CSS rules tool
 
@@ -35,4 +35,4 @@
 
 - Loads icon replacement mappings from `packages/icon-replacer-tool/icon-mappings.json`.
 - Iterates over customer files and replaces any references to old icons with new icons.
-- It will also replace any icon files that it finds.
+- Replaces any old icon files it finds with the new version of the icon.
