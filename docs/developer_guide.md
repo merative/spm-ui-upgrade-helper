@@ -1,13 +1,13 @@
-[<< Back to home](index.md)
+[<< Back to home](index)
 
 # Developer Guide
 
-- [Project Overview](dev/project_overview.md)
-- [Installation](dev/installation.md)
-- [Running the tool](dev/running_the_tool.md)
-- [Running the tests](dev/tests.md)
-- [Coding](dev/coding.md)
-- [Adding a new tool](dev/adding_a_new_tool.md)
-- [Adding new rules to the css-rules-tool](dev/adding_new_rules.md)
-- [Debugging](dev/debugging.md)
-- [Releasing](dev/releasing.md)
+- [Project Overview](dev/project_overview)
+- [Installation](dev/installation)
+- [Running the tool](dev/running_the_tool)
+- [Running the tests](dev/tests)
+- [Coding](dev/coding)
+- [Adding a new tool](dev/adding_a_new_tool)
+- [Adding new rules to the css-rules-tool](dev/adding_new_rules)
+- [Debugging](dev/debugging)
+- [Releasing](dev/releasing)

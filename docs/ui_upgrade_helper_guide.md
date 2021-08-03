@@ -1,4 +1,4 @@
-[<< Back to home](index.md)
+[<< Back to home](index)
 
 # UI Upgrade Helper Guide
 
@@ -54,7 +54,7 @@ Once installed, you will need to allow Docker Desktop to access certain paths on
 7. The files in `<input folder>` will be scanned and the results placed in `<output folder>`.
 8.  Click the `Source Control: Git` button on the left sidebar to inspect the changes.
 
-<img style="text-align:center" src="images/upgrade-helper.gif" width="500">
+![FIXME alt text](images/upgrade-helper.gif "FIXME title")
 
 9. Copy the contents of `<output folder>` into your v8 development environment.
 10. Build and test v8.
@@ -73,7 +73,7 @@ If your installation is non-standard, you might need to update the ignore files 
 
 ### Ignoring files
 
-See the [ignoring files page](customer/customer_ignores.md) for steps to ignore certain files and folders.
+See the [ignoring files page](customer/customer_ignores) for steps to ignore certain files and folders.
 
 ## Troubleshooting
 
