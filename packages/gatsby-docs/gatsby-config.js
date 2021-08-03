@@ -5,9 +5,7 @@ module.exports = {
     keywords: "spm, ui, upgrade, helper, v8"
   },
   plugins: [
-    {
-      resolve: "gatsby-theme-carbon"
-    }
+    `gatsby-theme-carbon`
   ],
   pathPrefix: 'spm-ui-upgrade-helper',
 };
