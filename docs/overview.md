@@ -1,14 +1,14 @@
-[<< Back to home](index.md)
+[<< Back to home](index)
 
 # Overview
 
 The SPM UI Upgrade Helper helps to automates the upgrade process by applying the same UI changes we have made to v8 to a customer's 7.0.11.0 development environment.
 
-To get started, see the [UI Upgrade Helper guide](ui_upgrade_helper_guide.md).
+To get started, see the [UI Upgrade Helper guide](ui_upgrade_helper_guide).
 
 ## Tools
 
-All of the tools are run sequentially via a single command, as detailed in the [UI Upgrade Helper guide](ui_upgrade_helper_guide.md).
+All of the tools are run sequentially via a single command, as detailed in the [UI Upgrade Helper guide](ui_upgrade_helper_guide).
 
 ### CSS Rules Tool
 

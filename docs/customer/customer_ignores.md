@@ -1,4 +1,4 @@
-[<< Back to the UI Upgrade Helper guide](../ui_upgrade_helper_guide.md)
+[<< Back to the UI Upgrade Helper guide](../ui_upgrade_helper_guide)
 
 # Ignoring files
 

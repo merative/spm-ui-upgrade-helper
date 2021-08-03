@@ -1,4 +1,4 @@
-[<< Back to the developer guide](../developer_guide.md)
+[<< Back to the developer guide](../developer_guide)
 
 ## Running the UI Upgrade Helper tool
 
