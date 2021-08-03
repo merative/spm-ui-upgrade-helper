@@ -1,4 +1,3 @@
-const fs = require("fs-extra");
 const fileio = require("@folkforms/file-io");
 const testWithDataFolder = require("test-with-data-folder");
 const convertDocs = require("./convert-docs");
@@ -21,8 +20,9 @@ const runTest = folder => {
   const expectedFolder = `${folder}/expected`;
   const temporaryFolder = `${folder}/temp`;
   const overrides = {
-    inputFolder,
+    docsFolder: temporaryFolder,
     outputFolder: temporaryFolder,
+    skipCopy: true,
   };
   const testFunc = () => { convertDocs(overrides); };
 
