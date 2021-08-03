@@ -1,5 +1,5 @@
 node_modules
 .cache
 public
-src/pages/**/*.md
+src/pages/**
 test-data/**/temp

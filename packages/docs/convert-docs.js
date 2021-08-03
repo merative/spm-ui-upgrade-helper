@@ -9,18 +9,15 @@ const shelljs = require("shelljs");
  */
 const convertDocs = overrides => {
   const docsFolder = overrides && overrides.docsFolder || "../../docs";
-  const outputFolder = overrides && overrides.outputFolder || "temp";
+  const outputFolder = overrides && overrides.outputFolder || "src/pages";
   const skipCopy = overrides && overrides.skipCopy || false;
 
   if(!skipCopy) {
-    copyFiles(docsFolder, outputFolder);
+    shelljs.rm("-rf", outputFolder);
+    fileio.copyFolder(docsFolder, outputFolder);
   }
   modifyFiles(outputFolder);
   //generateNavItems(outputFolder);
-}
-
-const copyFiles = (docsFolder, outputFolder) => {
-  shelljs.cp("-r", `${docsFolder}/*`, outputFolder);
 }
 
 const modifyFiles = outputFolder => {
@@ -28,16 +25,32 @@ const modifyFiles = outputFolder => {
   files.forEach(file => {
     let contents = fileio.readLines(file);
     contents = contents.map(line => {
-      //console.log(`#### line (1) = '${line}'`);
+      if(line.startsWith("[<<")) {
+        line = "";
+      }
       if(line.startsWith("# ")) {
         line = ["---", `title: ${line.substring(2)}`, "---"];
       }
-      //console.log(`#### line (2) = '${line}'`);
       return line;
     });
     contents = contents.flat();
+    contents = removeEmptyLinesAtStart(contents);
     fileio.writeLines(file, contents);
   });
+}
+
+const removeEmptyLinesAtStart = contents => {
+  let firstNonEmpty = -1;
+  for(let i = 0; i < contents.length; i++) {
+    if(contents[i].length > 0) {
+      firstNonEmpty = i;
+      break;
+    }
+  }
+  if(firstNonEmpty != -1) {
+    contents.splice(0, firstNonEmpty);
+  }
+  return contents;
 }
 
 module.exports = convertDocs;
