@@ -6,7 +6,7 @@ The documentation lives in the `docs` folder.
 
 We build the [documentation site](https://ibm.github.io/spm-ui-upgrade-helper/) during the Travis build using Gatsby and we deploy it to Github Pages.
 
-The build copies the `docs` folder to `packages/gatsby-docs`, makes some minor alternations to make it work with the Carbon theme, and deploys it. Specifically it will convert the level 1 headings into "title" attributes, and it will remove the "`[<< Back to previous page]`" links.
+The build copies the `docs` folder to `packages/gatsby-docs`, makes some minor alternations to make it work with the Carbon theme, and deploys it. Specifically it will convert the level 1 headings into "title" attributes, and it will remove the `[<< Back to previous page]` links.
 
 Doing this allows us to keep our documentation files in the `docs` folder in case we ever need to switch back to using standard Github pages (for example if there is an error in the Gatsby deploy.)
 
