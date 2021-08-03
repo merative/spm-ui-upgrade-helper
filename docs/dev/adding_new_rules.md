@@ -2,6 +2,6 @@
 
 # Adding new rules
 
-OOTB rules are stored in the `packages/config/rules` folder.
+OOTB rules are stored in the `packages/css-rules-tool/rules` folder.
 
 See the [css-rules-tool guide](../overview) for details on the ordering of the rules.
