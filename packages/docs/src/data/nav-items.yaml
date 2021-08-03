@@ -1,0 +1,12 @@
+- title: Foo
+  pages:
+    - title: fooX title
+      path: /foo/fooX
+    - title: fooY title
+      path: /foo/fooY
+- title: Bar
+  pages:
+    - title: barX title
+      path: /bar/barX
+    - title: barY title
+      path: /bar/barY
