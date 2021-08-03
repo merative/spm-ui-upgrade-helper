@@ -13,6 +13,7 @@
     "install-all": "npm-run-all --sequential install:*",
     "install:code-generator": "cd packages/code-generator && yarn install",
     "install:css-rules-tool": "cd packages/css-rules-tool && yarn install",
+    "install:docs": "cd packages/docs && yarn install",
     "install:icon-replacer-tool": "cd packages/icon-replacer-tool && yarn install",
     "install:initial-check": "cd packages/initial-check && yarn install",
     "install:js-rules-tool": "cd packages/js-rules-tool && yarn install",
