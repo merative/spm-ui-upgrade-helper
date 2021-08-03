@@ -11,4 +11,4 @@ script:
   - yarn install
   - yarn install-all
   - yarn test
-  - cd packages/docs && yarn gatsby:deploy
+  - cd packages/gatsby-docs && yarn gatsby:deploy
