@@ -73,7 +73,7 @@ If your installation is non-standard, you might need to update the ignore files 
 
 ### Ignoring files
 
-See the [ignoring files page](customer/customer_ignores) for steps to ignore certain files and folders.
+See the [ignoring files page](customer_ignores) for steps to ignore certain files and folders.
 
 ## Troubleshooting
 
