@@ -1,1 +1,1 @@
-{"data":{"allNavItemsYaml":{"edges":[{"node":{"title":"Foo Title","pages":[{"title":"Foo","path":"foo/foo.js"}],"hasDivider":null}}]}}}
+{"data":{"allNavItemsYaml":{"edges":[{"node":{"title":"Foo","pages":[{"title":"fooX title","path":"/foo/fooX"},{"title":"fooY title","path":"/foo/fooY"}],"hasDivider":null}},{"node":{"title":"Bar","pages":[{"title":"barX title","path":"/bar/barX"},{"title":"barY title","path":"/bar/barY"}],"hasDivider":null}}]}}}
