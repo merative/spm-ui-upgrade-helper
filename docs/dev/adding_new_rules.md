@@ -1,6 +1,6 @@
-[<< Back to the developer guide](../developer_guide)
+[<< Back to the developer guide](developer_guide)
 
-# Adding New Rules
+# Adding new rules
 
 OOTB rules are stored in the `packages/config/rules` folder.
 

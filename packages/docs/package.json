@@ -4,18 +4,24 @@
   "description": "SPM UI Upgrade Helper Documentation",
   "main": "index.js",
   "scripts": {
-    "gatsby:build": "gatsby build",
+    "convert-docs": "node convert-docs-run.js",
+    "test": "jest",
+    "gatsby:build": "yarn convert-docs && gatsby build",
     "gatsby:clean": "gatsby clean",
-    "gatsby:dev": "gatsby develop",
+    "gatsby:dev": "yarn convert-docs && gatsby develop",
     "gatsby:serve": "gatsby serve",
-    "gatsby:deploy": "gatsby build --prefix-paths && gh-pages -d public -b gh-pages -r https://${GH_TOKEN}@github.com/IBM/spm-ui-upgrade-helper.git"
+    "gatsby:deploy": "yarn convert-docs && gatsby build --prefix-paths && gh-pages -d public -b gh-pages -r https://${GH_TOKEN}@github.com/IBM/spm-ui-upgrade-helper.git"
   },
   "license": "Apache-2.0",
   "devDependencies": {
+    "@folkforms/file-io": "^0.2.4",
     "gatsby": "^3.10.2",
     "gatsby-theme-carbon": "^2.0.0",
     "gh-pages": "^3.2.3",
+    "jest": "^27.0.6",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "shelljs": "^0.8.4",
+    "test-with-data-folder": "^0.0.10"
   }
 }

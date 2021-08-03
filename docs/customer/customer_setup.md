@@ -1,6 +1,6 @@
 [<< Back to home](index)
 
-# UI Upgrade Helper Guide
+# Setup
 
 ## Initial setup
 
@@ -21,12 +21,12 @@ Once installed, you will need to allow Docker Desktop to access certain paths on
 
 ## Downloading the tool
 
-### Option 1: Public Docker Hub
+### Option 1: Public Docker hub
 
 1. Run `docker login`
 2. Run `docker pull docker.io/ibmcom/spm-ui-upgrade-helper:latest`
 
-### Option 2: Internal IBM Docker Hub
+### Option 2: Internal IBM Docker hub
 
 1. Run `docker login wh-govspm-docker-local.artifactory.swg-devops.com`
 2. Run `docker pull wh-govspm-docker-local.artifactory.swg-devops.com/artifactory/wh-govspm-docker-local/spm-ui-upgrade-helper/spm-ui-upgrade-helper:latest`
