@@ -11,4 +11,10 @@ script:
   - yarn install
   - yarn install-all
   - yarn test
-  - cd packages/gatsby-docs && yarn gatsby:deploy
+
+deploy:
+  provider: script
+  script: cd packages/gatsby-docs && yarn gatsby:deploy
+  skip_cleanup: true
+  on:
+    branch: main
