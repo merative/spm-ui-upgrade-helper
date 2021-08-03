@@ -1,0 +1,21 @@
+{
+  "name": "@spm-ui-upgrade-helper/docs",
+  "version": "0.0.0",
+  "description": "SPM UI Upgrade Helper Documentation",
+  "main": "index.js",
+  "scripts": {
+    "gatsby:build": "gatsby build",
+    "gatsby:clean": "gatsby clean",
+    "gatsby:dev": "gatsby develop",
+    "gatsby:serve": "gatsby serve",
+    "gatsby:deploy": "gatsby build --prefix-paths && gh-pages -d public -b gh-pages -r https://${GITHUB_TOKEN}@github.ibm.com/IBM/spm-ui-upgrade-helper.git"
+  },
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "gatsby": "^3.10.2",
+    "gatsby-theme-carbon": "^2.0.0",
+    "gh-pages": "^3.2.3",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  }
+}
