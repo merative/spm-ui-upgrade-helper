@@ -54,33 +54,21 @@ const execute = (overrides = {}) => {
   console.info("css-rules-tool finished");
 }
 
-// FIXME Merge this method with the method below...
 /**
  * Prettify the file contents. This is an important step because modifying the file later will
- * automatically prettify the entire file, resulting in style changes that may obscure functional
- * changes. So to avoid this we prettify the file first and apply the rules later.
+ * automatically prettify the entire file, so in order to detect if there were functional changes we
+ * must prettify the file first so that we know that any subsequent changes are functional changes.
  *
  * @param {array} contents file contents
  * @param {string} filename filename, used for error messages
  */
 const prettifyContents = (contents, filename) => {
   ({ contents, placeholders } = utils.removeInvalidCSS(contents));
-  contents = prettify(contents, filename);
+  const options = { silent: false, source: filename };
+  const ast = css.parse(contents, options);
+  contents = css.stringify(ast);
   contents = utils.restoreInvalidCSS(contents, placeholders);
   return contents;
-}
-
-/**
- * Prettify the given CSS.
- *
- * @param {string} contents file contents
- * @param {string} filename input file, used in error messages
- * @returns {string} the CSS data prettified
- */
-const prettify = (contents, filename) => {
-    const options = { silent: false, source: filename };
-    const ast = css.parse(contents, options);
-    return css.stringify(ast);
 }
 
 /**
