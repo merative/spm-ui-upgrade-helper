@@ -8,8 +8,7 @@ lib
 browser-app/plugins
 packages/browser-app/plugins
 /workspace/
-UIUpgradeHelper-HealthCheck.xlsx
-~$UIUpgradeHelper-HealthCheck.xlsx
+*.xlsx
 server.js
 .npmrc
 _old
