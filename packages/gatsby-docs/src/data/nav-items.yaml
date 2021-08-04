@@ -8,10 +8,12 @@
   pages:
     - title: Setup
       path: /customer/customer_setup
-    - title: Customer font replacement
-      path: /customer/customer_font_replacement
     - title: Ignoring files
       path: /customer/customer_ignores
+    - title: Custom configuration
+      path: /customer/customer_configuration
+    - title: Customer font replacement
+      path: /customer/customer_font_replacement
 - title: UI upgrade helper developer guide
   pages:
     - title: Developer guide
