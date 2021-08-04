@@ -1,5 +1,5 @@
 const shelljs = require("shelljs");
-const dryRunShellJs = require("./tests/dryRunShellJs");
+const { dryRunShellJs } = require("dummy-shells");
 const { Command } = require('commander');
 const release = require("./release-local");
 
