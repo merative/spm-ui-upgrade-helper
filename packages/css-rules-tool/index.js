@@ -26,7 +26,7 @@ const execute = (overrides = {}) => {
       try {
         originals[filename] = contents;
         prettified[filename] = prettifyContents(contents, filename);
-        appliedRules[filename] = applyRulesToContents(prettified[filename], rules, filename);
+        appliedRules[filename] = applyRulesToContents(rules, prettified[filename], filename);
         // If there are no functional changes then undo the prettification of the file
         if (utils.identicalData(prettified[filename], appliedRules[filename])) {
           delete prettified[filename];
@@ -72,9 +72,17 @@ const prettifyContents = (contents, filename) => {
 }
 
 /**
- * FIXME JSDoc
+ * Apply the given user rules to the CSS. Removes know invalid CSS, then applies the rules, then
+ * restores the known invalid CSS.
+ *
+ * "Known invalid CSS" comes from certain SPM CSS variables like `${foo}`. We replace these
+ * variables with placeholders while we work on the file and restore the variables later.
+ *
+ * @param {object} rules user rules to apply
+ * @param {string} contents file contents
+ * @param {*} filename input filename, only used for error messages
  */
-const applyRulesToContents = (contents, rules, filename) => {
+const applyRulesToContents = (rules, contents, filename) => {
   ({ contents, placeholders } = utils.removeInvalidCSS(contents));
   contents = applyRules(rules, contents, filename);
   contents = utils.restoreInvalidCSS(contents, placeholders);
