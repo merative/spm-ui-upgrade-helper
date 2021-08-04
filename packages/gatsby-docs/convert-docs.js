@@ -4,7 +4,7 @@ const shelljs = require("shelljs");
 /**
  * Copies files from "<root>/docs" folder to "<root>/packages/docs/src/pages" folder. Also converts
  * markdown documents from a standard format to the Gatsby format. It replaces the heading level 1
- * titles with "title: heading" attributes.
+ * titles with "title: heading" attributes and removes the "[<< Back to previous pages]" links.
  *
  * @param {*} overrides overrides used for testing
  */
