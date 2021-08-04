@@ -10,7 +10,7 @@
     "build:release": "yarn echo-commit && yarn generate-files && yarn docker-tasks build -p",
     "at:build": "node acceptance-tests/scripts/generate-acceptance-test-data.js",
     "at:test": "jest acceptance-tests/puppeteer/.*.test.js",
-    "install:all": "npm-run-all --sequential install:*",
+    "install-all": "npm-run-all --sequential install:*",
     "install:code-generator": "cd packages/code-generator && yarn install",
     "install:css-rules-tool": "cd packages/css-rules-tool && yarn install",
     "install:docs": "cd packages/docs && yarn install",
