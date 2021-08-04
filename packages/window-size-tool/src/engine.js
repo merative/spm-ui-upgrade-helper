@@ -43,8 +43,7 @@ function evaluateInequality(firstOperand, secondOperand, operator) {
 function getWindowOptions(document) {
   let windowOptions = {};
 
-  const optionsString =
-    document.documentElement.getAttribute("WINDOW_OPTIONS");
+  const optionsString = document.documentElement.getAttribute("WINDOW_OPTIONS");
 
   if (optionsString) {
     windowOptions = optionsString
@@ -87,19 +86,23 @@ function checkWidth(document, rule) {
   let pass = false;
 
   const { width } = getWindowOptions(document);
-
   const pageWidth = parseInt(width);
-  const [operator, ruleWidth] = rule.width.split(" ");
 
   if (pageWidth) {
-    pass = evaluateInequality(pageWidth, ruleWidth, operator);
+    const limits = rule.width.split(" and ").map((limit) => limit.split(" "));
+
+    pass = limits.reduce((result, limit) => {
+      const [operator, ruleWidth] = limit;
+
+      return result && evaluateInequality(pageWidth, ruleWidth, operator);
+    }, true);
   }
 
   console.debug(
-    `\t${
-      pass ? chalk.green(pass) : chalk.red(pass)
-    }\t <-\twidth: ${chalk.magenta(
-      `${pageWidth ? pageWidth : "none"} ${operator} ${ruleWidth}`
+    `\twidth: ${
+      pass ? chalk.green(`${pass} `) : chalk.red(pass)
+    } <- ${chalk.magenta(
+      `[${pageWidth ? pageWidth : "none"}] · [${rule.width}]`
     )}`
   );
 
@@ -123,9 +126,9 @@ function checkRule(document, rule) {
       pass = pass || result;
 
       console.debug(
-        `\t${
-          result ? chalk.green(result) : chalk.red(result)
-        }\t <-\t${chalk.magenta(xPath)}`
+        `\tterm:  ${
+          result ? chalk.green(`${result} `) : chalk.red(result)
+        } <- [${chalk.magenta(xPath)}]`
       );
     }
   });
@@ -146,7 +149,7 @@ function applyRules(document, name, rules, sizes) {
   let hasChanges = false;
 
   rules.forEach((rule, index) => {
-    console.debug(`\trule\t\t${chalk.yellow(index + 1)}`);
+    console.debug(`rule:     ${chalk.yellow(index + 1)}`);
 
     if (checkWidth(document, rule)) {
       const pass = checkRule(document, rule);
@@ -157,7 +160,7 @@ function applyRules(document, name, rules, sizes) {
 
         // This is where we can flip between pixels and size attribute
         const usePixelWidths = true;
-        if(usePixelWidths) {
+        if (usePixelWidths) {
           windowOptions.width = sizes[rule.target];
         } else {
           delete windowOptions.width;
