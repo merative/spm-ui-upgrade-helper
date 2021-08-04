@@ -1,8 +1,8 @@
-const dummyShell = require("./tests/dummyShellJs");
+const { dummyShellJs } = require("dummy-shells");
 const release = require("./release-local");
 
 afterEach(() => {
-  dummyShell._clear();
+  dummyShellJs._clear();
 });
 
 test('test that --start option runs the correct commands', () => {
@@ -15,10 +15,10 @@ test('test that --start option runs the correct commands', () => {
     "git push --set-upstream origin v0.10.0",
   ];
 
-  release(dummyShell, "--start", "0.10.0");
+  release(dummyShellJs, "--start", "0.10.0");
 
-  expect(expected).toEqual(dummyShell.execList);
-  expect(expected.length).toEqual(dummyShell.execList.length);
+  expect(expected).toEqual(dummyShellJs.execList);
+  expect(expected.length).toEqual(dummyShellJs.execList.length);
 });
 
 test('test that --ship option runs the correct commands', () => {
@@ -33,10 +33,10 @@ test('test that --ship option runs the correct commands', () => {
     "rm -f version.json",
   ];
 
-  release(dummyShell, "--ship", "0.10.0");
+  release(dummyShellJs, "--ship", "0.10.0");
 
-  expect(expected).toEqual(dummyShell.execList);
-  expect(expected.length).toEqual(dummyShell.execList.length);
+  expect(expected).toEqual(dummyShellJs.execList);
+  expect(expected.length).toEqual(dummyShellJs.execList.length);
 });
 
 test('test that version is validated correctly', () => {
@@ -45,13 +45,13 @@ test('test that version is validated correctly', () => {
     "ERROR: Version must match x.y.z format.",
   ];
 
-  release(dummyShell, "--start", "v0.0.0");
+  release(dummyShellJs, "--start", "v0.0.0");
 
-  expect(expected).toEqual(dummyShell.echoList);
-  expect(expected.length).toEqual(dummyShell.echoList.length);
+  expect(expected).toEqual(dummyShellJs.echoList);
+  expect(expected.length).toEqual(dummyShellJs.echoList.length);
 
-  expect([]).toEqual(dummyShell.execList);
-  expect(0).toEqual(dummyShell.execList.length);
+  expect([]).toEqual(dummyShellJs.execList);
+  expect(0).toEqual(dummyShellJs.execList.length);
 });
 
 test('test that an unknown option will fail', () => {
@@ -60,11 +60,11 @@ test('test that an unknown option will fail', () => {
     "ERROR: Unknown option: '--foo'",
   ];
 
-  release(dummyShell, "--foo", "0.10.0");
+  release(dummyShellJs, "--foo", "0.10.0");
 
-  expect(expected).toEqual(dummyShell.echoList);
-  expect(expected.length).toEqual(dummyShell.echoList.length);
+  expect(expected).toEqual(dummyShellJs.echoList);
+  expect(expected.length).toEqual(dummyShellJs.echoList.length);
 
-  expect([]).toEqual(dummyShell.execList);
-  expect(0).toEqual(dummyShell.execList.length);
+  expect([]).toEqual(dummyShellJs.execList);
+  expect(0).toEqual(dummyShellJs.execList.length);
 });
