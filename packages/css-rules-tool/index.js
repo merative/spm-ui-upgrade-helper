@@ -44,7 +44,7 @@ const execute = (overrides = {}) => {
     console.info(`${Object.keys(appliedRules).length} files were modified`);
 
     // Save changes
-    utils.writeFilesToDisk(config, appliedRules);
+    utils.writeFiles(appliedRules);
 
   } catch (error) {
     console.error(error);
