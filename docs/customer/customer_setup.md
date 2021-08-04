@@ -45,7 +45,7 @@ Once installed, you will need to allow Docker Desktop to access certain paths on
         - `<input folder>` should be your 7.0.11.0 development environment (set it to the root folder as there are files in both webclient and EJBServer that the tool will touch.)
         - Run `chmod -R 777 <output folder>` so that Docker can interact with the output folder.
         - `<output folder>` should be a temporary folder e.g. `c:\temp\upgrade` or `/tmp/upgrade`.
-        - `<output folder>` will be wiped, so be careful.
+        - `<output folder>` will be wiped, so be careful!
         - The input and output folders MUST be absolute paths.
 3. Open your browser to http://localhost:3000
 4. Press `F1` or `cmd + shift + p`.
@@ -79,6 +79,7 @@ See the [ignoring files page](customer_ignores) for steps to ignore certain file
 
 - Make sure you are logged in to Docker (run `docker login` or `docker login wh-govspm-docker-local.artifactory.swg-devops.com`)
 - Make sure folders are shared in Docker Desktop
+- Restart Docker Desktop
 - Delete `<output folder>` and try again
 - Make sure you have run `chmod -R 777 <output folder>` so that Docker can write to it
-- Don't refresh http://localhost:3000/#/home/workspace, instead go to http://localhost:3000
+- Don't refresh http://localhost:3000/#/home/workspace/output, instead go to http://localhost:3000
