@@ -1,4 +1,4 @@
-[<< Back to the UI Upgrade Helper guide](../ui_upgrade_helper_guide)
+[<< Back to the UI Upgrade Helper guide](customer_setup)
 
 # Ignoring files
 
