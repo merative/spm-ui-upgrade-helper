@@ -6,7 +6,7 @@ const css = require('css');
  *
  * @param {object} userRules user rules to apply
  * @param {string} contents file contents
- * @param {string} filename input file, only used for error messages
+ * @param {string} filename input filename, only used for error messages
  * @returns {string} CSS data with the given rules applied
  */
 const applyRules = (userRules, contents, filename) => {

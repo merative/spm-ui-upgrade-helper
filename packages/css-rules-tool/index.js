@@ -26,7 +26,7 @@ const execute = (overrides = {}) => {
       try {
         originals[filename] = contents;
         prettified[filename] = prettifyContents(contents, filename);
-        appliedRules[filename] = applyRulesToContents(prettified[filename], rules, filename);
+        appliedRules[filename] = applyRulesToContents(rules, prettified[filename], filename);
         // If there are no functional changes then undo the prettification of the file
         if (utils.identicalData(prettified[filename], appliedRules[filename])) {
           delete prettified[filename];
@@ -54,39 +54,35 @@ const execute = (overrides = {}) => {
   console.info("css-rules-tool finished");
 }
 
-// FIXME Merge this method with the method below...
 /**
  * Prettify the file contents. This is an important step because modifying the file later will
- * automatically prettify the entire file, resulting in style changes that may obscure functional
- * changes. So to avoid this we prettify the file first and apply the rules later.
+ * automatically prettify the entire file, so in order to detect if there were functional changes we
+ * must prettify the file first so that we know that any subsequent changes are functional changes.
  *
  * @param {array} contents file contents
  * @param {string} filename filename, used for error messages
  */
 const prettifyContents = (contents, filename) => {
   ({ contents, placeholders } = utils.removeInvalidCSS(contents));
-  contents = prettify(contents, filename);
+  const options = { silent: false, source: filename };
+  const ast = css.parse(contents, options);
+  contents = css.stringify(ast);
   contents = utils.restoreInvalidCSS(contents, placeholders);
   return contents;
 }
 
 /**
- * Prettify the given CSS.
+ * Apply the given user rules to the CSS. Removes know invalid CSS, then applies the rules, then
+ * restores the known invalid CSS.
  *
+ * "Known invalid CSS" comes from certain SPM CSS variables like `${foo}`. We replace these
+ * variables with placeholders while we work on the file and restore the variables later.
+ *
+ * @param {object} rules user rules to apply
  * @param {string} contents file contents
- * @param {string} filename input file, used in error messages
- * @returns {string} the CSS data prettified
+ * @param {*} filename input filename, only used for error messages
  */
-const prettify = (contents, filename) => {
-    const options = { silent: false, source: filename };
-    const ast = css.parse(contents, options);
-    return css.stringify(ast);
-}
-
-/**
- * FIXME JSDoc
- */
-const applyRulesToContents = (contents, rules, filename) => {
+const applyRulesToContents = (rules, contents, filename) => {
   ({ contents, placeholders } = utils.removeInvalidCSS(contents));
   contents = applyRules(rules, contents, filename);
   contents = utils.restoreInvalidCSS(contents, placeholders);
