@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "npmClient": "yarn",
   "packages": [
-    "packages/*-tool"
+    "packages/*"
   ],
   "command": {
     "run": {

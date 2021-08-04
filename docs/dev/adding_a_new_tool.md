@@ -24,8 +24,6 @@ module.exports = { execute };
 ```
 
 - Run `yarn add express nodemon`. These packages will be required later.
-- Update `package.json` `scripts: { }` section to include `install:your-tool`.
-- Update `package.json` `scripts: { start }` section to start the new tool.
 - Run `yarn build:dev` to build the Docker image. This will include a shortcut to run your new tool on its own.
 - Update `dev.bat`/`dev.sh` to map the source code from the local machine to the Docker container. This will allow you to recompile the code on the fly.
 - Run the Docker container using `dev.bat`/`dev.sh`

@@ -1,5 +1,5 @@
 {
-  "name": "@spm-ui-upgrade-helper/docs",
+  "name": "@upgrade-helper/gatsby-docs",
   "version": "0.0.0",
   "description": "SPM UI Upgrade Helper Documentation",
   "main": "index.js",
