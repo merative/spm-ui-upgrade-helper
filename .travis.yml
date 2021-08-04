@@ -8,7 +8,6 @@ env:
   - VER=`node -pe "require('./package.json')['version']"`
 
 script:
-  - yarn install
   - yarn install-all
   - yarn test
   - cd packages/gatsby-docs && yarn gatsby:deploy
