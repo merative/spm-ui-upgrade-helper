@@ -2,8 +2,7 @@
   "name": "@upgrade-helper/release",
   "version": "0.0.0",
   "license": "Apache-2.0",
-  "description": "Release scripts for the SPM UI Upgrade Helper",
-  "author": "",
+  "description": "Release scripts for the SPM UI Upgrade Helper.",
   "main": "release-cli.js",
   "scripts": {
     "test": "jest"

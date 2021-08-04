@@ -3,7 +3,6 @@
   "version": "0.0.0",
   "license": "Apache-2.0",
   "description": "Generate boilerplate files required to get the tools up and running.",
-  "author": "",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"

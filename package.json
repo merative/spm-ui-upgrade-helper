@@ -2,10 +2,10 @@
   "name": "spm-ui-upgrade-helper",
   "version": "1.0.0",
   "license": "Apache-2.0",
-  "description": "",
-  "author": "",
+  "description": "SPM UI Upgrade Helper.",
   "scripts": {
     "echo-commit": "node echo-commit.js",
+    "generate-files": "node packages/code-generator/index.js",
     "build:dev": "yarn echo-commit && yarn generate-files --dev && yarn docker-tasks build -p --build-arg dev_mode=true",
     "build:release": "yarn echo-commit && yarn generate-files && yarn docker-tasks build -p",
     "at:build": "node acceptance-tests/scripts/generate-acceptance-test-data.js",
@@ -15,7 +15,6 @@
     "start": "yarn initial-check && npm-run-all --parallel start:*",
     "start:theia": "node /home/theia/packages/browser-app/src-gen/backend/main.js /home/workspace/output --hostname=0.0.0.0",
     "start:tools": "lerna run --scope @upgrade-helper/*-tool start && yarn start-theia",
-    "generate-files": "node ./packages/code-generator/index.js",
     "test": "lerna run test",
     "release": "node packages/release/release-cli.js"
   },

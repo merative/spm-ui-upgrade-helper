@@ -2,9 +2,7 @@
   "name": "@upgrade-helper/shared-utils",
   "version": "0.0.0",
   "license": "Apache-2.0",
-  "description": "Shared utility classes.",
-  "author": "",
-  "main": "",
+  "description": "Shared utility classes used by all packages.",
   "scripts": {
     "test": "jest"
   },
