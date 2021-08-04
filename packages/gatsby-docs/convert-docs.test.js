@@ -7,7 +7,7 @@ const convertDocs = require("./convert-docs");
  */
 const testCaseFolders = fileio.glob("test-data/test-case-*", { onlyDirectories: true, deep: 1 });
 testCaseFolders.forEach(folder => {
-  test(`convert-docs test (from: ${folder})`, () => {
+  test(`convert-docs test (from: packages/gatsby-docs/${folder})`, () => {
     runTest(folder);
   });
 });

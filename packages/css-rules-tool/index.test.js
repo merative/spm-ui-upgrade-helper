@@ -4,7 +4,7 @@ const { execute } = require("./index");
 
 const testCaseFolders = fileio.glob("test-data/test-case-*", { onlyDirectories: true, deep: 1 });
 testCaseFolders.forEach(folder => {
-  test(`css-rules-tool test (from: ${folder})`, () => {
+  test(`css-rules-tool test (from: packages/css-rules-tool/${folder})`, () => {
     runTest(folder);
   });
 });

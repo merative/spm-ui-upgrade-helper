@@ -7,7 +7,7 @@ const { execute } = require("./index");
  */
 const testCaseFolders = fileio.glob("test-data/test-case-*", { onlyDirectories: true, deep: 1 });
 testCaseFolders.forEach(folder => {
-  test(`window-size-tool test (from: ${folder})`, () => {
+  test(`window-size-tool test (from: packages/window-size-tool/${folder})`, () => {
     runTest(folder);
   });
 });
