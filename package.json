@@ -16,9 +16,8 @@
     "start:theia": "node /home/theia/packages/browser-app/src-gen/backend/main.js /home/workspace/output --hostname=0.0.0.0",
     "start:tools": "lerna run --scope @upgrade-helper/*-tool start && yarn start-theia",
     "generate-files": "node ./packages/code-generator/index.js",
-    "test": "lerna run test && yarn test-release",
-    "test-release": "jest ./release/.*.test.js",
-    "release": "node release/release-cli.js"
+    "test": "lerna run test",
+    "release": "node packages/release/release-cli.js"
   },
   "resolutions": {
     "@types/react": "^16.8.0"
