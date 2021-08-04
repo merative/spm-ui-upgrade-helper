@@ -1,14 +1,13 @@
 {
   "name": "@upgrade-helper/window-size-tool",
   "version": "0.0.0",
-  "description": "",
+  "license": "Apache-2.0",
+  "description": "Updates window sizes based on their contents.",
   "main": "index.js",
   "scripts": {
     "start": "nodemon server.js",
     "test": "jest"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "chalk": "^4.1.1",
     "express": "^4.17.1",

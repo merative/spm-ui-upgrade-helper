@@ -1,14 +1,13 @@
 {
   "name": "@upgrade-helper/show-dev-shortcuts",
   "version": "0.0.0",
-  "description": "",
+  "license": "Apache-2.0",
+  "description": "Adds dev shortcuts to packages/vs-upgrade-helper-plugin/package.json when run with --dev flag.",
   "main": "show-dev-shortcuts.js",
   "scripts": {
     "show-dev-shortcuts": "node show-dev-shortcuts.js",
     "test": "jest"
   },
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
     "@folkforms/file-io": "^0.2.2",
     "commander": "^8.0.0",

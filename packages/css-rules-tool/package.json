@@ -2,8 +2,7 @@
   "name": "@upgrade-helper/css-rules-tool",
   "version": "0.0.0",
   "license": "Apache-2.0",
-  "description": "",
-  "author": "",
+  "description": "Applies rules changes to CSS files.",
   "main": "index.js",
   "scripts": {
     "start": "nodemon server.js",

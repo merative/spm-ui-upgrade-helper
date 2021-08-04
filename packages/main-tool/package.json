@@ -1,14 +1,13 @@
 {
   "name": "@upgrade-helper/main-tool",
   "version": "0.0.0",
-  "description": "Main service that triggers other services.",
+  "license": "Apache-2.0",
+  "description": "Main tool that runs the other tools.",
   "main": "index.js",
   "scripts": {
     "start": "nodemon server.js",
     "test": "jest"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "@folkforms/file-io": "^0.2.3",
     "express": "^4.17.1",

@@ -2,9 +2,8 @@
 	"name": "vs-upgrade-helper-plugin",
 	"version": "0.0.0",
 	"license": "Apache-2.0",
-	"description": "",
-	"author": "",
-	"publisher": "ibm",
+	"description": "Adds the F1 shortcuts to Eclipse Theia.",
+	"publisher": "IBM",
 	"repository": "https://github.com/Microsoft/vscode-extension-samples/helloworld-sample",
 	"engines": {
 		"vscode": "^1.34.0"
