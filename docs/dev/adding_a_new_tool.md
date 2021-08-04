@@ -24,14 +24,16 @@ module.exports = { execute };
 ```
 
 - Run `yarn add express nodemon`. These packages will be required later.
-- Run `yarn build:dev` to build the Docker image. This will include a shortcut to run your new tool on its own.
-- Update `dev.bat`/`dev.sh` to map the source code from the local machine to the Docker container. This will allow you to recompile the code on the fly.
+- Update the range of ports used. Search VSCode for `4000-40` to see all instances and update them to include your port.
+- Run `yarn build:dev` to build the Docker image. This will add a shortcut to Eclipse Theia to run your new tool on its own.
+- Update `dev.bat`/`dev.sh` to map the source code from the local machine to the Docker container. This will allow you to edit your code on the fly.
 - Run the Docker container using `dev.bat`/`dev.sh`
 - Open http://localhost:3000
 - Press `ctrl + shift + p` or `F1`.
 - Type `Run SPM UI Upgrade Helper - <your tool name> (DEBUG)` and you should see your new tool listed.
 - Click the tool and you should see the Docker container's log print "Hello, world!"
-- Implement code for your tool.
+- Implement the tests and code for your tool.
+- Add some additional tests to `packages/main-tool` and some additional data to `acceptance-tests/scripts/acceptance-test-data-sets.json`.
 - When you are ready to release your tool to the customer, set `enabled: true` in `config/tools.json`. This will cause it to be run as part of the main tool.
 
 ## Notes
