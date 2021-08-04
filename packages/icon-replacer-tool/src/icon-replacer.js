@@ -49,7 +49,7 @@ function run(config, sourceDir, mapPath) {
       filesToWrite[file] = nextContent;
     }
   });
-  utils.writeFilesToDisk(config, filesToWrite);
+  utils.writeFiles(filesToWrite);
   console.info(`${Object.keys(filesToWrite).length} files were modified`);
 
   const end = Date.now();

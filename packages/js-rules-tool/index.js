@@ -82,9 +82,9 @@ const execute = overrides => {
     });
 
     // Save changes
-    // utils.writeFilesToDisk(config, modified);
+    // utils.writeFiles(modified);
     // utils.commitFiles(config.outputFolder, "???");
-    // utils.writeFilesToDisk(config, ???);
+    // utils.writeFiles(???);
 
   } catch (error) {
     console.error(error);
