@@ -2,7 +2,7 @@
 
 # Overview
 
-The SPM UI Upgrade Helper helps to automates the upgrade process by applying the same UI changes we have made to v8 to a customer's 7.0.11.0 development environment.
+The SPM UI Upgrade Helper helps to automates the upgrade process by applying the same UI changes we have made in SPM v8 to a customer's SPM 7.0.11.0 development environment.
 
 To get started, see the [UI Upgrade Helper guide](customer/customer_setup).
 
