@@ -75,6 +75,10 @@ If your installation is non-standard, you might need to update the ignore files 
 
 See the [ignoring files page](customer_ignores) for steps to ignore certain files and folders.
 
+### Custom configuration
+
+If custom configuration is required, this can be achieved by using a `.spm-uiuh-config` file as detailed [here](customer_configuration).
+
 ## Troubleshooting
 
 - Make sure you are logged in to Docker (run `docker login` or `docker login wh-govspm-docker-local.artifactory.swg-devops.com`)
