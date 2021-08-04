@@ -4,8 +4,7 @@
   "description": "Initial check that everything is set up correctly.",
   "main": "index.js",
   "scripts": {
-    "start": "node start.js",
-    "test": "jest"
+    "start": "node start.js"
   },
   "author": "",
   "license": "ISC",
