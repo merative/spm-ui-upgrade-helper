@@ -5,7 +5,10 @@
 - Add a new tool to the list at `config/tools.json` by copying the existing tool format.
 - The new tool MUST end with `-tool`. Various scripts depend on this naming convention.
 - Your new tool should be feature flagged off while it is under development by setting `enabled: false`. You will still be able to run it via a developer shortcut (see below.)
-- Create a new package with an `index.js` file containing an `execute` method. This method will be triggered when the IDE shortcut is invoked.
+- Create a new package with an `index.js` file containing the following code.
+    - The `execute` method will be triggered when the IDE shortcut is invoked.
+    - The `overrides` argument is used when the tool is invoked from `main-tool` and also for testing.
+    - It is important to use exactly this code so that the correct setup is performed based on whether the tool is invoked from `main-tool` or via a debug shortcut.
 
 ```
 const utils = require("../shared-utils/sharedUtils");
