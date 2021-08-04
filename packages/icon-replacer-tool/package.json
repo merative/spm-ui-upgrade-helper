@@ -2,8 +2,7 @@
   "name": "@upgrade-helper/icon-replacer-tool",
   "version": "0.0.0",
   "license": "Apache-2.0",
-  "description": "",
-  "author": "",
+  "description": "Replaces references to v7 icons with their v8 counterparts, as well as replacing the icon files themselves.",
   "main": "index.js",
   "scripts": {
     "start": "nodemon server.js",

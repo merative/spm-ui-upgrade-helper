@@ -7,7 +7,7 @@ const { execute } = require("./index");
  */
 const testCaseFolders = fileio.glob("test-data/test-case-*", { onlyDirectories: true, deep: 1 });
 testCaseFolders.forEach(folder => {
-  test(`icon-replacer-tool test (from: ${folder})`, () => {
+  test(`icon-replacer-tool test (from: packages/icon-replacer-tool/${folder})`, () => {
     runTest(folder);
   });
 });

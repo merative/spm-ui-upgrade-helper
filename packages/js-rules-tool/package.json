@@ -2,8 +2,7 @@
   "name": "@upgrade-helper/js-rules-tool",
   "version": "0.0.0",
   "license": "Apache-2.0",
-  "description": "",
-  "author": "",
+  "description": "Checks for JS changes that may be impacted by v8 CSS changes.",
   "main": "index.js",
   "scripts": {
     "start": "nodemon server.js",

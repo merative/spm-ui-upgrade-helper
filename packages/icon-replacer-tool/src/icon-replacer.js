@@ -39,19 +39,18 @@ function run(config, sourceDir, mapPath) {
 
   // glob all other files from target directory (minus some excluded filetypes)
   const files = utils.removeFiles(config.files, config.iconReplacerTool.exclude);
-  let modifiedFileCount = 0;
+  const filesToWrite = {};
   files.forEach((file) => {
     const prevContent = fileio.readLines(file).join("\n"); // read globbed files content
     const nextContent = engine.updateIconReferences(prevContent, mappings); // check if file contains references to update
 
     // if a file is updated with new references, write that content back to file
     if (nextContent) {
-      shelljs.mkdir("-p", file.substring(0, file.lastIndexOf("/")));
-      fileio.writeLines(file, nextContent);
-      modifiedFileCount++;
+      filesToWrite[file] = nextContent;
     }
   });
-  console.info(`${modifiedFileCount} files were modified`);
+  utils.writeFiles(filesToWrite);
+  console.info(`${Object.keys(filesToWrite).length} files were modified`);
 
   const end = Date.now();
   const date = new Date(end - start);

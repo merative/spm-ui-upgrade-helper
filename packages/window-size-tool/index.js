@@ -30,7 +30,7 @@ const execute = overrides => {
     }
   });
 
-  utils.writeFilesToDisk(config, outputFiles);
+  utils.writeFiles(outputFiles);
 
   console.info("window-size-tool finished");
 };

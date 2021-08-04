@@ -17,23 +17,20 @@ const removeOutputFolder = config => {
 }
 
 /**
- * Writes the given files to disk. Expects an object where the keys are the filenames and the values
- * are the file contents. The output filenames are the input filenames with `config.inputFolder`
- * replaced by `config.outputFolder`.
+ * Writes the given files to disk. Expects an object where the keys are the output filenames and the
+ * values are the file contents.
  *
- * @param {object} config configuration object containing `inputFolder` and `outputFolder` attributes
- * @param {object} files object containing filenames and contents
+ * @param {object} fileData object containing filenames and contents
  */
-const writeFilesToDisk = (config, files) => {
-  Object.keys(files).forEach(filename => {
-    let contents = files[filename];
+const writeFiles = fileData => {
+  Object.keys(fileData).forEach(filename => {
+    let contents = fileData[filename];
     if(typeof contents !== "string") {
       contents = contents.join("\n");
     }
-    const outputFilename = filename.replace(config.inputFolder, config.outputFolder);
-    const folder = outputFilename.substring(0, outputFilename.lastIndexOf('/'));
+    const folder = filename.substring(0, filename.lastIndexOf('/'));
     fs.mkdirpSync(folder);
-    fs.writeFileSync(outputFilename, contents);
+    fs.writeFileSync(filename, contents);
   });
 }
 
@@ -157,7 +154,7 @@ const flipToOutputFiles = (config, inputFiles) => {
 
 module.exports = {
   removeOutputFolder,
-  writeFilesToDisk,
+  writeFiles,
   globAllFiles,
   keepFiles,
   removeFiles,

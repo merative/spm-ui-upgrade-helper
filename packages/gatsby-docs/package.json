@@ -1,8 +1,8 @@
 {
-  "name": "@spm-ui-upgrade-helper/docs",
+  "name": "@upgrade-helper/gatsby-docs",
   "version": "0.0.0",
+  "license": "Apache-2.0",
   "description": "SPM UI Upgrade Helper Documentation",
-  "main": "index.js",
   "scripts": {
     "convert-docs": "node convert-docs-run.js",
     "test": "jest",
@@ -12,7 +12,6 @@
     "gatsby:serve": "gatsby serve",
     "gatsby:deploy": "yarn convert-docs && gatsby build --prefix-paths && gh-pages -d public -b gh-pages -r https://${GH_TOKEN}@github.com/IBM/spm-ui-upgrade-helper.git"
   },
-  "license": "Apache-2.0",
   "devDependencies": {
     "@folkforms/file-io": "^0.2.4",
     "gatsby": "^3.10.2",

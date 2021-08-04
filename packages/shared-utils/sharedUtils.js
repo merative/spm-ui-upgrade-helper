@@ -5,7 +5,7 @@ const { createGitRepo, commitFiles } = require("./src/gitUtils");
 const { identicalData } = require("./src/identicalData");
 const {
   removeOutputFolder,
-  writeFilesToDisk,
+  writeFiles,
   globAllFiles,
   keepFiles,
   removeFiles,
@@ -30,7 +30,7 @@ module.exports = {
   identicalData,
   // filesAndFolders.js
   removeOutputFolder,
-  writeFilesToDisk,
+  writeFiles,
   globAllFiles,
   keepFiles,
   removeFiles,

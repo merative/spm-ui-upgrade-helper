@@ -3,7 +3,7 @@ const fileio = require("@folkforms/file-io");
 const testWithDataFolder = require("test-with-data-folder");
 const { loadConfig } = require("./config");
 const {
-  writeFilesToDisk,
+  writeFiles,
   globAllFiles,
   keepFiles,
   removeFiles,
@@ -29,30 +29,25 @@ const overrides = {
   quiet: true,
 }
 
-test('filesAndFolders.writeFilesToDisk failing test', () => {
-  shelljs.rm("-rf", "./src/test-data/filesAndFolders/output");
-  shelljs.mkdir("-p", "./src/test-data/filesAndFolders/output");
-  const config = {
-    inputFolder: "./src/test-data/filesAndFolders/input",
-    outputFolder: "./src/test-data/filesAndFolders/output",
-    quiet: true,
-  }
-  const filename1 = "./src/test-data/filesAndFolders/input/foo.txt";
-  const filename2 = "./src/test-data/filesAndFolders/input/bar.txt";
+test('filesAndFolders.writeFiles test', () => {
+  shelljs.rm("-rf", "./src/test-data/filesAndFolders/temp_writeFiles");
+  shelljs.mkdir("-p", "./src/test-data/filesAndFolders/temp_writeFiles");
+  const filename1 = "./src/test-data/filesAndFolders/temp_writeFiles/foo.txt";
+  const filename2 = "./src/test-data/filesAndFolders/temp_writeFiles/bar.txt";
   const files = {
     [filename1]: ["foo","foo","foo"],
     [filename2]: ["bar","bar","bar"],
   };
 
-  writeFilesToDisk(config, files);
+  writeFiles(files);
 
-  const actual1 = fileio.readLines("./src/test-data/filesAndFolders/output/foo.txt");
-  const actual2 = fileio.readLines("./src/test-data/filesAndFolders/output/bar.txt");
+  const actual1 = fileio.readLines("./src/test-data/filesAndFolders/temp_writeFiles/foo.txt");
+  const actual2 = fileio.readLines("./src/test-data/filesAndFolders/temp_writeFiles/bar.txt");
 
   expect(actual1).toEqual(files[filename1]);
   expect(actual2).toEqual(files[filename2]);
 
-  shelljs.rm("-rf", "./src/test-data/filesAndFolders/output");
+  shelljs.rm("-rf", "./src/test-data/filesAndFolders/temp_writeFiles");
 });
 
 test('filesAndFolders.globAllFiles test', () => {
