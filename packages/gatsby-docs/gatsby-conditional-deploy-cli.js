@@ -14,25 +14,19 @@ const shell = program.opts().dryRun ? dryRunShellJs : shelljs;
 
 const travisBranch = process.env.TRAVIS_BRANCH;
 if(travisBranch !== "main") {
-  console.info("Not deploying Gatsby since branch was not main");
+  console.info("Not checking for documentation changes since branch was not main");
   return 0;
 }
 
 /*
- * We are currently on main, but we want to get all changes on the feature branch that is being
+ * We are currently on main, and we want to get all changes on the feature branch which is being
  * merged into main. This is so we can check for changes that will trigger a gatsby deploy. What we
  * have is a merge commit with two parents that can be referenced as head^1 and head^2. The latter
- * is the last commit of the feature branch just before the merge. We can diff that commit vs the
- * merge-base, which is the point where the feature branch diverged from main.
+ * is the last commit of the feature branch just before the merge. We can diff that commit with the
+ * merge-base (the merge-base being the point where the feature branch diverged from main) to get
+ * all the changes on the feature branch.
  */
-shell.exec("git branch");
-shell.echo("----");
-shell.exec("git log --oneline --graph --decorate --all -10");
 const mergeBase = shell.exec(`git merge-base HEAD^1 HEAD^2`).stdout.trimEnd();
 const changes = shell.exec(`git diff --name-only ${mergeBase} HEAD^2`).stdout.split("\n");
-
-console.info(`gatsby-conditional-deploy-cli.js:`);
-console.info(`    merge-base: ${mergeBase}`);
-console.info(`    changes: ${JSON.stringify(changes)}`);
 
 return gatsbyConditionalDeploy(shell, changes);

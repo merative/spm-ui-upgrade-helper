@@ -1,11 +1,13 @@
 const gatsbyConditionalDeploy = (shell, changes) => {
 
   let hasChanges = false;
-  changes.forEach(line => {
-    if(line.startsWith("docs/")|| line.indexOf("nav-items.yaml") != -1) {
+  for(let i = 0; i < changes.length; i++) {
+    if(changes[i].startsWith("docs/") || changes[i].indexOf("nav-items.yaml") != -1) {
+      console.info(`Running gatsby:deploy due to change in ${changes[i]}`);
       hasChanges = true;
+      break;
     }
-  });
+  };
 
   if(hasChanges) {
     return shell.exec("yarn gatsby:deploy").code;

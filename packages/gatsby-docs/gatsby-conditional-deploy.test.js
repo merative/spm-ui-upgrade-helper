@@ -1,8 +1,15 @@
 const { dummyShellJs } = require("dummy-shells");
 const gatsbyConditionalDeploy = require("./gatsby-conditional-deploy");
 
+const consoleInfoBackup = console.info;
+
+beforeEach(() => {
+  console.info = () => {};
+});
+
 afterEach(() => {
   dummyShellJs._clear();
+  console.info = consoleInfoBackup;
 });
 
 test('it deploys if there are changes to the "docs" folder', () => {
