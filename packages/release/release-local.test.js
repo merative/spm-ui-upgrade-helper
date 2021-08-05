@@ -1,12 +1,18 @@
 const { dummyShellJs } = require("dummy-shells");
 const release = require("./release-local");
 
+beforeEach(() => {
+  dummyShellJs._setExecStdOut("");
+});
+
 afterEach(() => {
   dummyShellJs._clear();
 });
 
 test('test that --start option runs the correct commands', () => {
   const expected = [
+    "git pull --tags",
+    "git tag --list v0.10.0",
     "yarn install",
     "yarn test",
     "echo { \"version\": \"0.10.0\" }>version.json",
@@ -23,6 +29,8 @@ test('test that --start option runs the correct commands', () => {
 
 test('test that --ship option runs the correct commands', () => {
   const expected = [
+    "git pull --tags",
+    "git tag --list v0.10.0",
     "docker login wh-govspm-docker-local.artifactory.swg-devops.com",
     "yarn docker-tasks release 0.10.0",
     "yarn docker-tasks release latest",
@@ -65,6 +73,22 @@ test('test that an unknown option will fail', () => {
   expect(expected).toEqual(dummyShellJs.echoList);
   expect(expected.length).toEqual(dummyShellJs.echoList.length);
 
-  expect([]).toEqual(dummyShellJs.execList);
-  expect(0).toEqual(dummyShellJs.execList.length);
+  expect([ "git pull --tags", "git tag --list v0.10.0" ]).toEqual(dummyShellJs.execList);
+  expect(2).toEqual(dummyShellJs.execList.length);
+});
+
+test('test that re-using an existing tag will fail', () => {
+  dummyShellJs._setExecStdOut("0.10.0");
+  const expected = [
+    "Option: '--start', Version: '0.10.0'",
+    "ERROR: Version 0.10.0 already exists (found tag 'v0.10.0').",
+  ];
+
+  release(dummyShellJs, "--start", "0.10.0");
+
+  expect(expected).toEqual(dummyShellJs.echoList);
+  expect(expected.length).toEqual(dummyShellJs.echoList.length);
+
+  expect([ "git pull --tags", "git tag --list v0.10.0" ]).toEqual(dummyShellJs.execList);
+  expect(2).toEqual(dummyShellJs.execList.length);
 });
