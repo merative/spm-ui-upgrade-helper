@@ -1,5 +1,5 @@
 const { dummyShellJs } = require("dummy-shells");
-const gatsbyDeploy = require("./gatsby-deploy");
+const gatsbyConditionalDeploy = require("./gatsby-conditional-deploy");
 
 afterEach(() => {
   dummyShellJs._clear();
@@ -13,7 +13,7 @@ test('it deploys if there are changes to the "docs" folder', () => {
   ];
   const expected = [ "yarn gatsby:deploy" ];
 
-  gatsbyDeploy(dummyShellJs, changes);
+  gatsbyConditionalDeploy(dummyShellJs, changes);
 
   expect(expected).toEqual(dummyShellJs.execList);
   expect(expected.length).toEqual(dummyShellJs.execList.length);
@@ -27,7 +27,7 @@ test('it deploys if there are changes to nav-items.yaml', () => {
   ];
   const expected = [ "yarn gatsby:deploy" ];
 
-  gatsbyDeploy(dummyShellJs, changes);
+  gatsbyConditionalDeploy(dummyShellJs, changes);
 
   expect(expected).toEqual(dummyShellJs.execList);
   expect(expected.length).toEqual(dummyShellJs.execList.length);
@@ -39,7 +39,7 @@ test('it does NOT deploy if there are no changes', () => {
   ]
   const expected = [];
 
-  gatsbyDeploy(dummyShellJs, changes);
+  gatsbyConditionalDeploy(dummyShellJs, changes);
 
   expect(expected).toEqual(dummyShellJs.execList);
   expect(expected.length).toEqual(dummyShellJs.execList.length);
