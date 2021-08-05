@@ -16,4 +16,4 @@ jobs:
     - stage: deploy-gatsby-docs
       if: branch = main
       script:
-        - cd packages/gatsby-docs && yarn gatsby:deploy
+        - cd packages/gatsby-docs && yarn install && yarn gatsby:deploy
