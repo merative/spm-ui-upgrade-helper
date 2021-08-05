@@ -10,7 +10,7 @@
     "gatsby:clean": "gatsby clean",
     "gatsby:dev": "yarn convert-docs && gatsby develop",
     "gatsby:serve": "gatsby serve",
-    "gatsby:check-deploy": "node gatsby-deploy-cli.js",
+    "gatsby:conditional-deploy": "node gatsby-deploy-cli.js",
     "gatsby:deploy": "yarn convert-docs && gatsby build --prefix-paths && gh-pages -d public -b gh-pages -r https://${GH_TOKEN}@github.com/IBM/spm-ui-upgrade-helper.git"
   },
   "devDependencies": {
