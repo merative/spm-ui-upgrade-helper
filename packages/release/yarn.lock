@@ -1030,10 +1030,10 @@ domexception@^2.0.1:
   dependencies:
     webidl-conversions "^5.0.0"
 
-dummy-shells@^0.0.5:
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/dummy-shells/-/dummy-shells-0.0.5.tgz#db72e249149d83d06c259db8885b91e3bed88362"
-  integrity sha512-x8DEHI4kE556AoABaD/odztJvVStKPO/ZUBNLUEV+qtlqeX8T/kqXyRPUj+FkbR6PrYvxyZPFYdvdFz2rt7AhQ==
+dummy-shells@^0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/dummy-shells/-/dummy-shells-0.0.7.tgz#a3292d01e51aa13cf03b7ccb7592c6d61b879113"
+  integrity sha512-w1zhoPSxnPQWTBFNJlX0NHxMAbA0mWZUqPMS7iz/uIitngXQWxEIo/kmXhY5B7A12pixub7rKN0AKyVUwlUTmQ==
 
 electron-to-chromium@^1.3.793:
   version "1.3.795"
