@@ -8,17 +8,11 @@ const gatsbyConditionalDeploy = (shell, changes) => {
   });
 
   if(hasChanges) {
-    exec(shell, "yarn gatsby:deploy");
+    return shell.exec("yarn gatsby:deploy").code;
   } else {
     shell.echo("Not running gatsby:deploy as there were no changes to the 'docs' folder or to 'nav-items.yaml'.");
+    return 0;
   }
-
-  return 0;
-}
-
-const exec = (shell, cmd) => {
-  const r = shell.exec(cmd);
-  if(r.code != 0) { shell.exit(r.code); }
 }
 
 module.exports = gatsbyConditionalDeploy;

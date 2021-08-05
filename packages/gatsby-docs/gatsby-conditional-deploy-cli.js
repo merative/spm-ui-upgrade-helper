@@ -25,7 +25,13 @@ if(travisBranch !== "main") {
  * is the last commit of the feature branch just before the merge. We can diff that commit vs the
  * merge-base, which is the point where the feature branch diverged from main.
  */
+shell.exec("git branch");
+shell.exec("git log --oneline --graph --decorate --all -10");
 const mergeBase = shell.exec(`git merge-base head^1 head^2`).stdout.trimEnd();
 const changes = shell.exec(`git diff --name-only ${mergeBase} head^2`).stdout.split("\n");
+
+console.info(`gatsby-conditional-deploy-cli.js:`);
+console.info(`    merge-base: ${mergeBase}`);
+console.info(`    changes: ${JSON.stringify(changes)}`);
 
 return gatsbyConditionalDeploy(shell, changes);

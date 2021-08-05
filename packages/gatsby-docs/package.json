@@ -2,7 +2,7 @@
   "name": "@upgrade-helper/gatsby-docs",
   "version": "0.0.0",
   "license": "Apache-2.0",
-  "description": "SPM UI Upgrade Helper Documentation",
+  "description": "Builds the 'docs' folder as a Gatsby site.",
   "scripts": {
     "convert-docs": "node convert-docs-run.js",
     "test": "jest",
