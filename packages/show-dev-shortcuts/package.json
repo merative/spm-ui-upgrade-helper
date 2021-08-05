@@ -5,13 +5,11 @@
   "description": "Adds dev shortcuts to packages/vs-upgrade-helper-plugin/package.json when run with --dev flag.",
   "main": "show-dev-shortcuts.js",
   "scripts": {
-    "show-dev-shortcuts": "node show-dev-shortcuts.js",
-    "test": "jest"
+    "show-dev-shortcuts": "node show-dev-shortcuts.js"
   },
   "devDependencies": {
     "@folkforms/file-io": "^0.2.2",
     "commander": "^8.0.0",
-    "jest": "^27.0.6",
     "json-format": "^1.0.1"
   }
 }

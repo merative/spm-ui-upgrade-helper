@@ -25,6 +25,7 @@ const runTest = folder => {
     globs: [ "**/*" ],
     quiet: true,
     debug: false,
+    testMode: true,
   };
 
   const testFunc = () => { execute(testConfigOverrides); };

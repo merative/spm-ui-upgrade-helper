@@ -17,6 +17,7 @@ const loadConfig = (overrides = {}) => {
     ignorePatternsFile: overrides.ignorePatternsFile || "../../config/.spm-uiuh-ignore",
     quiet: overrides.quiet || false,
     debug: overrides.debug === false ? false : true,
+    testMode: overrides.testMode || false,
     skipInit: overrides.skipInit || false,
     files: overrides.files || [],
     cssRulesTool: {

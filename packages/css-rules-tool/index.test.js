@@ -20,6 +20,7 @@ const runTest = folder => {
     globs: [ "**/*" ],
     quiet: true,
     skipInit: true,
+    testMode: true,
   };
 
   // Define the function under test
