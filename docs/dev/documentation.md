@@ -29,9 +29,9 @@ Note that the Gatsby navigation sidebar is hand-crafted, so if you add a new pag
 
 ## Gatsby and Travis
 
-Gatsby will only be deployed if the build contains changes to the `docs` folder or to `packages/gatsby-docs/src/data/nav-items.yaml`. This is done to speed up the build.
+Gatsby will only be deployed if the build contains changes to the `docs` or `packages/gatsby-docs` folders. This is done to speed up the build.
 
-See https://github.com/IBM/spm-ui-upgrade-helper/blob/main/packages/gatsby-docs/gatsby-conditional-deploy-cli.js.
+See https://github.com/IBM/spm-ui-upgrade-helper/blob/main/packages/gatsby-docs/gatsby-conditional-deploy-cli.js
 
 ## Switching between Gatsby and GitHub Pages
 
