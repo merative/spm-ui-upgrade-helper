@@ -27,5 +27,6 @@ if(start) { option = "--start"; version = start; }
 if(ship) { option = "--ship"; version = ship; }
 
 const shell = dryRun ? dryRunShellJs : shelljs;
+dryRunShellJs._setExecStdOut("");
 
 return release(shell, option, version);
