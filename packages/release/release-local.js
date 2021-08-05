@@ -7,6 +7,13 @@ const release = (shell, option, version) => {
     return 1;
   }
 
+  exec(shell, `git pull --tags`); // Make sure we have all tags locally
+  const existing = exec(shell, `git tag --list v${version}`).stdout;
+  if(existing.length > 0) {
+    shell.echo(`ERROR: Version ${version} already exists (found tag 'v${version}').`);
+    return 1;
+  }
+
   if(option === "--start") {
     shell.echo("Building...");
     exec(shell, `yarn install`);
@@ -43,6 +50,7 @@ const release = (shell, option, version) => {
 const exec = (shell, cmd) => {
   const r = shell.exec(cmd);
   if(r.code != 0) { shell.exit(r.code); }
+  return r;
 }
 
 module.exports = release;
