@@ -8,6 +8,7 @@ test('config test with defaults', () => {
     ignorePatternsFile: "../../config/.spm-uiuh-ignore",
     quiet: false,
     debug: true,
+    testMode: false,
     skipInit: false,
     files: [],
     cssRulesTool: {
@@ -34,6 +35,7 @@ test('config test with all overrides', () => {
     ignorePatternsFile: "eee",
     quiet: true,
     debug: false,
+    testMode: true,
     skipInit: true,
     files: [],
     cssRulesTool: {
@@ -67,6 +69,7 @@ test('config test with some overrides', () => {
     ignorePatternsFile: "eee",
     quiet: true,
     debug: true,
+    testMode: false,
     skipInit: false,
     files: [],
     cssRulesTool: {

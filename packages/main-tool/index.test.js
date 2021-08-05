@@ -26,6 +26,7 @@ const runTest = folder => {
     outputFolder: temporaryFolder,
     globs: [ "**/*" ],
     quiet: true,
+    testMode: true,
   };
   const additionalConfigOverridesFile = `${folder}/config.json`;
   if(fs.existsSync(additionalConfigOverridesFile)) {

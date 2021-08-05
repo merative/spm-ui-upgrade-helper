@@ -45,11 +45,15 @@ const init = config => {
 
   console.info("Initializing output folder");
   removeOutputFolder(config);
-  createGitRepo(config);
+  if(!config.testMode) { // Skip creating the repo during tests
+    createGitRepo(config);
+  }
   let inputFiles = globAllFiles(config);
   inputFiles = removeIgnoredFiles(config, inputFiles);
   copyFilesToOutputFolder(config, inputFiles);
-  commitFiles(config.outputFolder, "Initial commit");
+  if(!config.testMode) { // Skip committing files during tests
+    commitFiles(config.outputFolder, "Initial commit");
+  }
   let files = flipToOutputFiles(config, inputFiles);
   config.files = files;
 }
