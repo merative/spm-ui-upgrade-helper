@@ -31,6 +31,9 @@ function evaluateInequality(firstOperand, secondOperand, operator) {
     case OPERATORS.GREATER_THAN_OR_EQUAL_TO: {
       return firstOperand >= secondOperand;
     }
+    default: {
+      return;
+    }
   }
 }
 
@@ -41,10 +44,17 @@ function evaluateInequality(firstOperand, secondOperand, operator) {
  * @returns JS object representing the WINDOWS_OPTIONS string.
  */
 function getWindowOptions(document) {
+  if (
+    !document ||
+    !document.documentElement ||
+    !document.documentElement.getAttribute
+  ) {
+    return;
+  }
+
   let windowOptions = {};
 
-  const optionsString =
-    document.documentElement.getAttribute("WINDOW_OPTIONS");
+  const optionsString = document.documentElement.getAttribute("WINDOW_OPTIONS");
 
   if (optionsString) {
     windowOptions = optionsString
@@ -67,13 +77,26 @@ function getWindowOptions(document) {
  *
  * @param {object} file UIM file where the PAGE element exists.
  * @param {object} windowOptions JS object representing the WINDOWS_OPTIONS string.
+ * @returns UIM document with new WINDOW_OPTIONS attribute set.
  */
 function setWindowOptions(document, windowOptions) {
+  if (
+    !document ||
+    !document.documentElement ||
+    !document.documentElement.setAttribute ||
+    !windowOptions ||
+    typeof windowOptions !== "object"
+  ) {
+    return;
+  }
+
   const optionsString = Object.entries(windowOptions)
     .map(([key, value]) => `${key}=${value}`)
     .join(",");
 
   document.documentElement.setAttribute("WINDOW_OPTIONS", optionsString);
+
+  return document;
 }
 
 /**
@@ -83,25 +106,41 @@ function setWindowOptions(document, windowOptions) {
  * @param {object} rule Rules object.
  * @returns Whether a UIM file meets the width criteria or not.
  */
-function checkWidth(document, rule) {
+function checkWidth(document, rule, verbose = true) {
+  if (
+    !document ||
+    !document.documentElement ||
+    !document.documentElement.getAttribute ||
+    !rule ||
+    typeof rule !== "object"
+  ) {
+    return;
+  }
+
   let pass = false;
 
   const { width } = getWindowOptions(document);
-
   const pageWidth = parseInt(width);
-  const [operator, ruleWidth] = rule.width.split(" ");
 
   if (pageWidth) {
-    pass = evaluateInequality(pageWidth, ruleWidth, operator);
+    const limits = rule.width.split(" and ").map((limit) => limit.split(" "));
+
+    pass = limits.reduce((result, limit) => {
+      const [operator, ruleWidth] = limit;
+
+      return result && evaluateInequality(pageWidth, ruleWidth, operator);
+    }, true);
   }
 
-  console.debug(
-    `\t${
-      pass ? chalk.green(pass) : chalk.red(pass)
-    }\t <-\twidth: ${chalk.magenta(
-      `${pageWidth ? pageWidth : "none"} ${operator} ${ruleWidth}`
-    )}`
-  );
+  if (verbose) {
+    console.debug(
+      `\twidth: ${
+        pass ? chalk.green(`${pass} `) : chalk.red(pass)
+      } <- ${chalk.magenta(
+        `[${pageWidth ? pageWidth : "none"}] · [${rule.width}]`
+      )}`
+    );
+  }
 
   return pass;
 }
@@ -113,7 +152,11 @@ function checkWidth(document, rule) {
  * @param {object} rule Rules object.
  * @returns Whether the UIM file meets the rules criteria or not.
  */
-function checkRule(document, rule) {
+function checkRule(document, rule, verbose = true) {
+  if (!document || !rule || typeof rule !== "object") {
+    return;
+  }
+
   let pass = false;
 
   rule.terms.forEach((xPath) => {
@@ -122,11 +165,13 @@ function checkRule(document, rule) {
 
       pass = pass || result;
 
-      console.debug(
-        `\t${
-          result ? chalk.green(result) : chalk.red(result)
-        }\t <-\t${chalk.magenta(xPath)}`
-      );
+      if (verbose) {
+        console.debug(
+          `\tterm:  ${
+            result ? chalk.green(`${result} `) : chalk.red(result)
+          } <- [${chalk.magenta(xPath)}]`
+        );
+      }
     }
   });
 
@@ -141,15 +186,30 @@ function checkRule(document, rule) {
  * @param {object} sizes Mapping breakpoints to be applied to UIMs if rules criteria a met.
  * @returns Array of UIM files transformed by rules.
  */
-function applyRules(document, name, rules, sizes) {
-  console.debug(`filename: ${chalk.cyan(name)}`);
+function applyRules(document, name, rules, sizes, verbose = true) {
+  if (
+    !document ||
+    !name ||
+    !rules ||
+    !Array.isArray(rules) ||
+    !sizes ||
+    typeof sizes !== "object"
+  ) {
+    return;
+  }
+
+  if (verbose) {
+    console.debug(`filename: ${chalk.cyan(name)}`);
+  }
   let hasChanges = false;
 
   rules.forEach((rule, index) => {
-    console.debug(`\trule\t\t${chalk.yellow(index + 1)}`);
+    if (verbose) {
+      console.debug(`rule:     ${chalk.yellow(index + 1)}`);
+    }
 
-    if (checkWidth(document, rule)) {
-      const pass = checkRule(document, rule);
+    if (checkWidth(document, rule, verbose)) {
+      const pass = checkRule(document, rule, verbose);
 
       if (pass) {
         hasChanges = true;
@@ -157,7 +217,7 @@ function applyRules(document, name, rules, sizes) {
 
         // This is where we can flip between pixels and size attribute
         const usePixelWidths = true;
-        if(usePixelWidths) {
+        if (usePixelWidths) {
           windowOptions.width = sizes[rule.target];
         } else {
           delete windowOptions.width;
@@ -172,4 +232,11 @@ function applyRules(document, name, rules, sizes) {
   return { document, hasChanges };
 }
 
-module.exports = { applyRules };
+module.exports = {
+  evaluateInequality,
+  getWindowOptions,
+  setWindowOptions,
+  checkWidth,
+  checkRule,
+  applyRules,
+};

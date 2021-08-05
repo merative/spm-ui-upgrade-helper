@@ -1,11 +1,18 @@
 [
   {
-    "width": "< 950",
+    "width": "> 768",
     "terms": [
-      "count(/*/LIST/*) >= 6",
-      "/*/CLUSTER/@NUM_COLS >= 3",
-      "count(/*/CLUSTER[@NUM_COLS >= 2]/LIST) > 0"
+      "/*/CLUSTER/@NUM_COLS = 2",
+      "count(/*/LIST) > 0 and count(/*/LIST/*) < 5"
     ],
-    "target": "lg"
+    "target": "md"
+  },
+  {
+    "width": "> 576 and <= 768",
+    "terms": [
+      "count(/*/CLUSTER[not(@NUM_COLS)]) > 0 or /*/CLUSTER/@NUM_COLS = 1",
+      "count(/*/LIST) > 0 and count(/*/LIST/*) <= 2"
+    ],
+    "target": "sm"
   }
 ]

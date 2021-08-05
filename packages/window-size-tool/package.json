@@ -6,7 +6,10 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon server.js",
-    "test": "jest"
+    "test": "jest",
+    "test:all": "jest",
+    "test:unit": "jest ./src",
+    "test:integration": "jest ./index.test.js"
   },
   "dependencies": {
     "chalk": "^4.1.1",

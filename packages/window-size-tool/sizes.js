@@ -1,7 +1,7 @@
 module.exports = {
-  xs: 400,
-  sm: 600,
-  md: 800,
-  lg: 1000,
-  xlg: 1200,
+  xs: 0,
+  sm: 500,
+  md: 700,
+  lg: 0,
+  xlg: 0,
 };
