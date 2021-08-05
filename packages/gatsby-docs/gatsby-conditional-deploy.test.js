@@ -40,20 +40,6 @@ test('it deploys if there are changes to the "packages/gatsby-docs" folder', () 
   expect(expected.length).toEqual(dummyShellJs.execList.length);
 });
 
-test('it deploys if there are changes to nav-items.yaml', () => {
-  const changes = [
-    "foo/foo.txt",
-    "foo/nav-items.yaml",
-    "bar/bar.txt",
-  ];
-  const expected = [ "yarn gatsby:deploy" ];
-
-  gatsbyConditionalDeploy(dummyShellJs, changes);
-
-  expect(expected).toEqual(dummyShellJs.execList);
-  expect(expected.length).toEqual(dummyShellJs.execList.length);
-});
-
 test('it does not deploy if there are no changes', () => {
   const changes = [
     "not-docs-folder/foo.txt",
