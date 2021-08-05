@@ -10,4 +10,4 @@ env:
 script:
   - yarn install-all
   - yarn test
-  - cd packages/gatsby-docs && yarn gatsby:deploy
+  - cd packages/gatsby-docs && yarn gatsby:conditional-deploy
