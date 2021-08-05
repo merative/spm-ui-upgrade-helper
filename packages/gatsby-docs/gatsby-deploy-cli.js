@@ -12,7 +12,7 @@ program
 
 const travisBranch = process.env.TRAVIS_BRANCH;
 console.log(`travisBranch = ${travisBranch}`);
-const changes = shelljs.exec(`git diff --name-status HEAD ${travisBranch}`).stdout.split("\n");
+const changes = shelljs.exec(`git diff --name-status main ${travisBranch}`).stdout.split("\n");
 
 const dryRun = program.opts().dryRun;
 const shell = dryRun ? dryRunShellJs : shelljs;
