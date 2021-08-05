@@ -21,7 +21,7 @@ if(travisBranch !== "main") {
 /*
  * We are currently on main, and we want to get all changes on the feature branch which is being
  * merged into main. This is so we can check for changes that will trigger a gatsby deploy. What we
- * have is a merge commit with two parents that can be referenced as head^1 and head^2. The latter
+ * have is a merge commit with two parents that can be referenced as HEAD^1 and HEAD^2. The latter
  * is the last commit of the feature branch just before the merge. We can diff that commit with the
  * merge-base (the merge-base being the point where the feature branch diverged from main) to get
  * all the changes on the feature branch.
