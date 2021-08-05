@@ -1,0 +1,11 @@
+<!--
+  - Expected: No change.
+  -
+  - Reason: PAGE element WINDOW_OPTIONS attribute is an empty string.
+  -->
+<?xml version="1.0" encoding="UTF-8"?>
+<PAGE WINDOW_OPTIONS="">
+  <CLUSTER>
+    <FIELD/>
+  </CLUSTER>
+</PAGE>

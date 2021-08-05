@@ -2,12 +2,9 @@
 
 Tests the second rule we have encoded in `rules.json`.
 
-    if ( width attribute > 768 AND (
-      count LIST elements (columns?) < 5
-      OR CLUSTER with == 2 cols
+    if ( PAGE width attribute > 576 and <= 768 AND (
+      CLUSTER = 1 cols
+      OR  LIST <= 2 cols
     )) {
-      change the width attribute to 700/medium
+      reduces the width attribute to 500
     }
-
-If width is >768 change to 700/medium if:
-Rule: the page contains only 2 column clusters or lists <5 columns

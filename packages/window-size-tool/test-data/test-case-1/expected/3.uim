@@ -1,0 +1,11 @@
+<!--
+  - Expected: No change.
+  -
+  - Reason: PAGE element WINDOW_OPTIONS attribute width is too small.
+  -->
+<?xml version="1.0" encoding="UTF-8"?>
+<PAGE WINDOW_OPTIONS="width=420">
+  <CLUSTER>
+    <FIELD/>
+  </CLUSTER>
+</PAGE>

@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon server.js",
-    "test": "test:all",
+    "test": "jest",
     "test:all": "jest",
     "test:unit": "jest ./src",
     "test:integration": "jest ./index.test.js"

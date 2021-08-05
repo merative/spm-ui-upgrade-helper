@@ -2,10 +2,9 @@
 
 Tests the first rule we have encoded in `rules.json`.
 
-    if ( width attribute < 950 AND (
-      count LIST elements >= 6
-      OR CLUSTER with >= 3 cols
-      OR ( CLUSTER with >= 2 cols AND nested LIST )
+    if ( PAGE width attribute > 768 AND (
+      CLUSTER = 2 cols
+      OR  LIST < 5 cols
     )) {
-      increase the width attribute to 1000
+      reduces the width attribute to 700
     }
