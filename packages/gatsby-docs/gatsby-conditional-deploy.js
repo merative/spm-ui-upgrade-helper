@@ -2,9 +2,7 @@ const gatsbyConditionalDeploy = (shell, changes) => {
 
   let hasChanges = false;
   for(let i = 0; i < changes.length; i++) {
-    if(changes[i].indexOf("nav-items.yaml") != -1 ||
-       changes[i].startsWith("docs/") ||
-       changes[i].startsWith("packages/gatsby-docs/")) {
+    if(changes[i].startsWith("docs/") || changes[i].startsWith("packages/gatsby-docs/")) {
       console.info(`Running gatsby:deploy due to change in ${changes[i]}`);
       hasChanges = true;
       break;
