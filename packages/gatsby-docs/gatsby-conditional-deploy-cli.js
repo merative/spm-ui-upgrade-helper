@@ -26,9 +26,10 @@ if(travisBranch !== "main") {
  * merge-base, which is the point where the feature branch diverged from main.
  */
 shell.exec("git branch");
+shell.echo("----");
 shell.exec("git log --oneline --graph --decorate --all -10");
-const mergeBase = shell.exec(`git merge-base head^1 head^2`).stdout.trimEnd();
-const changes = shell.exec(`git diff --name-only ${mergeBase} head^2`).stdout.split("\n");
+const mergeBase = shell.exec(`git merge-base HEAD^1 HEAD^2`).stdout.trimEnd();
+const changes = shell.exec(`git diff --name-only ${mergeBase} HEAD^2`).stdout.split("\n");
 
 console.info(`gatsby-conditional-deploy-cli.js:`);
 console.info(`    merge-base: ${mergeBase}`);
