@@ -1,17 +1,11 @@
 const gatsbyDeploy = (shell, changes) => {
 
-  console.log(`#### gatsby-deploy.js`);
-  console.log(`# typeof changes = ${typeof changes}`);
-  console.log(`# changes = ${JSON.stringify(changes)}`);
-
   let hasChanges = false;
   changes.forEach(line => {
     if(line.indexOf("docs/") != -1 || line.indexOf("nav-items.yaml") != -1) {
       hasChanges = true;
     }
   });
-
-  console.log(`# hasChanges = ${hasChanges}`);
 
   if(hasChanges) {
     exec(shell, "yarn gatsby:deploy");

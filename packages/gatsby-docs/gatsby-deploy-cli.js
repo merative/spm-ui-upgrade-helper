@@ -11,7 +11,6 @@ program
   .parse(process.argv);
 
 const travisBranch = process.env.TRAVIS_BRANCH;
-console.log(`travisBranch = ${travisBranch}`);
 const changes = shelljs.exec(`git diff --name-status main ${travisBranch}`).stdout.split("\n");
 
 const dryRun = program.opts().dryRun;
