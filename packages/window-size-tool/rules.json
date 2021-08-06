@@ -1,5 +1,10 @@
 [
   {
+    "width": "< 1200",
+    "terms": ["//CLUSTER/@NUM_COLS > 4", "count(//LIST/*) > 6"],
+    "target": "xlg"
+  },
+  {
     "width": ">= 768",
     "terms": [
       "//CLUSTER/@NUM_COLS >= 3",
