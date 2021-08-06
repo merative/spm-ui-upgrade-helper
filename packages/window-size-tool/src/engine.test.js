@@ -459,7 +459,7 @@ describe("checkRule", () => {
 
     const document = {};
     const rule = {
-      terms: ["rule.1"],
+      terms: ["criteria.1"],
     };
 
     xp.select.mockImplementation(() => false);
@@ -474,7 +474,7 @@ describe("checkRule", () => {
 
     const document = {};
     const rule = {
-      terms: ["rule.1"],
+      terms: ["criteria.1"],
     };
 
     xp.select.mockImplementation(() => true);
@@ -489,10 +489,10 @@ describe("checkRule", () => {
 
     const document = {};
     const rule = {
-      terms: ["rule.1", "rule.2"],
+      terms: ["criteria.1", "criteria.2"],
     };
 
-    xp.select.mockImplementation((rule) => rule === "rule.2");
+    xp.select.mockImplementation((rule) => rule === "criteria.2");
 
     const actual = checkRule(document, rule, false);
 
@@ -545,7 +545,7 @@ describe("applyRules", () => {
     const rules = [
       {
         width: "> 576 and <= 768",
-        terms: ["rule.1", "rule.2"],
+        terms: ["criteria.1", "criteria.2"],
         target: "sm",
       },
     ];
@@ -573,7 +573,7 @@ describe("applyRules", () => {
     const rules = [
       {
         width: "> 768",
-        terms: ["rule.1", "rule.2"],
+        terms: ["criteria.1", "criteria.2"],
         target: "md",
       },
     ];
@@ -601,12 +601,45 @@ describe("applyRules", () => {
     const rules = [
       {
         width: "> 768",
-        terms: ["rule.1", "rule.2"],
+        terms: ["criteria.1", "criteria.2"],
         target: "md",
       },
     ];
 
     xp.select.mockImplementation((rule) => false);
+
+    applyRules(document, filename, rules, sizes, false);
+
+    const actual = mockSetAttribute.mock.calls.length;
+
+    expect(actual).toEqual(expected);
+  });
+
+  test("should only match the first rule when the first rule is passed", () => {
+    const expected = 0;
+
+    const mockSetAttribute = jest.fn();
+    const document = {
+      documentElement: {
+        getAttribute: () => "width=800",
+        setAttribute: mockSetAttribute,
+      },
+    };
+    const filename = "test.uim";
+    const rules = [
+      {
+        width: "> 768",
+        terms: ["criteria.1"],
+        target: "md",
+      },
+      {
+        width: "> 768",
+        terms: ["criteria.1"],
+        target: "md",
+      },
+    ];
+
+    xp.select.mockImplementation((rule) => true);
 
     applyRules(document, filename, rules, sizes, false);
 
