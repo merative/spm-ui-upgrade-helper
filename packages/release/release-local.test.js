@@ -1,4 +1,4 @@
-const { dummyShellJs } = require("dummy-shells");
+const { dummyShellJs } = require("../shared-utils/sharedUtils").dummyShells;
 const release = require("./release-local");
 
 beforeEach(() => {

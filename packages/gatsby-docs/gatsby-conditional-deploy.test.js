@@ -1,4 +1,4 @@
-const { dummyShellJs } = require("dummy-shells");
+const { dummyShellJs } = require("../shared-utils/sharedUtils").dummyShells;
 const gatsbyConditionalDeploy = require("./gatsby-conditional-deploy");
 
 const consoleInfoBackup = console.info;

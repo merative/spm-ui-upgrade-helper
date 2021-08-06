@@ -6018,11 +6018,6 @@ downshift@5.2.1:
     prop-types "^15.7.2"
     react-is "^16.13.1"
 
-dummy-shells@^0.0.4:
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/dummy-shells/-/dummy-shells-0.0.4.tgz#0167f1021132421cec14dbf074f727a8fa7fa663"
-  integrity sha512-UoG3XCnaH0JQdJSN8NKWmqZKyjCiLYas+UP7qN/nDgn/fv7VLJ+9TMKLevvscCHU/MhFeU/CGIlNS3hC0Eu8Ew==
-
 duplexer3@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/duplexer3/-/duplexer3-0.1.4.tgz#ee01dd1cac0ed3cbc7fdbea37dc0a8f1ce002ce2"
