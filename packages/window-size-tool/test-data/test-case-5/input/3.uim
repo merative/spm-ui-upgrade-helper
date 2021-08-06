@@ -1,12 +1,13 @@
 <!--
-  - Expected: Width changes to 1000 (large).
+  - Expected: Width changes to 1200 (extra large).
   -
-  - Reason: PAGE element WINDOW_OPTIONS attribute width is greater than 768 and 
-  - contains more than a 4 column LIST.
+  - Reason: PAGE element WINDOW_OPTIONS attribute width is less than 1200 with 
+  - a 7 column LIST.
   -->
 <?xml version="1.0" encoding="UTF-8"?>
 <PAGE WINDOW_OPTIONS="width=1000">
   <LIST>
+    <FIELD/>
     <FIELD/>
     <FIELD/>
     <FIELD/>

@@ -1,0 +1,17 @@
+<!--
+  - Expected: Width changes to 1000 (large).
+  -
+  - Reason: PAGE element WINDOW_OPTIONS attribute width is equal to or greater 
+  - than 768 with a 2 of more column CLUSTER that contains a LIST.
+  -->
+<?xml version="1.0" encoding="UTF-8"?>
+<PAGE WINDOW_OPTIONS="width=1000">
+  <CLUSTER NUM_COLS="2">
+    <LIST>
+      <FIELD/>
+    </LIST>
+    <LIST>
+      <FIELD/>
+    </LIST>
+  </CLUSTER>
+</PAGE>

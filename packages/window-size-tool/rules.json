@@ -1,17 +1,36 @@
 [
   {
+    "width": "< 1200",
+    "terms": ["//CLUSTER/@NUM_COLS > 4", "count(//LIST/*) > 6"],
+    "target": "xlg"
+  },
+  {
+    "width": ">= 768",
+    "terms": [
+      "//CLUSTER/@NUM_COLS >= 3",
+      "count(//CLUSTER[@NUM_COLS >= 2]//LIST) > 0",
+      "count(//LIST/*) = 5 or count(//LIST/*) = 6"
+    ],
+    "target": "lg"
+  },
+  {
     "width": "> 768",
     "terms": [
-      "/*/CLUSTER/@NUM_COLS = 2",
-      "count(/*/LIST) > 0 and count(/*/LIST/*) < 5"
+      "//CLUSTER/@NUM_COLS = 2",
+      "count(//LIST) > 0 and count(//LIST/*) < 5"
     ],
+    "target": "md"
+  },
+  {
+    "width": "<= 576",
+    "terms": ["//CLUSTER/@NUM_COLS = 2", "count(//LIST/*) = 4"],
     "target": "md"
   },
   {
     "width": "> 576 and <= 768",
     "terms": [
-      "count(/*/CLUSTER[not(@NUM_COLS)]) > 0 or /*/CLUSTER/@NUM_COLS = 1",
-      "count(/*/LIST) > 0 and count(/*/LIST/*) <= 2"
+      "count(//CLUSTER[not(@NUM_COLS)]) > 0 or //CLUSTER/@NUM_COLS = 1",
+      "count(//LIST) > 0 and count(//LIST/*) <= 2"
     ],
     "target": "sm"
   }

@@ -204,27 +204,29 @@ function applyRules(document, name, rules, sizes, verbose = true) {
   let hasChanges = false;
 
   rules.forEach((rule, index) => {
-    if (verbose) {
-      console.debug(`rule:     ${chalk.yellow(index + 1)}`);
-    }
+    if (!hasChanges) {
+      if (verbose) {
+        console.debug(`rule:     ${chalk.yellow(index + 1)}`);
+      }
 
-    if (checkWidth(document, rule, verbose)) {
-      const pass = checkRule(document, rule, verbose);
+      if (checkWidth(document, rule, verbose)) {
+        const pass = checkRule(document, rule, verbose);
 
-      if (pass) {
-        hasChanges = true;
-        const windowOptions = getWindowOptions(document);
+        if (pass) {
+          hasChanges = true;
+          const windowOptions = getWindowOptions(document);
 
-        // This is where we can flip between pixels and size attribute
-        const usePixelWidths = true;
-        if (usePixelWidths) {
-          windowOptions.width = sizes[rule.target];
-        } else {
-          delete windowOptions.width;
-          windowOptions.size = rule.target;
+          // This is where we can flip between pixels and size attribute
+          const usePixelWidths = true;
+          if (usePixelWidths) {
+            windowOptions.width = sizes[rule.target];
+          } else {
+            delete windowOptions.width;
+            windowOptions.size = rule.target;
+          }
+
+          setWindowOptions(document, windowOptions);
         }
-
-        setWindowOptions(document, windowOptions);
       }
     }
   });
