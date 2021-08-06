@@ -6,7 +6,7 @@ const gatsbyConditionalDeploy = require("./gatsby-conditional-deploy");
 const program = new Command();
 program
   .name("yarn gatsby-conditional-deploy")
-  .addHelpText('beforeAll', 'Deploy Gatsby only if there are changes in the "docs" folder or to "packages/gatsby-docs/src/data/nav-items.yaml".\n')
+  .addHelpText('beforeAll', 'Deploy Gatsby only if there are changes in the "packages/gatsby-docs/" folder.\n')
   .option('-n, --dry-run', 'Show what commands would be executed, without actually running anything')
   .parse(process.argv);
 

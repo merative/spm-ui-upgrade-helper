@@ -2,16 +2,15 @@
   "name": "@upgrade-helper/gatsby-docs",
   "version": "0.0.0",
   "license": "Apache-2.0",
-  "description": "Builds the 'docs' folder as a Gatsby site.",
+  "description": "Builds the documentation as a Gatsby site.",
   "scripts": {
-    "convert-docs": "node convert-docs-run.js",
     "test": "jest",
-    "gatsby:build": "yarn convert-docs && gatsby build",
+    "gatsby:build": "gatsby build",
     "gatsby:clean": "gatsby clean",
-    "gatsby:dev": "yarn convert-docs && gatsby develop",
+    "gatsby:dev": "gatsby clean && gatsby develop",
     "gatsby:serve": "gatsby serve",
     "gatsby:conditional-deploy": "node gatsby-conditional-deploy-cli.js",
-    "gatsby:deploy": "yarn convert-docs && gatsby build --prefix-paths && gh-pages -d public -b gh-pages -r https://${GH_TOKEN}@github.com/IBM/spm-ui-upgrade-helper.git"
+    "gatsby:deploy": "gatsby build --prefix-paths && gh-pages -d public -b gh-pages -r https://${GH_TOKEN}@github.com/IBM/spm-ui-upgrade-helper.git"
   },
   "devDependencies": {
     "commander": "^8.1.0",

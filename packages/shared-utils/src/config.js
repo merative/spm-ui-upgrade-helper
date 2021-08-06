@@ -10,10 +10,12 @@ const filesAndFolders = require("./filesAndFolders");
  */
 const loadConfig = (overrides = {}) => {
   let config = {
+    // Input and output folders are relative from inside the Docker container
     inputFolder: overrides.inputFolder || "/home/workspace/input",
     outputFolder: overrides.outputFolder || "/home/workspace/output",
     // Globs will have `inputFolder` prepended, i.e. `${inputFolder}/${glob}`
     globs: overrides.globs || [ "EJBServer/components/**/*", "webclient/components/**/*" ],
+    // These files and folders will be ignored by the tool
     ignorePatternsFile: overrides.ignorePatternsFile || "../../config/.spm-uiuh-ignore",
     quiet: overrides.quiet || false,
     debug: overrides.debug === false ? false : true,
