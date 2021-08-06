@@ -22,7 +22,6 @@
     "@types/react": "^16.8.0"
   },
   "devDependencies": {
-    "@folkforms/file-io": "^0.2.3",
     "commander": "^8.0.0",
     "docker-tasks": "^0.1.49",
     "eslint": "^7.20.0",

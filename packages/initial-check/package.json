@@ -9,7 +9,6 @@
   },
   "author": "",
   "dependencies": {
-    "@folkforms/file-io": "^0.2.2",
     "fs-extra": "^10.0.0"
   },
   "devDependencies": {

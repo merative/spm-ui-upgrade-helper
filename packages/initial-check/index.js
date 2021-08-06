@@ -1,5 +1,4 @@
 const fs = require("fs-extra");
-const fileio = require("@folkforms/file-io");
 const utils = require("../shared-utils/sharedUtils");
 
 const execute = overrides => {
@@ -17,7 +16,7 @@ const execute = overrides => {
  */
 const checkVersionNumber = () => {
   try {
-    const json = fileio.readJson("../../version.json");
+    const json = utils.readJson("../../version.json");
     console.log(`Success: Found version number: ${json.version}`);
   } catch(err) {
     console.log(`Warning: Version number not found (could not find version.json)`);
@@ -29,7 +28,7 @@ const checkVersionNumber = () => {
  */
 const checkCommitHash = () => {
   try {
-    const json = fileio.readJson("../../commit.json");
+    const json = utils.readJson("../../commit.json");
     console.log(`Success: Found commit hash: ${json.commit}`);
     console.log(`Success: Found long commit hash: ${json.commitLong}`);
   } catch(err) {
@@ -46,7 +45,7 @@ const checkOutputFolderIsWritable = config => {
   const testFile = `${config.outputFolder}/.test.txt`;
   try {
     const testData = [ "foo" ];
-    fileio.writeLines(testFile, testData);
+    utils.writeLines(testFile, testData);
     fs.removeSync(testFile);
   } catch(err) {
     console.log(`ERROR: Could not write test file to output folder. You may need to run \`chmod -R 777 <output folder>\` on the local machine.`);

@@ -1,4 +1,4 @@
-const fileio = require("@folkforms/file-io");
+const utils = require("../../../shared-utils/sharedUtils");
 const fromMarkdown = require('mdast-util-from-markdown');
 const { mergeAndSortRules } = require("../../../shared-utils/src/rulesUtils");
 
@@ -8,9 +8,9 @@ const { mergeAndSortRules } = require("../../../shared-utils/src/rulesUtils");
  */
 const getTestCaseData = () => {
   const testCases = [];
-  let files = fileio.glob("./src/testCases/*.md.only");
+  let files = utils.glob("./src/testCases/*.md.only");
   if(!files || files.length == 0) {
-    files = fileio.glob("./src/testCases/*.md");
+    files = utils.glob("./src/testCases/*.md");
   }
 
   files.forEach(file => {
@@ -18,7 +18,7 @@ const getTestCaseData = () => {
       return;
     }
 
-    const tree = fromMarkdown(fileio.readLines(file).join("\n"));
+    const tree = fromMarkdown(utils.readLines(file).join("\n"));
     const testCase = {};
     for(let i = 0; i < tree.children.length; i++) {
       const item = tree.children[i];

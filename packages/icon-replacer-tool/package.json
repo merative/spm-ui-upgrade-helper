@@ -9,7 +9,6 @@
     "test": "jest"
   },
   "dependencies": {
-    "@folkforms/file-io": "^0.2.3",
     "chalk": "^4.1.1",
     "express": "^4.17.1",
     "fast-glob": "^3.2.6",

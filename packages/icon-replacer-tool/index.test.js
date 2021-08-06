@@ -1,11 +1,11 @@
 const testWithDataFolder = require("test-with-data-folder");
-const fileio = require("@folkforms/file-io");
+const utils = require("../shared-utils/sharedUtils");
 const { execute } = require("./index");
 
 /**
  * Run the test against each of the test case folders.
  */
-const testCaseFolders = fileio.glob("test-data/test-case-*", { onlyDirectories: true, deep: 1 });
+const testCaseFolders = utils.glob("test-data/test-case-*", { onlyDirectories: true, deep: 1 });
 testCaseFolders.forEach(folder => {
   test(`icon-replacer-tool test (from: packages/icon-replacer-tool/${folder})`, () => {
     runTest(folder);

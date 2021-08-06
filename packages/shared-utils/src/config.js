@@ -1,5 +1,5 @@
 const fs = require("fs-extra");
-const fileio = require("@folkforms/file-io");
+const filesAndFolders = require("./filesAndFolders");
 
 /**
  * Load the configuration. Note that paths are either absolute paths within the docker container or
@@ -46,7 +46,7 @@ const checkForLocalConfigOverride = inputFolder => {
   const file = `${inputFolder}/.spm-uiuh-config`;
   if(fs.existsSync(file)) {
     console.info("Found .spm-uiuh-config");
-    return fileio.readJson(file);
+    return filesAndFolders.readJson(file);
   }
   return undefined;
 }

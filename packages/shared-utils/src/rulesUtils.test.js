@@ -1,4 +1,4 @@
-const fileio = require("@folkforms/file-io");
+const filesAndFolders = require("./filesAndFolders");
 const { loadRules } = require("./rulesUtils");
 
 let info = console.info;
@@ -17,7 +17,7 @@ test('ruleUtils test', () => {
     },
     quiet: true,
   }
-  const expected = fileio.readJson("./src/test-data/rulesUtils/rulesExpected.json");
+  const expected = filesAndFolders.readJson("./src/test-data/rulesUtils/rulesExpected.json");
 
   const actual = loadRules(overrides);
 

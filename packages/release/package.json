@@ -8,7 +8,6 @@
     "test": "jest"
   },
   "devDependencies": {
-    "@folkforms/file-io": "^0.2.3",
     "commander": "^8.0.0",
     "dummy-shells": "^0.0.7",
     "jest": "^27.0.6",

@@ -1,5 +1,4 @@
 const css = require('css');
-const fileio = require('@folkforms/file-io');
 const { applyRules } = require("./src/applyRules");
 const utils = require("../shared-utils/sharedUtils");
 
@@ -22,7 +21,7 @@ const execute = (overrides = {}) => {
     const originals = {}, prettified = {}, appliedRules = {};
     console.info(`Processing ${targetFiles.length} files`);
     targetFiles.forEach(filename => {
-      const contents = fileio.readLines(filename).join("\n");
+      const contents = utils.readLines(filename).join("\n");
       try {
         originals[filename] = contents;
         prettified[filename] = prettifyContents(contents, filename);

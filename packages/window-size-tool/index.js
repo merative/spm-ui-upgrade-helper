@@ -1,6 +1,5 @@
 const sizes = require("./sizes");
 const engine = require("./src/engine");
-const fileio = require("@folkforms/file-io");
 const utils = require("../shared-utils/sharedUtils");
 const xmldom = require("xmldom");
 
@@ -15,11 +14,11 @@ const execute = overrides => {
   const serializer = new xmldom.XMLSerializer();
 
   const inputFiles = utils.keepFiles(config.files, "uim", "vim");
-  const rules = fileio.readJson(config.windowSizeTool.rules);
+  const rules = utils.readJson(config.windowSizeTool.rules);
 
   let outputFiles = {};
   inputFiles.forEach(file => {
-    const contents = fileio.readLines(file).join("\n");
+    const contents = utils.readLines(file).join("\n");
     const originalDocument = parser.parseFromString(contents);
 
     const { document, hasChanges } = engine.applyRules(originalDocument, file, rules, sizes);

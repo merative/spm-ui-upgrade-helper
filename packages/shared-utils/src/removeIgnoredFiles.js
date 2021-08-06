@@ -1,4 +1,4 @@
-const fileio = require("@folkforms/file-io");
+const filesAndFolders = require("./filesAndFolders");
 const fs = require("fs-extra");
 const ignore = require("ignore");
 const path = require('path');
@@ -10,10 +10,10 @@ const removeIgnoredFiles = (config, inputFiles) => {
   let relativePaths = inputFiles.map(f => path.relative(config.inputFolder, f));
   relativePaths = relativePaths.map(f => f.replace(/\\/g, "/"));
 
-  const ignoreFileOOTBContents = fileio.readLines(config.ignorePatternsFile);
+  const ignoreFileOOTBContents = filesAndFolders.readLines(config.ignorePatternsFile);
   const ignoreFileCustomer = `${config.inputFolder}/.spm-uiuh-ignore`;
   const ignoreFileCustomerContents = fs.existsSync(ignoreFileCustomer)
-    ? fileio.readLines(ignoreFileCustomer)
+    ? filesAndFolders.readLines(ignoreFileCustomer)
     : [];
   const allIgnores = [ ignoreFileOOTBContents, ignoreFileCustomerContents ].flat();
 

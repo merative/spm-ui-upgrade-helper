@@ -14,7 +14,6 @@
     "gatsby:deploy": "yarn convert-docs && gatsby build --prefix-paths && gh-pages -d public -b gh-pages -r https://${GH_TOKEN}@github.com/IBM/spm-ui-upgrade-helper.git"
   },
   "devDependencies": {
-    "@folkforms/file-io": "^0.2.4",
     "commander": "^8.1.0",
     "dummy-shells": "^0.0.4",
     "gatsby": "^3.10.2",
