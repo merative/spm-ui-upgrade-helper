@@ -4,7 +4,7 @@ title: Project overview
 
 ## Front end
 
-- Eclipse Theia is our front-end. It is an IDE inside the browser.
+- [Eclipse Theia](https://theia-ide.org/) is our front-end. It is an IDE inside the browser.
 - We have added plugins to Eclipse Theia that appear as new `F1` shortcuts (the same as `F1` in VSCode.)
 - These plugins call Rest APIs that do the actual work.
 
