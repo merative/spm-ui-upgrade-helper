@@ -1,0 +1,15 @@
+<!--
+  - Expected: Width changes to 700 (medium).
+  -
+  - Reason: PAGE element WINDOW_OPTIONS attribute width is equal to or less than 
+  - 576 with a nested 2 column CLUSTER.
+  -->
+<?xml version="1.0" encoding="UTF-8"?>
+<PAGE WINDOW_OPTIONS="width=500">
+  <CONTAINER>
+    <CLUSTER NUM_COLS="2">
+      <FIELD/>
+      <FIELD/>
+    </CLUSTER>
+  </CONTAINER>
+</PAGE>

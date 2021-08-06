@@ -1,0 +1,13 @@
+<!--
+  - Expected: No change.
+  -
+  - Reason: PAGE element WINDOW_OPTIONS attribute width is equal to or less than 
+  - 576 with a 2 column LIST.
+  -->
+<?xml version="1.0" encoding="UTF-8"?>
+<PAGE WINDOW_OPTIONS="width=576">
+  <LIST>
+    <FIELD/>
+    <FIELD/>
+  </LIST>
+</PAGE>
