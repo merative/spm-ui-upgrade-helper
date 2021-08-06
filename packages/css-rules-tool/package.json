@@ -16,7 +16,6 @@
     "nodemon": "^2.0.7"
   },
   "devDependencies": {
-    "jest": "^26.0.1",
-    "test-with-data-folder": "^0.0.9"
+    "jest": "^26.0.1"
   }
 }

@@ -15,9 +15,11 @@ const {
   readJson,
   readLines,
   writeLines,
+  copyFolder,
 } = require("./src/filesAndFolders");
 const { removeIgnoredFiles } = require("./src/removeIgnoredFiles");
 const { init } = require("./src/init");
+const testWithDataFolder = require("./src/testWithDataFolder");
 
 module.exports = {
   // config.js
@@ -44,8 +46,11 @@ module.exports = {
   readJson,
   readLines,
   writeLines,
+  copyFolder,
   // removeIgnoredFiles.js
   removeIgnoredFiles,
   // init.js
   init,
+  // testWithDataFolder.js
+  testWithDataFolder
 };

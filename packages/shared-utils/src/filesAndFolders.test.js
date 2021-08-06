@@ -1,5 +1,5 @@
 const shelljs = require("shelljs");
-const testWithDataFolder = require("test-with-data-folder");
+const testWithDataFolder = require("./testWithDataFolder");
 const { loadConfig } = require("./config");
 const {
   writeFiles,

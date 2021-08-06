@@ -13,7 +13,6 @@
     "shelljs": "^0.8.4"
   },
   "devDependencies": {
-    "jest": "^27.0.5",
-    "test-with-data-folder": "^0.0.7"
+    "jest": "^27.0.5"
   }
 }

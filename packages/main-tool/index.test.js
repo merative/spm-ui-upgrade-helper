@@ -1,6 +1,5 @@
 const fs = require("fs-extra");
 const utils = require("../shared-utils/sharedUtils");
-const testWithDataFolder = require("test-with-data-folder");
 const { execute } = require("./index");
 
 /**
@@ -36,5 +35,5 @@ const runTest = folder => {
 
   const testFunc = () => { execute(testConfigOverrides, testToolsOverride); };
 
-  testWithDataFolder(testFunc, inputFolder, expectedFolder, temporaryFolder);
+  utils.testWithDataFolder(testFunc, inputFolder, expectedFolder, temporaryFolder);
 }

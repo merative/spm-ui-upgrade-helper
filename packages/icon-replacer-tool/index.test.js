@@ -1,4 +1,3 @@
-const testWithDataFolder = require("test-with-data-folder");
 const utils = require("../shared-utils/sharedUtils");
 const { execute } = require("./index");
 
@@ -31,5 +30,5 @@ const runTest = folder => {
 
   const testFunc = () => { execute(overrides); };
 
-  testWithDataFolder(testFunc, inputFolder, expectedFolder, temporaryFolder);
+  utils.testWithDataFolder(testFunc, inputFolder, expectedFolder, temporaryFolder);
 }
