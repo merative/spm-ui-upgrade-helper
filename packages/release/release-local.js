@@ -32,11 +32,9 @@ const release = (shell, option, version) => {
 
   if(option === "--ship") {
     shell.echo("Shipping...");
-    exec(shell, "docker login wh-govspm-docker-local.artifactory.swg-devops.com");
+    exec(shell, "docker login");
     exec(shell, `yarn docker-tasks release ${version}`);
     exec(shell, `yarn docker-tasks release latest`);
-    exec(shell, `yarn docker-tasks release ${version} --public`);
-    exec(shell, `yarn docker-tasks release latest --public`);
     exec(shell, `git tag v${version}`);
     exec(shell, `git push --tags`);
     exec(shell, `rm -f version.json`);

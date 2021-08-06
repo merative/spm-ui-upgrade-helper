@@ -39,10 +39,10 @@ echo.
 
 call docker stop spm-ui-upgrade-helper
 call docker rm spm-ui-upgrade-helper
-echo Logging in to wh-govspm-docker-local.artifactory.swg-devops.com...
-call docker login wh-govspm-docker-local.artifactory.swg-devops.com
-call docker pull wh-govspm-docker-local.artifactory.swg-devops.com/artifactory/wh-govspm-docker-local/spm-ui-upgrade-helper/spm-ui-upgrade-helper:%VERSION%
-call docker run %DETACH_CMD% -p 3000:3000 -p 4000-4004:4000-4004 %UIUH_DEV_CMD% %INPUT_FOLDER_CMD% %OUTPUT_FOLDER_CMD% --name spm-ui-upgrade-helper wh-govspm-docker-local.artifactory.swg-devops.com/artifactory/wh-govspm-docker-local/spm-ui-upgrade-helper/spm-ui-upgrade-helper:%VERSION%
+echo Logging in to Docker Hub...
+call docker login
+call docker pull ibmcom/spm-ui-upgrade-helper:%VERSION%
+call docker run %DETACH_CMD% -p 3000:3000 -p 4000-4004:4000-4004 %UIUH_DEV_CMD% %INPUT_FOLDER_CMD% %OUTPUT_FOLDER_CMD% --name spm-ui-upgrade-helper ibmcom/spm-ui-upgrade-helper:%VERSION%
 endlocal
 
 goto end

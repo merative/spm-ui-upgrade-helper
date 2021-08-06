@@ -1,11 +1,4 @@
 imageName: spm-ui-upgrade-helper
 runArgs: -p 3000:3000 -p 4000-4004:4000-4004
-
-defaultRelease: private
-
-# Public repo
+defaultRelease: public
 username: ibmcom
-
-# Private repo
-privateRepoUrl: wh-govspm-docker-local.artifactory.swg-devops.com/artifactory/wh-govspm-docker-local
-privateRepoFolder: spm-ui-upgrade-helper

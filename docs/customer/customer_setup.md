@@ -28,8 +28,8 @@ Once installed, you will need to allow Docker Desktop to access certain paths on
 
 ### Option 2: Internal IBM Docker hub
 
-1. Run `docker login wh-govspm-docker-local.artifactory.swg-devops.com`
-2. Run `docker pull wh-govspm-docker-local.artifactory.swg-devops.com/artifactory/wh-govspm-docker-local/spm-ui-upgrade-helper/spm-ui-upgrade-helper:latest`
+1. Run `docker login`
+2. Run `docker pull ibmcom/spm-ui-upgrade-helper:latest`
 
 ## Running the tool
 
@@ -81,7 +81,7 @@ If custom configuration is required, this can be achieved by using a `.spm-uiuh-
 
 ## Troubleshooting
 
-- Make sure you are logged in to Docker (run `docker login` or `docker login wh-govspm-docker-local.artifactory.swg-devops.com`)
+- Make sure you are logged in to Docker (run `docker login`)
 - Make sure folders are shared in Docker Desktop
 - Restart Docker Desktop
 - Delete `<output folder>` and try again
