@@ -1,5 +1,4 @@
 const utils = require("../shared-utils/sharedUtils");
-const testWithDataFolder = require("test-with-data-folder");
 const { execute } = require("./index");
 
 const testCaseFolders = utils.glob("test-data/test-case-*", { onlyDirectories: true, deep: 1 });
@@ -27,5 +26,5 @@ const runTest = folder => {
   const testFunction = () => { execute(configOverrides); };
 
   // Run the test
-  testWithDataFolder(testFunction, inputFolder, expectedFolder, temporaryFolder);
+  utils.testWithDataFolder(testFunction, inputFolder, expectedFolder, temporaryFolder);
 }

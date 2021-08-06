@@ -1,6 +1,4 @@
 const utils = require("../shared-utils/sharedUtils");
-
-const testWithDataFolder = require("test-with-data-folder");
 const convertDocs = require("./convert-docs");
 
 /**
@@ -27,5 +25,5 @@ const runTest = folder => {
   };
   const testFunc = () => { convertDocs(overrides); };
 
-  testWithDataFolder(testFunc, inputFolder, expectedFolder, temporaryFolder);
+  utils.testWithDataFolder(testFunc, inputFolder, expectedFolder, temporaryFolder);
 }
