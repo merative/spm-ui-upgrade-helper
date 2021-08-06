@@ -616,7 +616,7 @@ describe("applyRules", () => {
   });
 
   test("should only match the first rule when the first rule is passed", () => {
-    const expected = 0;
+    const expected = 1;
 
     const mockSetAttribute = jest.fn();
     const document = {
