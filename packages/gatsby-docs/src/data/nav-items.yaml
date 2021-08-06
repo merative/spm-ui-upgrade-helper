@@ -1,10 +1,7 @@
-- title: Getting started
-  pages:
-    - path: /
 - title: Overview
   pages:
     - path: /overview
-- title: UI upgrade helper guide
+- title: UI Upgrade Helper Guide
   pages:
     - title: Setup
       path: /customer/customer_setup
@@ -14,10 +11,8 @@
       path: /customer/customer_configuration
     - title: Customer font replacement
       path: /customer/customer_font_replacement
-- title: UI upgrade helper developer guide
+- title: UI Upgrade Helper Developer Guide
   pages:
-    - title: Developer guide
-      path: /dev/developer_guide
     - title: Project overview
       path: /dev/project_overview
     - title: Installation
