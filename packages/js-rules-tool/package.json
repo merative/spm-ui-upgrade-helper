@@ -9,7 +9,6 @@
     "test": "jest"
   },
   "dependencies": {
-    "@folkforms/file-io": "^0.2.2",
     "date-format": "^3.0.0",
     "esprima": "^4.0.1",
     "estraverse": "^5.2.0",

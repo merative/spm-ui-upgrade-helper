@@ -1,6 +1,6 @@
 const fs = require("fs-extra");
-const fileio = require("@folkforms/file-io");
 const shelljs = require("shelljs");
+const globLib = require("fast-glob");
 
 /**
  * Removes the folder `config.outputFolder`.
@@ -43,9 +43,9 @@ const globAllFiles = config => {
   console.info("Collecting input files");
   const startTime = new Date().getTime();
   let inputFiles = [];
-  config.globs.forEach(glob => {
-    const path = `${config.inputFolder}/${glob}`;
-    const files = fileio.glob(path);
+  config.globs.forEach(g => {
+    const path = `${config.inputFolder}/${g}`;
+    const files = globLib.sync(path);
     inputFiles.push(files);
   });
   inputFiles = inputFiles.flat();
@@ -152,6 +152,67 @@ const flipToOutputFiles = (config, inputFiles) => {
   return files;
 }
 
+/**
+ * Glob all files according to the given pattern.
+ *
+ * This is a thin wrapper around `fast-glob` (https://www.npmjs.com/package/fast-glob)
+ *
+ * @param {string} pattern glob pattern
+ * @param {object} options fast-glob options
+ * @returns {array} files found
+ */
+const glob = (pattern, options) => {
+  return globLib.sync(pattern, options);
+}
+
+/**
+ * Read the contents of a file into an array.
+ *
+ * @param {string} filename file to read
+ * @returns {array} file contents
+ */
+const readLines = filename => {
+  return readLinesAsString(filename).split("\n");
+}
+
+/**
+ * Read the contents of a file into a string.
+ *
+ * @param {string} filename file to read
+ * @returns {string} file contents
+ */
+const readLinesAsString = filename => {
+  const contents = fs.readFileSync(filename, 'utf8');
+  return contents;
+}
+
+/**
+ * Reads a JSON file and converts it to a JS object.
+ *
+ * @param {string} filename file to read
+ * @returns {object} file contents parsed with JSON.parse
+ */
+const readJson = filename => {
+  return JSON.parse(readLinesAsString(filename));
+}
+
+/**
+ * Writes the given array to a file.
+ *
+ * @param {string} filename file to write
+ * @returns {array} data string or array of lines to write
+ */
+const writeLines = (filename, data, append = false) => {
+  let dataOut;
+  if(typeof data === "string") {
+    dataOut = data;
+  } else {
+    dataOut = data.join("\n");
+  }
+  const options = { flag: append ? "a" : "w" };
+  fs.outputFileSync(filename, dataOut, options);
+}
+
 module.exports = {
   removeOutputFolder,
   writeFiles,
@@ -160,4 +221,8 @@ module.exports = {
   removeFiles,
   copyFilesToOutputFolder,
   flipToOutputFiles,
+  glob,
+  readJson,
+  readLines,
+  writeLines,
 };

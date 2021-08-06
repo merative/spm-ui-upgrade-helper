@@ -1,12 +1,12 @@
 const fs = require("fs-extra");
-const fileio = require("@folkforms/file-io");
+const utils = require("../shared-utils/sharedUtils");
 const testWithDataFolder = require("test-with-data-folder");
 const { execute } = require("./index");
 
 /**
  * Run the test against each of the test case folders.
  */
-const testCaseFolders = fileio.glob("test-data/test-case-*", { onlyDirectories: true, deep: 1 });
+const testCaseFolders = utils.glob("test-data/test-case-*", { onlyDirectories: true, deep: 1 });
 testCaseFolders.forEach(folder => {
   test(`main-tool test (from: packages/main-tool/${folder})`, () => {
     runTest(folder);
@@ -20,7 +20,7 @@ const runTest = folder => {
   const inputFolder = `${folder}/input`;
   const expectedFolder = `${folder}/expected`;
   const temporaryFolder = `${folder}/temp`;
-  const testToolsOverride = fileio.readJson(`${folder}/tools.json`);
+  const testToolsOverride = utils.readJson(`${folder}/tools.json`);
   let testConfigOverrides = {
     inputFolder,
     outputFolder: temporaryFolder,
@@ -30,7 +30,7 @@ const runTest = folder => {
   };
   const additionalConfigOverridesFile = `${folder}/config.json`;
   if(fs.existsSync(additionalConfigOverridesFile)) {
-    const testAdditionalConfigOverrides = fileio.readJson(additionalConfigOverridesFile);
+    const testAdditionalConfigOverrides = utils.readJson(additionalConfigOverridesFile);
     testConfigOverrides = { ...testConfigOverrides, ...testAdditionalConfigOverrides };
   }
 

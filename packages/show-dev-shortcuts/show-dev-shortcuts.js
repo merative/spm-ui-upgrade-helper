@@ -5,15 +5,15 @@
  * Note that the paths used here are different due to how the Dockerfile builds the code.
  */
 const { program } = require("commander");
-const fileio = require("@folkforms/file-io");
+const utils = require("../shared-utils/sharedUtils");
 const jsonFormat = require("json-format");
 
 program.parse();
 const devMode = program.args.length > 0 && !!program.args[0];
 
 const packageFile = "../plugins/package.json";
-const package = fileio.readJson(packageFile);
-const tools = fileio.readJson("./tools.json");
+const package = utils.readJson(packageFile);
+const tools = utils.readJson("./tools.json");
 
 if(devMode === true) {
   console.log(`show-dev-shortcuts: Rewriting '${packageFile}' to include all tools`);
@@ -30,4 +30,4 @@ if(devMode === true) {
   console.log(`show-dev-shortcuts: Argument was '${devMode}', using default configuration.`);
 }
 
-fileio.writeLines(packageFile, jsonFormat(package));
+utils.writeLines(packageFile, jsonFormat(package));

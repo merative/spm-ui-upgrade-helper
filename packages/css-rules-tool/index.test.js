@@ -1,8 +1,8 @@
-const fileio = require("@folkforms/file-io");
+const utils = require("../shared-utils/sharedUtils");
 const testWithDataFolder = require("test-with-data-folder");
 const { execute } = require("./index");
 
-const testCaseFolders = fileio.glob("test-data/test-case-*", { onlyDirectories: true, deep: 1 });
+const testCaseFolders = utils.glob("test-data/test-case-*", { onlyDirectories: true, deep: 1 });
 testCaseFolders.forEach(folder => {
   test(`css-rules-tool test (from: packages/css-rules-tool/${folder})`, () => {
     runTest(folder);

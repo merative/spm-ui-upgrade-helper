@@ -1,6 +1,5 @@
 var esprima = require('esprima');
 var estraverse = require('estraverse');
-const fileio = require('@folkforms/file-io');
 const utils = require("../shared-utils/sharedUtils");
 const { applyRulesToJS } = require("./src/applyRulesToJS");
 
@@ -34,7 +33,7 @@ const execute = overrides => {
     // Apply the rules to the files
     const modified = {};
     targetFiles.forEach(filename => {
-      const contents = fileio.readLines(filename);
+      const contents = utils.readLines(filename);
       // modified[filename] = applyRulesToJS(contents, rules, filename);
 
       const identifiers = [

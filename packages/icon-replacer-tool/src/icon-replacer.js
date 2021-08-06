@@ -1,8 +1,6 @@
 const chalk = require("chalk");
 const io = require("./io");
 const engine = require("./engine");
-const fileio = require("@folkforms/file-io");
-const shelljs = require("shelljs");
 const utils = require("../../shared-utils/sharedUtils");
 
 /**
@@ -41,7 +39,7 @@ function run(config, sourceDir, mapPath) {
   const files = utils.removeFiles(config.files, config.iconReplacerTool.exclude);
   const filesToWrite = {};
   files.forEach((file) => {
-    const prevContent = fileio.readLines(file).join("\n"); // read globbed files content
+    const prevContent = utils.readLines(file).join("\n"); // read globbed files content
     const nextContent = engine.updateIconReferences(prevContent, mappings); // check if file contains references to update
 
     // if a file is updated with new references, write that content back to file

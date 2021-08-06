@@ -1,4 +1,4 @@
-const fileio = require("@folkforms/file-io");
+const utils = require("../sharedUtils");
 const { loadConfig } = require("./config");
 const { removeIgnoredFiles } = require("./removeIgnoredFiles");
 
@@ -18,7 +18,7 @@ const overrides = {
 
 test('removeIgnoredFiles test 1', () => {
     const config = loadConfig(overrides);
-    let inputFiles = fileio.glob(overrides.inputFolder + "/**");
+    let inputFiles = utils.glob(overrides.inputFolder + "/**");
     inputFiles = inputFiles.map(f => {
       return f.startsWith("./") ? f.substring(2) : f;
     });

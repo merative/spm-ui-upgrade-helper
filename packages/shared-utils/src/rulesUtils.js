@@ -1,4 +1,4 @@
-const fileio = require('@folkforms/file-io');
+const filesAndFolders = require("./filesAndFolders");
 
 /**
  * Loads the rules files and merges and sorts them. Also loads any rules files found at the location
@@ -6,7 +6,7 @@ const fileio = require('@folkforms/file-io');
  */
 const loadRules = config => {
   const rulesJson = [];
-  const rulesFiles = fileio.glob(`${config.cssRulesTool.rulesFolder}/*.json`);
+  const rulesFiles = filesAndFolders.glob(`${config.cssRulesTool.rulesFolder}/*.json`);
   rulesFiles.forEach(file => rulesJson.push(readRulesFile(file)));
   return mergeAndSortRules(rulesJson);
 }
@@ -17,7 +17,7 @@ const loadRules = config => {
  * @param {*} filename filename to read
  */
 const readRulesFile = filename => {
-  const rules = fileio.readJson(filename);
+  const rules = filesAndFolders.readJson(filename);
   rules.SelectorRemove.forEach(item => {
     if (!item.value) {
       throw new Error(

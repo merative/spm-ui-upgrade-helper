@@ -1,8 +1,8 @@
-const fileio = require("@folkforms/file-io");
+const utils = require("../../packages/shared-utils/sharedUtils");
 const shelljs = require("shelljs");
 const { Command } = require('commander');
 
-const allDataSets = fileio.readJson("acceptance-tests/scripts/acceptance-test-data-sets.json");
+const allDataSets = utils.readJson("acceptance-tests/scripts/acceptance-test-data-sets.json");
 
 const program = new Command();
 program

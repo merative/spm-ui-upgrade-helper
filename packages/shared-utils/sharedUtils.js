@@ -10,7 +10,11 @@ const {
   keepFiles,
   removeFiles,
   copyFilesToOutputFolder,
-  flipToOutputFiles
+  flipToOutputFiles,
+  glob,
+  readJson,
+  readLines,
+  writeLines,
 } = require("./src/filesAndFolders");
 const { removeIgnoredFiles } = require("./src/removeIgnoredFiles");
 const { init } = require("./src/init");
@@ -36,6 +40,10 @@ module.exports = {
   removeFiles,
   copyFilesToOutputFolder,
   flipToOutputFiles,
+  glob,
+  readJson,
+  readLines,
+  writeLines,
   // removeIgnoredFiles.js
   removeIgnoredFiles,
   // init.js

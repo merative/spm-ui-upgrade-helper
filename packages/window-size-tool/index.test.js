@@ -1,11 +1,11 @@
-const fileio = require("@folkforms/file-io");
+const utils = require("../shared-utils/sharedUtils");
 const testWithDataFolder = require("test-with-data-folder");
 const { execute } = require("./index");
 
 /**
  * Run the test against each of the test case folders.
  */
-const testCaseFolders = fileio.glob("test-data/test-case-*", { onlyDirectories: true, deep: 1 });
+const testCaseFolders = utils.glob("test-data/test-case-*", { onlyDirectories: true, deep: 1 });
 testCaseFolders.forEach(folder => {
   test(`window-size-tool test (from: packages/window-size-tool/${folder})`, () => {
     runTest(folder);

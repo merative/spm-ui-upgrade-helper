@@ -1,4 +1,4 @@
-const fileio = require("@folkforms/file-io");
+const utils = require("../shared-utils/sharedUtils");
 const shelljs = require("shelljs");
 
 /**
@@ -15,15 +15,15 @@ const convertDocs = overrides => {
 
   if(!skipCopy) {
     shelljs.rm("-rf", outputFolder);
-    fileio.copyFolder(docsFolder, outputFolder);
+    utils.copyFolder(docsFolder, outputFolder);
   }
   modifyFiles(outputFolder);
 }
 
 const modifyFiles = outputFolder => {
-  const files = fileio.glob(`${outputFolder}/**/*.md`);
+  const files = utils.glob(`${outputFolder}/**/*.md`);
   files.forEach(file => {
-    let contents = fileio.readLines(file);
+    let contents = utils.readLines(file);
     if(contents[0].startsWith("[<<")) {
       contents.splice(0, 1);
     }
@@ -37,7 +37,7 @@ const modifyFiles = outputFolder => {
       return line;
     });
     contents = contents.flat();
-    fileio.writeLines(file, contents);
+    utils.writeLines(file, contents);
   });
 }
 
