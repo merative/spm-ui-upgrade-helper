@@ -6,10 +6,10 @@ const links = [
     title: 'Github',
     href: 'https://github.com/IBM/spm-ui-upgrade-helper',
   },
-//  {
-//    title: 'IBM Documentation',
-//    href: 'https://www.ibm.com/docs/en/spm/7.0.11?topic=product-overview',
-//  },
+  {
+    title: 'IBM Documentation',
+    href: 'https://www.ibm.com/docs/en/spm/7.0.11?topic=product-overview',
+  },
 //  {
 //    title: 'Change Log',
 //    href: 'https://github.com/IBM/spm-kubernetes/blob/master/CHANGELOG.md',
