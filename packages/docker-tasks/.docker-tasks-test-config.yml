@@ -1,0 +1,4 @@
+# This file is test configuration for docker-tasks.test.js
+imageName: foo
+runArgs: -p 3000:3000
+username: folkforms
