@@ -17,7 +17,7 @@ Once installed, you will need to allow Docker Desktop to access certain paths on
 3. Share your 7.0.11.0 development environment folder
 4. Share a temporary folder, e.g. `/tmp/upgrade` or `c:\temp\upgrade`
 
-![1. Open Docker Desktop, 2. Click the Settings button then Resources then File Sharing, 3. Add the folder you want to share with the Docker container](../images/docker-volume-sharing.png "Docker volume sharing screenshot")
+![1. Open Docker Desktop, 2. Click the Settings button then Resources then File Sharing, 3. Add the folder you want to share with the Docker container](../../images/docker-volume-sharing.png "Docker volume sharing screenshot")
 
 ## Downloading the tool
 
@@ -47,7 +47,7 @@ Once installed, you will need to allow Docker Desktop to access certain paths on
 7. The files in `<input folder>` will be scanned and the results placed in `<output folder>`.
 8.  Click the `Source Control: Git` button on the left sidebar to inspect the changes.
 
-![1. Press F1, 2. Type "Run SPM UI Upgrade Helper", 3. Select the shortcut, 4. Wait for the tool to finish, 5. Click "Source Control: Git" to see the output](../images/upgrade-helper.gif "Running the UI Upgrade Helper tool")
+![1. Press F1, 2. Type "Run SPM UI Upgrade Helper", 3. Select the shortcut, 4. Wait for the tool to finish, 5. Click "Source Control: Git" to see the output](../../images/upgrade-helper.gif "Running the UI Upgrade Helper tool")
 
 9. Copy the contents of `<output folder>` into your v8 development environment.
 10. Build and test v8.
