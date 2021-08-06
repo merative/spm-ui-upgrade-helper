@@ -9,7 +9,6 @@
   },
   "devDependencies": {
     "commander": "^8.0.0",
-    "dummy-shells": "^0.0.7",
     "jest": "^27.0.6",
     "shelljs": "^0.8.4"
   }

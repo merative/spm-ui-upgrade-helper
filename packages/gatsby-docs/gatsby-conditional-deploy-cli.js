@@ -1,5 +1,5 @@
 const shelljs = require("shelljs");
-const { dryRunShellJs } = require("dummy-shells");
+const utils = require("../shared-utils/sharedUtils");
 const { Command } = require('commander');
 const gatsbyConditionalDeploy = require("./gatsby-conditional-deploy");
 
@@ -10,7 +10,7 @@ program
   .option('-n, --dry-run', 'Show what commands would be executed, without actually running anything')
   .parse(process.argv);
 
-const shell = program.opts().dryRun ? dryRunShellJs : shelljs;
+const shell = program.opts().dryRun ? utils.dummyShells.dryRunShellJs : shelljs;
 
 const travisBranch = process.env.TRAVIS_BRANCH;
 if(travisBranch !== "main") {

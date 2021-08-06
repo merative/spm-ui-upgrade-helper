@@ -20,6 +20,7 @@ const {
 const { removeIgnoredFiles } = require("./src/removeIgnoredFiles");
 const { init } = require("./src/init");
 const testWithDataFolder = require("./src/testWithDataFolder");
+const dummyShells = require("./src/dummyShells");
 
 module.exports = {
   // config.js
@@ -52,5 +53,7 @@ module.exports = {
   // init.js
   init,
   // testWithDataFolder.js
-  testWithDataFolder
+  testWithDataFolder,
+  // dummyShells.js
+  dummyShells,
 };

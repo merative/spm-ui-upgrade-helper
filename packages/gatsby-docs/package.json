@@ -15,7 +15,6 @@
   },
   "devDependencies": {
     "commander": "^8.1.0",
-    "dummy-shells": "^0.0.4",
     "gatsby": "^3.10.2",
     "gatsby-theme-carbon": "^2.0.0",
     "gh-pages": "^3.2.3",
