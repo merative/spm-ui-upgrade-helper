@@ -8,6 +8,7 @@ env:
   - VER=`node -pe "require('./package.json')['version']"`
 
 script:
+  - echo @@@@@@@@ TRAVIS_COMMIT_RANGE = $TRAVIS_COMMIT_RANGE
   - yarn install-all
   - yarn test
   - cd packages/gatsby-docs && yarn gatsby:conditional-deploy
