@@ -1,5 +1,4 @@
 var esprima = require('esprima');
-var estraverse = require('estraverse');
 const utils = require("../shared-utils/sharedUtils");
 const { applyRulesToJS } = require("./src/applyRulesToJS");
 
@@ -7,26 +6,11 @@ const { applyRulesToJS } = require("./src/applyRulesToJS");
  * Main method. Will be called via http://localhost:40xx/execute
  */
 const execute = overrides => {
-  // estraverse.traverse(x2, {
-  //   enter: function (node, parent) {
-  //     console.log("traverse-enter");
-  //     if (node.type == 'FunctionExpression' || node.type == 'FunctionDeclaration') {
-  //       return estraverse.VisitorOption.Skip;
-  //     }
-  //   },
-  //   leave: function (node, parent) {
-  //     console.log("traverse-leave");
-  //     if (node.type == 'VariableDeclarator') {
-  //       console.log(node.id.name);
-  //     }
-  //   }
-  // });
-
-  const config = { ...utils.loadConfig(), ...overrides };
+  const config = utils.loadConfig(overrides);
   utils.init(config);
 
   // Initial setup
-  let targetFiles = config.files;
+  let targetFiles = config.internal.files;
   targetFiles = utils.keepFiles(targetFiles, "js");
 
   try {
@@ -82,7 +66,7 @@ const execute = overrides => {
 
     // Save changes
     // utils.writeFiles(modified);
-    // utils.commitFiles(config.outputFolder, "???");
+    // utils.commitFiles(config.internal.outputFolder, "???");
     // utils.writeFiles(???);
 
   } catch (error) {

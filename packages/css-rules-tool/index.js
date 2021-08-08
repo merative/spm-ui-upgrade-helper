@@ -7,13 +7,13 @@ const utils = require("../shared-utils/sharedUtils");
  *
  * We prettify the files as a first step in order to make the final diff as clean as possible.
  */
-const execute = (overrides = {}) => {
+const execute = overrides => {
   try {
-    const config = { ...utils.loadConfig(), ...overrides };
+    const config = utils.loadConfig(overrides);
     utils.init(config);
 
     // Initial setup
-    let targetFiles = config.files;
+    let targetFiles = config.internal.files;
     targetFiles = utils.keepFiles(targetFiles, "css");
 
     // Apply the rules to the files
@@ -47,7 +47,7 @@ const execute = (overrides = {}) => {
 
   } catch (error) {
     console.error(error);
-    process.exit(1);
+    return 1;
   }
 
   console.info("css-rules-tool finished");

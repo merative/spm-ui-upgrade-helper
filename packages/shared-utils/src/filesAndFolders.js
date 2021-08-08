@@ -3,16 +3,16 @@ const shelljs = require("shelljs");
 const globLib = require("fast-glob");
 
 /**
- * Removes the folder `config.outputFolder`.
+ * Removes the folder `config.internal.outputFolder`.
  *
  * @param {object} config configuration object
  */
 const removeOutputFolder = config => {
   console.info("Deleting existing output folder");
   const cwd = process.cwd();
-  shelljs.rm("-rf", `${config.outputFolder}/*`);
-  shelljs.rm("-rf", `${config.outputFolder}/.git`);
-  shelljs.mkdir('-p', config.outputFolder);
+  shelljs.rm("-rf", `${config.internal.outputFolder}/*`);
+  shelljs.rm("-rf", `${config.internal.outputFolder}/.git`);
+  shelljs.mkdir('-p', config.internal.outputFolder);
   shelljs.cd(cwd);
 }
 
@@ -44,7 +44,7 @@ const globAllFiles = config => {
   const startTime = new Date().getTime();
   let inputFiles = [];
   config.globs.forEach(g => {
-    const path = `${config.inputFolder}/${g}`;
+    const path = `${config.internal.inputFolder}/${g}`;
     const files = globLib.sync(path);
     inputFiles.push(files);
   });
@@ -111,8 +111,7 @@ const removeFiles = (files, ...ext) => {
 }
 
 /**
- * Updates all of the files in `inputFiles` array to `config.outputFolder`, by updating
- * `config.inputFolder` => `config.outputFolder`.
+ * Copies files from `config.internal.inputFolder` to `config.internal.outputFolder`.
  *
  * @param {*} config configuration object
  * @param {*} inputFiles list of input files
@@ -122,7 +121,7 @@ const copyFilesToOutputFolder = (config, inputFiles) => {
   const startTime = new Date().getTime();
   const outputFiles = [];
   inputFiles.forEach(file => {
-    const destFile = file.replace(config.inputFolder, config.outputFolder);
+    const destFile = file.replace(config.internal.inputFolder, config.internal.outputFolder);
     const destFolder = destFile.substring(0, destFile.lastIndexOf('/'));
     shelljs.mkdir('-p', destFolder);
     shelljs.cp(file, destFile);
@@ -133,8 +132,8 @@ const copyFilesToOutputFolder = (config, inputFiles) => {
 }
 
 /**
- * Updates the path of all files in `inputFiles` array from `config.inputFolder` =>
- * `config.outputFolder`.
+ * Updates the path of all files in `inputFiles` array from `config.internal.inputFolder` =>
+ * `config.internal.outputFolder`.
  *
  * @param {*} config configuration object
  * @param {*} inputFiles list of input files
@@ -144,7 +143,7 @@ const flipToOutputFiles = (config, inputFiles) => {
   const startTime = new Date().getTime();
   const files = [];
   inputFiles.forEach(file => {
-    const destFile = file.replace(config.inputFolder, config.outputFolder);
+    const destFile = file.replace(config.internal.inputFolder, config.internal.outputFolder);
     files.push(destFile);
   });
   const endTime = new Date().getTime();

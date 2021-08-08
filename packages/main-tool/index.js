@@ -9,14 +9,15 @@ const utils = require("../shared-utils/sharedUtils");
 const execute = (testConfigOverrides = {}, testToolOverrides = []) => {
   try {
     // Load configuration (and apply any test overrides provided)
-    const config = { ...utils.loadConfig(), ...testConfigOverrides };
+    let config = utils.loadConfig(testConfigOverrides);
+
     const tools = testToolOverrides.length > 0 ? testToolOverrides : utils.readJson("../../config/tools.json");
 
-    // Init the output folder and set config.files
+    // Init the output folder and set config.internal.files
     utils.init(config);
 
     // Pass configuration to the individual tools so we can tell them to skip the init step
-    const configOverrides = { ...config, skipInit: true };
+    const configOverrides = { ...config, internal: { ...config.internal, skipInit: true } };
 
     // Execute all the tools
     tools.forEach(tool => {

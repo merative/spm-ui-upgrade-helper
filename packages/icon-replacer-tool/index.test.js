@@ -4,7 +4,7 @@ const { execute } = require("./index");
 /**
  * Run the test against each of the test case folders.
  */
-const testCaseFolders = utils.glob("test-data/test-case-*", { onlyDirectories: true, deep: 1 });
+const testCaseFolders = utils.glob("test-data/test-case-2", { onlyDirectories: true, deep: 1 });
 testCaseFolders.forEach(folder => {
   test(`icon-replacer-tool test (from: packages/icon-replacer-tool/${folder})`, () => {
     runTest(folder);
@@ -19,13 +19,17 @@ const runTest = folder => {
   const expectedFolder = `${folder}/expected`;
   const temporaryFolder = `${folder}/temp`;
   const overrides = {
-    inputFolder,
-    outputFolder: temporaryFolder,
     globs: [ "**" ],
-    iconMappings: "./icon_mappings.json",
-    iconFolder: "./source_files",
     logLevel: "quiet",
-    testMode: true,
+    iconReplacerTool: {
+      iconMappings: "./icon_mappings.json",
+      iconFolder: "./source_files",
+    },
+    internal: {
+      inputFolder,
+      outputFolder: temporaryFolder,
+      testMode: true,
+    },
   };
 
   const testFunc = () => { execute(overrides); };

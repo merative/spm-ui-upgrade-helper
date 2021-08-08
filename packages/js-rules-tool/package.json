@@ -11,7 +11,6 @@
   "dependencies": {
     "date-format": "^3.0.0",
     "esprima": "^4.0.1",
-    "estraverse": "^5.2.0",
     "express": "^4.17.1",
     "nodemon": "^2.0.7"
   },

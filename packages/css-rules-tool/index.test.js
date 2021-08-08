@@ -14,12 +14,13 @@ const runTest = folder => {
   const expectedFolder = `${folder}/expected`;
   const temporaryFolder = `${folder}/temp`;
   const configOverrides = {
-    inputFolder,
-    outputFolder: temporaryFolder,
     globs: [ "**/*" ],
     logLevel: "quiet",
-    testMode: true,
-    skipInit: true,
+    internal: {
+      inputFolder,
+      outputFolder: temporaryFolder,
+      testMode: true,
+    },
   };
 
   // Define the function under test

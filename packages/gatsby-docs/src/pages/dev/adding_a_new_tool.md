@@ -14,7 +14,7 @@ title: Adding a new tool
 const utils = require("../shared-utils/sharedUtils");
 
 const execute = overrides => {
-  const config = { ...utils.loadConfig(), ...overrides };
+  const config = utils.loadConfig(overrides);
   utils.init(config);
 
   console.log("Hello, world!");

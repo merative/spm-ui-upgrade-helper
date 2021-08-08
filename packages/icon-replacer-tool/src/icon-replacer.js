@@ -18,7 +18,7 @@ function run(config, sourceDir, mapPath) {
   console.info(`Searching for icon ${chalk.magenta("files")} to replace...`);
 
   // glob icon files from target directory
-  const iconFiles = utils.keepFiles(config.files, "png", "svg");
+  const iconFiles = utils.keepFiles(config.internal.files, "png", "svg");
   console.info(`Processing ${iconFiles.length} files`);
   let modifiedIconCount = 0;
   iconFiles.forEach((iconFile) => {
@@ -36,7 +36,7 @@ function run(config, sourceDir, mapPath) {
   console.info(`Searching for icon ${chalk.magenta("references")} to update...`);
 
   // glob all other files from target directory (minus some excluded filetypes)
-  const files = utils.removeFiles(config.files, config.iconReplacerTool.exclude);
+  const files = utils.removeFiles(config.internal.files, config.iconReplacerTool.exclude);
   const filesToWrite = {};
   files.forEach((file) => {
     const prevContent = utils.readLines(file).join("\n"); // read globbed files content

@@ -19,11 +19,13 @@ const runTest = folder => {
   const expectedFolder = `${folder}/expected`;
   const temporaryFolder = `${folder}/temp`;
   let testConfigOverrides = {
-    inputFolder,
-    outputFolder: temporaryFolder,
     globs: [ "**/*" ],
     logLevel: "quiet",
-    testMode: true,
+    internal: {
+      inputFolder,
+      outputFolder: temporaryFolder,
+      testMode: true,
+    },
   };
 
   const testFunc = () => { execute(testConfigOverrides); };

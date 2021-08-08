@@ -12,13 +12,15 @@ afterEach(() => {
 });
 
 const overrides = {
-  inputFolder: "src/test-data/removeIgnoredFiles/input",
-  outputFolder: "src/test-data/removeIgnoredFiles/output",
+  internal: {
+    inputFolder: "src/test-data/removeIgnoredFiles/input",
+    outputFolder: "src/test-data/removeIgnoredFiles/output",
+  },
 }
 
 test('removeIgnoredFiles test 1', () => {
     const config = loadConfig(overrides);
-    let inputFiles = utils.glob(overrides.inputFolder + "/**");
+    let inputFiles = utils.glob(overrides.internal.inputFolder + "/**");
     inputFiles = inputFiles.map(f => {
       return f.startsWith("./") ? f.substring(2) : f;
     });

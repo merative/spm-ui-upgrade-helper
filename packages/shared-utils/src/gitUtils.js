@@ -1,13 +1,13 @@
 const shell = require("shelljs");
 
 /**
- * Creates a Git repository in `config.outputFolder`.
+ * Creates a Git repository in `config.internal.outputFolder`.
  *
  * @param {object} config configuration object
  */
 const createGitRepo = config => {
   const cwd = process.cwd();
-  shell.cd(config.outputFolder);
+  shell.cd(config.internal.outputFolder);
   shell.exec(`git init`);
   shell.exec(`git config gc.auto 0`);
   shell.cd(cwd);

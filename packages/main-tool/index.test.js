@@ -21,16 +21,29 @@ const runTest = folder => {
   const temporaryFolder = `${folder}/temp`;
   const testToolsOverride = utils.readJson(`${folder}/tools.json`);
   let testConfigOverrides = {
-    inputFolder,
-    outputFolder: temporaryFolder,
     globs: [ "**/*" ],
     logLevel: "quiet",
-    testMode: true,
+    iconReplacerTool: {
+      iconMappings: "../icon-replacer-tool/icon_mappings.json",
+      iconFolder: "../icon-replacer-tool/source_files",
+    },
+    internal: {
+      inputFolder,
+      outputFolder: temporaryFolder,
+      testMode: true,
+    },
   };
   const additionalConfigOverridesFile = `${folder}/config.json`;
   if(fs.existsSync(additionalConfigOverridesFile)) {
     const testAdditionalConfigOverrides = utils.readJson(additionalConfigOverridesFile);
-    testConfigOverrides = { ...testConfigOverrides, ...testAdditionalConfigOverrides };
+    testConfigOverrides = {
+      ...testConfigOverrides,
+      ...testAdditionalConfigOverrides,
+      internal: {
+        ...testConfigOverrides.internal,
+        ...testAdditionalConfigOverrides.internal,
+      },
+    };
   }
 
   const testFunc = () => { execute(testConfigOverrides, testToolsOverride); };

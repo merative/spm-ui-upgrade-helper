@@ -2,22 +2,26 @@ const { loadConfig } = require("./config");
 
 test('config test with defaults', () => {
   const expected = {
-    inputFolder: "/home/workspace/input",
-    outputFolder: "/home/workspace/output",
     globs: [ "EJBServer/components/**/*", "webclient/components/**/*" ],
-    ignorePatternsFile: "../../config/.spm-uiuh-ignore",
     logLevel: "normal",
-    testMode: false,
-    skipInit: false,
-    files: [],
     cssRulesTool: {
       rulesFolder: "../css-rules-tool/rules",
     },
     iconReplacerTool: {
       exclude: ["zip", "class", "jpg", "jpeg", "gif", "png"],
+      iconFolder: "/home/theia/packages/icon-replacer-tool/source_files",
+      iconMappings: "/home/theia/packages/icon-replacer-tool/icon_mappings.json",
     },
     windowSizeTool: {
       rules: "../window-size-tool/rules.json",
+    },
+    internal: {
+      inputFolder: "/home/workspace/input",
+      outputFolder: "/home/workspace/output",
+      ignorePatternsFile: "../../config/.spm-uiuh-ignore",
+      files: [],
+      skipInit: false,
+      testMode: false,
     },
   }
 
@@ -28,22 +32,26 @@ test('config test with defaults', () => {
 
 test('config test with all overrides', () => {
   const overrides = {
-    inputFolder: "aaa",
-    outputFolder: "bbb",
     globs: [ "Foo/**/*" ],
-    ignorePatternsFile: "eee",
     logLevel: "quiet",
-    testMode: true,
-    skipInit: true,
-    files: [],
     cssRulesTool: {
       rulesFolder: "ccc",
     },
     iconReplacerTool: {
       exclude: "ggg",
+      iconFolder: "iii",
+      iconMappings: "hhh",
     },
     windowSizeTool: {
-      rules: "hhh",
+      rules: "jjj",
+    },
+    internal: {
+      inputFolder: "aaa",
+      outputFolder: "bbb",
+      ignorePatternsFile: "eee",
+      files: [],
+      skipInit: true,
+      testMode: true,
     },
   }
   const expected = overrides;
@@ -55,29 +63,36 @@ test('config test with all overrides', () => {
 
 test('config test with some overrides', () => {
   const overrides = {
-    ignorePatternsFile: "eee",
     logLevel: "quiet",
     cssRulesTool: {
       rulesFolder: "../some-rules-folder",
     },
+    internal: {
+      ignorePatternsFile: "eee",
+      skipInit: true,
+    },
   }
   const expected = {
-    inputFolder: "/home/workspace/input",
-    outputFolder: "/home/workspace/output",
     globs: [ "EJBServer/components/**/*", "webclient/components/**/*" ],
-    ignorePatternsFile: "eee",
     logLevel: "quiet",
-    testMode: false,
-    skipInit: false,
-    files: [],
     cssRulesTool: {
       rulesFolder: "../some-rules-folder",
     },
     iconReplacerTool: {
       exclude: ["zip", "class", "jpg", "jpeg", "gif", "png"],
+      iconFolder: "/home/theia/packages/icon-replacer-tool/source_files",
+      iconMappings: "/home/theia/packages/icon-replacer-tool/icon_mappings.json",
     },
     windowSizeTool: {
       rules: "../window-size-tool/rules.json",
+    },
+    internal: {
+      inputFolder: "/home/workspace/input",
+      outputFolder: "/home/workspace/output",
+      ignorePatternsFile: "eee",
+      files: [],
+      skipInit: true,
+      testMode: false,
     },
   };
 
