@@ -24,7 +24,7 @@ const runTest = folder => {
     globs: [ "**" ],
     iconMappings: "./icon_mappings.json",
     iconFolder: "./source_files",
-    quiet: true,
+    logLevel: "quiet",
     testMode: true,
   };
 

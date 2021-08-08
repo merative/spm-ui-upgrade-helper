@@ -6,8 +6,7 @@ test('config test with defaults', () => {
     outputFolder: "/home/workspace/output",
     globs: [ "EJBServer/components/**/*", "webclient/components/**/*" ],
     ignorePatternsFile: "../../config/.spm-uiuh-ignore",
-    quiet: false,
-    debug: true,
+    logLevel: "normal",
     testMode: false,
     skipInit: false,
     files: [],
@@ -33,8 +32,7 @@ test('config test with all overrides', () => {
     outputFolder: "bbb",
     globs: [ "Foo/**/*" ],
     ignorePatternsFile: "eee",
-    quiet: true,
-    debug: false,
+    logLevel: "quiet",
     testMode: true,
     skipInit: true,
     files: [],
@@ -58,8 +56,9 @@ test('config test with all overrides', () => {
 test('config test with some overrides', () => {
   const overrides = {
     ignorePatternsFile: "eee",
-    quiet: true,
+    logLevel: "quiet",
     cssRulesTool: {
+      rulesFolder: "../some-rules-folder",
     },
   }
   const expected = {
@@ -67,13 +66,12 @@ test('config test with some overrides', () => {
     outputFolder: "/home/workspace/output",
     globs: [ "EJBServer/components/**/*", "webclient/components/**/*" ],
     ignorePatternsFile: "eee",
-    quiet: true,
-    debug: true,
+    logLevel: "quiet",
     testMode: false,
     skipInit: false,
     files: [],
     cssRulesTool: {
-      rulesFolder: "../css-rules-tool/rules",
+      rulesFolder: "../some-rules-folder",
     },
     iconReplacerTool: {
       exclude: ["zip", "class", "jpg", "jpeg", "gif", "png"],

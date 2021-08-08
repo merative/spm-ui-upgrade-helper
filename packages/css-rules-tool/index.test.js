@@ -17,9 +17,9 @@ const runTest = folder => {
     inputFolder,
     outputFolder: temporaryFolder,
     globs: [ "**/*" ],
-    quiet: true,
-    skipInit: true,
+    logLevel: "quiet",
     testMode: true,
+    skipInit: true,
   };
 
   // Define the function under test

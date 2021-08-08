@@ -15,7 +15,7 @@ test('ruleUtils test', () => {
     cssRulesTool: {
       rulesFolder: "./src/test-data/rulesUtils/rulesFolder",
     },
-    quiet: true,
+    logLevel: "quiet",
   }
   const expected = filesAndFolders.readJson("./src/test-data/rulesUtils/rulesExpected.json");
 

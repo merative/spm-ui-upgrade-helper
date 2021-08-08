@@ -9,7 +9,7 @@ const utils = require("../shared-utils/sharedUtils");
 const execute = (testConfigOverrides = {}, testToolOverrides = []) => {
   try {
     // Load configuration (and apply any test overrides provided)
-    const config = { ...utils.loadConfig(), debug: false, ...testConfigOverrides };
+    const config = { ...utils.loadConfig(), ...testConfigOverrides };
     const tools = testToolOverrides.length > 0 ? testToolOverrides : utils.readJson("../../config/tools.json");
 
     // Init the output folder and set config.files

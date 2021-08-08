@@ -29,7 +29,7 @@ const overrides = {
   globs: [ "**/*" ],
   ignorePatternsFolder: "src/test-data/filesAndFolders/globAllFiles/ignore",
   ignorePatternsFolderAdditional: "src/test-data/filesAndFolders/globAllFiles/ignoreAdditional",
-  quiet: true,
+  logLevel: "quiet",
 }
 
 test('filesAndFolders.writeFiles test', () => {
@@ -96,7 +96,7 @@ test('filesAndFolders.copyFilesToOutputFolder test', () => {
   const config = {
     inputFolder,
     outputFolder: temporaryFolder,
-    quiet: true,
+    logLevel: "quiet",
   };
   const testFunc = () => { copyFilesToOutputFolder(config, inputFiles); }
 
@@ -109,7 +109,7 @@ test('filesAndFolders.flipToOutputFiles test', () => {
   const config = {
     inputFolder: "input",
     outputFolder: "output",
-    quiet: true,
+    logLevel: "quiet",
   }
 
   const actual = flipToOutputFiles(config, input);
