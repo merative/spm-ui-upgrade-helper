@@ -1,5 +1,3 @@
-// Fork of https://github.com/folkforms/docker-tasks
-
 const shelljs = require("shelljs");
 
 const dockerTasks = (execFunction = shelljs, props, args) => {
