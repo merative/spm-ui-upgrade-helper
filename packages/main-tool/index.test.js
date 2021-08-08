@@ -5,7 +5,7 @@ const { execute } = require("./index");
 /**
  * Run the test against each of the test case folders.
  */
-const testCaseFolders = utils.glob("test-data/test-case-2", { onlyDirectories: true, deep: 1 });
+const testCaseFolders = utils.glob("test-data/test-case-*", { onlyDirectories: true, deep: 1 });
 testCaseFolders.forEach(folder => {
   test(`main-tool test (from: packages/main-tool/${folder})`, () => {
     runTest(folder);
@@ -23,6 +23,10 @@ const runTest = folder => {
   let testConfigOverrides = {
     globs: [ "**/*" ],
     logLevel: "quiet",
+    iconReplacerTool: {
+      iconMappings: "../icon-replacer-tool/icon_mappings.json",
+      iconFolder: "../icon-replacer-tool/source_files",
+    },
     internal: {
       inputFolder,
       outputFolder: temporaryFolder,
@@ -32,7 +36,14 @@ const runTest = folder => {
   const additionalConfigOverridesFile = `${folder}/config.json`;
   if(fs.existsSync(additionalConfigOverridesFile)) {
     const testAdditionalConfigOverrides = utils.readJson(additionalConfigOverridesFile);
-    testConfigOverrides = { ...testConfigOverrides, ...testAdditionalConfigOverrides };
+    testConfigOverrides = {
+      ...testConfigOverrides,
+      ...testAdditionalConfigOverrides,
+      internal: {
+        ...testConfigOverrides.internal,
+        ...testAdditionalConfigOverrides.internal,
+      },
+    };
   }
 
   const testFunc = () => { execute(testConfigOverrides, testToolsOverride); };

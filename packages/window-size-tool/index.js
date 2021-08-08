@@ -7,7 +7,7 @@ const xmldom = require("xmldom");
  * Main method. Will be called via http://localhost:40xx/execute.
  */
 const execute = overrides => {
-  const config = { ...utils.loadConfig(), ...overrides };
+  const config = utils.loadConfig(overrides);
   utils.init(config);
 
   const parser = new xmldom.DOMParser();

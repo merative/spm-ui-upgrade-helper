@@ -7,9 +7,9 @@ const utils = require("../shared-utils/sharedUtils");
  *
  * We prettify the files as a first step in order to make the final diff as clean as possible.
  */
-const execute = (overrides = {}) => {
+const execute = overrides => {
   try {
-    const config = { ...utils.loadConfig(), ...overrides };
+    const config = utils.loadConfig(overrides);
     utils.init(config);
 
     // Initial setup

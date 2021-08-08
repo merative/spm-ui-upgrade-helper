@@ -19,9 +19,13 @@ Paths are relative to the input folder.
       cssRulesTool: {
         rulesFolder: "custom-rules",
       },
-      // File extensions to exclude when checking for icon references
       iconReplacerTool: {
+        // File extensions to exclude when checking for icon references
         exclude: ["zip", "class", "jpg", "jpeg", "gif", "png"],
+        // Directory containing v8 icon files
+        iconFolder: "./source_files",
+        // File containing icon mappings from v7 to v8
+        iconMappings: "./icon_mappings.json",
       },
       // Window sizing rules
       windowSizeTool: {

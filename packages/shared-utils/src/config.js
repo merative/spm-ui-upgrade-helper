@@ -11,42 +11,47 @@ const filesAndFolders = require("./filesAndFolders");
 const loadConfig = (overrides = {}) => {
   let config = {
     // Globs are relative to the input folder, i.e. `${inputFolder}/${glob}`
-    globs: overrides.globs || [ "EJBServer/components/**/*", "webclient/components/**/*" ],
+    globs: [ "EJBServer/components/**/*", "webclient/components/**/*" ],
     // Log verbosity. Options are quiet/normal/debug.
-    logLevel: overrides.logLevel || "normal",
+    logLevel: "normal",
     // css-rules-tool options
     cssRulesTool: {
       // Folder where CSS rules are located
-      rulesFolder: overrides.cssRulesTool && overrides.cssRulesTool.rulesFolder || "../css-rules-tool/rules",
+      rulesFolder: "../css-rules-tool/rules",
     },
     // icon-replacer-tool options
     iconReplacerTool: {
       // File extensions to exclude when checking for icon references
-      exclude: overrides.iconReplacerTool && overrides.iconReplacerTool.exclude || ["zip", "class", "jpg", "jpeg", "gif", "png"],
+      exclude: ["zip", "class", "jpg", "jpeg", "gif", "png"],
+      // Directory containing v8 icon files
+      iconFolder: "/home/theia/packages/icon-replacer-tool/source_files",
+      // File containing icon mappings from v7 to v8
+      iconMappings: "/home/theia/packages/icon-replacer-tool/icon_mappings.json",
     },
     // window-size-tool options
     windowSizeTool: {
       // Window sizing rules
-      rules: overrides.windowSizeTool && overrides.windowSizeTool.rules || "../window-size-tool/rules.json",
+      rules: "../window-size-tool/rules.json",
     },
     // Internal variables that should not be overridden by clients
     internal: {
       // Input and output folders are relative from inside the Docker container
-      inputFolder: overrides.internal && overrides.internal.inputFolder || "/home/workspace/input",
-      outputFolder: overrides.internal && overrides.internal.outputFolder || "/home/workspace/output",
+      inputFolder: "/home/workspace/input",
+      outputFolder: "/home/workspace/output",
       // The files and folders in this file will be ignored by the tool
-      ignorePatternsFile: overrides.internal && overrides.internal.ignorePatternsFile || "../../config/.spm-uiuh-ignore",
+      ignorePatternsFile: "../../config/.spm-uiuh-ignore",
       // Working set of files
-      files: overrides.internal && overrides.internal.files || [],
+      files: [],
       // Used to skip initialization stage when a tool is run from the main tool
-      skipInit: overrides.internal && overrides.internal.skipInit || false,
+      skipInit: false,
       // Used to suppress certain functions during testing
-      testMode: overrides.internal && overrides.internal.testMode || false,
+      testMode: false,
     }
   };
+  config = merge(config, overrides);
   // If there is a .spm-uiuh-config file present then load it as an override
-  const configOverride = checkForLocalConfigOverride(config.internal.inputFolder)
-  config = { ...config, ...configOverride };
+  const localConfigOverride = checkForLocalConfigOverride(config.internal.inputFolder)
+  config = merge(config, localConfigOverride);
   return config;
 }
 
@@ -65,4 +70,25 @@ const checkForLocalConfigOverride = inputFolder => {
   return undefined;
 }
 
-module.exports = { loadConfig };
+const merge = (a, b) => {
+  let output = Object.assign({}, a);
+  if (isObject(a) && isObject(b)) {
+    Object.keys(b).forEach(key => {
+      if (isObject(b[key])) {
+        if (!(key in a))
+          Object.assign(output, { [key]: b[key] });
+        else
+          output[key] = merge(a[key], b[key]);
+      } else {
+        Object.assign(output, { [key]: b[key] });
+      }
+    });
+  }
+  return output;
+}
+
+const isObject = item => {
+  return (item && typeof item === 'object' && !Array.isArray(item));
+};
+
+module.exports = { loadConfig, merge };

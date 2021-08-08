@@ -9,6 +9,8 @@ test('config test with defaults', () => {
     },
     iconReplacerTool: {
       exclude: ["zip", "class", "jpg", "jpeg", "gif", "png"],
+      iconFolder: "/home/theia/packages/icon-replacer-tool/source_files",
+      iconMappings: "/home/theia/packages/icon-replacer-tool/icon_mappings.json",
     },
     windowSizeTool: {
       rules: "../window-size-tool/rules.json",
@@ -37,9 +39,11 @@ test('config test with all overrides', () => {
     },
     iconReplacerTool: {
       exclude: "ggg",
+      iconFolder: "iii",
+      iconMappings: "hhh",
     },
     windowSizeTool: {
-      rules: "hhh",
+      rules: "jjj",
     },
     internal: {
       inputFolder: "aaa",
@@ -76,6 +80,8 @@ test('config test with some overrides', () => {
     },
     iconReplacerTool: {
       exclude: ["zip", "class", "jpg", "jpeg", "gif", "png"],
+      iconFolder: "/home/theia/packages/icon-replacer-tool/source_files",
+      iconMappings: "/home/theia/packages/icon-replacer-tool/icon_mappings.json",
     },
     windowSizeTool: {
       rules: "../window-size-tool/rules.json",
