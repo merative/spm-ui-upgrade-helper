@@ -24,7 +24,7 @@ const runTest = folder => {
     inputFolder,
     outputFolder: temporaryFolder,
     globs: [ "**/*" ],
-    quiet: true,
+    logLevel: "quiet",
     testMode: true,
   };
   const additionalConfigOverridesFile = `${folder}/config.json`;

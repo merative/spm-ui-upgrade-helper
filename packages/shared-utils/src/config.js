@@ -17,20 +17,29 @@ const loadConfig = (overrides = {}) => {
     globs: overrides.globs || [ "EJBServer/components/**/*", "webclient/components/**/*" ],
     // These files and folders will be ignored by the tool
     ignorePatternsFile: overrides.ignorePatternsFile || "../../config/.spm-uiuh-ignore",
-    quiet: overrides.quiet || false,
-    debug: overrides.debug === false ? false : true,
-    testMode: overrides.testMode || false,
-    skipInit: overrides.skipInit || false,
-    files: overrides.files || [],
+    // Log verbosity. Options are quiet/normal/debug.
+    logLevel: overrides.logLevel || "normal",
+    // css-rules-tool options
     cssRulesTool: {
+      // Folder where CSS rules are located
       rulesFolder: overrides.cssRulesTool && overrides.cssRulesTool.rulesFolder || "../css-rules-tool/rules",
     },
+    // icon-replacer-tool options
     iconReplacerTool: {
+      // File extensions to exclude when checking for icon references
       exclude: overrides.iconReplacerTool && overrides.iconReplacerTool.exclude || ["zip", "class", "jpg", "jpeg", "gif", "png"],
     },
+    // window-size-tool options
     windowSizeTool: {
+      // Window sizing rules
       rules: overrides.windowSizeTool && overrides.windowSizeTool.rules || "../window-size-tool/rules.json",
     },
+    // Used to suppress certain functions during testing
+    testMode: overrides.testMode || false,
+    // Used to skip initialization stage when a tool is run from the main tool
+    skipInit: overrides.skipInit || false,
+    // Working set of files
+    files: overrides.files || [],
   };
   // If there is a .spm-uiuh-config file present then load it as an override
   const configOverride = checkForLocalConfigOverride(config.inputFolder)

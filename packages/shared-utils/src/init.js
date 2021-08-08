@@ -19,17 +19,17 @@ const { removeIgnoredFiles } = require("./removeIgnoredFiles");
  * @param {*} config configuration object
  */
 const init = config => {
-  // Turn off info messages (typically used during unit tests)
-  if(config.quiet) {
+  if(config.logLevel.toLowerCase() === "quiet") {
     console.info = () => {};
-  }
-
-  // Turn off debug messages by default
-  if(!config.debug) {
+    console.log = () => {};
     console.debug = () => {};
   }
 
-  // Skip init sometimes (typically when tools are run via the main tool, and during unit tests)
+  if(config.logLevel.toLowerCase() === "normal") {
+    console.debug = () => {};
+  }
+
+  // Skip init sometimes (used when tools are run via the main tool, and during tests)
   if(config.skipInit) {
     console.info("Skipping init step");
     return;
