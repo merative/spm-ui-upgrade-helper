@@ -9,7 +9,7 @@ title: Releasing
     - Use `acceptance-test.bat`/`acceptance-test.sh` to point the tool at the generated data
     - Use `yarn at:test` to run puppeteer tests against the generated data
     - If issues are found, the correct process is to fix the issues on `main` and cherry-pick the fixes into the `v0.0.1` branch
-3. Run `yarn release --ship 0.0.1`
+3. Run `yarn release --ship`
     - This will push the latest image to Docker as `imageName:0.0.1` and `imageName:latest`, then tag the branch as `v0.0.1`
 
 ## Notes
