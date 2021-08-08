@@ -10,13 +10,8 @@ const filesAndFolders = require("./filesAndFolders");
  */
 const loadConfig = (overrides = {}) => {
   let config = {
-    // Input and output folders are relative from inside the Docker container
-    inputFolder: overrides.inputFolder || "/home/workspace/input",
-    outputFolder: overrides.outputFolder || "/home/workspace/output",
-    // Globs will have `inputFolder` prepended, i.e. `${inputFolder}/${glob}`
+    // Globs are relative to the input folder, i.e. `${inputFolder}/${glob}`
     globs: overrides.globs || [ "EJBServer/components/**/*", "webclient/components/**/*" ],
-    // These files and folders will be ignored by the tool
-    ignorePatternsFile: overrides.ignorePatternsFile || "../../config/.spm-uiuh-ignore",
     // Log verbosity. Options are quiet/normal/debug.
     logLevel: overrides.logLevel || "normal",
     // css-rules-tool options
@@ -34,15 +29,23 @@ const loadConfig = (overrides = {}) => {
       // Window sizing rules
       rules: overrides.windowSizeTool && overrides.windowSizeTool.rules || "../window-size-tool/rules.json",
     },
-    // Used to suppress certain functions during testing
-    testMode: overrides.testMode || false,
-    // Used to skip initialization stage when a tool is run from the main tool
-    skipInit: overrides.skipInit || false,
-    // Working set of files
-    files: overrides.files || [],
+    // Internal variables that should not be overridden by clients
+    internal: {
+      // Input and output folders are relative from inside the Docker container
+      inputFolder: overrides.internal && overrides.internal.inputFolder || "/home/workspace/input",
+      outputFolder: overrides.internal && overrides.internal.outputFolder || "/home/workspace/output",
+      // The files and folders in this file will be ignored by the tool
+      ignorePatternsFile: overrides.internal && overrides.internal.ignorePatternsFile || "../../config/.spm-uiuh-ignore",
+      // Working set of files
+      files: overrides.internal && overrides.internal.files || [],
+      // Used to skip initialization stage when a tool is run from the main tool
+      skipInit: overrides.internal && overrides.internal.skipInit || false,
+      // Used to suppress certain functions during testing
+      testMode: overrides.internal && overrides.internal.testMode || false,
+    }
   };
   // If there is a .spm-uiuh-config file present then load it as an override
-  const configOverride = checkForLocalConfigOverride(config.inputFolder)
+  const configOverride = checkForLocalConfigOverride(config.internal.inputFolder)
   config = { ...config, ...configOverride };
   return config;
 }

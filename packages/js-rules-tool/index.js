@@ -26,7 +26,7 @@ const execute = overrides => {
   utils.init(config);
 
   // Initial setup
-  let targetFiles = config.files;
+  let targetFiles = config.internal.files;
   targetFiles = utils.keepFiles(targetFiles, "js");
 
   try {
@@ -82,7 +82,7 @@ const execute = overrides => {
 
     // Save changes
     // utils.writeFiles(modified);
-    // utils.commitFiles(config.outputFolder, "???");
+    // utils.commitFiles(config.internal.outputFolder, "???");
     // utils.writeFiles(???);
 
   } catch (error) {

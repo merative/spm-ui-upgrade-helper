@@ -24,12 +24,14 @@ afterEach(() => {
 });
 
 const overrides = {
-  inputFolder: "src/test-data/filesAndFolders/globAllFiles/input",
-  outputFolder: "src/test-data/filesAndFolders/globAllFiles/output",
   globs: [ "**/*" ],
   ignorePatternsFolder: "src/test-data/filesAndFolders/globAllFiles/ignore",
   ignorePatternsFolderAdditional: "src/test-data/filesAndFolders/globAllFiles/ignoreAdditional",
   logLevel: "quiet",
+  internal: {
+    inputFolder: "src/test-data/filesAndFolders/globAllFiles/input",
+    outputFolder: "src/test-data/filesAndFolders/globAllFiles/output",
+  },
 }
 
 test('filesAndFolders.writeFiles test', () => {
@@ -94,9 +96,11 @@ test('filesAndFolders.copyFilesToOutputFolder test', () => {
 
   const inputFiles = glob(`${inputFolder}/**/*`);
   const config = {
-    inputFolder,
-    outputFolder: temporaryFolder,
     logLevel: "quiet",
+    internal: {
+      inputFolder,
+      outputFolder: temporaryFolder,
+    }
   };
   const testFunc = () => { copyFilesToOutputFolder(config, inputFiles); }
 
@@ -107,16 +111,14 @@ test('filesAndFolders.flipToOutputFiles test', () => {
   const input = [ "input/foo.txt", "input/bar.txt" ];
   const expected = [ "output/foo.txt", "output/bar.txt" ];
   const config = {
-    inputFolder: "input",
-    outputFolder: "output",
     logLevel: "quiet",
+    internal: {
+      inputFolder: "input",
+      outputFolder: "output",
+    },
   }
 
   const actual = flipToOutputFiles(config, input);
 
   expect(actual).toEqual(expected);
-});
-
-test('filesAndFolders.removeOutputFolder dummy test ', () => {
-  expect(true).toEqual(true);
 });

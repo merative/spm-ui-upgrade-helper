@@ -42,7 +42,7 @@ const checkCommitHash = () => {
  * @param {*} config configuration object containing output folder path
  */
 const checkOutputFolderIsWritable = config => {
-  const testFile = `${config.outputFolder}/.test.txt`;
+  const testFile = `${config.internal.outputFolder}/.test.txt`;
   try {
     const testData = [ "foo" ];
     utils.writeLines(testFile, testData);

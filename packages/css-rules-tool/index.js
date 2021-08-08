@@ -13,7 +13,7 @@ const execute = (overrides = {}) => {
     utils.init(config);
 
     // Initial setup
-    let targetFiles = config.files;
+    let targetFiles = config.internal.files;
     targetFiles = utils.keepFiles(targetFiles, "css");
 
     // Apply the rules to the files
@@ -47,7 +47,7 @@ const execute = (overrides = {}) => {
 
   } catch (error) {
     console.error(error);
-    process.exit(1);
+    return 1;
   }
 
   console.info("css-rules-tool finished");

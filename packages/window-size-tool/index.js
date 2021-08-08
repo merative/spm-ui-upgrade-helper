@@ -13,7 +13,7 @@ const execute = overrides => {
   const parser = new xmldom.DOMParser();
   const serializer = new xmldom.XMLSerializer();
 
-  const inputFiles = utils.keepFiles(config.files, "uim", "vim");
+  const inputFiles = utils.keepFiles(config.internal.files, "uim", "vim");
   const rules = utils.readJson(config.windowSizeTool.rules);
 
   let outputFiles = {};

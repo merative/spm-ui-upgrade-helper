@@ -2,14 +2,8 @@ const { loadConfig } = require("./config");
 
 test('config test with defaults', () => {
   const expected = {
-    inputFolder: "/home/workspace/input",
-    outputFolder: "/home/workspace/output",
     globs: [ "EJBServer/components/**/*", "webclient/components/**/*" ],
-    ignorePatternsFile: "../../config/.spm-uiuh-ignore",
     logLevel: "normal",
-    testMode: false,
-    skipInit: false,
-    files: [],
     cssRulesTool: {
       rulesFolder: "../css-rules-tool/rules",
     },
@@ -18,6 +12,14 @@ test('config test with defaults', () => {
     },
     windowSizeTool: {
       rules: "../window-size-tool/rules.json",
+    },
+    internal: {
+      inputFolder: "/home/workspace/input",
+      outputFolder: "/home/workspace/output",
+      ignorePatternsFile: "../../config/.spm-uiuh-ignore",
+      files: [],
+      skipInit: false,
+      testMode: false,
     },
   }
 
@@ -28,14 +30,8 @@ test('config test with defaults', () => {
 
 test('config test with all overrides', () => {
   const overrides = {
-    inputFolder: "aaa",
-    outputFolder: "bbb",
     globs: [ "Foo/**/*" ],
-    ignorePatternsFile: "eee",
     logLevel: "quiet",
-    testMode: true,
-    skipInit: true,
-    files: [],
     cssRulesTool: {
       rulesFolder: "ccc",
     },
@@ -44,6 +40,14 @@ test('config test with all overrides', () => {
     },
     windowSizeTool: {
       rules: "hhh",
+    },
+    internal: {
+      inputFolder: "aaa",
+      outputFolder: "bbb",
+      ignorePatternsFile: "eee",
+      files: [],
+      skipInit: true,
+      testMode: true,
     },
   }
   const expected = overrides;
@@ -55,21 +59,18 @@ test('config test with all overrides', () => {
 
 test('config test with some overrides', () => {
   const overrides = {
-    ignorePatternsFile: "eee",
     logLevel: "quiet",
     cssRulesTool: {
       rulesFolder: "../some-rules-folder",
     },
+    internal: {
+      ignorePatternsFile: "eee",
+      skipInit: true,
+    },
   }
   const expected = {
-    inputFolder: "/home/workspace/input",
-    outputFolder: "/home/workspace/output",
     globs: [ "EJBServer/components/**/*", "webclient/components/**/*" ],
-    ignorePatternsFile: "eee",
     logLevel: "quiet",
-    testMode: false,
-    skipInit: false,
-    files: [],
     cssRulesTool: {
       rulesFolder: "../some-rules-folder",
     },
@@ -78,6 +79,14 @@ test('config test with some overrides', () => {
     },
     windowSizeTool: {
       rules: "../window-size-tool/rules.json",
+    },
+    internal: {
+      inputFolder: "/home/workspace/input",
+      outputFolder: "/home/workspace/output",
+      ignorePatternsFile: "eee",
+      files: [],
+      skipInit: true,
+      testMode: false,
     },
   };
 
