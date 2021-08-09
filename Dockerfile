@@ -16,7 +16,7 @@ RUN yarn install-all-docker
 
 # commit.json is at the top of the layers because it changes frequently
 FROM install-packages AS copy-json
-ADD *.json .
+ADD *.json ./
 
 # vs-upgrade-helper-plugin
 # The plugin does not support being created using lerna. It has to be a standalone project.
