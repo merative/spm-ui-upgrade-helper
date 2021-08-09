@@ -1,4 +1,4 @@
-const { loadConfig, merge } = require("./src/config");
+const { loadConfig } = require("./src/config");
 const { loadRules } = require("./src/rulesUtils");
 const { removeInvalidCSS, restoreInvalidCSS } = require("./src/invalidCss");
 const { createGitRepo, commitFiles } = require("./src/gitUtils");
@@ -25,7 +25,6 @@ const dummyShells = require("./src/dummyShells");
 module.exports = {
   // config.js
   loadConfig,
-  merge,
   // rulesUtils.js
   loadRules,
   // invalidCss.js

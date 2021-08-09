@@ -70,6 +70,12 @@ const checkForLocalConfigOverride = inputFolder => {
   return undefined;
 }
 
+/**
+ * Deep merges two objects. Items in object 'b' take precedence.
+ *
+ * @param {object} a first object
+ * @param {object} b second object
+ */
 const merge = (a, b) => {
   let output = Object.assign({}, a);
   if (isObject(a) && isObject(b)) {
@@ -87,8 +93,13 @@ const merge = (a, b) => {
   return output;
 }
 
+/**
+ * Checks if the item is an object.
+ *
+ * @param {*} item item to check
+ */
 const isObject = item => {
   return (item && typeof item === 'object' && !Array.isArray(item));
 };
 
-module.exports = { loadConfig, merge };
+module.exports = { loadConfig };
