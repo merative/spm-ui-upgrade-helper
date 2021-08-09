@@ -1,11 +1,21 @@
-const release = (shell, option, version) => {
+const release = (shell, option, version, options = {}) => {
   if(option === "--start") {
     shell.echo("Validating...");
+    // Make sure version number is correct format
     if(!version.match(/^\d+\.\d+\.\d+$/)) {
       shell.echo("ERROR: Version must match x.y.z format.");
       return 1;
     }
-    exec(shell, `git pull --tags`); // Make sure we have all tags locally
+    // Make sure working directory is clean
+    if(!options.testMode) {
+      const r = exec(shell, `git status --porcelain`);
+      if(r.stdout && r.stdout.length > 0) {
+        shell.echo("ERROR: Working directory is not clean.");
+        return 1;
+      }
+    }
+    // Make sure tag does not already exist
+    exec(shell, `git pull --tags`);
     const existing = exec(shell, `git tag --list v${version}`).stdout;
     if(existing.length > 0) {
       shell.echo(`ERROR: Version ${version} already exists (found tag 'v${version}').`);
