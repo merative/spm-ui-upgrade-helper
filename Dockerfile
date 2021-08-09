@@ -22,9 +22,6 @@ ADD *.json ./
 # The plugin does not support being created using lerna. It has to be a standalone project.
 ARG NODE_VERSION=12.18.3
 FROM node:${NODE_VERSION} AS plugins
-RUN addgroup theia && \
-    adduser -G theia -s /bin/sh -D theia;
-USER theia
 WORKDIR /home/plugins
 ADD packages/vs-upgrade-helper-plugin/ .
 COPY --from=install-packages --chown=theia:theia \
