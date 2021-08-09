@@ -40,4 +40,4 @@ if (dryRun) {
   console.log("");
 }
 
-return r;
+process.exit(r);
