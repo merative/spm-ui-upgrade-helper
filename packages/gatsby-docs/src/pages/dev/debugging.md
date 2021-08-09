@@ -11,10 +11,10 @@ If there is a problem with the Docker container you can run one of the following
 
 ## Versions
 
-You can see the version and/or commit hash that the Docker image was built from by looking at the first few lines of the logs. Here we can see we are running version `0.0.11` which was built against commit hash `7c56370`.
+You can see the version and/or commit hash that the Docker image was built from by looking at the first few lines of the logs. Here we can see we are running version `0.0.11` which was built from commit `7c56370`. This information is also available in `version.json` and `commit.json` at the root of each Docker image.
 
     yarn run v1.22.4
-    $ yarn initial-check && npm-run-all --parallel start-theia start-tools
+    $ yarn initial-check && npm-run-all --parallel start:*
     $ cd packages/initial-check && yarn start
     $ node start.js
     Success: Found version number: 0.0.11

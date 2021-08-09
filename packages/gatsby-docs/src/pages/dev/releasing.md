@@ -5,6 +5,7 @@ title: Releasing
 1. Run `yarn release --start 0.0.1` to create the release branch
     - This will create a branch named `v0.0.1`, push it to Travis, and build a Docker image
 2. Release testing
+    - Use `yarn at:install` to install puppeteer
     - Use `yarn at:build kitchen-sink` to generate acceptance test data
     - Use `acceptance-test.bat`/`acceptance-test.sh` to point the tool at the generated data
     - Use `yarn at:test` to run puppeteer tests against the generated data

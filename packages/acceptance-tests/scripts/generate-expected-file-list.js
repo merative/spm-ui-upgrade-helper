@@ -1,7 +1,7 @@
-const utils = require("../../packages/shared-utils/sharedUtils");
+const utils = require("../../shared-utils/sharedUtils");
 
 const generateExpectedFileList = datasetName => {
-  const datasetsJson = utils.readJson("acceptance-tests/scripts/acceptance-test-data-sets.json");
+  const datasetsJson = utils.readJson("scripts/datasets.json");
   const dataset = datasetsJson[datasetName];
   let changes = [];
 

@@ -1,5 +1,5 @@
 {
-    "name": "eslint-plugin-upgrade-helper",
+    "name": "@upgrade-helper/eslint-plugin-upgrade-helper",
     "version": "1.0.0",
     "main": "index.js",
     "devDependencies": {
