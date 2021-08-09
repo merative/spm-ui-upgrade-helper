@@ -28,15 +28,13 @@ COPY --from=install-packages --chown=theia:theia \
     /home/theia/packages/vs-upgrade-helper-plugin/src/functions.ts \
     /home/plugins/packages/vs-upgrade-helper-plugin/src
 # Copy and run the 'show-dev-shortcuts' utility
-ADD packages/shared-utils packages/shared-utils
-ADD packages/show-dev-shortcuts packages/show-dev-shortcuts
+ADD packages/shared-utils /tmp/packages/shared-utils
+ADD packages/show-dev-shortcuts /tmp/packages/show-dev-shortcuts
 ADD config/tools.json config/tools.json
-# FIXME Are these installed already from earlier lerna bootstrap and thus redundant?
-# FIXME Can we move these so they are not bundled during the plugin build?
-RUN cd /home/plugins/packages/shared-utils && yarn install
-RUN cd /home/plugins/packages/show-dev-shortcuts && yarn install
+RUN cd /tmp/packages/shared-utils && yarn install
+RUN cd /tmp/packages/show-dev-shortcuts && yarn install
 ARG dev_mode
-RUN cd /home/plugins/packages/show-dev-shortcuts && yarn show-dev-shortcuts $dev_mode
+RUN cd /tmp/packages/show-dev-shortcuts && yarn show-dev-shortcuts $dev_mode
 # Build plugin
 WORKDIR /home/plugins
 RUN yarn install
