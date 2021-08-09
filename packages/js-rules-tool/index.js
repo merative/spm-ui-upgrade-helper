@@ -1,6 +1,5 @@
 var esprima = require('esprima');
 const utils = require("../shared-utils/sharedUtils");
-const { applyRulesToJS } = require("./src/applyRulesToJS");
 
 /**
  * Main method. Will be called via http://localhost:40xx/execute
@@ -14,42 +13,40 @@ const execute = overrides => {
   targetFiles = utils.keepFiles(targetFiles, "js");
 
   try {
-    // Apply the rules to the files
-    const modified = {};
+    // const modified = {};
     targetFiles.forEach(filename => {
       const contents = utils.readLines(filename);
-      // modified[filename] = applyRulesToJS(contents, rules, filename);
-
+      // Example identifiers
       const identifiers = [
-        "addClass",
-        "attr",
+        "getElementById",
+        "getElementByClass",
         "byId",
         "byClass",
+        "addClass",
+        "attr",
         "query",
         "create",
         "className",
-        "height", // ???
         "innerHTML",
         "className",
-        // "element["className"]     // You can do this as well
-        // "element[classNameFromVar]  // Or this
-        // "element.className.indexOf(someVar)
-        "style",
-        // "element.style.visibility = "visible" // For example
-        // "element.style.backgroundColor = "#F4FAB4" // For example
         "getAttribute",
         "setAttribute",
-        // "domConstruct.place(domConstruct.toDom(rawHtml), location)
-        "getElementsByTagName", // Might manipulate them later
-        // "document.body.style
+        "style",
         "write",
-        "getElementById",
         "createElement",
-        // var re = new RegExp('^sortTableBdy'); // Is this a class? Yes, but hard to programatically tell.
-        "getElementByClass",
+        "height", // Style as attribute
+        "getElementsByTagName", // Might manipulate them later
+        // "element["className"]
+        // "element[classNameFromVar]
+        // "element.className.indexOf(someVar)
+        // "element.style.visibility = "visible"
+        // "element.style.backgroundColor = "#F4FAB4"
+        // "domConstruct.place(domConstruct.toDom(rawHtml), location)
+        // "document.body.style
+        // var re = new RegExp('^sortTableBdy');
       ];
 
-      // FIXME New AST stuff
+      // Find identifiers
       let foundIdentifiers = esprima.tokenize(contents.join("\n"));
       foundIdentifiers = foundIdentifiers.filter(item =>
         item.type === "Identifier" &&
@@ -59,15 +56,10 @@ const execute = overrides => {
         console.info(`filename = ${filename}`);
         console.info(`foundIdentifiers = ${JSON.stringify(foundIdentifiers)}`);
       }
-
-      // const x2 = esprima.parseScript(contents.join("\n"));
-      // console.log(`x2 = ${JSON.stringify(x2)}`);
     });
 
     // Save changes
-    // utils.writeFiles(modified);
-    // utils.commitFiles(config.internal.outputFolder, "???");
-    // utils.writeFiles(???);
+    // ...
 
   } catch (error) {
     console.error(error);
