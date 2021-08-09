@@ -12,7 +12,7 @@ program
   .option('--start <version>', 'Start the release process by creating and pushing the release branch and building a docker image')
   .option('--ship', 'Ship the release by pushing the latest docker image to the repo and tagging the current commit')
   .option('-n, --dry-run', 'Show what commands would be executed, without actually running anything')
-  .parse(process.argv);
+  .parse();
 
 const opts = program.opts();
 const start = opts.start;
