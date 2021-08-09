@@ -1,6 +1,5 @@
 const xp = require("xpath");
 
-const { evaluateInequality } = require("./util");
 const { getPageWindowOptions, setPageWindowOptions } = require("./uim");
 const { checkPageWidth, checkRule, applyRule } = require("./engine");
 
@@ -8,111 +7,6 @@ jest.mock("xpath");
 
 beforeEach(() => {
   xp.select.mockReset();
-});
-
-describe("evaluateInequality", () => {
-  test("should return 'undefined' when no args are passed", () => {
-    const expected = undefined;
-
-    const actual = evaluateInequality();
-
-    expect(actual).toEqual(expected);
-  });
-
-  test("should return 'undefined' when there is no operator", () => {
-    const expected = undefined;
-
-    const firstOperand = 1;
-    const secondOperand = 2;
-
-    const actual = evaluateInequality(firstOperand, secondOperand);
-
-    expect(actual).toEqual(expected);
-  });
-
-  test("should return 'undefined' when an invalid operator is passed", () => {
-    const expected = undefined;
-
-    const firstOperand = 1;
-    const secondOperand = 2;
-    const operator = "-";
-
-    const actual = evaluateInequality(firstOperand, secondOperand, operator);
-
-    expect(actual).toEqual(expected);
-  });
-
-  test("should return 'true' when 1 < 2 args are passed", () => {
-    const expected = true;
-
-    const firstOperand = 1;
-    const secondOperand = 2;
-    const operator = "<";
-
-    const actual = evaluateInequality(firstOperand, secondOperand, operator);
-
-    expect(actual).toEqual(expected);
-  });
-
-  test("should return 'true' when 1 <= 2 args are passed", () => {
-    const expected = true;
-
-    const firstOperand = 1;
-    const secondOperand = 2;
-    const operator = "<=";
-
-    const actual = evaluateInequality(firstOperand, secondOperand, operator);
-
-    expect(actual).toEqual(expected);
-  });
-
-  test("should return 'false' when 1 > 2 args are passed", () => {
-    const expected = false;
-
-    const firstOperand = 1;
-    const secondOperand = 2;
-    const operator = ">";
-
-    const actual = evaluateInequality(firstOperand, secondOperand, operator);
-
-    expect(actual).toEqual(expected);
-  });
-
-  test("should return 'false' when 1 >= 2 args are passed", () => {
-    const expected = false;
-
-    const firstOperand = 1;
-    const secondOperand = 2;
-    const operator = ">=";
-
-    const actual = evaluateInequality(firstOperand, secondOperand, operator);
-
-    expect(actual).toEqual(expected);
-  });
-
-  test("should return 'true' when 1 <= 1 args are passed", () => {
-    const expected = true;
-
-    const firstOperand = 1;
-    const secondOperand = 1;
-    const operator = "<=";
-
-    const actual = evaluateInequality(firstOperand, secondOperand, operator);
-
-    expect(actual).toEqual(expected);
-  });
-
-  test("should return 'true' when 1 >= 1 args are passed", () => {
-    const expected = true;
-
-    const firstOperand = 1;
-    const secondOperand = 1;
-    const operator = ">=";
-
-    const actual = evaluateInequality(firstOperand, secondOperand, operator);
-
-    expect(actual).toEqual(expected);
-  });
 });
 
 describe("getPageWindowOptions", () => {

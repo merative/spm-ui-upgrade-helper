@@ -29,7 +29,7 @@ function evaluateInequality(firstOperand, secondOperand, operator) {
       return firstOperand >= secondOperand;
     }
     default: {
-      return;
+      throw "Operator is not valid";
     }
   }
 }
