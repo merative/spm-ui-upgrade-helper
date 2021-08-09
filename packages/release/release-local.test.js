@@ -1,4 +1,5 @@
-const { dummyShellJs } = require("../shared-utils/sharedUtils").dummyShells;
+const utils = require("../shared-utils/sharedUtils");
+const { dummyShellJs } = utils.dummyShells;
 const release = require("./release-local");
 
 beforeEach(() => {
@@ -11,6 +12,7 @@ afterEach(() => {
 
 test('test that --start option runs the correct commands', () => {
   const expected = [
+    "git status --porcelain",
     "git pull --tags",
     "git tag --list v0.10.0",
     "yarn install",
@@ -23,8 +25,8 @@ test('test that --start option runs the correct commands', () => {
 
   release(dummyShellJs, "--start", "0.10.0");
 
-  expect(expected).toEqual(dummyShellJs.execList);
-  expect(expected.length).toEqual(dummyShellJs.execList.length);
+  expect(dummyShellJs.execList).toEqual(expected);
+  expect(dummyShellJs.execList.length).toEqual(expected.length);
 });
 
 test('test that --ship option runs the correct commands', () => {
@@ -39,8 +41,8 @@ test('test that --ship option runs the correct commands', () => {
 
   release(dummyShellJs, "--ship", "0.10.0");
 
-  expect(expected).toEqual(dummyShellJs.execList);
-  expect(expected.length).toEqual(dummyShellJs.execList.length);
+  expect(dummyShellJs.execList).toEqual(expected);
+  expect(dummyShellJs.execList.length).toEqual(expected.length);
 });
 
 test('test that version is validated correctly', () => {
@@ -51,11 +53,11 @@ test('test that version is validated correctly', () => {
 
   release(dummyShellJs, "--start", "v0.0.0");
 
-  expect(expected).toEqual(dummyShellJs.echoList);
-  expect(expected.length).toEqual(dummyShellJs.echoList.length);
+  expect(dummyShellJs.echoList).toEqual(expected);
+  expect(dummyShellJs.echoList.length).toEqual(expected.length);
 
-  expect([]).toEqual(dummyShellJs.execList);
-  expect(0).toEqual(dummyShellJs.execList.length);
+  expect(dummyShellJs.execList).toEqual([]);
+  expect(dummyShellJs.execList.length).toEqual(0);
 });
 
 test('test that an unknown option will fail', () => {
@@ -65,11 +67,11 @@ test('test that an unknown option will fail', () => {
 
   release(dummyShellJs, "--foo", "0.10.0");
 
-  expect(expected).toEqual(dummyShellJs.echoList);
-  expect(expected.length).toEqual(dummyShellJs.echoList.length);
+  expect(dummyShellJs.echoList).toEqual(expected);
+  expect(dummyShellJs.echoList.length).toEqual(expected.length);
 
-  expect([]).toEqual(dummyShellJs.execList);
-  expect(0).toEqual(dummyShellJs.execList.length);
+  expect(dummyShellJs.execList).toEqual([]);
+  expect(dummyShellJs.execList.length).toEqual(0);
 });
 
 test('test that re-using an existing tag will fail', () => {
@@ -79,11 +81,11 @@ test('test that re-using an existing tag will fail', () => {
     "ERROR: Version 0.10.0 already exists (found tag 'v0.10.0').",
   ];
 
-  release(dummyShellJs, "--start", "0.10.0");
+  release(dummyShellJs, "--start", "0.10.0", { testMode: true });
 
-  expect(expected).toEqual(dummyShellJs.echoList);
-  expect(expected.length).toEqual(dummyShellJs.echoList.length);
+  expect(dummyShellJs.echoList).toEqual(expected);
+  expect(dummyShellJs.echoList.length).toEqual(expected.length);
 
-  expect([ "git pull --tags", "git tag --list v0.10.0" ]).toEqual(dummyShellJs.execList);
-  expect(2).toEqual(dummyShellJs.execList.length);
+  expect(dummyShellJs.execList).toEqual([ "git pull --tags", "git tag --list v0.10.0" ]);
+  expect(dummyShellJs.execList.length).toEqual(2);
 });
