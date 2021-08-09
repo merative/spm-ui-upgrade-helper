@@ -5,8 +5,7 @@
   "description": "Checks for JS changes that may be impacted by v8 CSS changes.",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js",
-    "test": "jest"
+    "start": "nodemon server.js"
   },
   "dependencies": {
     "date-format": "^3.0.0",
