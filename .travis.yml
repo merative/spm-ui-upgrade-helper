@@ -7,7 +7,25 @@ dist: xenial
 env:
   - VER=`node -pe "require('./package.json')['version']"`
 
-script:
-  - yarn install-all
-  - yarn test
-  - cd packages/gatsby-docs && yarn gatsby:conditional-deploy
+# script:
+#   - yarn install-all
+#   - yarn test
+#   - cd packages/gatsby-docs && yarn gatsby:conditional-deploy
+
+jobs:
+  include:
+    - name: "Tests"
+      script:
+        - yarn install
+        - yarn install-all
+        - yarn test
+    - name: "DockerImage"
+      script:
+        - yarn install
+        - yarn build:release
+        #- Puppeteer tests go here
+    - name: "Docs"
+      script:
+        - yarn install
+        - yarn install-all
+        - cd packages/gatsby-docs && yarn gatsby:conditional-deploy
