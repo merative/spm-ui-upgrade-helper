@@ -2,7 +2,7 @@ const shelljs = require("shelljs");
 const utils = require("../shared-utils/sharedUtils");
 const { dryRunShellJs } = utils.dummyShells;
 const { Command } = require('commander');
-const release = require("./release-local");
+const release = require("./release");
 
 const program = new Command();
 program
