@@ -12,7 +12,7 @@ FROM install-root AS install-packages
 WORKDIR /home/theia
 ADD packages packages
 ADD config config
-RUN yarn install-all
+RUN yarn install-all-docker
 
 # commit.json is at the top of the layers because it changes frequently
 FROM install-packages AS copy-json
