@@ -19,9 +19,9 @@ jobs:
         - yarn install
         - yarn install-all
         - cd packages/gatsby-docs && yarn gatsby:conditional-deploy
-    # - name: "DockerImage"
-    #   script:
-    #     - yarn install
-    #     - yarn install-all
-    #     - yarn build:release
-    #     # - Puppeteer tests go here
+    - name: "DockerImage"
+      script:
+        - yarn install
+        - yarn install-all
+        - yarn build:release
+        # - Puppeteer tests go here
