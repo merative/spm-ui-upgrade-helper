@@ -1,6 +1,6 @@
 const utils = require("../shared-utils/sharedUtils");
 const { dummyShellJs } = utils.dummyShells;
-const release = require("./release-local");
+const release = require("./release");
 
 beforeEach(() => {
   dummyShellJs._setExecStdOut("");
