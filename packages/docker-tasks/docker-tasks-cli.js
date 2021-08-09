@@ -40,4 +40,5 @@ if (dryRun) {
   console.log("");
 }
 
+console.log(`r = ${JSON.stringify(r)}`);
 return r;
