@@ -14,8 +14,8 @@
     "install-all": "yarn install && lerna bootstrap",
     "initial-check": "cd packages/initial-check && yarn start",
     "start": "yarn initial-check && npm-run-all --parallel start:*",
-    "start:theia": "node /home/theia/packages/browser-app/src-gen/backend/main.js /home/workspace/output --hostname=0.0.0.0",
-    "start:tools": "lerna run --scope @upgrade-helper/*-tool start && yarn start-theia",
+    "start:theia": "node /home/theia/browser-app/src-gen/backend/main.js /home/workspace/output --hostname=0.0.0.0",
+    "start:tools": "lerna run --scope @upgrade-helper/*-tool start",
     "test": "lerna run test",
     "release": "node packages/release/release-cli.js"
   },

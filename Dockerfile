@@ -23,18 +23,21 @@ ADD *.json .
 ARG NODE_VERSION=12.18.3
 FROM node:${NODE_VERSION} AS plugins
 WORKDIR /home/plugins
-ADD ./packages/vs-upgrade-helper-plugin/ .
+ADD packages/vs-upgrade-helper-plugin/ .
 COPY --from=install-packages --chown=theia:theia \
     /home/theia/packages/vs-upgrade-helper-plugin/src/functions.ts \
     /home/plugins/packages/vs-upgrade-helper-plugin/src
-# Copy and run show-dev-shortcuts utility
-WORKDIR /home/show-dev-shortcuts
-ADD ./packages/show-dev-shortcuts/ .
-ADD ./config/tools.json ./tools.json
-RUN yarn install
+# Copy and run the 'show-dev-shortcuts' utility
+ADD packages/shared-utils packages/shared-utils
+ADD packages/show-dev-shortcuts packages/show-dev-shortcuts
+ADD config/tools.json config/tools.json
+# FIXME Are these installed already from earlier lerna bootstrap and thus redundant?
+# FIXME Can we move these so they are not bundled during the plugin build?
+RUN cd /home/plugins/packages/shared-utils && yarn install
+RUN cd /home/plugins/packages/show-dev-shortcuts && yarn install
 ARG dev_mode
-RUN yarn show-dev-shortcuts $dev_mode
-# Build plugins
+RUN cd /home/plugins/packages/show-dev-shortcuts && yarn show-dev-shortcuts $dev_mode
+# Build plugin
 WORKDIR /home/plugins
 RUN yarn install
 RUN yarn compile
@@ -62,8 +65,8 @@ ENV HOME /home/theia
 WORKDIR /home/theia
 COPY --from=copy-json --chown=theia:theia /home/theia /home/theia
 COPY --from=plugins --chown=theia:theia /home/plugins/*.vsix /home/theia/plugins/
-COPY --from=theia --chown=theia:theia /home/theia /home/theia/packages/browser-app
-RUN cp -R /home/theia/packages/browser-app/plugins/* /home/theia/plugins/
+COPY --from=theia --chown=theia:theia /home/theia /home/theia/browser-app
+RUN cp -R /home/theia/browser-app/plugins/* /home/theia/plugins/
 EXPOSE 3000
 EXPOSE 4000-4004
 ENV SHELL=/bin/bash \
