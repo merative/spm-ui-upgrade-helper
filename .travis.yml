@@ -22,6 +22,7 @@ jobs:
     - name: "DockerImage"
       script:
         - yarn install
+        - yarn install-all
         - yarn build:release
         #- Puppeteer tests go here
     - name: "Docs"
