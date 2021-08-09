@@ -25,7 +25,6 @@
     "@types/react": "^16.8.0"
   },
   "devDependencies": {
-    "jest": "^27.0.6",
     "shelljs": "^0.8.4"
   },
   "dependencies": {
