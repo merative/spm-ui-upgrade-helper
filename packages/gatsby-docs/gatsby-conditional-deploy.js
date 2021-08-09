@@ -12,7 +12,7 @@ const gatsbyConditionalDeploy = (shell, changes) => {
   if(hasChanges) {
     return shell.exec("yarn gatsby:deploy").code;
   } else {
-    shell.echo("Not running gatsby:deploy as there were no changes to the 'docs' folder or to 'nav-items.yaml'.");
+    shell.echo("Not running gatsby:deploy as there were no changes in the 'packages/gatsby-docs/' folder.");
     return 0;
   }
 }
