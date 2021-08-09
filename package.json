@@ -9,9 +9,10 @@
     "docker-tasks": "node packages/docker-tasks/docker-tasks-cli.js",
     "build:dev": "yarn echo-commit && yarn generate-files --dev && yarn docker-tasks build -p --build-arg dev_mode=true",
     "build:release": "yarn echo-commit && yarn generate-files && yarn docker-tasks build -p",
-    "at:build": "node acceptance-tests/scripts/generate-acceptance-test-data.js",
-    "at:test": "jest acceptance-tests/puppeteer/.*.test.js",
-    "install-all": "yarn install && lerna bootstrap",
+    "at:install": "cd packages/acceptance-tests && yarn install",
+    "at:generate-data": "cd packages/acceptance-tests && yarn at:generate-data",
+    "at:test": "cd packages/acceptance-tests && yarn at:test",
+    "install-all": "yarn install && lerna bootstrap --ignore @upgrade-helper/acceptance-tests",
     "initial-check": "cd packages/initial-check && yarn start",
     "start": "yarn initial-check && npm-run-all --parallel start:*",
     "start:theia": "node /home/theia/browser-app/src-gen/backend/main.js /home/workspace/output --hostname=0.0.0.0",
@@ -23,10 +24,7 @@
     "@types/react": "^16.8.0"
   },
   "devDependencies": {
-    "commander": "^8.0.0",
-    "eslint": "^7.20.0",
     "jest": "^27.0.6",
-    "puppeteer": "^10.1.0",
     "shelljs": "^0.8.4"
   },
   "dependencies": {

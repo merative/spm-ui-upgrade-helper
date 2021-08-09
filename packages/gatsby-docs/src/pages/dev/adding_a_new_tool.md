@@ -33,7 +33,7 @@ module.exports = { execute };
 - Type `Run SPM UI Upgrade Helper - <your tool name> (DEBUG)` and you should see your new tool listed.
 - Click the tool and you should see the Docker container's log print "Hello, world!"
 - Implement the tests and code for your tool.
-- Add some additional tests to `packages/main-tool` and some additional data to `acceptance-tests/scripts/acceptance-test-data-sets.json`.
+- Add some additional tests to `packages/main-tool` and some additional data to `packages/acceptance-tests/scripts/datasets.json` in the `kitchen-sink` dataset.
 - When you are ready to release your tool to the customer, set `enabled: true` in `config/tools.json`. This will cause it to be run as part of the main tool.
 
 ## Notes

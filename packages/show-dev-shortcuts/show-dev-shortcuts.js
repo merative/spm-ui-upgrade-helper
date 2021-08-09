@@ -11,9 +11,9 @@ const jsonFormat = require("json-format");
 program.parse();
 const devMode = program.args.length > 0 && !!program.args[0];
 
-const packageFile = "../plugins/package.json";
+const packageFile = "/home/plugins/package.json";
 const package = utils.readJson(packageFile);
-const tools = utils.readJson("./tools.json");
+const tools = utils.readJson("/home/plugins/config/tools.json");
 
 if(devMode === true) {
   console.log(`show-dev-shortcuts: Rewriting '${packageFile}' to include all tools`);

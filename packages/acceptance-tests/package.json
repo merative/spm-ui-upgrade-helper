@@ -1,0 +1,17 @@
+{
+  "name": "@upgrade-helper/acceptance-tests",
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "description": "Acceptance tests for the SPM UI Upgrade Helper tool.",
+  "main": "index.js",
+  "scripts": {
+    "at:generate-data": "node scripts/generate-acceptance-test-data.js",
+    "at:test": "jest puppeteer/.*.test.js"
+  },
+  "devDependencies": {
+    "commander": "^8.1.0",
+    "jest": "^26.0.1",
+    "puppeteer": "^10.2.0",
+    "shelljs": "^0.8.4"
+  }
+}

@@ -6,7 +6,6 @@ lib
 !*-app/package.json
 .DS_Store
 browser-app/plugins
-packages/browser-app/plugins
 /workspace/
 *.xlsx
 server.js

@@ -1,15 +1,15 @@
-const utils = require("../../packages/shared-utils/sharedUtils");
+const utils = require("../../shared-utils/sharedUtils");
 const shelljs = require("shelljs");
 const { Command } = require('commander');
 
-const allDataSets = utils.readJson("acceptance-tests/scripts/acceptance-test-data-sets.json");
+const allDataSets = utils.readJson("scripts/datasets.json");
 
 const program = new Command();
 program
   .name("yarn at:build")
   .addHelpText('before', '\nGenerates acceptance test data for release testing.\n') 
-  .argument("<dataset>", "Name of dataset to use. See acceptance-tests/scripts/acceptance-test-data-sets.json.")
-  .showHelpAfterError(`Possible dataset values: ${Object.keys(allDataSets).join(", ")}.\nSee acceptance-tests/scripts/acceptance-test-data-sets.json.`)
+  .argument("<dataset>", "Name of dataset to use. See scripts/datasets.json.")
+  .showHelpAfterError(`Possible dataset values: ${Object.keys(allDataSets).join(", ")}.\nSee scripts/datasets.json.`)
   .parse();
 
 const data = allDataSets[program.args[0]];
@@ -49,7 +49,7 @@ const createFolders = (totalFiles, maxFolderDepth) => {
 const addUnchangedFiles = folders => {
   const count = data.totalFiles - fileCount;
   for(let i = 0; i < count; i++) {
-    shelljs.cp("acceptance-tests/scripts/dummy-files/no-updates.css", `${componentFolder}/${folders[folderIndex]}/no-updates-${i}.css`);
+    shelljs.cp("scripts/dummy-files/no-updates.css", `${componentFolder}/${folders[folderIndex]}/no-updates-${i}.css`);
     folderIndex++;
     if(folderIndex >= folders.length) {
       folderIndex = 0;
@@ -78,7 +78,7 @@ const getFilenameWithIndex = (file, index) => {
  */
 const addFiles = (file, count, folders) => {
   for(let i = 0; i < count; i++) {
-    const src = `acceptance-tests/scripts/dummy-files/${file}`;
+    const src = `scripts/dummy-files/${file}`;
     const dest = `${componentFolder}/${folders[folderIndex]}/${getFilenameWithIndex(file, i)}`;
     shelljs.cp(src, dest);
     fileCount++;
@@ -97,7 +97,7 @@ const addFiles = (file, count, folders) => {
  */
 const copyFiles = (file, count, folders) => {
   for(let i = 0; i < count; i++) {
-    shelljs.cp(`acceptance-tests/scripts/dummy-files/${file}`, `${componentFolder}/${folders[folderIndex]}/${file}`);
+    shelljs.cp(`scripts/dummy-files/${file}`, `${componentFolder}/${folders[folderIndex]}/${file}`);
     fileCount++;
     folderIndex++;
     if(folderIndex >= folders.length) {
@@ -111,25 +111,25 @@ const copyFiles = (file, count, folders) => {
  */
 const addIgnoredFiles = () => {
   // This file will be ignored by OOTB ignores
-  const folder1 = `acceptance-tests/input/.git`;
+  const folder1 = `input/.git`;
   shelljs.mkdir(folder1);
-  shelljs.cp("acceptance-tests/scripts/dummy-files/should-be-ignored.css", folder1);
+  shelljs.cp("scripts/dummy-files/should-be-ignored.css", folder1);
   // This file will be ignored by the .spm-uiuh-ignore file we have added
-  const folder2 = `acceptance-tests/input/foo`;
+  const folder2 = `input/foo`;
   shelljs.mkdir("-p", folder2);
-  shelljs.cp("acceptance-tests/scripts/dummy-files/should-be-ignored.css", folder2);
-  shelljs.cp("acceptance-tests/scripts/dummy-files/.spm-uiuh-ignore", "acceptance-tests/input");
+  shelljs.cp("scripts/dummy-files/should-be-ignored.css", folder2);
+  shelljs.cp("scripts/dummy-files/.spm-uiuh-ignore", "input");
   // Test language packs are ignored
-  const folder3 = `acceptance-tests/input/webclient/components/TestLanguagePack_aa`;
+  const folder3 = `input/webclient/components/TestLanguagePack_aa`;
   shelljs.mkdir("-p", folder3);
-  shelljs.cp("acceptance-tests/scripts/dummy-files/should-be-ignored.css", folder3);
+  shelljs.cp("scripts/dummy-files/should-be-ignored.css", folder3);
 }
 
-shelljs.rm("-rf", "acceptance-tests/input");
-shelljs.rm("-rf", "acceptance-tests/output");
-const componentFolder = "acceptance-tests/input/webclient/components/Foo";
+shelljs.rm("-rf", "input");
+shelljs.rm("-rf", "output");
+const componentFolder = "input/webclient/components/Foo";
 shelljs.mkdir("-p", componentFolder);
-shelljs.mkdir("acceptance-tests/output");
+shelljs.mkdir("output");
 
 let fileCount = 0;
 let folderIndex = 0;
