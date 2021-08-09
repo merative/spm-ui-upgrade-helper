@@ -1,13 +1,8 @@
 const xp = require("xpath");
 
-const {
-  evaluateInequality,
-  getWindowOptions,
-  setWindowOptions,
-  checkWidth,
-  checkRule,
-  applyRules,
-} = require("./engine");
+const { evaluateInequality } = require("./util");
+const { getPageWindowOptions, setPageWindowOptions } = require("./uim");
+const { checkPageWidth, checkRule, applyRule } = require("./engine");
 
 jest.mock("xpath");
 
@@ -120,11 +115,11 @@ describe("evaluateInequality", () => {
   });
 });
 
-describe("getWindowOptions", () => {
+describe("getPageWindowOptions", () => {
   test("should return 'undefined' when no args are passed", () => {
     const expected = undefined;
 
-    const actual = getWindowOptions();
+    const actual = getPageWindowOptions();
 
     expect(actual).toEqual(expected);
   });
@@ -135,7 +130,7 @@ describe("getWindowOptions", () => {
     const document1 = {
       WINDOW_OPTIONS: "",
     };
-    const actual1 = getWindowOptions(document1);
+    const actual1 = getPageWindowOptions(document1);
 
     expect(actual1).toEqual(expected);
 
@@ -144,7 +139,7 @@ describe("getWindowOptions", () => {
         WINDOW_OPTIONS: "",
       },
     };
-    const actual2 = getWindowOptions(document2);
+    const actual2 = getPageWindowOptions(document2);
 
     expect(actual2).toEqual(expected);
   });
@@ -157,7 +152,7 @@ describe("getWindowOptions", () => {
         getAttribute: () => null,
       },
     };
-    const actual1 = getWindowOptions(document1);
+    const actual1 = getPageWindowOptions(document1);
 
     expect(actual1).toEqual(expected);
 
@@ -166,7 +161,7 @@ describe("getWindowOptions", () => {
         getAttribute: () => "",
       },
     };
-    const actual2 = getWindowOptions(document2);
+    const actual2 = getPageWindowOptions(document2);
 
     expect(actual2).toEqual(expected);
   });
@@ -179,7 +174,7 @@ describe("getWindowOptions", () => {
         getAttribute: () => "height=400",
       },
     };
-    const actual = getWindowOptions(document);
+    const actual = getPageWindowOptions(document);
 
     expect(actual).toEqual(expected);
   });
@@ -192,17 +187,17 @@ describe("getWindowOptions", () => {
         getAttribute: () => "width=400, height=400",
       },
     };
-    const actual = getWindowOptions(document);
+    const actual = getPageWindowOptions(document);
 
     expect(actual).toEqual(expected);
   });
 });
 
-describe("setWindowOptions", () => {
+describe("setPageWindowOptions", () => {
   test("should return 'undefined' when no args are passed", () => {
     const expected = undefined;
 
-    const actual = setWindowOptions();
+    const actual = setPageWindowOptions();
 
     expect(actual).toEqual(expected);
   });
@@ -215,7 +210,7 @@ describe("setWindowOptions", () => {
         setAttribute: () => {},
       },
     };
-    const actual = setWindowOptions(document);
+    const actual = setPageWindowOptions(document);
 
     expect(actual).toEqual(expected);
   });
@@ -229,7 +224,7 @@ describe("setWindowOptions", () => {
         setAttribute: mockSetAttribute,
       },
     };
-    setWindowOptions(document, {});
+    setPageWindowOptions(document, {});
 
     const [property, actual] = mockSetAttribute.mock.calls[0];
 
@@ -245,7 +240,7 @@ describe("setWindowOptions", () => {
         setAttribute: mockSetAttribute,
       },
     };
-    setWindowOptions(document, { height: 400 });
+    setPageWindowOptions(document, { height: 400 });
 
     const [property, actual] = mockSetAttribute.mock.calls[0];
 
@@ -261,7 +256,7 @@ describe("setWindowOptions", () => {
         setAttribute: mockSetAttribute,
       },
     };
-    setWindowOptions(document, { width: 400, height: 400 });
+    setPageWindowOptions(document, { width: 400, height: 400 });
 
     const [property, actual] = mockSetAttribute.mock.calls[0];
 
@@ -269,11 +264,11 @@ describe("setWindowOptions", () => {
   });
 });
 
-describe("checkWidth", () => {
+describe("checkPageWidth", () => {
   test("should return 'undefined' when no args are passed", () => {
     const expected = undefined;
 
-    const actual = checkWidth();
+    const actual = checkPageWidth();
 
     expect(actual).toEqual(expected);
   });
@@ -286,7 +281,7 @@ describe("checkWidth", () => {
         getAttribute: () => {},
       },
     };
-    const actual = checkWidth(document);
+    const actual = checkPageWidth(document);
 
     expect(actual).toEqual(expected);
   });
@@ -302,7 +297,7 @@ describe("checkWidth", () => {
     const rule = {
       width: "> 200",
     };
-    const actual = checkWidth(document, rule, false);
+    const actual = checkPageWidth(document, rule, false);
 
     expect(actual).toEqual(expected);
   });
@@ -318,7 +313,7 @@ describe("checkWidth", () => {
     const rule = {
       width: "> 200",
     };
-    const actual = checkWidth(document, rule, false);
+    const actual = checkPageWidth(document, rule, false);
 
     expect(actual).toEqual(expected);
   });
@@ -334,7 +329,7 @@ describe("checkWidth", () => {
     const rule = {
       width: "> 200",
     };
-    const actual = checkWidth(document, rule, false);
+    const actual = checkPageWidth(document, rule, false);
 
     expect(actual).toEqual(expected);
   });
@@ -350,7 +345,7 @@ describe("checkWidth", () => {
     const rule = {
       width: "< 200",
     };
-    const actual = checkWidth(document, rule, false);
+    const actual = checkPageWidth(document, rule, false);
 
     expect(actual).toEqual(expected);
   });
@@ -366,7 +361,7 @@ describe("checkWidth", () => {
     const rule = {
       width: "<= 400",
     };
-    const actual = checkWidth(document, rule, false);
+    const actual = checkPageWidth(document, rule, false);
 
     expect(actual).toEqual(expected);
   });
@@ -382,7 +377,7 @@ describe("checkWidth", () => {
     const rule = {
       width: ">= 400",
     };
-    const actual = checkWidth(document, rule, false);
+    const actual = checkPageWidth(document, rule, false);
 
     expect(actual).toEqual(expected);
   });
@@ -398,7 +393,7 @@ describe("checkWidth", () => {
     const rule = {
       width: ">= 200 and <= 300",
     };
-    const actual = checkWidth(document, rule, false);
+    const actual = checkPageWidth(document, rule, false);
 
     expect(actual).toEqual(expected);
   });
@@ -414,7 +409,7 @@ describe("checkWidth", () => {
     const rule = {
       width: ">= 200 and <= 300",
     };
-    const actual = checkWidth(document, rule, false);
+    const actual = checkPageWidth(document, rule, false);
 
     expect(actual).toEqual(expected);
   });
@@ -430,7 +425,7 @@ describe("checkWidth", () => {
     const rule = {
       width: ">= 200 and <= 300",
     };
-    const actual = checkWidth(document, rule, false);
+    const actual = checkPageWidth(document, rule, false);
 
     expect(actual).toEqual(expected);
   });
@@ -500,7 +495,7 @@ describe("checkRule", () => {
   });
 });
 
-describe("applyRules", () => {
+describe("applyRule", () => {
   const sizes = {
     xs: 0,
     sm: 500,
@@ -512,7 +507,7 @@ describe("applyRules", () => {
   test("should return 'undefined' when no args are passed", () => {
     const expected = undefined;
 
-    const actual = applyRules();
+    const actual = applyRule();
 
     expect(actual).toEqual(expected);
   });
@@ -526,7 +521,7 @@ describe("applyRules", () => {
       },
     };
     const filename = "test.uim";
-    const actual = applyRules(document, filename);
+    const actual = applyRule(document, filename);
 
     expect(actual).toEqual(expected);
   });
@@ -552,7 +547,7 @@ describe("applyRules", () => {
 
     xp.select.mockImplementation((rule) => true);
 
-    applyRules(document, filename, rules, sizes, false);
+    applyRule(document, filename, rules, sizes, false);
 
     const [property, actual] = mockSetAttribute.mock.calls[0];
 
@@ -580,7 +575,7 @@ describe("applyRules", () => {
 
     xp.select.mockImplementation((rule) => true);
 
-    applyRules(document, filename, rules, sizes, false);
+    applyRule(document, filename, rules, sizes, false);
 
     const [property, actual] = mockSetAttribute.mock.calls[0];
 
@@ -608,7 +603,7 @@ describe("applyRules", () => {
 
     xp.select.mockImplementation((rule) => false);
 
-    applyRules(document, filename, rules, sizes, false);
+    applyRule(document, filename, rules, sizes, false);
 
     const actual = mockSetAttribute.mock.calls.length;
 
@@ -641,7 +636,7 @@ describe("applyRules", () => {
 
     xp.select.mockImplementation((rule) => true);
 
-    applyRules(document, filename, rules, sizes, false);
+    applyRule(document, filename, rules, sizes, false);
 
     const actual = mockSetAttribute.mock.calls.length;
 
