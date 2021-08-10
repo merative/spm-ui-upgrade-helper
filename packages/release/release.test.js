@@ -6,13 +6,12 @@ let echoList = [];
 beforeEach(() => {
   jest.mock("shelljs", () => {
     return {
-      exec: jest.fn(() => ({ code: 0 })),
-      echo: jest.fn(),
       exit: jest.fn(),
     }
   })
   shelljs = require("shelljs");
-  shelljs.exec = jest.fn(input => execList.push(input));
+  // Can't access execList/echoList in jest factory above
+  shelljs.exec = jest.fn(input => { execList.push(input); return { code: 0, stdout: "" }; });
   shelljs.echo = jest.fn(message => echoList.push(message));
 });
 
