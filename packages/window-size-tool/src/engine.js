@@ -3,13 +3,28 @@ const xp = require("xpath");
 
 const { evaluateInequality } = require("./util");
 const {
-  getPageWindowOptions,
-  getLinkWindowOptions,
-  setPageWindowOptions,
-  setLinkWindowOptions,
+  getPageOptions,
+  getLinkOptions,
+  setPageOptions,
+  setLinkOptions,
 } = require("./uim");
 
+/**
+ * Compares a width value to a rule and returns whether the width passes the
+ * rule or not.
+ *
+ * @param {number} width Width value.
+ * @param {string} rule Rules expression.
+ * @param {boolean} verbose Will log debug messages if true (true by default).
+ * @returns Whether width passes the rule or not.
+ */
 function checkWidth(width, rule, verbose = true) {
+  if (!width) {
+    throw Error("You must supply a width");
+  } else if (!rule) {
+    throw Error("You must supply a rules string");
+  }
+
   let pass = false;
 
   if (typeof width === "string") {
@@ -38,40 +53,39 @@ function checkWidth(width, rule, verbose = true) {
 }
 
 /**
- * Checks if a UIM file meets the width criteria defined by a rules object.
+ * Compares a width value of a UIM PAGE element to a rule and returns whether
+ * the width passes the rule or not.
  *
- * @param {object} file UIM file to compare to rules width criteria.
- * @param {object} rule Rules object.
- * @returns Whether a UIM file meets the width criteria or not.
+ * @param {object} pageNode DOM node representing a UIM PAGE element.
+ * @param {string} rule Rules expression.
+ * @param {boolean} verbose Will log debug messages if true (true by default).
+ * @returns Whether UIM PAGE element width passes the rule or not.
  */
-function checkPageWidth(document, rule, verbose = true) {
-  if (
-    !document ||
-    !document.documentElement ||
-    !document.documentElement.getAttribute ||
-    !rule ||
-    typeof rule !== "object"
-  ) {
-    return;
+function checkPageWidth(pageNode, rule, verbose = true) {
+  const pageOptions = getPageOptions(pageNode);
+
+  if (!pageOptions) {
+    return false;
   }
 
-  const { width } = getPageWindowOptions(document);
-
-  return checkWidth(width, rule.width, verbose);
+  return checkWidth(pageOptions.width, rule, verbose);
 }
 
-function checkLinkWidth(document, rule, verbose = true) {
-  if (
-    !document ||
-    !document.documentElement ||
-    !document.documentElement.getAttribute ||
-    !rule ||
-    typeof rule !== "object"
-  ) {
-    return;
-  }
+/**
+ * Takes a UIM PAGE element and checks it for LINK elements who's widths pass
+ * the rule.
+ *
+ * @param {object} pageNode DOM node representing a UIM PAGE element.
+ * @param {string} rule Rules expression.
+ * @param {boolean} verbose Will log debug messages if true (true by default).
+ * @returns Returns an array of LINK elements who's widths pass the rule.
+ */
+function checkLinkWidth(pageNode, rule, verbose = true) {
+  const links = getLinkOptions(pageNode).filter((link) => {
+    if (!link.options || !link.options.width) {
+      return false;
+    }
 
-  const links = getLinkWindowOptions(document).filter((link) => {
     return checkWidth(link.options.width, rule.width, verbose);
   });
 
@@ -81,20 +95,23 @@ function checkLinkWidth(document, rule, verbose = true) {
 /**
  * Compares UIM file to rules criteria.
  *
- * @param {object} file UIM file to compare to rules criteria.
+ * @param {object} node DOM node to compare to rules criteria.
  * @param {object} rule Rules object.
- * @returns Whether the UIM file meets the rules criteria or not.
+ * @param {boolean} verbose Will log debug messages if true (true by default).
+ * @returns Whether the DOM node meets the rules criteria or not.
  */
-function checkRule(document, rule, verbose = true) {
+function checkRule(node, rule, verbose = true) {
   let pass = false;
 
-  if (!document || !rule || typeof rule !== "object") {
-    return pass;
+  if (!node) {
+    throw Error("You must supply a node");
+  } else if (!rule) {
+    throw Error("You must supply a rules object");
   }
 
-  rule.terms.forEach((xPath) => {
+  rule.terms.forEach((term) => {
     if (!pass) {
-      const result = xp.select(xPath, document);
+      const result = xp.select(term, node);
 
       pass = pass || result;
 
@@ -102,7 +119,7 @@ function checkRule(document, rule, verbose = true) {
         console.debug(
           ` term:  ${
             result ? chalk.green(`${result} `) : chalk.red(result)
-          } <- [${chalk.magenta(xPath)}]`
+          } <- [${chalk.magenta(term)}]`
         );
       }
     }
@@ -112,28 +129,75 @@ function checkRule(document, rule, verbose = true) {
 }
 
 /**
- * Applies xPath rules to UIM files from the inputFolders.
+ * Updates the WINDOW_OPTIONS width value.
  *
- * @param {array} inputFiles UIM files from input folder.
- * @param {array} rules Rules to apply to the UIM files.
- * @param {object} sizes Mapping breakpoints to be applied to UIMs if rules criteria a met.
- * @returns Array of UIM files transformed by rules.
+ * @param {string} windowOptions WINDOW_OPTIONS string to update.
+ * @param {object} sizes Mapping breakpoints to be applied to UIMs if rules
+ * criteria a met.
+ * @param {number} target Target width category from sizes.js file.
+ * @param {boolean} usePixelWidths Determines whether width is set as a pixel value
+ * or a size category.
  */
-function applyRule(document, name, rules, sizes, references, verbose = true) {
-  if (
-    !document ||
-    !name ||
-    !rules ||
-    !Array.isArray(rules) ||
-    !sizes ||
-    typeof sizes !== "object"
-  ) {
-    return;
+function updateWidthOption(
+  windowOptions,
+  sizes,
+  target,
+  usePixelWidths = true
+) {
+  if (!windowOptions) {
+    throw Error("You must supply a WINDOW_OPTIONS string");
+  } else if (!sizes) {
+    throw Error("You must supply a sizes object");
+  } else if (!target) {
+    throw Error("You must supply a target size category");
   }
 
-  if (verbose) {
-    console.debug(`filename: ${chalk.cyan(name)}`);
+  if (usePixelWidths) {
+    windowOptions.width = sizes[target];
+  } else {
+    delete windowOptions.width;
+    windowOptions.size = target;
   }
+}
+
+/**
+ * Applies xPath rules to a UIM XML document.
+ *
+ * @param {object} document Parsed UIM XML document.
+ * @param {string} filename Filename of UIM XML document.
+ * @param {array} rules Rules to apply to the UIM XML document.
+ * @param {object} sizes Mapping breakpoints to be applied to UIMs if rules
+ * criteria a met.
+ * @param {object} pagedictionary A dictionary used to lookup UIM pages by id.
+ * @param {boolean} verbose Will log debug messages if true (true by default).
+ * @returns Returns whether the document was updated by the rules or not.
+ */
+function applyRule(
+  document,
+  filename,
+  rules,
+  sizes,
+  pagedictionary,
+  verbose = true
+) {
+  if (!document) {
+    throw Error("You must supply a UIM document");
+  } else if (!filename && filename !== "") {
+    throw Error("You must supply a filename");
+  } else if (!rules) {
+    throw Error("You must supply a rules array");
+  } else if (!sizes) {
+    throw Error("You must supply a size object");
+  } else if (!pagedictionary) {
+    throw Error("You must supply a PAGE dictionary map");
+  }
+
+  const pageNode = document.documentElement;
+
+  if (verbose) {
+    console.debug(`filename: ${chalk.cyan(filename)}`);
+  }
+
   let hasChanges = false;
 
   rules.forEach((rule, index) => {
@@ -142,56 +206,46 @@ function applyRule(document, name, rules, sizes, references, verbose = true) {
         console.debug(`rule: ${chalk.yellow(index + 1)}`);
       }
 
-      if (checkPageWidth(document, rule, verbose)) {
-        const pass = checkRule(document, rule, verbose);
+      if (checkPageWidth(pageNode, rule.width, verbose)) {
+        const pass = checkRule(pageNode, rule, verbose);
 
         if (pass) {
           hasChanges = true;
-          const windowOptions = getPageWindowOptions(document);
+          const windowOptions = getPageOptions(pageNode);
 
-          // This is where we can flip between pixels and size attribute
-          const usePixelWidths = true;
-          if (usePixelWidths) {
-            windowOptions.width = sizes[rule.target];
-          } else {
-            delete windowOptions.width;
-            windowOptions.size = rule.target;
-          }
+          updateWidthOption(windowOptions, sizes, rule.target);
 
-          setPageWindowOptions(document, windowOptions);
+          setPageOptions(pageNode, windowOptions);
         }
       }
 
-      const matches = checkLinkWidth(document, rule, verbose);
+      const linkMatches = checkLinkWidth(pageNode, rule, verbose);
 
-      matches.forEach(({ pageId, options, link }) => {
+      linkMatches.forEach(({ pageId, options, link }) => {
         let pass = false;
 
-        const reference = references[pageId];
+        const pageReference = pagedictionary[pageId];
 
-        if (reference) {
-          pass = checkRule(reference.document, rule, verbose);
+        if (pageReference) {
+          pass = checkRule(
+            pageReference.document.documentElement,
+            rule,
+            verbose
+          );
 
           hasChanges = hasChanges || pass;
 
-          // This is where we can flip between pixels and size attribute
-          const usePixelWidths = true;
-          if (usePixelWidths) {
-            options.width = sizes[rule.target];
-          } else {
-            delete options.width;
-            options.size = rule.target;
-          }
+          updateWidthOption(windowOptions, sizes, rule.target);
 
           if (pass) {
-            setLinkWindowOptions(link, options);
+            setLinkOptions(link, options);
           }
         }
       });
     }
   });
 
-  return { document, hasChanges };
+  return hasChanges;
 }
 
 /**
@@ -207,7 +261,7 @@ function applyRule(document, name, rules, sizes, references, verbose = true) {
 function applyRules(files, rules, sizes, io, parser, serializer) {
   const results = [];
 
-  const references = {};
+  const pagedictionary = {};
 
   const uims = files.map((file) => {
     const contents = io.readLines(file).join("\n");
@@ -215,7 +269,7 @@ function applyRules(files, rules, sizes, io, parser, serializer) {
 
     const pageId = document.documentElement.getAttribute("PAGE_ID");
 
-    references[pageId] = {
+    pagedictionary[pageId] = {
       file,
       document,
     };
@@ -227,18 +281,11 @@ function applyRules(files, rules, sizes, io, parser, serializer) {
     };
   });
 
-  uims.forEach(({ document: prevDocument, file }) => {
-    const { document: nextDocument, hasChanges } = applyRule(
-      prevDocument,
-      file,
-      rules,
-      sizes,
-      references
-    );
+  uims.forEach(({ document, file }) => {
+    const hasChanges = applyRule(document, file, rules, sizes, pagedictionary);
 
     // // Only mark the files as 'for writing' if the contents changed
     if (hasChanges) {
-      console.log("nextDocument", nextDocument);
       results[file] = serializer.serializeToString(nextDocument);
     }
   });
@@ -247,8 +294,11 @@ function applyRules(files, rules, sizes, io, parser, serializer) {
 }
 
 module.exports = {
+  checkWidth,
   checkPageWidth,
+  checkLinkWidth,
   checkRule,
+  updateWidthOption,
   applyRule,
   applyRules,
 };
