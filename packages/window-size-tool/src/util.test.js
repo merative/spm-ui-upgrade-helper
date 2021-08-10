@@ -1,30 +1,22 @@
 const { evaluateInequality } = require("./util");
 
 describe("evaluateInequality", () => {
-  const InvalidOperatorError = "Operator is not valid";
-
   test("should return 'undefined' when no args are passed", () => {
-    const expected = InvalidOperatorError;
-
     const actual = () => evaluateInequality();
 
-    expect(actual).toThrow(expected);
+    expect(actual).toThrow();
   });
 
   test("should return 'undefined' when there is no operator", () => {
-    const expected = InvalidOperatorError;
-
     const firstOperand = 1;
     const secondOperand = 2;
 
     const actual = () => evaluateInequality(firstOperand, secondOperand);
 
-    expect(actual).toThrow(expected);
+    expect(actual).toThrow();
   });
 
   test("should return 'undefined' when an invalid operator is passed", () => {
-    const expected = InvalidOperatorError;
-
     const firstOperand = 1;
     const secondOperand = 2;
     const operator = "-";
@@ -32,7 +24,7 @@ describe("evaluateInequality", () => {
     const actual = () =>
       evaluateInequality(firstOperand, secondOperand, operator);
 
-    expect(actual).toThrow(expected);
+    expect(actual).toThrow();
   });
 
   test("should return 'true' when 1 < 2 args are passed", () => {
