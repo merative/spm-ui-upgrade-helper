@@ -7,13 +7,12 @@
     "test": "jest"
   },
   "dependencies": {
-    "@folkforms/file-io": "^0.2.2",
+    "fast-glob": "^3.2.7",
     "fs-extra": "^10.0.0",
     "ignore": "^5.1.8",
     "shelljs": "^0.8.4"
   },
   "devDependencies": {
-    "jest": "^27.0.5",
-    "test-with-data-folder": "^0.0.7"
+    "jest": "^27.0.5"
   }
 }

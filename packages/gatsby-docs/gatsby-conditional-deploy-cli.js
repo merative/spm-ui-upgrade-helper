@@ -1,16 +1,16 @@
 const shelljs = require("shelljs");
-const { dryRunShellJs } = require("dummy-shells");
+const utils = require("../shared-utils/sharedUtils");
 const { Command } = require('commander');
 const gatsbyConditionalDeploy = require("./gatsby-conditional-deploy");
 
 const program = new Command();
 program
   .name("yarn gatsby-conditional-deploy")
-  .addHelpText('beforeAll', 'Deploy Gatsby only if there are changes in the "docs" folder or to "packages/gatsby-docs/src/data/nav-items.yaml".\n')
+  .addHelpText('beforeAll', 'Deploy Gatsby only if there are changes in the "packages/gatsby-docs/" folder.\n')
   .option('-n, --dry-run', 'Show what commands would be executed, without actually running anything')
   .parse(process.argv);
 
-const shell = program.opts().dryRun ? dryRunShellJs : shelljs;
+const shell = program.opts().dryRun ? utils.dummyShells.dryRunShellJs : shelljs;
 
 const travisBranch = process.env.TRAVIS_BRANCH;
 if(travisBranch !== "main") {

@@ -43,7 +43,7 @@ docker login
 if [ "$?" != 0 ]; then echo "Error: Could not log in to Docker repo."; exit 1; fi
 docker pull ibmcom/spm-ui-upgrade-helper:$VERSION
 if [ "$?" != 0 ]; then echo "Error: Could not pull $VERSION version."; exit 1; fi
-docker run $DETACH_CMD -p 3000:3000 -p 4000-4004:4000-4004 \
+docker run $DETACH_CMD -p 3000:3000 -p 4000:4000 \
     $UIUH_DEV_CMD \
     $INPUT_FOLDER_CMD \
     $OUTPUT_FOLDER_CMD \

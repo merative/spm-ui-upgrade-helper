@@ -1,6 +1,5 @@
 const shelljs = require("shelljs");
-const fileio = require("@folkforms/file-io");
-const testWithDataFolder = require("test-with-data-folder");
+const testWithDataFolder = require("./testWithDataFolder");
 const { loadConfig } = require("./config");
 const {
   writeFiles,
@@ -8,7 +7,11 @@ const {
   keepFiles,
   removeFiles,
   copyFilesToOutputFolder,
-  flipToOutputFiles
+  flipToOutputFiles,
+  glob,
+  readLines,
+  readJson,
+  writeLines,
 } = require("./filesAndFolders");
 
 let info = console.info;
@@ -21,12 +24,14 @@ afterEach(() => {
 });
 
 const overrides = {
-  inputFolder: "src/test-data/filesAndFolders/globAllFiles/input",
-  outputFolder: "src/test-data/filesAndFolders/globAllFiles/output",
   globs: [ "**/*" ],
   ignorePatternsFolder: "src/test-data/filesAndFolders/globAllFiles/ignore",
   ignorePatternsFolderAdditional: "src/test-data/filesAndFolders/globAllFiles/ignoreAdditional",
-  quiet: true,
+  logLevel: "quiet",
+  internal: {
+    inputFolder: "src/test-data/filesAndFolders/globAllFiles/input",
+    outputFolder: "src/test-data/filesAndFolders/globAllFiles/output",
+  },
 }
 
 test('filesAndFolders.writeFiles test', () => {
@@ -41,8 +46,8 @@ test('filesAndFolders.writeFiles test', () => {
 
   writeFiles(files);
 
-  const actual1 = fileio.readLines("./src/test-data/filesAndFolders/temp_writeFiles/foo.txt");
-  const actual2 = fileio.readLines("./src/test-data/filesAndFolders/temp_writeFiles/bar.txt");
+  const actual1 = readLines("./src/test-data/filesAndFolders/temp_writeFiles/foo.txt");
+  const actual2 = readLines("./src/test-data/filesAndFolders/temp_writeFiles/bar.txt");
 
   expect(actual1).toEqual(files[filename1]);
   expect(actual2).toEqual(files[filename2]);
@@ -89,11 +94,13 @@ test('filesAndFolders.copyFilesToOutputFolder test', () => {
   const expectedFolder = "src/test-data/filesAndFolders/copyFilesToOutputFolder/input"; // Same as input
   const temporaryFolder = "src/test-data/filesAndFolders/copyFilesToOutputFolder/temp";
 
-  const inputFiles = fileio.glob(`${inputFolder}/**/*`);
+  const inputFiles = glob(`${inputFolder}/**/*`);
   const config = {
-    inputFolder,
-    outputFolder: temporaryFolder,
-    quiet: true,
+    logLevel: "quiet",
+    internal: {
+      inputFolder,
+      outputFolder: temporaryFolder,
+    }
   };
   const testFunc = () => { copyFilesToOutputFolder(config, inputFiles); }
 
@@ -104,16 +111,14 @@ test('filesAndFolders.flipToOutputFiles test', () => {
   const input = [ "input/foo.txt", "input/bar.txt" ];
   const expected = [ "output/foo.txt", "output/bar.txt" ];
   const config = {
-    inputFolder: "input",
-    outputFolder: "output",
-    quiet: true,
+    logLevel: "quiet",
+    internal: {
+      inputFolder: "input",
+      outputFolder: "output",
+    },
   }
 
   const actual = flipToOutputFiles(config, input);
 
   expect(actual).toEqual(expected);
-});
-
-test('filesAndFolders.removeOutputFolder dummy test ', () => {
-  expect(true).toEqual(true);
 });

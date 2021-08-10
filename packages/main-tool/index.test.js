@@ -1,12 +1,11 @@
 const fs = require("fs-extra");
-const fileio = require("@folkforms/file-io");
-const testWithDataFolder = require("test-with-data-folder");
+const utils = require("../shared-utils/sharedUtils");
 const { execute } = require("./index");
 
 /**
  * Run the test against each of the test case folders.
  */
-const testCaseFolders = fileio.glob("test-data/test-case-*", { onlyDirectories: true, deep: 1 });
+const testCaseFolders = utils.glob("test-data/test-case-*", { onlyDirectories: true, deep: 1 });
 testCaseFolders.forEach(folder => {
   test(`main-tool test (from: packages/main-tool/${folder})`, () => {
     runTest(folder);
@@ -20,21 +19,34 @@ const runTest = folder => {
   const inputFolder = `${folder}/input`;
   const expectedFolder = `${folder}/expected`;
   const temporaryFolder = `${folder}/temp`;
-  const testToolsOverride = fileio.readJson(`${folder}/tools.json`);
+  const testToolsOverride = utils.readJson(`${folder}/tools.json`);
   let testConfigOverrides = {
-    inputFolder,
-    outputFolder: temporaryFolder,
     globs: [ "**/*" ],
-    quiet: true,
-    testMode: true,
+    logLevel: "quiet",
+    iconReplacerTool: {
+      iconMappings: "../icon-replacer-tool/icon_mappings.json",
+      iconFolder: "../icon-replacer-tool/source_files",
+    },
+    internal: {
+      inputFolder,
+      outputFolder: temporaryFolder,
+      testMode: true,
+    },
   };
   const additionalConfigOverridesFile = `${folder}/config.json`;
   if(fs.existsSync(additionalConfigOverridesFile)) {
-    const testAdditionalConfigOverrides = fileio.readJson(additionalConfigOverridesFile);
-    testConfigOverrides = { ...testConfigOverrides, ...testAdditionalConfigOverrides };
+    const testAdditionalConfigOverrides = utils.readJson(additionalConfigOverridesFile);
+    testConfigOverrides = {
+      ...testConfigOverrides,
+      ...testAdditionalConfigOverrides,
+      internal: {
+        ...testConfigOverrides.internal,
+        ...testAdditionalConfigOverrides.internal,
+      },
+    };
   }
 
   const testFunc = () => { execute(testConfigOverrides, testToolsOverride); };
 
-  testWithDataFolder(testFunc, inputFolder, expectedFolder, temporaryFolder);
+  utils.testWithDataFolder(testFunc, inputFolder, expectedFolder, temporaryFolder);
 }

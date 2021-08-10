@@ -1,18 +1,18 @@
 const fs = require("fs-extra");
-const fileio = require("@folkforms/file-io");
 const shelljs = require("shelljs");
+const globLib = require("fast-glob");
 
 /**
- * Removes the folder `config.outputFolder`.
+ * Removes the folder `config.internal.outputFolder`.
  *
  * @param {object} config configuration object
  */
 const removeOutputFolder = config => {
   console.info("Deleting existing output folder");
   const cwd = process.cwd();
-  shelljs.rm("-rf", `${config.outputFolder}/*`);
-  shelljs.rm("-rf", `${config.outputFolder}/.git`);
-  shelljs.mkdir('-p', config.outputFolder);
+  shelljs.rm("-rf", `${config.internal.outputFolder}/*`);
+  shelljs.rm("-rf", `${config.internal.outputFolder}/.git`);
+  shelljs.mkdir('-p', config.internal.outputFolder);
   shelljs.cd(cwd);
 }
 
@@ -43,9 +43,9 @@ const globAllFiles = config => {
   console.info("Collecting input files");
   const startTime = new Date().getTime();
   let inputFiles = [];
-  config.globs.forEach(glob => {
-    const path = `${config.inputFolder}/${glob}`;
-    const files = fileio.glob(path);
+  config.globs.forEach(g => {
+    const path = `${config.internal.inputFolder}/${g}`;
+    const files = globLib.sync(path);
     inputFiles.push(files);
   });
   inputFiles = inputFiles.flat();
@@ -111,8 +111,7 @@ const removeFiles = (files, ...ext) => {
 }
 
 /**
- * Updates all of the files in `inputFiles` array to `config.outputFolder`, by updating
- * `config.inputFolder` => `config.outputFolder`.
+ * Copies files from `config.internal.inputFolder` to `config.internal.outputFolder`.
  *
  * @param {*} config configuration object
  * @param {*} inputFiles list of input files
@@ -122,7 +121,7 @@ const copyFilesToOutputFolder = (config, inputFiles) => {
   const startTime = new Date().getTime();
   const outputFiles = [];
   inputFiles.forEach(file => {
-    const destFile = file.replace(config.inputFolder, config.outputFolder);
+    const destFile = file.replace(config.internal.inputFolder, config.internal.outputFolder);
     const destFolder = destFile.substring(0, destFile.lastIndexOf('/'));
     shelljs.mkdir('-p', destFolder);
     shelljs.cp(file, destFile);
@@ -133,8 +132,8 @@ const copyFilesToOutputFolder = (config, inputFiles) => {
 }
 
 /**
- * Updates the path of all files in `inputFiles` array from `config.inputFolder` =>
- * `config.outputFolder`.
+ * Updates the path of all files in `inputFiles` array from `config.internal.inputFolder` =>
+ * `config.internal.outputFolder`.
  *
  * @param {*} config configuration object
  * @param {*} inputFiles list of input files
@@ -144,12 +143,93 @@ const flipToOutputFiles = (config, inputFiles) => {
   const startTime = new Date().getTime();
   const files = [];
   inputFiles.forEach(file => {
-    const destFile = file.replace(config.inputFolder, config.outputFolder);
+    const destFile = file.replace(config.internal.inputFolder, config.internal.outputFolder);
     files.push(destFile);
   });
   const endTime = new Date().getTime();
   console.info(`Updating paths finished [${endTime - startTime} ms]`);
   return files;
+}
+
+/**
+ * Glob all files according to the given pattern.
+ *
+ * This is a thin wrapper around `fast-glob` (https://www.npmjs.com/package/fast-glob)
+ *
+ * @param {string} pattern glob pattern
+ * @param {object} options fast-glob options
+ * @returns {array} files found
+ */
+const glob = (pattern, options) => {
+  return globLib.sync(pattern, options);
+}
+
+/**
+ * Read the contents of a file into an array.
+ *
+ * @param {string} filename file to read
+ * @returns {array} file contents
+ */
+const readLines = filename => {
+  return readLinesAsString(filename).split("\n");
+}
+
+/**
+ * Read the contents of a file into a string.
+ *
+ * @param {string} filename file to read
+ * @returns {string} file contents
+ */
+const readLinesAsString = filename => {
+  const contents = fs.readFileSync(filename, 'utf8');
+  return contents;
+}
+
+/**
+ * Reads a JSON file and converts it to a JS object.
+ *
+ * @param {string} filename file to read
+ * @returns {object} file contents parsed with JSON.parse
+ */
+const readJson = filename => {
+  return JSON.parse(readLinesAsString(filename));
+}
+
+/**
+ * Writes the given array to a file.
+ *
+ * @param {string} filename file to write
+ * @returns {array} data string or array of lines to write
+ */
+const writeLines = (filename, data, append = false) => {
+  let dataOut;
+  if(typeof data === "string") {
+    dataOut = data;
+  } else {
+    dataOut = data.join("\n");
+  }
+  const options = { flag: append ? "a" : "w" };
+  fs.outputFileSync(filename, dataOut, options);
+}
+
+/**
+ * Copies the given folder recursively, preserving directory structure.
+ *
+ * @param {string} inputFolder input folder
+ * @param {string} outputFolder output folder, will be created if it does not exist
+ * @param {object} options options used when globbing up the input files
+ */
+const copyFolder = (inputFolder, outputFolder, options) => {
+  let files = glob(`${inputFolder}/**/*`, options);
+  const copyTasks = [];
+  files.forEach(f => {
+    copyTasks.push({ src: f, dest: f.replace(inputFolder, outputFolder) });
+  });
+  copyTasks.forEach(c => {
+    const folderPart = c.dest.substring(0, c.dest.lastIndexOf("/"));
+    shelljs.mkdir("-p", folderPart);
+    shelljs.cp(c.src, c.dest);
+  });
 }
 
 module.exports = {
@@ -160,4 +240,9 @@ module.exports = {
   removeFiles,
   copyFilesToOutputFolder,
   flipToOutputFiles,
+  glob,
+  readJson,
+  readLines,
+  writeLines,
+  copyFolder,
 };

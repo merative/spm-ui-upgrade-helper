@@ -1,0 +1,19 @@
+{
+  "name": "@upgrade-helper/docker-tasks",
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "description": "Utilities to run Docker workflow tasks.",
+  "main": "docker-tasks.js",
+  "scripts": {
+    "docker-tasks": "node docker-tasks-cli.js",
+    "test": "jest"
+  },
+  "dependencies": {
+    "fs-extra": "^9.1.0",
+    "js-yaml": "^4.0.0",
+    "shelljs": "^0.8.4"
+  },
+  "devDependencies": {
+    "jest": "^27.0.4"
+  }
+}

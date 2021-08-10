@@ -19,43 +19,43 @@ const { removeIgnoredFiles } = require("./removeIgnoredFiles");
  * @param {*} config configuration object
  */
 const init = config => {
-  // Turn off info messages (typically used during unit tests)
-  if(config.quiet) {
+  if(config.logLevel.toLowerCase() === "quiet") {
     console.info = () => {};
-  }
-
-  // Turn off debug messages by default
-  if(!config.debug) {
+    console.log = () => {};
     console.debug = () => {};
   }
 
-  // Skip init sometimes (typically when tools are run via the main tool, and during unit tests)
-  if(config.skipInit) {
+  if(config.logLevel.toLowerCase() === "normal") {
+    console.debug = () => {};
+  }
+
+  // Skip init sometimes (used when tools are run via the main tool, and during tests)
+  if(config.internal.skipInit) {
     console.info("Skipping init step");
     return;
   }
 
   // Remove "./" paths as they will cause problems later when trying to ignore files
-  config.inputFolder = config.inputFolder.startsWith("./")
-    ? config.inputFolder.substring(2)
-    : config.inputFolder;
-  config.outputFolder = config.outputFolder.startsWith("./")
-    ? config.outputFolder.substring(2)
-    : config.outputFolder;
+  config.internal.inputFolder = config.internal.inputFolder.startsWith("./")
+    ? config.internal.inputFolder.substring(2)
+    : config.internal.inputFolder;
+  config.internal.outputFolder = config.internal.outputFolder.startsWith("./")
+    ? config.internal.outputFolder.substring(2)
+    : config.internal.outputFolder;
 
   console.info("Initializing output folder");
   removeOutputFolder(config);
-  if(!config.testMode) {
+  if(!config.internal.testMode) {
     createGitRepo(config);
   }
   let inputFiles = globAllFiles(config);
   inputFiles = removeIgnoredFiles(config, inputFiles);
   copyFilesToOutputFolder(config, inputFiles);
-  if(!config.testMode) {
-    commitFiles(config.outputFolder, "Initial commit");
+  if(!config.internal.testMode) {
+    commitFiles(config.internal.outputFolder, "Initial commit");
   }
   let files = flipToOutputFiles(config, inputFiles);
-  config.files = files;
+  config.internal.files = files;
 }
 
 module.exports = { init };

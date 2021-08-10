@@ -2,7 +2,7 @@ const gatsbyConditionalDeploy = (shell, changes) => {
 
   let hasChanges = false;
   for(let i = 0; i < changes.length; i++) {
-    if(changes[i].startsWith("docs/") || changes[i].startsWith("packages/gatsby-docs/")) {
+    if(changes[i].startsWith("packages/gatsby-docs/")) {
       console.info(`Running gatsby:deploy due to change in ${changes[i]}`);
       hasChanges = true;
       break;
@@ -12,7 +12,7 @@ const gatsbyConditionalDeploy = (shell, changes) => {
   if(hasChanges) {
     return shell.exec("yarn gatsby:deploy").code;
   } else {
-    shell.echo("Not running gatsby:deploy as there were no changes to the 'docs' folder or to 'nav-items.yaml'.");
+    shell.echo("Not running gatsby:deploy as there were no changes in the 'packages/gatsby-docs/' folder.");
     return 0;
   }
 }

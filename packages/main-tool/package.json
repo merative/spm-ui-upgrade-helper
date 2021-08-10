@@ -9,13 +9,11 @@
     "test": "jest"
   },
   "dependencies": {
-    "@folkforms/file-io": "^0.2.3",
     "express": "^4.17.1",
     "nodemon": "^2.0.7"
   },
   "devDependencies": {
     "fs-extra": "^10.0.0",
-    "jest": "^27.0.5",
-    "test-with-data-folder": "^0.0.9"
+    "jest": "^27.0.5"
   }
 }

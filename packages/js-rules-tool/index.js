@@ -1,72 +1,52 @@
 var esprima = require('esprima');
-var estraverse = require('estraverse');
-const fileio = require('@folkforms/file-io');
 const utils = require("../shared-utils/sharedUtils");
-const { applyRulesToJS } = require("./src/applyRulesToJS");
 
 /**
  * Main method. Will be called via http://localhost:40xx/execute
  */
 const execute = overrides => {
-  // estraverse.traverse(x2, {
-  //   enter: function (node, parent) {
-  //     console.log("traverse-enter");
-  //     if (node.type == 'FunctionExpression' || node.type == 'FunctionDeclaration') {
-  //       return estraverse.VisitorOption.Skip;
-  //     }
-  //   },
-  //   leave: function (node, parent) {
-  //     console.log("traverse-leave");
-  //     if (node.type == 'VariableDeclarator') {
-  //       console.log(node.id.name);
-  //     }
-  //   }
-  // });
-
-  const config = { ...utils.loadConfig(), ...overrides };
+  const config = utils.loadConfig(overrides);
   utils.init(config);
 
   // Initial setup
-  let targetFiles = config.files;
+  let targetFiles = config.internal.files;
   targetFiles = utils.keepFiles(targetFiles, "js");
 
   try {
-    // Apply the rules to the files
-    const modified = {};
+    // const modified = {};
     targetFiles.forEach(filename => {
-      const contents = fileio.readLines(filename);
-      // modified[filename] = applyRulesToJS(contents, rules, filename);
-
+      const contents = utils.readLines(filename);
+      // Example identifiers
       const identifiers = [
-        "addClass",
-        "attr",
+        "getElementById",
+        "getElementByClass",
         "byId",
         "byClass",
+        "addClass",
+        "attr",
         "query",
         "create",
         "className",
-        "height", // ???
         "innerHTML",
         "className",
-        // "element["className"]     // You can do this as well
-        // "element[classNameFromVar]  // Or this
-        // "element.className.indexOf(someVar)
-        "style",
-        // "element.style.visibility = "visible" // For example
-        // "element.style.backgroundColor = "#F4FAB4" // For example
         "getAttribute",
         "setAttribute",
-        // "domConstruct.place(domConstruct.toDom(rawHtml), location)
-        "getElementsByTagName", // Might manipulate them later
-        // "document.body.style
+        "style",
         "write",
-        "getElementById",
         "createElement",
-        // var re = new RegExp('^sortTableBdy'); // Is this a class? Yes, but hard to programatically tell.
-        "getElementByClass",
+        "height", // Style as attribute
+        "getElementsByTagName", // Might manipulate them later
+        // "element["className"]
+        // "element[classNameFromVar]
+        // "element.className.indexOf(someVar)
+        // "element.style.visibility = "visible"
+        // "element.style.backgroundColor = "#F4FAB4"
+        // "domConstruct.place(domConstruct.toDom(rawHtml), location)
+        // "document.body.style
+        // var re = new RegExp('^sortTableBdy');
       ];
 
-      // FIXME New AST stuff
+      // Find identifiers
       let foundIdentifiers = esprima.tokenize(contents.join("\n"));
       foundIdentifiers = foundIdentifiers.filter(item =>
         item.type === "Identifier" &&
@@ -76,15 +56,10 @@ const execute = overrides => {
         console.info(`filename = ${filename}`);
         console.info(`foundIdentifiers = ${JSON.stringify(foundIdentifiers)}`);
       }
-
-      // const x2 = esprima.parseScript(contents.join("\n"));
-      // console.log(`x2 = ${JSON.stringify(x2)}`);
     });
 
     // Save changes
-    // utils.writeFiles(modified);
-    // utils.commitFiles(config.outputFolder, "???");
-    // utils.writeFiles(???);
+    // ...
 
   } catch (error) {
     console.error(error);

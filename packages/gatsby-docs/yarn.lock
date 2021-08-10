@@ -1236,23 +1236,6 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@folkforms/file-io@^0.2.2":
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/@folkforms/file-io/-/file-io-0.2.3.tgz#6f10c96d6c7aaa1e27e4566bd37693532b31dfa7"
-  integrity sha512-4GCoabgInYEi4nD8fBbJV6n1vtQfdDrb8qpN1J9nhpE5OlcDUpEOssaxlYoX0+WznsCb5ZmbU4D2LpUA/MPKEw==
-  dependencies:
-    fast-glob "^3.2.5"
-    fs-extra "^9.1.0"
-
-"@folkforms/file-io@^0.2.4":
-  version "0.2.4"
-  resolved "https://registry.yarnpkg.com/@folkforms/file-io/-/file-io-0.2.4.tgz#305462e2a37b2045c711ca3ecba34733963bda75"
-  integrity sha512-BKNdxIiGvT9zSFtkBkCfT6oOUCY3peRHV9kccoux0VqrfCt0QYdKccgf9QcER0QHKEr72esUxnPNmHqw7zuHXw==
-  dependencies:
-    fast-glob "^3.2.5"
-    fs-extra "^9.1.0"
-    shelljs "^0.8.4"
-
 "@gatsbyjs/reach-router@^1.3.6":
   version "1.3.6"
   resolved "https://registry.yarnpkg.com/@gatsbyjs/reach-router/-/reach-router-1.3.6.tgz#4e8225836959be247890b66f21a3198a0589e34d"
@@ -6035,11 +6018,6 @@ downshift@5.2.1:
     prop-types "^15.7.2"
     react-is "^16.13.1"
 
-dummy-shells@^0.0.4:
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/dummy-shells/-/dummy-shells-0.0.4.tgz#0167f1021132421cec14dbf074f727a8fa7fa663"
-  integrity sha512-UoG3XCnaH0JQdJSN8NKWmqZKyjCiLYas+UP7qN/nDgn/fv7VLJ+9TMKLevvscCHU/MhFeU/CGIlNS3hC0Eu8Ew==
-
 duplexer3@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/duplexer3/-/duplexer3-0.1.4.tgz#ee01dd1cac0ed3cbc7fdbea37dc0a8f1ce002ce2"
@@ -6921,7 +6899,7 @@ fast-deep-equal@^3.1.1, fast-deep-equal@^3.1.3:
   resolved "https://registry.yarnpkg.com/fast-deep-equal/-/fast-deep-equal-3.1.3.tgz#3a7d56b559d6cbc3eb512325244e619a65c6c525"
   integrity sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==
 
-fast-glob@^3.0.3, fast-glob@^3.1.1, fast-glob@^3.2.4, fast-glob@^3.2.5:
+fast-glob@^3.0.3, fast-glob@^3.1.1, fast-glob@^3.2.4:
   version "3.2.7"
   resolved "https://registry.yarnpkg.com/fast-glob/-/fast-glob-3.2.7.tgz#fd6cb7a2d7e9aa7a7846111e85a196d6b2f766a1"
   integrity sha512-rYGMRwip6lUMvYD3BTScMwT1HtAs2d71SMv66Vrxs0IekGZEjhM0pcMfjQPnknBt2zeCwQMEupiN02ZP4DiT1Q==
@@ -15965,14 +15943,6 @@ test-exclude@^6.0.0:
     "@istanbuljs/schema" "^0.1.2"
     glob "^7.1.4"
     minimatch "^3.0.4"
-
-test-with-data-folder@^0.0.10:
-  version "0.0.10"
-  resolved "https://registry.yarnpkg.com/test-with-data-folder/-/test-with-data-folder-0.0.10.tgz#8b82c482bc2d9dfa6e1b6576d695a0ef66d6047b"
-  integrity sha512-Q/MTxMiVavI8jD99Sw9GHesKF5nGfLWzBVYPF+TisOgxqMdDKEGRLyMrgV98uZRn9SUyHOfM1dZ0pxivoiNRTg==
-  dependencies:
-    "@folkforms/file-io" "^0.2.2"
-    shelljs "^0.8.4"
 
 text-hex@1.0.x:
   version "1.0.0"

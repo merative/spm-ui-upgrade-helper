@@ -1,23 +1,31 @@
 const sizes = require("./sizes");
 const engine = require("./src/engine");
-const fileio = require("@folkforms/file-io");
 const utils = require("../shared-utils/sharedUtils");
 const xmldom = require("xmldom");
+
+const fileio = { readLines: utils.readLines };
 
 /**
  * Main method. Will be called via http://localhost:40xx/execute.
  */
 const execute = (overrides) => {
-  const config = { ...utils.loadConfig(), ...overrides };
+  const config = utils.loadConfig(overrides);
   utils.init(config);
 
   const parser = new xmldom.DOMParser();
   const serializer = new xmldom.XMLSerializer();
 
-  const inputFiles = utils.keepFiles(config.files, "uim", "vim");
-  const rules = fileio.readJson(config.windowSizeTool.rules);
+  const inputFiles = utils.keepFiles(config.internal.files, "uim", "vim");
+  const rules = utils.readJson(config.windowSizeTool.rules);
 
-  const outputFiles = engine.applyRules(inputFiles, rules, sizes, fileio, parser, serializer);
+  const outputFiles = engine.applyRules(
+    inputFiles,
+    rules,
+    sizes,
+    fileio,
+    parser,
+    serializer
+  );
 
   utils.writeFiles(outputFiles);
 
