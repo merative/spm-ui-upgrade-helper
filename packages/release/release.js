@@ -1,4 +1,4 @@
-const release = (shell, option, version, options = {}) => {
+const release = (shell, option, version) => {
   if(option === "--start") {
     shell.echo("Validating...");
     // Make sure version number is correct format
@@ -7,12 +7,17 @@ const release = (shell, option, version, options = {}) => {
       return 1;
     }
     // Make sure working directory is clean
-    if(!options.testMode) {
-      const r = exec(shell, `git status --porcelain`);
-      if(r.stdout && r.stdout.length > 0) {
-        shell.echo("ERROR: Working directory is not clean.");
-        return 1;
-      }
+    const r = exec(shell, `git status --porcelain`);
+    if(r.stdout && r.stdout.length > 0) {
+      shell.echo("ERROR: Working directory is not clean.");
+      return 1;
+    }
+    // Make sure we are on "main" branch
+    let branch = exec(shell, `git symbolic-ref --short -q HEAD`).stdout;
+    branch = branch.substring(0, branch.length - 1);
+    if(branch !== "main") {
+      shell.echo(`ERROR: Releases can only be created on 'main' branch.`);
+      return 1;
     }
     // Make sure tag does not already exist
     exec(shell, `git pull --tags`);
