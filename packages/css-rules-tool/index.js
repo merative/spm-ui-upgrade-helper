@@ -33,7 +33,7 @@ const execute = overrides => {
         }
       } catch(err) {
         console.warn(`WARNING {`);
-        console.warn(`  Message: Failed to parse file ${err.filename} line ${err.line} column ${err.column}`);
+        console.warn(`  Message: Failed to parse file ${filename} line ${err.line} column ${err.column}`);
         console.warn(`  Reason: ${err.reason}`);
         const split = contents.split("\n");
         console.warn(`  Hint: Line ${err.line} may contain invalid CSS: "${split[err.line - 1].trimEnd()}"`);
