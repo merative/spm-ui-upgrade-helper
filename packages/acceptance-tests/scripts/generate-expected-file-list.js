@@ -8,6 +8,9 @@ const generateExpectedFileList = datasetName => {
   for(let i = 0; i < dataset.cssUpdates; i++) {
     changes.push(`has-updates-css-${i}.css`);
   }
+  for(let i = 0; i < dataset.invalidCssFiles; i++) {
+    changes.push(`invalid-css-file-${i}.css`);
+  }
   for(let i = 0; i < dataset.iconUpdates; i++) {
     changes.push(`has-updates-icons-${i}.properties`);
   }

@@ -6,6 +6,8 @@ const expected = [
   "has-updates-css-2.css",
   "has-updates-css-1.css",
   "has-updates-css-0.css",
+  "invalid-css-file-0.css",
+  "invalid-css-file-1.css",
   "has-updates-css-and-icons-1.css",
   "has-updates-css-and-icons-0.css",
   "Chevron_Down_Blue30_10px.png",
