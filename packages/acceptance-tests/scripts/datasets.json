@@ -8,13 +8,13 @@
     "cssAndIconUpdates": 2,
     "windowSizeUpdates": 3
   },
-  "icon-replacer-performance": {
-    "totalFiles": 6000,
+  "performance-test": {
+    "totalFiles": 10000,
     "maxFolderDepth": 10,
-    "cssUpdates": 0,
+    "cssUpdates": 10,
     "iconUpdates": 10,
-    "iconFiles": 0,
-    "cssAndIconUpdates": 0,
-    "windowSizeUpdates": 0
+    "iconFiles": 10,
+    "cssAndIconUpdates": 10,
+    "windowSizeUpdates": 10
   }
 }
