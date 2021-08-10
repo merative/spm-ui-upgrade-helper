@@ -25,15 +25,14 @@ Once installed, you will need to allow Docker Desktop to access certain paths on
 ## Build steps
 
 1. Clone the repo with `git clone git@github.com:IBM/spm-ui-upgrade-helper.git`
-2. Run `yarn install`
-3. Run `yarn install-all`
-4. Run the following commands (not strictly necessary but it will greatly speed up the Docker build)
+2. Run `yarn install-all`
+3. Run the following commands (not strictly necessary but it will greatly speed up the Docker build)
     - `docker pull theiaide/theia:1.14.0`
     - `docker pull node:12.18.3`
     - `docker pull node:12.18.3-alpine`
-5. Build the container with `yarn build:dev`
-6. Build the acceptance test data with `yarn at:build kitchen-sink`
-7. Start the container with `acceptance-test.bat`/`acceptance-test.sh`
+4. Build the container with `yarn build:dev`
+5. Build the acceptance test data with `yarn at:build kitchen-sink`
+6. Start the container with `acceptance-test.bat`/`acceptance-test.sh`
 
 ## Notes
 
