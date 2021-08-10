@@ -17,7 +17,8 @@ const execute = (testConfigOverrides = {}, testToolOverrides = []) => {
     utils.init(config);
 
     // Pass configuration to the individual tools so we can tell them to skip the init step
-    const configOverrides = { ...config, internal: { ...config.internal, skipInit: true } };
+    const configOverrides = config;
+    configOverrides.internal.skipInit = true;
 
     // Execute all the tools
     tools.forEach(tool => {
