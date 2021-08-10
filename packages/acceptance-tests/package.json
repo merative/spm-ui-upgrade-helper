@@ -6,7 +6,8 @@
   "main": "index.js",
   "scripts": {
     "at:generate-data": "node scripts/generate-acceptance-test-data.js",
-    "at:test": "jest puppeteer/.*.test.js"
+    "at:test": "jest puppeteer/.*.test.js",
+    "test": "jest scripts/.*.test.js"
   },
   "devDependencies": {
     "commander": "^8.1.0",

@@ -135,6 +135,7 @@ let fileCount = 0;
 let folderIndex = 0;
 const folders = createFolders(data.totalFiles, data.maxFolderDepth);
 addFiles("has-updates-css.css", data.cssUpdates, folders);
+addFiles("invalid-css-file.css", data.invalidCssFiles, folders);
 addFiles("has-updates-icons.properties", data.iconUpdates, folders);
 copyFiles("Chevron_Down_Blue30_10px.png", data.iconFiles, folders);
 addFiles("has-updates-css-and-icons.css", data.cssAndIconUpdates, folders);

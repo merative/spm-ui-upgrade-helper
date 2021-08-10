@@ -3,9 +3,7 @@ const { applyRules } = require("./src/applyRules");
 const utils = require("../shared-utils/sharedUtils");
 
 /**
- * Main method. Will be called via http://localhost:4000/execute
- *
- * We prettify the files as a first step in order to make the final diff as clean as possible.
+ * Main method. Will be called via http://localhost:40xx/execute
  */
 const execute = overrides => {
   try {
@@ -32,12 +30,7 @@ const execute = overrides => {
           delete appliedRules[filename];
         }
       } catch(err) {
-        console.warn(`WARNING {`);
-        console.warn(`  Message: Failed to parse file ${err.filename} line ${err.line} column ${err.column}`);
-        console.warn(`  Reason: ${err.reason}`);
-        const split = contents.split("\n");
-        console.warn(`  Hint: Line ${err.line} may contain invalid CSS: "${split[err.line - 1].trimEnd()}"`);
-        console.warn(`}`);
+        console.warn(err);
       }
     });
     console.info(`${Object.keys(appliedRules).length} files were modified`);
