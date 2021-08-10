@@ -22,7 +22,7 @@ afterEach(() => {
   jest.resetAllMocks();
 })
 
-test('test that --start option runs the correct commands', () => {
+test('--start option runs the correct commands', () => {
   shelljs.exec = jest.fn(input => {
     execList.push(input);
     if(input === "git status --porcelain") {
@@ -56,7 +56,7 @@ test('test that --start option runs the correct commands', () => {
   expect(execList.length).toEqual(expected.length);
 });
 
-test('test that --start option can only be run on the main branch', () => {
+test('--start option can only be run on the main branch', () => {
   shelljs.exec = jest.fn(input => {
     execList.push(input);
     if(input === "git status --porcelain") {
@@ -85,7 +85,7 @@ test('test that --start option can only be run on the main branch', () => {
   expect(echoList.length).toEqual(expectedEcho.length);
 });
 
-test('test that --ship option runs the correct commands', () => {
+test('--ship option runs the correct commands', () => {
   const expected = [
     "docker login",
     "yarn docker-tasks release 0.10.0",
@@ -101,7 +101,7 @@ test('test that --ship option runs the correct commands', () => {
   expect(execList.length).toEqual(expected.length);
 });
 
-test('test that version is validated correctly', () => {
+test('version is validated correctly', () => {
   const expected = [
     "Validating...",
     "ERROR: Version must match x.y.z format.",
@@ -115,7 +115,7 @@ test('test that version is validated correctly', () => {
   expect(execList.length).toEqual(0);
 });
 
-test('test that re-using an existing tag will fail', () => {
+test('re-using an existing tag will fail', () => {
   shelljs.exec = jest.fn(input => {
     execList.push(input);
     if(input === "git status --porcelain") {
@@ -148,7 +148,7 @@ test('test that re-using an existing tag will fail', () => {
   expect(execList.length).toEqual(expectedExec.length);
 });
 
-test('test that an unknown option will fail', () => {
+test('using an unknown option will fail', () => {
   const expected = [
     "ERROR: Unknown option: '--foo'",
   ];
