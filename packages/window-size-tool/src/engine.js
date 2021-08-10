@@ -249,16 +249,42 @@ function applyRule(
 }
 
 /**
+ * .
  *
- * @param {array} files .
- * @param {array} rules .
- * @param {object} sizes .
- * @param {object} io .
- * @param {object} parser .
- * @param {object} serializer .
- * @returns .
+ * @param {array} files A list of globbed UIM files.
+ * @param {array} rules An array of xPath based rules.
+ * @param {object} sizes Mapping breakpoints to be applied to UIMs if rules
+ * criteria a met.
+ * @param {object} io Util for reading contents of globbed files.
+ * @param {object} parser Util for transforming globbed file content to an
+ * object.
+ * @param {object} serializer Util for transforming XML object back to a string.
+ * @returns A list of files that have met the rules criteria and had their
+ * width's updated.
  */
-function applyRules(files, rules, sizes, io, parser, serializer) {
+function applyRules(
+  files,
+  rules,
+  sizes,
+  io,
+  parser,
+  serializer,
+  verbose = true
+) {
+  if (!files) {
+    throw Error("You must supply a globbed files array");
+  } else if (!rules) {
+    throw Error("You must supply a rules array");
+  } else if (!sizes) {
+    throw Error("You must supply a size object");
+  } else if (!io) {
+    throw Error("You must supply an io object");
+  } else if (!parser) {
+    throw Error("You must supply an parser object");
+  } else if (!serializer) {
+    throw Error("You must supply an serializer object");
+  }
+
   const results = [];
 
   const pagedictionary = {};
@@ -282,9 +308,16 @@ function applyRules(files, rules, sizes, io, parser, serializer) {
   });
 
   uims.forEach(({ document, file }) => {
-    const hasChanges = applyRule(document, file, rules, sizes, pagedictionary);
+    const hasChanges = applyRule(
+      document,
+      file,
+      rules,
+      sizes,
+      pagedictionary,
+      verbose
+    );
 
-    // // Only mark the files as 'for writing' if the contents changed
+    // Only mark the files as 'for writing' if the contents changed
     if (hasChanges) {
       results[file] = serializer.serializeToString(document);
     }

@@ -633,3 +633,124 @@ describe("applyRule", () => {
     expect(result).toEqual(1);
   });
 });
+
+describe("applyRules", () => {
+  const filename = "test.uim";
+  const sizes = {
+    xs: 0,
+    sm: 500,
+    md: 700,
+    lg: 1000,
+    xlg: 1200,
+  };
+
+  beforeEach(() => {
+    xp.select.mockReset();
+  });
+
+  test("should throw an error when no files are passed", () => {
+    const actual = () => applyRules();
+
+    expect(actual).toThrow();
+  });
+
+  test("should throw an error when no rules is passed", () => {
+    const files = [];
+    const actual = () => applyRules(files);
+
+    expect(actual).toThrow();
+  });
+
+  test("should throw an error when no sizes are passed", () => {
+    const files = [];
+    const rules = [];
+    const actual = () => applyRules(files, rules);
+
+    expect(actual).toThrow();
+  });
+
+  test("should throw an error when no io is passed", () => {
+    const files = [];
+    const rules = [];
+    const actual = () => applyRules(files, rules, sizes);
+
+    expect(actual).toThrow();
+  });
+
+  test("should throw an error when no parser is passed", () => {
+    const files = [];
+    const rules = [];
+    const io = {};
+    const actual = () => applyRules(files, rules, sizes, io);
+
+    expect(actual).toThrow();
+  });
+
+  test("should throw an error when no serializer is passed", () => {
+    const files = [];
+    const rules = [];
+    const io = {};
+    const parser = {};
+    const actual = () => applyRules(files, rules, sizes, io, parser);
+
+    expect(actual).toThrow();
+  });
+
+  test("should serialize UIM documents to strings when the document matches the rules", () => {
+    const expected = true;
+
+    const mockSerializeToString = jest.fn();
+
+    const files = ["test.uim"];
+    const rules = [
+      {
+        width: "> 768",
+        terms: ["criteria.1"],
+        target: "md",
+      },
+    ];
+    const io = {
+      readLines: (file) => [],
+    };
+    const parser = {
+      parseFromString: (contents) => ({
+        documentElement: {
+          getAttribute: (attribute) => {
+            if (attribute === "PAGE_ID") {
+              return "test-id";
+            } else if (attribute === "WINDOW_OPTIONS") {
+              return null;
+            }
+          },
+        },
+      }),
+    };
+    const serializer = {
+      serializeToString: mockSerializeToString,
+    };
+
+    xp.select.mockImplementation((xPath) => {
+      if (xPath.includes("LINK")) {
+        return [
+          {
+            getAttribute: (attribute) => {
+              if (attribute === "PAGE_ID") {
+                return "test-id";
+              } else if (attribute === "WINDOW_OPTIONS") {
+                return "width=999";
+              }
+            },
+            setAttribute: () => {},
+          },
+        ];
+      } else {
+        return true;
+      }
+    });
+
+    applyRules(files, rules, sizes, io, parser, serializer, false);
+    const actual = mockSerializeToString.mock.calls.length > 0;
+
+    expect(actual).toEqual(expected);
+  });
+});
