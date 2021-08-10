@@ -1,3 +1,5 @@
+const shelljs = require ("shelljs");
+
 const dryRunShellJs = {
   exit: () => {},
   echo: arg => console.log(arg),
@@ -5,12 +7,19 @@ const dryRunShellJs = {
     console.log(`cp ${arg1} ${arg2}`);
     return { code: 0 };
   },
-  exec: arg => {
-    console.log(arg);
-    return { code: 0, stdout: dryRunShellJs._getExecStdOut };
+  exec: cmd => {
+    console.log(cmd);
+    return { code: 0, stdout: dryRunShellJs._getExecStdOut(cmd) };
   },
-  _setExecStdOut: retVal => dryRunShellJs._getExecStdOut = retVal,
-  _getExecStdOut: undefined,
+  _getExecStdOut: cmd => {
+    if(cmd === "git status --porcelain" ||
+       cmd === "git symbolic-ref --short -q HEAD" ||
+       cmd.startsWith("git tag --list v")
+    ) {
+      return shelljs.exec(cmd).stdout;
+    }
+    return "";
+  },
 }
 
 module.exports = dryRunShellJs;
