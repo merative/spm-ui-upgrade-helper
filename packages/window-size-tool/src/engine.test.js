@@ -1,457 +1,306 @@
 const xp = require("xpath");
 
 const {
-  evaluateInequality,
-  getWindowOptions,
-  setWindowOptions,
   checkWidth,
+  checkPageWidth,
+  checkLinkWidth,
   checkRule,
+  updateWidthOption,
+  applyRule,
   applyRules,
 } = require("./engine");
 
 jest.mock("xpath");
 
-beforeEach(() => {
-  xp.select.mockReset();
-});
-
-describe("evaluateInequality", () => {
-  test("should return 'undefined' when no args are passed", () => {
-    const expected = undefined;
-
-    const actual = evaluateInequality();
-
-    expect(actual).toEqual(expected);
-  });
-
-  test("should return 'undefined' when there is no operator", () => {
-    const expected = undefined;
-
-    const firstOperand = 1;
-    const secondOperand = 2;
-
-    const actual = evaluateInequality(firstOperand, secondOperand);
-
-    expect(actual).toEqual(expected);
-  });
-
-  test("should return 'undefined' when an invalid operator is passed", () => {
-    const expected = undefined;
-
-    const firstOperand = 1;
-    const secondOperand = 2;
-    const operator = "-";
-
-    const actual = evaluateInequality(firstOperand, secondOperand, operator);
-
-    expect(actual).toEqual(expected);
-  });
-
-  test("should return 'true' when 1 < 2 args are passed", () => {
-    const expected = true;
-
-    const firstOperand = 1;
-    const secondOperand = 2;
-    const operator = "<";
-
-    const actual = evaluateInequality(firstOperand, secondOperand, operator);
-
-    expect(actual).toEqual(expected);
-  });
-
-  test("should return 'true' when 1 <= 2 args are passed", () => {
-    const expected = true;
-
-    const firstOperand = 1;
-    const secondOperand = 2;
-    const operator = "<=";
-
-    const actual = evaluateInequality(firstOperand, secondOperand, operator);
-
-    expect(actual).toEqual(expected);
-  });
-
-  test("should return 'false' when 1 > 2 args are passed", () => {
-    const expected = false;
-
-    const firstOperand = 1;
-    const secondOperand = 2;
-    const operator = ">";
-
-    const actual = evaluateInequality(firstOperand, secondOperand, operator);
-
-    expect(actual).toEqual(expected);
-  });
-
-  test("should return 'false' when 1 >= 2 args are passed", () => {
-    const expected = false;
-
-    const firstOperand = 1;
-    const secondOperand = 2;
-    const operator = ">=";
-
-    const actual = evaluateInequality(firstOperand, secondOperand, operator);
-
-    expect(actual).toEqual(expected);
-  });
-
-  test("should return 'true' when 1 <= 1 args are passed", () => {
-    const expected = true;
-
-    const firstOperand = 1;
-    const secondOperand = 1;
-    const operator = "<=";
-
-    const actual = evaluateInequality(firstOperand, secondOperand, operator);
-
-    expect(actual).toEqual(expected);
-  });
-
-  test("should return 'true' when 1 >= 1 args are passed", () => {
-    const expected = true;
-
-    const firstOperand = 1;
-    const secondOperand = 1;
-    const operator = ">=";
-
-    const actual = evaluateInequality(firstOperand, secondOperand, operator);
-
-    expect(actual).toEqual(expected);
-  });
-});
-
-describe("getWindowOptions", () => {
-  test("should return 'undefined' when no args are passed", () => {
-    const expected = undefined;
-
-    const actual = getWindowOptions();
-
-    expect(actual).toEqual(expected);
-  });
-
-  test("should return 'undefined' when malformed document is passed", () => {
-    const expected = undefined;
-
-    const document1 = {
-      WINDOW_OPTIONS: "",
-    };
-    const actual1 = getWindowOptions(document1);
-
-    expect(actual1).toEqual(expected);
-
-    const document2 = {
-      documentElement: {
-        WINDOW_OPTIONS: "",
-      },
-    };
-    const actual2 = getWindowOptions(document2);
-
-    expect(actual2).toEqual(expected);
-  });
-
-  test("should return an empty object when WINDOW_OPTIONS is not set", () => {
-    const expected = {};
-
-    const document1 = {
-      documentElement: {
-        getAttribute: () => null,
-      },
-    };
-    const actual1 = getWindowOptions(document1);
-
-    expect(actual1).toEqual(expected);
-
-    const document2 = {
-      documentElement: {
-        getAttribute: () => "",
-      },
-    };
-    const actual2 = getWindowOptions(document2);
-
-    expect(actual2).toEqual(expected);
-  });
-
-  test('should return \'{ "height": "400" }\' when a document with WINDOW_OPTIONS set to "height=400" is passed', () => {
-    const expected = { height: "400" };
-
-    const document = {
-      documentElement: {
-        getAttribute: () => "height=400",
-      },
-    };
-    const actual = getWindowOptions(document);
-
-    expect(actual).toEqual(expected);
-  });
-
-  test('should return \'{ "width": "400", "height": "400" }\' when a document with WINDOW_OPTIONS set to "width=400, height=400" is passed', () => {
-    const expected = { width: "400", height: "400" };
-
-    const document = {
-      documentElement: {
-        getAttribute: () => "width=400, height=400",
-      },
-    };
-    const actual = getWindowOptions(document);
-
-    expect(actual).toEqual(expected);
-  });
-});
-
-describe("setWindowOptions", () => {
-  test("should return 'undefined' when no args are passed", () => {
-    const expected = undefined;
-
-    const actual = setWindowOptions();
-
-    expect(actual).toEqual(expected);
-  });
-
-  test("should return 'undefined' when only document arg is passed", () => {
-    const expected = undefined;
-
-    const document = {
-      documentElement: {
-        setAttribute: () => {},
-      },
-    };
-    const actual = setWindowOptions(document);
-
-    expect(actual).toEqual(expected);
-  });
-
-  test("should return a document with it's WINDOW_OPTIONS set to an empty string, when an empty windowOptions object is passed", () => {
-    const expected = "";
-
-    const mockSetAttribute = jest.fn();
-    const document = {
-      documentElement: {
-        setAttribute: mockSetAttribute,
-      },
-    };
-    setWindowOptions(document, {});
-
-    const [property, actual] = mockSetAttribute.mock.calls[0];
-
-    expect(actual).toEqual(expected);
-  });
-
-  test('should return a document with it\'s WINDOW_OPTIONS set to "height=400", when \'{ "height": "400" }\' is passed', () => {
-    const expected = "height=400";
-
-    const mockSetAttribute = jest.fn();
-    const document = {
-      documentElement: {
-        setAttribute: mockSetAttribute,
-      },
-    };
-    setWindowOptions(document, { height: 400 });
-
-    const [property, actual] = mockSetAttribute.mock.calls[0];
-
-    expect(actual).toEqual(expected);
-  });
-
-  test('should return a document with it\'s WINDOW_OPTIONS set to "width=400,height=400", when \'{ "width": "400", "height": "400" }\' is passed', () => {
-    const expected = "width=400,height=400";
-
-    const mockSetAttribute = jest.fn();
-    const document = {
-      documentElement: {
-        setAttribute: mockSetAttribute,
-      },
-    };
-    setWindowOptions(document, { width: 400, height: 400 });
-
-    const [property, actual] = mockSetAttribute.mock.calls[0];
-
-    expect(actual).toEqual(expected);
-  });
-});
-
 describe("checkWidth", () => {
-  test("should return 'undefined' when no args are passed", () => {
-    const expected = undefined;
+  test("should throw an error when no width is supplied", () => {
+    const actual = () => checkWidth();
 
-    const actual = checkWidth();
-
-    expect(actual).toEqual(expected);
+    expect(actual).toThrow();
   });
 
-  test("should return 'undefined' when document arg only is passed", () => {
-    const expected = undefined;
+  test("should throw an error when no rule is supplied", () => {
+    const width = 400;
+    const actual = () => checkWidth(width);
 
-    const document = {
-      documentElement: {
-        getAttribute: () => {},
-      },
-    };
-    const actual = checkWidth(document);
-
-    expect(actual).toEqual(expected);
+    expect(actual).toThrow();
   });
 
-  test("should return 'false' when WINDOW_OPTIONS height only is set", () => {
+  test('should return "false" when width is "400" and the rule is "< 300"', () => {
     const expected = false;
 
-    const document = {
-      documentElement: {
-        getAttribute: () => "height=400",
-      },
-    };
-    const rule = {
-      width: "> 200",
-    };
-    const actual = checkWidth(document, rule, false);
+    const width = 400;
+    const rule = "< 300";
+    const verbose = false;
+    const actual = checkWidth(width, rule, verbose);
 
     expect(actual).toEqual(expected);
   });
 
-  test("should return 'true' when WINDOW_OPTIONS width only is set", () => {
-    const expected = true;
-
-    const document = {
-      documentElement: {
-        getAttribute: () => "width=400",
-      },
-    };
-    const rule = {
-      width: "> 200",
-    };
-    const actual = checkWidth(document, rule, false);
-
-    expect(actual).toEqual(expected);
-  });
-
-  test("should return 'true' when WINDOW_OPTIONS width and height is set", () => {
-    const expected = true;
-
-    const document = {
-      documentElement: {
-        getAttribute: () => "height=400, width=400",
-      },
-    };
-    const rule = {
-      width: "> 200",
-    };
-    const actual = checkWidth(document, rule, false);
-
-    expect(actual).toEqual(expected);
-  });
-
-  test("should return 'false' when WINDOW_OPTIONS width is set '400' and rule is '< 200'", () => {
+  test('should return "false" when width is "400" and the rule is "> 500"', () => {
     const expected = false;
 
-    const document = {
-      documentElement: {
-        getAttribute: () => "width=400",
-      },
-    };
-    const rule = {
-      width: "< 200",
-    };
-    const actual = checkWidth(document, rule, false);
+    const width = 400;
+    const rule = "> 500";
+    const verbose = false;
+    const actual = checkWidth(width, rule, verbose);
 
     expect(actual).toEqual(expected);
   });
 
-  test("should return 'true' when WINDOW_OPTIONS width is set '400' and rule is '<= 400'", () => {
+  test('should return "true" when width is "400" and the rule is ">= 400"', () => {
     const expected = true;
 
-    const document = {
-      documentElement: {
-        getAttribute: () => "width=400",
-      },
-    };
-    const rule = {
-      width: "<= 400",
-    };
-    const actual = checkWidth(document, rule, false);
+    const width = 400;
+    const rule = ">= 400";
+    const verbose = false;
+    const actual = checkWidth(width, rule, verbose);
 
     expect(actual).toEqual(expected);
   });
 
-  test("should return 'true' when WINDOW_OPTIONS width is set '400' and rule is '>= 400'", () => {
-    const expected = true;
-
-    const document = {
-      documentElement: {
-        getAttribute: () => "width=400",
-      },
-    };
-    const rule = {
-      width: ">= 400",
-    };
-    const actual = checkWidth(document, rule, false);
-
-    expect(actual).toEqual(expected);
-  });
-
-  test("should return 'false' when WINDOW_OPTIONS width is set '100' and rule is '>= 200 and <= 300'", () => {
+  test('should return "false" when width is "100" and the rule is ">= 200 and <= 300"', () => {
     const expected = false;
 
-    const document = {
-      documentElement: {
-        getAttribute: () => "width=100",
-      },
-    };
-    const rule = {
-      width: ">= 200 and <= 300",
-    };
-    const actual = checkWidth(document, rule, false);
+    const width = 100;
+    const rule = ">= 200 and <= 300";
+    const verbose = false;
+    const actual = checkWidth(width, rule, verbose);
 
     expect(actual).toEqual(expected);
   });
 
-  test("should return 'false' when WINDOW_OPTIONS width is set '400' and rule is '>= 200 and <= 300'", () => {
+  test('should return "false" when width is "400" and the rule is ">= 200 and <= 300"', () => {
     const expected = false;
 
-    const document = {
-      documentElement: {
-        getAttribute: () => "width=400",
-      },
-    };
-    const rule = {
-      width: ">= 200 and <= 300",
-    };
-    const actual = checkWidth(document, rule, false);
+    const width = 400;
+    const rule = ">= 200 and <= 300";
+    const verbose = false;
+    const actual = checkWidth(width, rule, verbose);
 
     expect(actual).toEqual(expected);
   });
 
-  test("should return 'true' when WINDOW_OPTIONS width is set '25000' and rule is '>= 200 and <= 300'", () => {
+  test('should return "false" when width is "250" and the rule is ">= 200 and <= 300"', () => {
     const expected = true;
 
-    const document = {
-      documentElement: {
-        getAttribute: () => "width=250",
+    const width = 250;
+    const rule = ">= 200 and <= 300";
+    const verbose = false;
+    const actual = checkWidth(width, rule, verbose);
+
+    expect(actual).toEqual(expected);
+  });
+});
+
+describe("checkPageWidth", () => {
+  test("should throw an error when no width is supplied", () => {
+    const actual = () => checkPageWidth();
+
+    expect(actual).toThrow();
+  });
+
+  test("should throw an error when no rule is supplied", () => {
+    const width = 400;
+    const actual = () => checkPageWidth(width);
+
+    expect(actual).toThrow();
+  });
+
+  test('should return "false" when width is "400" and the rule is "< 300"', () => {
+    const expected = false;
+
+    const pageNode = {
+      getAttribute: () => "width=400",
+    };
+    const rule = "< 300";
+    const verbose = false;
+    const actual = checkPageWidth(pageNode, rule, verbose);
+
+    expect(actual).toEqual(expected);
+  });
+
+  test('should return "false" when width is "400" and the rule is "> 500"', () => {
+    const expected = false;
+
+    const pageNode = {
+      getAttribute: () => "width=400",
+    };
+    const rule = "> 500";
+    const verbose = false;
+    const actual = checkPageWidth(pageNode, rule, verbose);
+
+    expect(actual).toEqual(expected);
+  });
+
+  test('should return "true" when width is "400" and the rule is ">= 400"', () => {
+    const expected = true;
+
+    const pageNode = {
+      getAttribute: () => "width=400",
+    };
+    const rule = ">= 400";
+    const verbose = false;
+    const actual = checkPageWidth(pageNode, rule, verbose);
+
+    expect(actual).toEqual(expected);
+  });
+
+  test('should return "false" when width is "100" and the rule is ">= 200 and <= 300"', () => {
+    const expected = false;
+
+    const pageNode = {
+      getAttribute: () => "width=100",
+    };
+    const rule = ">= 200 and <= 300";
+    const verbose = false;
+    const actual = checkPageWidth(pageNode, rule, verbose);
+
+    expect(actual).toEqual(expected);
+  });
+
+  test('should return "false" when width is "400" and the rule is ">= 200 and <= 300"', () => {
+    const expected = false;
+
+    const pageNode = {
+      getAttribute: () => "width=400",
+    };
+    const rule = ">= 200 and <= 300";
+    const verbose = false;
+    const actual = checkPageWidth(pageNode, rule, verbose);
+
+    expect(actual).toEqual(expected);
+  });
+
+  test('should return "false" when width is "250" and the rule is ">= 200 and <= 300"', () => {
+    const expected = true;
+
+    const pageNode = {
+      getAttribute: () => "width=250",
+    };
+    const rule = ">= 200 and <= 300";
+    const verbose = false;
+    const actual = checkPageWidth(pageNode, rule, verbose);
+
+    expect(actual).toEqual(expected);
+  });
+});
+
+describe("checkLinkWidth", () => {
+  beforeEach(() => {
+    xp.select.mockReset();
+  });
+
+  test("should throw an error when no PAGE node is supplied", () => {
+    const actual = () => checkLinkWidth();
+
+    expect(actual).toThrow();
+  });
+
+  test("should throw an error when no rule is supplied", () => {
+    const pageNode = {};
+    const actual = () => checkLinkWidth(pageNode);
+
+    expect(actual).toThrow();
+  });
+
+  test("should return an empty array when WINDOW_OPTIONS is null", () => {
+    const mockGetAttribute = (attribute) => {
+      if (attribute === "PAGE_ID") {
+        return "test-id";
+      } else if (attribute === "WINDOW_OPTIONS") {
+        return null;
+      }
+    };
+
+    const expected = [];
+
+    const pageNode = {};
+    xp.select.mockImplementation(() => [
+      {
+        getAttribute: mockGetAttribute,
       },
+    ]);
+    const rule = ">= 400";
+    const verbose = false;
+    const actual = checkLinkWidth(pageNode, rule, verbose);
+
+    expect(actual).toEqual(expected);
+  });
+
+  test('should return an empty array when the link\'s width is "300" and the rule is ">= 400"', () => {
+    const mockGetAttribute = (attribute) => {
+      if (attribute === "PAGE_ID") {
+        return "test-id";
+      } else if (attribute === "WINDOW_OPTIONS") {
+        return "width=300";
+      }
     };
-    const rule = {
-      width: ">= 200 and <= 300",
+
+    const expected = [];
+    xp.select.mockImplementation(() => [
+      {
+        getAttribute: mockGetAttribute,
+      },
+    ]);
+
+    const pageNode = {
+      getAttribute: () => null,
     };
-    const actual = checkWidth(document, rule, false);
+    const rule = { width: ">= 400" };
+    const verbose = false;
+    const actual = checkLinkWidth(pageNode, rule, verbose);
+
+    expect(actual).toEqual(expected);
+  });
+
+  test('should return a matching link when the link\'s width is "400" and the rule is ">= 400"', () => {
+    const mockGetAttribute = (attribute) => {
+      if (attribute === "PAGE_ID") {
+        return "test-id";
+      } else if (attribute === "WINDOW_OPTIONS") {
+        return "width=400";
+      }
+    };
+
+    const expected = [
+      {
+        link: {
+          getAttribute: mockGetAttribute,
+        },
+        options: {
+          width: "400",
+        },
+        pageId: "test-id",
+      },
+    ];
+    xp.select.mockImplementation(() => [
+      {
+        getAttribute: mockGetAttribute,
+      },
+    ]);
+
+    const pageNode = {};
+    const rule = { width: ">= 400" };
+    const verbose = false;
+    const actual = checkLinkWidth(pageNode, rule, verbose);
 
     expect(actual).toEqual(expected);
   });
 });
 
 describe("checkRule", () => {
-  test("should return 'undefined' when no args are passed", () => {
-    const expected = undefined;
+  test("should throw an error when no node is supplied", () => {
+    const actual = () => checkRule();
 
-    const actual = checkRule();
-
-    expect(actual).toEqual(expected);
+    expect(actual).toThrow();
   });
 
-  test("should return 'undefined' when document arg only is passed", () => {
-    const expected = undefined;
+  test("should throw an error when a rule object is not supplied", () => {
+    const node = {};
+    const actual = () => checkRule(node);
 
-    const document = {};
-    const actual = checkRule(document);
-
-    expect(actual).toEqual(expected);
+    expect(actual).toThrow();
   });
 
   test("should return 'false' when xpath rule passed matches document", () => {
@@ -500,39 +349,143 @@ describe("checkRule", () => {
   });
 });
 
-describe("applyRules", () => {
+describe("updateWidthOption", () => {
+  test("should throw an error when no WINDOW_OPTIONS string is supplied", () => {
+    const actual = () => updateWidthOption();
+
+    expect(actual).toThrow();
+  });
+
+  test("should throw an error when no sizes object is supplied", () => {
+    const windowOptions = {};
+    const actual = () => updateWidthOption(windowOptions);
+
+    expect(actual).toThrow();
+  });
+
+  test("should throw an error when no target size category is supplied", () => {
+    const windowOptions = {};
+    const sizes = {};
+    const actual = () => updateWidthOption(windowOptions, sizes);
+
+    expect(actual).toThrow();
+  });
+
+  test('should return \'{ width: "1000" }\' when sizes and target "lg" is passed', () => {
+    const expected = {
+      width: 1000,
+    };
+
+    const windowOptions = {};
+    const sizes = {
+      lg: 1000,
+    };
+    const target = "lg";
+    updateWidthOption(windowOptions, sizes, target);
+    const actual = windowOptions;
+
+    expect(actual).toEqual(expected);
+  });
+
+  test('should return \'{ size: "lg" }\' when sizes and target "lg" is passed and usePixelWidths is set to "false"', () => {
+    const expected = {
+      size: "lg",
+    };
+
+    const windowOptions = {};
+    const sizes = {
+      lg: "1000",
+    };
+    const target = "lg";
+    updateWidthOption(windowOptions, sizes, target, false);
+    const actual = windowOptions;
+
+    expect(actual).toEqual(expected);
+  });
+});
+
+describe("applyRule", () => {
+  const filename = "test.uim";
   const sizes = {
     xs: 0,
     sm: 500,
     md: 700,
-    lg: 0,
-    xlg: 0,
+    lg: 1000,
+    xlg: 1200,
   };
 
-  test("should return 'undefined' when no args are passed", () => {
-    const expected = undefined;
-
-    const actual = applyRules();
-
-    expect(actual).toEqual(expected);
+  beforeEach(() => {
+    xp.select.mockReset();
   });
 
-  test("should return 'undefined' when only some args are passed", () => {
-    const expected = undefined;
+  test("should throw an error when no document is passed", () => {
+    const actual = () => applyRule();
 
+    expect(actual).toThrow();
+  });
+
+  test("should throw an error when no filename is passed", () => {
+    const document = {};
+    const actual = () => applyRule(document);
+
+    expect(actual).toThrow();
+  });
+
+  test("should throw an error when no rules are passed", () => {
+    const document = {};
+    const actual = () => applyRule(document, filename);
+
+    expect(actual).toThrow();
+  });
+
+  test("should throw an error when no sizes are passed", () => {
+    const document = {};
+    const rules = [];
+    const actual = () => applyRule(document, filename, rules);
+
+    expect(actual).toThrow();
+  });
+
+  test("should throw an error when no PAGE dictionary is passed", () => {
+    const document = {};
+    const rules = [];
+    const actual = () => applyRule(document, filename, rules, sizes);
+
+    expect(actual).toThrow();
+  });
+
+  test('should not update the document and return "false" when no rules are passed', () => {
+    const expected = false;
+
+    const mockSetAttribute = jest.fn();
     const document = {
       documentElement: {
-        getAttribute: () => {},
+        setAttribute: mockSetAttribute,
       },
     };
-    const filename = "test.uim";
-    const actual = applyRules(document, filename);
+    const rules = [];
+    const pagedictionary = {};
+
+    xp.select.mockImplementation(() => [
+      {
+        setAttribute: mockSetAttribute,
+      },
+    ]);
+    const actual = applyRule(
+      document,
+      filename,
+      rules,
+      sizes,
+      pagedictionary,
+      false
+    );
 
     expect(actual).toEqual(expected);
+    expect(mockSetAttribute.mock.calls.length).toEqual(0);
   });
 
   test("should update width to 'small' size when width '600' matches the rule '> 576 and <= 768' and terms pass", () => {
-    const expected = `width=${sizes.sm}`;
+    const expected = true;
 
     const mockSetAttribute = jest.fn();
     const document = {
@@ -541,7 +494,6 @@ describe("applyRules", () => {
         setAttribute: mockSetAttribute,
       },
     };
-    const filename = "test.uim";
     const rules = [
       {
         width: "> 576 and <= 768",
@@ -549,18 +501,28 @@ describe("applyRules", () => {
         target: "sm",
       },
     ];
+    const pagedictionary = {};
 
-    xp.select.mockImplementation((rule) => true);
-
-    applyRules(document, filename, rules, sizes, false);
-
-    const [property, actual] = mockSetAttribute.mock.calls[0];
+    xp.select.mockImplementation((xPath) =>
+      xPath.includes("LINK") ? [] : true
+    );
+    const actual = applyRule(
+      document,
+      filename,
+      rules,
+      sizes,
+      pagedictionary,
+      false
+    );
 
     expect(actual).toEqual(expected);
+
+    const [property, result] = mockSetAttribute.mock.calls[0];
+    expect(result).toEqual(`width=${sizes.sm}`);
   });
 
-  test("should update width to 'small' size when width '800' matches the rule '> 768' and terms pass", () => {
-    const expected = `width=${sizes.md}`;
+  test("should update width to 'medium' size when width '800' matches the rule '> 768' and terms pass", () => {
+    const expected = true;
 
     const mockSetAttribute = jest.fn();
     const document = {
@@ -569,7 +531,6 @@ describe("applyRules", () => {
         setAttribute: mockSetAttribute,
       },
     };
-    const filename = "test.uim";
     const rules = [
       {
         width: "> 768",
@@ -577,18 +538,28 @@ describe("applyRules", () => {
         target: "md",
       },
     ];
+    const pagedictionary = {};
 
-    xp.select.mockImplementation((rule) => true);
-
-    applyRules(document, filename, rules, sizes, false);
-
-    const [property, actual] = mockSetAttribute.mock.calls[0];
+    xp.select.mockImplementation((xPath) =>
+      xPath.includes("LINK") ? [] : true
+    );
+    const actual = applyRule(
+      document,
+      filename,
+      rules,
+      sizes,
+      pagedictionary,
+      false
+    );
 
     expect(actual).toEqual(expected);
+
+    const [property, result] = mockSetAttribute.mock.calls[0];
+    expect(result).toEqual(`width=${sizes.md}`);
   });
 
   test("should not update width when width '800' matches the rule '> 768' but terms are not met", () => {
-    const expected = 0;
+    const expected = false;
 
     const mockSetAttribute = jest.fn();
     const document = {
@@ -597,7 +568,6 @@ describe("applyRules", () => {
         setAttribute: mockSetAttribute,
       },
     };
-    const filename = "test.uim";
     const rules = [
       {
         width: "> 768",
@@ -605,19 +575,27 @@ describe("applyRules", () => {
         target: "md",
       },
     ];
+    const pagedictionary = {};
 
-    xp.select.mockImplementation((rule) => false);
-
-    applyRules(document, filename, rules, sizes, false);
-
-    const actual = mockSetAttribute.mock.calls.length;
+    xp.select.mockImplementation((xPath) =>
+      xPath.includes("LINK") ? [] : false
+    );
+    const actual = applyRule(
+      document,
+      filename,
+      rules,
+      sizes,
+      pagedictionary,
+      false
+    );
 
     expect(actual).toEqual(expected);
+
+    const result = mockSetAttribute.mock.calls.length;
+    expect(result).toEqual(0);
   });
 
   test("should only match the first rule when the first rule is passed", () => {
-    const expected = 1;
-
     const mockSetAttribute = jest.fn();
     const document = {
       documentElement: {
@@ -625,7 +603,6 @@ describe("applyRules", () => {
         setAttribute: mockSetAttribute,
       },
     };
-    const filename = "test.uim";
     const rules = [
       {
         width: "> 768",
@@ -638,12 +615,141 @@ describe("applyRules", () => {
         target: "md",
       },
     ];
+    const pagedictionary = {};
 
-    xp.select.mockImplementation((rule) => true);
+    xp.select.mockImplementation((xPath) =>
+      xPath.includes("LINK") ? [] : true
+    );
+    const actual = applyRule(
+      document,
+      filename,
+      rules,
+      sizes,
+      pagedictionary,
+      false
+    );
 
-    applyRules(document, filename, rules, sizes, false);
+    const result = mockSetAttribute.mock.calls.length;
+    expect(result).toEqual(1);
+  });
+});
 
-    const actual = mockSetAttribute.mock.calls.length;
+describe("applyRules", () => {
+  const filename = "test.uim";
+  const sizes = {
+    xs: 0,
+    sm: 500,
+    md: 700,
+    lg: 1000,
+    xlg: 1200,
+  };
+
+  beforeEach(() => {
+    xp.select.mockReset();
+  });
+
+  test("should throw an error when no files are passed", () => {
+    const actual = () => applyRules();
+
+    expect(actual).toThrow();
+  });
+
+  test("should throw an error when no rules is passed", () => {
+    const files = [];
+    const actual = () => applyRules(files);
+
+    expect(actual).toThrow();
+  });
+
+  test("should throw an error when no sizes are passed", () => {
+    const files = [];
+    const rules = [];
+    const actual = () => applyRules(files, rules);
+
+    expect(actual).toThrow();
+  });
+
+  test("should throw an error when no io is passed", () => {
+    const files = [];
+    const rules = [];
+    const actual = () => applyRules(files, rules, sizes);
+
+    expect(actual).toThrow();
+  });
+
+  test("should throw an error when no parser is passed", () => {
+    const files = [];
+    const rules = [];
+    const io = {};
+    const actual = () => applyRules(files, rules, sizes, io);
+
+    expect(actual).toThrow();
+  });
+
+  test("should throw an error when no serializer is passed", () => {
+    const files = [];
+    const rules = [];
+    const io = {};
+    const parser = {};
+    const actual = () => applyRules(files, rules, sizes, io, parser);
+
+    expect(actual).toThrow();
+  });
+
+  test("should serialize UIM documents to strings when the document matches the rules", () => {
+    const expected = true;
+
+    const mockSerializeToString = jest.fn();
+
+    const files = ["test.uim"];
+    const rules = [
+      {
+        width: "> 768",
+        terms: ["criteria.1"],
+        target: "md",
+      },
+    ];
+    const io = {
+      readLines: (file) => [],
+    };
+    const parser = {
+      parseFromString: (contents) => ({
+        documentElement: {
+          getAttribute: (attribute) => {
+            if (attribute === "PAGE_ID") {
+              return "test-id";
+            } else if (attribute === "WINDOW_OPTIONS") {
+              return null;
+            }
+          },
+        },
+      }),
+    };
+    const serializer = {
+      serializeToString: mockSerializeToString,
+    };
+
+    xp.select.mockImplementation((xPath) => {
+      if (xPath.includes("LINK")) {
+        return [
+          {
+            getAttribute: (attribute) => {
+              if (attribute === "PAGE_ID") {
+                return "test-id";
+              } else if (attribute === "WINDOW_OPTIONS") {
+                return "width=999";
+              }
+            },
+            setAttribute: () => {},
+          },
+        ];
+      } else {
+        return true;
+      }
+    });
+
+    applyRules(files, rules, sizes, io, parser, serializer, false);
+    const actual = mockSerializeToString.mock.calls.length > 0;
 
     expect(actual).toEqual(expected);
   });
