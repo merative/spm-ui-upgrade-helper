@@ -1,8 +1,7 @@
 const filesAndFolders = require("./filesAndFolders");
 
 /**
- * Loads the rules files and merges and sorts them. Also loads any rules files found at the location
- * specified by the `ADDITIONAL_RULES` environment variable.
+ * Loads the rules files and merges and sorts them.
  */
 const loadRules = config => {
   const rulesJson = [];
