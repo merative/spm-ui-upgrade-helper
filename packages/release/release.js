@@ -14,6 +14,13 @@ const release = (shell, option, version, options = {}) => {
         return 1;
       }
     }
+    // Make sure we are on "main" branch
+    let branch = exec(shell, `git symbolic-ref --short -q HEAD`).stdout;
+    branch = branch.substring(0, branch.length - 1);
+    if(branch !== "main" && !options.dryRun) {
+      shell.echo(`ERROR: Releases can only be created on 'main' branch.`);
+      return 1;
+    }
     // Make sure tag does not already exist
     exec(shell, `git pull --tags`);
     const existing = exec(shell, `git tag --list v${version}`).stdout;

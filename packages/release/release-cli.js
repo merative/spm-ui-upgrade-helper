@@ -41,6 +41,10 @@ if(ship) {
 
 const shell = dryRun ? dryRunShellJs : shelljs;
 dryRunShellJs._setExecStdOut("");
+const options = {};
+if(dryRun) {
+  options.dryRun = true;
+}
 
-const r = release(shell, option, version);
+const r = release(shell, option, version, options);
 process.exit(r);

@@ -8,11 +8,14 @@ beforeEach(() => {
 
 afterEach(() => {
   dummyShellJs._clear();
+  dummyShellJs._setExecStdOut(undefined);
 });
 
-test('test that --start option runs the correct commands', () => {
+test.only('test that --start option runs the correct commands', () => {
+  dummyShellJs._setExecStdOut("main");
   const expected = [
     "git status --porcelain",
+    "git symbolic-ref --short -q HEAD",
     "git pull --tags",
     "git tag --list v0.10.0",
     "yarn install",
