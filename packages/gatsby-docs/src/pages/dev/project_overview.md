@@ -30,10 +30,12 @@ title: Project overview
 
 ### CSS rules tool
 
+- Located in `packages/css-rules-tool`.
 - Iterates over customer CSS files and applies the rules from `packages/css-rules-tool/rules/*.json`.
 
 ### Icon replacer tool
 
+- Located in `packages/icon-replacer-tool`.
 - Loads icon replacement mappings from `packages/icon-replacer-tool/icon-mappings.json`.
 - Iterates over customer files and replaces any references to old icons with new icons.
 - Replaces any old icon files it finds with the new version of the icon.
