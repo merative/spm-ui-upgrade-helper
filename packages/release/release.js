@@ -27,7 +27,6 @@ const release = (shell, option, version) => {
       return 1;
     }
     shell.echo("Building...");
-    exec(shell, `yarn install`);
     exec(shell, `yarn install-all`);
     exec(shell, `yarn test`);
     exec(shell, `echo { "version": "${version}" }>version.json`);

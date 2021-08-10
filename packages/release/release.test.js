@@ -41,7 +41,6 @@ test('--start option runs the correct commands', () => {
     "git symbolic-ref --short -q HEAD",
     "git pull --tags",
     "git tag --list v0.10.0",
-    "yarn install",
     "yarn install-all",
     "yarn test",
     "echo { \"version\": \"0.10.0\" }>version.json",
