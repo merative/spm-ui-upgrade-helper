@@ -64,7 +64,7 @@ function checkWidth(width, rule, verbose = true) {
 function checkPageWidth(pageNode, rule, verbose = true) {
   const pageOptions = getPageOptions(pageNode);
 
-  if (!pageOptions) {
+  if (!pageOptions || !pageOptions.width) {
     return false;
   }
 
@@ -235,7 +235,7 @@ function applyRule(
 
           hasChanges = hasChanges || pass;
 
-          updateWidthOption(windowOptions, sizes, rule.target);
+          updateWidthOption(options, sizes, rule.target);
 
           if (pass) {
             setLinkOptions(link, options);
@@ -286,7 +286,7 @@ function applyRules(files, rules, sizes, io, parser, serializer) {
 
     // // Only mark the files as 'for writing' if the contents changed
     if (hasChanges) {
-      results[file] = serializer.serializeToString(nextDocument);
+      results[file] = serializer.serializeToString(document);
     }
   });
 
