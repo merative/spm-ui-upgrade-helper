@@ -15,7 +15,8 @@ Once installed, you will need to allow Docker Desktop to access certain paths on
 1. Open Docker Desktop.
 2. Click Settings > Resources > File Sharing.
 3. Share your 7.0.11.0 development environment folder
-4. Share a temporary folder, e.g. `/tmp/upgrade` or `c:\temp\upgrade`
+4. Share a temporary output folder, e.g. `/tmp/upgrade` or `c:\temp\upgrade`
+    - Note that the output folder will be wiped, so be careful! Do NOT point this at your v8 development environment.
 
 ![1. Open Docker Desktop, 2. Click the Settings button then Resources then File Sharing, 3. Add the folder you want to share with the Docker container](../../images/docker-volume-sharing.png "Docker volume sharing screenshot")
 
