@@ -38,7 +38,10 @@ const release = (shell, option, version) => {
     shell.echo("");
     shell.echo("Build successful!");
     shell.echo("");
-    shell.echo("You should now perform acceptance testing. Use `yarn at:build kitchen-sink` and `acceptance-test.bat`/`acceptance-test.sh` to test against generated acceptance test data.");
+    shell.echo(
+      "You should now perform acceptance testing. Use `yarn at:install && yarn at:generate-data kitchen-sink` " +
+      "and then `acceptance-test.bat`/`acceptance-test.sh` and test against the generated acceptance test data."
+    );
     shell.echo("");
     shell.echo(`Once acceptance testing is finished, use \`yarn release --ship\` to release.`);
     shell.echo("");
