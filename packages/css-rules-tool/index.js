@@ -3,9 +3,7 @@ const { applyRules } = require("./src/applyRules");
 const utils = require("../shared-utils/sharedUtils");
 
 /**
- * Main method. Will be called via http://localhost:4000/execute
- *
- * We prettify the files as a first step in order to make the final diff as clean as possible.
+ * Main method. Will be called via http://localhost:40xx/execute
  */
 const execute = overrides => {
   try {
