@@ -11,7 +11,7 @@ title: Coding
 
 ## Linux
 
-1. Run `export UIUH_DEV=true` (Mac)
+1. Run `export UIUH_DEV=true`
 2. Start the container with `./dev.sh`
 3. Edit the code as required
 4. The container will automatically reload if running

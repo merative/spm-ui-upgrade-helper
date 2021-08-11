@@ -14,4 +14,4 @@ We build the [documentation](https://ibm.github.io/spm-ui-upgrade-helper/) with 
 
 ## Gatsby and Travis
 
-Gatsby will only be deployed if the build contains changes to the `packages/gatsby-docs` folder. This is done to speed up the build. See https://github.com/IBM/spm-ui-upgrade-helper/blob/main/packages/gatsby-docs/gatsby-conditional-deploy-cli.js
+Gatsby will only be deployed if the build contains changes to the `packages/gatsby-docs` folder. This is done to speed up the build.
