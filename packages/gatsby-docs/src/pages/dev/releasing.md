@@ -4,7 +4,7 @@ title: Releasing
 
 1. Start the release process
     - Run `yarn release --start 0.0.1`
-        - This will run the tests, build the Docker image, create a release branch named `v0.0.1` and push it to GitHub
+        - This will run the tests, build the Docker image, create a release branch named `v0.0.1` and push the branch to GitHub
 2. Release testing
     - Run `yarn at:install` to install Puppeteer
     - Run `yarn at:generate-data kitchen-sink` to generate acceptance test data

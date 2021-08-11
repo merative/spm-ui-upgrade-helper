@@ -10,23 +10,24 @@ title: Project overview
 
 ## Front end
 
-- [Eclipse Theia](https://theia-ide.org/) is our front-end. It is an IDE inside the browser.
-- The SPM UI Upgrade Helper tool is a plugin to Eclipse Theia that appears as an `F1` shortcut named `Run SPM UI Upgrade Helper`.
+- [Eclipse Theia](https://theia-ide.org/) is our front-end. It is an IDE inside the browser. Located at [localhost:3000](http://localhost:3000)
+- The SPM UI Upgrade Helper tool is a plugin to Eclipse Theia that appears as an `F1` shortcut named "Run SPM UI Upgrade Helper".
 - This plugin calls a Rest API that does the actual work.
 
 ## Back end
 
 ### Main tool
 
-- This tool is run by the `Run SPM UI Upgrade Helper` shortcut described above.
+- This tool is run by the "Run SPM UI Upgrade Helper" shortcut described above.
 - Located in `packages/main-tool`.
 - Running this tool does the following:
     - Calls `packages/shared-utils/src/init.js`
+        - Wipes the output folder
         - Creates an empty git repo in the output folder
         - Copies the working set of files to the output folder
-        - Commits the copied files so that we can use Git to diff them if they change
+        - Commits the files so that if they change we can use Git to diff them
     - Iterates through `config/tools.json` and activates any tools that have `enabled: true`
-    - The `Source Control: Git` tab in Eclipse Theia will show the diff of the changes
+    - The `Source Control: Git` tab in Eclipse Theia will diff the changes
 
 ### CSS rules tool
 

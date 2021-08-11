@@ -26,7 +26,7 @@
     - title: Adding a new tool
       path: /dev/adding_a_new_tool
     - title: Adding new CSS rules
-      path: /dev/adding_new_rules
+      path: /dev/adding_new_css_rules
     - title: Documentation
       path: /dev/documentation
     - title: Debugging
