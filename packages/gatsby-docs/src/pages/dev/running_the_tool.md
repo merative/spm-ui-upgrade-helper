@@ -7,5 +7,5 @@ title: Running the tool
 3. Press `ctrl + shift + p` or `F1`
 4. Type "Run SPM UI Upgrade Helper" and click the shortcut
 5. Wait a few minutes for the tool to run
-6. The files in `INPUT_FOLDER` will be scanned and the results placed in `OUTPUT_FOLDER`
+6. The files in the input folder will be scanned and the results placed in the output folder
 7. Click the "Source Control: Git" button on the left to inspect the changes

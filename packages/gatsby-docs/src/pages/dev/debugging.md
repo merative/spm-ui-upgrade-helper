@@ -11,7 +11,7 @@ If there is a problem with the Docker container you can run one of the following
 
 ## Versions
 
-You can see the version and/or commit hash that the Docker image was built from by looking at the first few lines of the logs. Here we can see we are running version `0.0.11` which was built from commit `7c56370`. This information is also available in `version.json` and `commit.json` at the root of each Docker image.
+You can see the version number and/or commit hash of the Docker image by looking at the first few lines of the logs. Here we can see we are running version `0.0.11` which was built from commit `7c56370`. This information is also available in `version.json` and `commit.json` at the root of each Docker image.
 
     yarn run v1.22.4
     $ yarn initial-check && npm-run-all --parallel start:*
@@ -19,9 +19,6 @@ You can see the version and/or commit hash that the Docker image was built from 
     $ node start.js
     Success: Found version number: 0.0.11
     Success: Found commit hash: 7c56370
-    Success: Found long commit hash: 7c5637011db15b104eb3bc6cbc37b6bc517fc8d5
-    Success: Wrote a test file to output folder to ensure it was writeable
-    Initial checks successful
 
 ## VSCode
 
