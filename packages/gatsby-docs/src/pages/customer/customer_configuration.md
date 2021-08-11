@@ -4,7 +4,7 @@ title: Custom configuration
 
 You can override the default configuration by creating a `.spm-uiuh-config` file in the root of your 7.0.11.0 development environment.
 
-This can be used to include files that are excluded by default or to customize the tools.
+This can be used to customize the tools.
 
 The file contents should be JSON and should match the structure of the [default configuration](https://github.com/IBM/spm-ui-upgrade-helper/blob/main/packages/shared-utils/src/config.js). Note that you only need to include the items you wish to override.
 

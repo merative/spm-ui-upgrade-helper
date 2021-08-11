@@ -22,7 +22,7 @@ You can see the version number and/or commit hash of the Docker image by looking
 
 ## VSCode
 
-1. Open a new VSCode window containing the vs-upgrade-helper-plugin folder only.
+1. Open a new VSCode window containing the `vs-upgrade-helper-plugin` folder only.
 2. Add a breakpoint.
 
 ![1. Open a new VSCode window containing the vs-upgrade-helper-plugin folder only. 2. Add a breakpoint.](../../images/debug_1.png "Debugging steps screenshot 1")

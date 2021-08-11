@@ -10,9 +10,9 @@ title: Project overview
 
 ## Front end
 
-- [Eclipse Theia](https://theia-ide.org/) is our front-end. It is an IDE inside the browser. Located at [localhost:3000](http://localhost:3000)
-- The SPM UI Upgrade Helper tool is a plugin to Eclipse Theia that appears as an `F1` shortcut named "Run SPM UI Upgrade Helper".
-- This plugin calls a Rest API that does the actual work.
+[Eclipse Theia](https://theia-ide.org/) is our front-end. It is an IDE inside the browser. Located at [localhost:3000](http://localhost:3000)
+
+The SPM UI Upgrade Helper tool is a plugin to Eclipse Theia that appears as an `F1` shortcut named "Run SPM UI Upgrade Helper". This plugin calls a Rest API that does the actual work.
 
 ## Back end
 
