@@ -18,8 +18,6 @@ const execute = (overrides) => {
   const inputFiles = utils.keepFiles(config.internal.files, "uim", "vim");
   const rules = utils.readJson(config.windowSizeTool.rules);
 
-  console.log('config.windowSizeTool.usePixelWidths', config.windowSizeTool.usePixelWidths);
-
   const outputFiles = engine.applyRules(
     inputFiles,
     rules,
@@ -27,7 +25,7 @@ const execute = (overrides) => {
     fileio,
     parser,
     serializer,
-    config.windowSizeTool.usePixelWidths,
+    config.windowSizeTool.usePixelWidths
   );
 
   utils.writeFiles(outputFiles);
