@@ -32,6 +32,8 @@ const loadConfig = (overrides = {}) => {
     windowSizeTool: {
       // Window sizing rules
       rules: "../window-size-tool/rules.json",
+      // Sets window widths in pixels if true, or Carbon size tokens if false (e.g. "sm", "md", "lg")
+      usePixelWidths: true
     },
     // Internal variables that should not be overridden by clients
     internal: {

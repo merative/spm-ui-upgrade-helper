@@ -381,7 +381,8 @@ describe("updateWidthOption", () => {
       lg: 1000,
     };
     const target = "lg";
-    updateWidthOption(windowOptions, sizes, target);
+    const usePixelWidths = true;
+    updateWidthOption(windowOptions, sizes, target, usePixelWidths, false);
     const actual = windowOptions;
 
     expect(actual).toEqual(expected);
@@ -397,7 +398,8 @@ describe("updateWidthOption", () => {
       lg: "1000",
     };
     const target = "lg";
-    updateWidthOption(windowOptions, sizes, target, false);
+    const usePixelWidths = false;
+    updateWidthOption(windowOptions, sizes, target, usePixelWidths);
     const actual = windowOptions;
 
     expect(actual).toEqual(expected);
@@ -465,6 +467,7 @@ describe("applyRule", () => {
     };
     const rules = [];
     const pagedictionary = {};
+    const usePixelWidths = true;
 
     xp.select.mockImplementation(() => [
       {
@@ -477,6 +480,7 @@ describe("applyRule", () => {
       rules,
       sizes,
       pagedictionary,
+      usePixelWidths,
       false
     );
 
@@ -502,6 +506,7 @@ describe("applyRule", () => {
       },
     ];
     const pagedictionary = {};
+    const usePixelWidths = true;
 
     xp.select.mockImplementation((xPath) =>
       xPath.includes("LINK") ? [] : true
@@ -512,6 +517,7 @@ describe("applyRule", () => {
       rules,
       sizes,
       pagedictionary,
+      usePixelWidths,
       false
     );
 
@@ -538,7 +544,8 @@ describe("applyRule", () => {
         target: "md",
       },
     ];
-    const pagedictionary = {};
+    const pageDictionary = {};
+    const usePixelWidths = true;
 
     xp.select.mockImplementation((xPath) =>
       xPath.includes("LINK") ? [] : true
@@ -548,7 +555,8 @@ describe("applyRule", () => {
       filename,
       rules,
       sizes,
-      pagedictionary,
+      pageDictionary,
+      usePixelWidths,
       false
     );
 
@@ -576,6 +584,7 @@ describe("applyRule", () => {
       },
     ];
     const pagedictionary = {};
+    const usePixelWidths = true;
 
     xp.select.mockImplementation((xPath) =>
       xPath.includes("LINK") ? [] : false
@@ -586,6 +595,7 @@ describe("applyRule", () => {
       rules,
       sizes,
       pagedictionary,
+      usePixelWidths,
       false
     );
 
@@ -616,6 +626,7 @@ describe("applyRule", () => {
       },
     ];
     const pagedictionary = {};
+    const usePixelWidths = true;
 
     xp.select.mockImplementation((xPath) =>
       xPath.includes("LINK") ? [] : true
@@ -626,6 +637,7 @@ describe("applyRule", () => {
       rules,
       sizes,
       pagedictionary,
+      usePixelWidths,
       false
     );
 
@@ -728,6 +740,7 @@ describe("applyRules", () => {
     const serializer = {
       serializeToString: mockSerializeToString,
     };
+    const usePixelWidths = true;
 
     xp.select.mockImplementation((xPath) => {
       if (xPath.includes("LINK")) {
@@ -748,7 +761,7 @@ describe("applyRules", () => {
       }
     });
 
-    applyRules(files, rules, sizes, io, parser, serializer, false);
+    applyRules(files, rules, sizes, io, parser, serializer, usePixelWidths, false);
     const actual = mockSerializeToString.mock.calls.length > 0;
 
     expect(actual).toEqual(expected);

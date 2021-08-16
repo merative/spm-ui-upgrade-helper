@@ -142,7 +142,7 @@ function updateWidthOption(
   windowOptions,
   sizes,
   target,
-  usePixelWidths = true
+  usePixelWidths
 ) {
   if (!windowOptions) {
     throw Error("You must supply a WINDOW_OPTIONS string");
@@ -169,6 +169,8 @@ function updateWidthOption(
  * @param {object} sizes Mapping breakpoints to be applied to UIMs if rules
  * criteria a met.
  * @param {object} pagedictionary A dictionary used to lookup UIM pages by id.
+ * @param {boolean} usePixelWidths Determines whether width is set as a pixel value
+ * or a size category.
  * @param {boolean} verbose Will log debug messages if true (true by default).
  * @returns Returns whether the document was updated by the rules or not.
  */
@@ -178,6 +180,7 @@ function applyRule(
   rules,
   sizes,
   pagedictionary,
+  usePixelWidths,
   verbose = true
 ) {
   if (!document) {
@@ -213,7 +216,7 @@ function applyRule(
           hasChanges = true;
           const windowOptions = getPageOptions(pageNode);
 
-          updateWidthOption(windowOptions, sizes, rule.target);
+          updateWidthOption(windowOptions, sizes, rule.target, usePixelWidths);
 
           setPageOptions(pageNode, windowOptions);
         }
@@ -235,7 +238,7 @@ function applyRule(
 
           hasChanges = hasChanges || pass;
 
-          updateWidthOption(options, sizes, rule.target);
+          updateWidthOption(options, sizes, rule.target, usePixelWidths);
 
           if (pass) {
             setLinkOptions(link, options);
@@ -259,6 +262,9 @@ function applyRule(
  * @param {object} parser Util for transforming globbed file content to an
  * object.
  * @param {object} serializer Util for transforming XML object back to a string.
+ * @param {boolean} usePixelWidths Determines whether width is set as a pixel value
+ * or a size category.
+ * @param {boolean} verbose Will log debug messages if true (true by default).
  * @returns A list of files that have met the rules criteria and had their
  * width's updated.
  */
@@ -269,6 +275,7 @@ function applyRules(
   io,
   parser,
   serializer,
+  usePixelWidths,
   verbose = true
 ) {
   if (!files) {
@@ -314,7 +321,8 @@ function applyRules(
       rules,
       sizes,
       pagedictionary,
-      verbose
+      usePixelWidths,
+      verbose,
     );
 
     // Only mark the files as 'for writing' if the contents changed
