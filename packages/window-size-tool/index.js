@@ -24,7 +24,8 @@ const execute = (overrides) => {
     sizes,
     fileio,
     parser,
-    serializer
+    serializer,
+    config.windowSizeTool.usePixelWidths
   );
 
   utils.writeFiles(outputFiles);

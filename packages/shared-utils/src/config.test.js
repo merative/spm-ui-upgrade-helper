@@ -14,6 +14,7 @@ test('config test with defaults', () => {
     },
     windowSizeTool: {
       rules: "../window-size-tool/rules.json",
+      usePixelWidths: true,
     },
     internal: {
       inputFolder: "/home/workspace/input",
@@ -44,6 +45,7 @@ test('config test with all overrides', () => {
     },
     windowSizeTool: {
       rules: "jjj",
+      usePixelWidths: true,
     },
     internal: {
       inputFolder: "aaa",
@@ -85,6 +87,7 @@ test('config test with some overrides', () => {
     },
     windowSizeTool: {
       rules: "../window-size-tool/rules.json",
+      usePixelWidths: true,
     },
     internal: {
       inputFolder: "/home/workspace/input",

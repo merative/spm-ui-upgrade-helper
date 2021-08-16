@@ -1,0 +1,8 @@
+{
+  "globs":[
+    "**/*"
+  ],
+  "windowSizeTool": {
+    "usePixelWidths": false
+  }
+}
