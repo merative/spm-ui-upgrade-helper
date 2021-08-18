@@ -1,0 +1,29 @@
+<!--
+  - Expected: No change.
+  -
+  - Reason: PAGE element WINDOW_OPTIONS attribute width is greater than 420 and 
+  - less than or equal to 576 with 3 ACTION_CONTROLs.
+  -->
+  <?xml version="1.0" encoding="UTF-8"?>
+  <PAGE WINDOW_OPTIONS="width=500">
+    <CONTAINER>
+      <CLUSTER>
+        <FIELD>
+          <CONNECT>
+            <SOURCE/>
+          </CONNECT>
+        </FIELD>
+        <FIELD>
+          <CONNECT>
+            <SOURCE/>
+            <TARGET/>
+          </CONNECT>
+        </FIELD>
+      </CLUSTER>
+    </CONTAINER>
+    <ACTION_SET>
+      <ACTION_CONTROL TYPE="SUBMIT"/>
+      <ACTION_CONTROL/>
+      <ACTION_CONTROL/>
+    </ACTION_SET>
+  </PAGE>

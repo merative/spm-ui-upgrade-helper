@@ -41,5 +41,12 @@
       "count(//FIELD//TARGET) > 0"
     ],
     "target": "sm"
+  },
+  {
+    "width": "> 420 and <= 576",
+    "terms": [
+      "(count(//CLUSTER[not(@NUM_COLS)]) > 0 or //CLUSTER/@NUM_COLS = 1) and count(//FIELD//TARGET) = 0 and count(//ACTION_CONTROL) = 2"
+    ],
+    "target": "xs"
   }
 ]

@@ -1,0 +1,26 @@
+<!--
+  - Expected: No change.
+  -
+  - Reason: PAGE element has no WINDOW_OPTIONS attribute.
+  -->
+<?xml version="1.0" encoding="UTF-8"?>
+<PAGE PAGE_ID="PersonRegister">
+  <CONTAINER>
+    <CLUSTER>
+      <FIELD>
+        <CONNECT>
+          <SOURCE/>
+        </CONNECT>
+      </FIELD>
+      <FIELD>
+        <CONNECT>
+          <SOURCE/>
+        </CONNECT>
+      </FIELD>
+    </CLUSTER>
+  </CONTAINER>
+  <ACTION_SET>
+    <ACTION_CONTROL TYPE="SUBMIT"/>
+    <ACTION_CONTROL/>
+  </ACTION_SET>
+</PAGE>

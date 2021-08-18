@@ -1,0 +1,13 @@
+<!--
+  - Expected: "PersonRegister" LINK element width changes to 400 (x-small).
+  -
+  - Reason: LINK element WINDOW_OPTIONS attribute width is greater than 420 and 
+  - less than or equal to 576 who's target PAGE element has a 1 column CLUSTER, 
+  - no editable FIELDs and 2 ACTION_CONTROLs.
+  -->
+<?xml version="1.0" encoding="UTF-8"?>
+<PAGE>
+  <ACTION_CONTROL>
+    <LINK PAGE_ID="PersonRegister" WINDOW_OPTIONS="width=500"/>
+  </ACTION_CONTROL>
+</PAGE>
