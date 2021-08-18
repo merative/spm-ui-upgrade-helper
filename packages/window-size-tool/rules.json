@@ -33,5 +33,13 @@
       "count(//LIST) > 0 and count(//LIST/*) <= 2"
     ],
     "target": "sm"
+  },
+  {
+    "width": "<= 420",
+    "terms": [
+      "count(//LIST/*) = 2 or count(//LIST/*) = 3",
+      "count(//FIELD//TARGET) > 0"
+    ],
+    "target": "sm"
   }
 ]
