@@ -1,6 +1,6 @@
 {
   "name": "spm-ui-upgrade-helper",
-  "version": "1.0.0",
+  "version": "0.0.12",
   "license": "Apache-2.0",
   "description": "SPM UI Upgrade Helper.",
   "scripts": {
@@ -31,7 +31,8 @@
     "commitizen": "^4.2.4",
     "emoji-cz": "^0.3.1",
     "husky": "^7.0.2",
-    "shelljs": "^0.8.4"
+    "shelljs": "^0.8.4",
+    "standard-version": "^9.3.1"
   },
   "dependencies": {
     "lerna": "^4.0.0",
