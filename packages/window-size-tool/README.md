@@ -1,4 +1,4 @@
-# uim-rules-engine-spike
+# Window Size Tool
 
 ## MVP goals
 
