@@ -50,7 +50,7 @@ test('--start option runs the correct commands', () => {
     "git add CHANGELOG.md package.json",
     "git commit -m \"Changelog v0.10.0\"",
     "git push origin main",
-    "git checkout -b v0.10.0",
+    "git checkout -b refs/heads/v0.10.0:refs/heads/v0.10.0",
     "git push --set-upstream origin v0.10.0",
   ];
 
