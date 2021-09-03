@@ -39,7 +39,7 @@ const release = (shell, option, version) => {
     exec(shell, `git commit -m "Changelog v${version}"`);
     exec(shell, `git push origin main`);
     // create release branch
-    exec(shell, `git checkout -b v${version}`);
+    exec(shell, `git checkout -b refs/heads/v${version}:refs/heads/v${version}`);
     exec(shell, `git push --set-upstream origin v${version}`);
     shell.echo("");
     shell.echo("Build successful!");
