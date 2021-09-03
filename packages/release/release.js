@@ -33,12 +33,12 @@ const release = (shell, option, version) => {
     shell.echo("Creating release branch...");
     exec(shell, `npm version ${version}`);
     exec(shell, `git add package.json && git commit -m "update package v${version}"`);
-    exec(shell, `git push origin main`);
+    exec(shell, `git push --set-upstream origin main`);
     exec(shell, `echo { "version": "${version}" }>version.json`);
     // creating changelog
     exec(shell, "yarn changelog");
     exec(shell, `git add CHANGELOG.md && git commit -m "update changelog v${version}"`);
-    exec(shell, `git push origin main`);
+    exec(shell, `git push --set-upstream origin main`);
     // create release branch
     exec(shell, `git checkout -b refs/heads/v${version}:refs/heads/v${version}`);
     exec(shell, `git push --set-upstream origin v${version}`);
