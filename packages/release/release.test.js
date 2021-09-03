@@ -45,6 +45,7 @@ test('--start option runs the correct commands', () => {
     "yarn test",
     "yarn build:release",
     "npm version 0.10.0",
+    "git push origin main",
     "echo { \"version\": \"0.10.0\" }>version.json",
     "yarn changelog",
     "git add CHANGELOG.md",
