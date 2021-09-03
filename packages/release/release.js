@@ -33,6 +33,7 @@ const release = (shell, option, version) => {
     shell.echo("Creating release branch...");
     exec(shell, `npm version ${version}`);
     exec(shell, `git add package.json && git commit -m "update package v${version}"`);
+    exec(shell, `git push origin main`);
     exec(shell, `echo { "version": "${version}" }>version.json`);
     // creating changelog
     exec(shell, "yarn changelog");
