@@ -1,6 +1,6 @@
 {
   "name": "spm-ui-upgrade-helper",
-  "version": "0.0.13",
+  "version": "0.0.12",
   "license": "Apache-2.0",
   "description": "SPM UI Upgrade Helper.",
   "scripts": {
