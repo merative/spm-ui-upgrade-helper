@@ -29,19 +29,10 @@ const release = (shell, option, version) => {
     shell.echo("Building...");
     exec(shell, `yarn install-all`);
     exec(shell, `yarn test`);
+    exec(shell, `echo { "version": "${version}" }>version.json`);
     exec(shell, `yarn build:release`);
     shell.echo("Creating release branch...");
-    // update version
-    exec(shell, `npm version ${version}`);
-    exec(shell, "git push origin main");
-    exec(shell, `echo { "version": "${version}" }>version.json`);
-    // creating changelog
-    exec(shell, "yarn changelog");
-    exec(shell, "git add CHANGELOG.md");
-    exec(shell, `git commit -m "changelog v${version}"`);
-    exec(shell, "git push origin main");
-    // create release branch
-    exec(shell, `git checkout -b refs/heads/v${version}:refs/heads/v${version}`);
+    exec(shell, `git checkout -b v${version}`);
     exec(shell, `git push --set-upstream origin v${version}`);
     shell.echo("");
     shell.echo("Build successful!");

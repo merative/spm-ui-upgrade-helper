@@ -43,15 +43,9 @@ test('--start option runs the correct commands', () => {
     "git tag --list v0.10.0",
     "yarn install-all",
     "yarn test",
-    "yarn build:release",
-    "npm version 0.10.0",
-    "git push origin main",
     "echo { \"version\": \"0.10.0\" }>version.json",
-    "yarn changelog",
-    "git add CHANGELOG.md",
-    "git commit -m \"changelog v0.10.0\"",
-    "git push origin main",
-    "git checkout -b refs/heads/v0.10.0:refs/heads/v0.10.0",
+    "yarn build:release",
+    "git checkout -b v0.10.0",
     "git push --set-upstream origin v0.10.0",
   ];
 

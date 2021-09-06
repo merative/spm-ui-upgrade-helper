@@ -10,10 +10,10 @@ const links = [
     title: 'IBM Documentation',
     href: 'https://www.ibm.com/docs/en/spm/7.0.11?topic=product-overview',
   },
-//  {
-//    title: 'Change Log',
-//    href: 'https://github.com/IBM/spm-ui-upgrade-helper/blob/main/CHANGELOG.md',
-//  }
+ {
+   title: 'Changelog',
+   href: 'https://github.com/IBM/spm-ui-upgrade-helper/releases',
+ }
 ];
 
 // shouldOpenNewTabs: true if outbound links should open in a new tab
