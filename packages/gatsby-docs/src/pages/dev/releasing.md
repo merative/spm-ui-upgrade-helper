@@ -3,6 +3,7 @@ title: Releasing
 ---
 
 1. Start the release process
+    - Document the release in `/docs/CHANGELOG.md`
     - Run `yarn release --start 0.0.1`
         - This will run the tests, build the Docker image, create a release branch named `v0.0.1` and push the branch to GitHub
 2. Release testing
@@ -15,8 +16,11 @@ title: Releasing
         - Cherry-pick the fixes into the `v0.0.1` branch
         - Re-run `yarn build:release`
 3. Ship the release
+    
     - Run `yarn release --ship`
         - This will push the image to the Docker Hub as `<image name>:0.0.1` and `<image name>:latest`, tag the commit as `v0.0.1` and push the tag to GitHub
+    - Publish the release
+      - To do this, edit the `v0.0.1` tag in the repo's [releases](https://github.com/IBM/spm-ui-upgrade-helper/releases) section, use the contents of `/docs/CHANGELOG.md` as the description 
 
 ## Notes
 
