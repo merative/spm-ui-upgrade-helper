@@ -34,6 +34,53 @@ Example rules file:
 
 All of the values in `SelectorRemove` will be deleted. The values in `SelectorReplace` will be replaced by `newValue`. The order in which the rules are applied is described below.
 
+### Window Size Tool
+
+Scans customer UIM files and updates the width of modals that are either too wide or too narrow based on their content.
+
+- Iterates over customer UIM files and applies the rules codified in [packages/window-size-tool/rules.json](https://github.com/IBM/spm-ui-upgrade-helper/tree/main/packages/window-size-tool/rules.json).
+
+Example rules file:
+
+    {
+      "width": "<= 576",
+      "terms": [
+        "//CLUSTER/@NUM_COLS = 2",
+        "count(//LIST/*) = 4"
+      ],
+      "target": "md"
+    }
+
+The `width` expression is used to determine which UIM files to match against (the tool is inspecting the `WINDOW_OPTIONS` attribute of any `<PAGE>` or `<LINK>` elements it finds).
+
+The `terms` array defines [XPath](https://developer.mozilla.org/en-US/docs/Web/XPath) expressions that are run against each UIM file that matches the `width` expression. If any of the expressions evaluated to `true` the size of that UIM is updated.
+
+The `target` value is the new [Carbon modal size](https://www.carbondesignsystem.com/components/modal/style#sizes) category that should be applied to the modal if the `width` and any of the `terms` evaluate to `true`. The pixel values for each size category are codified in [packages/window-size-tool/sizes.js](https://github.com/IBM/spm-ui-upgrade-helper/tree/main/packages/window-size-tool/sizes.js).
+
+### Icon Replacer Tool
+
+Scans customer source files for `V7` icons that have been replaced by `V8` equivalents.
+
+- Iterates over customer source files and replaces the icons codified in [packages/icon-replacer-tool/icons_mappings.json](https://github.com/IBM/spm-ui-upgrade-helper/tree/main/packages/icon-replacer-tool/icon_mappings.json).
+
+Example icons mappings (`"v7_FILENAME":"V8_FILENAME"`):
+
+    {
+      "Actions_Blue30_20px.png": "overflow-menu-horizontal--20-on-dark.svg",
+      "Actions_Blue50_20px.png": "overflow-menu-horizontal--20-enabled.svg",
+      "Calendar_Blue50_20px.png": "calendar--20-enabled.svg",
+      "Day_Blue50_20px.png": "calendar__day--20-enabled.svg",
+      "Gotodate_Blue50_20px.png": "calendar__go-to-date--20-enabled.svg",
+    }
+
+Example `V8` icon files:
+
+    `/source_files/overflow-menu-horizontal--20-on-dark.svg`
+
+All `V7` icon files that are found will be deleted and their `V8` equivalent will be copied to the same location.
+
+References to the icon in customer source files (files such as `.css`, `.js`, `jspx`, etc.) are also updated.
+
 #### Ordering of rules
 
 The following steps determine the order of the rules:

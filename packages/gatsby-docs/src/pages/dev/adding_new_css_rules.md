@@ -1,5 +1,5 @@
 ---
-title: Adding new rules
+title: Adding new CSS rules
 ---
 
 OOTB rules are stored in the `packages/css-rules-tool/rules` folder.
