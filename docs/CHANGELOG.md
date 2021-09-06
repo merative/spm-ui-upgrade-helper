@@ -1,4 +1,4 @@
-# 0.0.0 release notes
+# 0.0.14 release notes
 
 Read about enhancements and defect fixes in IBM SPM UI Upgrade Helper Tool.
 
@@ -8,3 +8,11 @@ For information about server-side changes, see the [IBM Cúram Social Program Ma
 
 
 ## Release notes
+
+### Updates Window Size Tools Docs
+
+Adds details on how window size tools are written to the gatsby documentation site.
+
+### Updates Icon Replacer Tools Docs
+
+Adds details on how icon replacer tools are written to the gatsby documentation site.
