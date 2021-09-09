@@ -34,13 +34,28 @@ Example rules file:
 
 All of the values in `SelectorRemove` will be deleted. The values in `SelectorReplace` will be replaced by `newValue`. The order in which the rules are applied is described below.
 
+#### Ordering of rules
+
+The following steps determine the order of the rules:
+
+- All OOTB rules are loaded.
+- The rules are sorted by length, with the longest items first, inside each of their respective categories `SelectorRemove` and `SelectorReplace`.
+- The `SelectorRemove` rules are applied first, followed by the `SelectorReplace` rules.
+
+#### Updating the OOTB rules
+
+If you want to update the OOTB rules so other customers have access to them, [open a PR](https://github.com/IBM/spm-ui-upgrade-helper).
+
 ### Window Size Tool
 
 Scans customer UIM files and updates the width of modals that are either too wide or too narrow based on their content.
 
 - Iterates over customer UIM files and applies the rules codified in [packages/window-size-tool/rules.json](https://github.com/IBM/spm-ui-upgrade-helper/tree/main/packages/window-size-tool/rules.json).
+- Any given UIM file will only match with one rule, so rule order matters.
 
 Example rules file:
+
+    // Find UIMs that have a width of 576px or lower, and contains a 2 column CLUSTER or a 4 column LIST, and update it's width to 'md'.
 
     {
       "width": "<= 576",
@@ -80,25 +95,3 @@ Example `V8` icon files:
 All `V7` icon files that are found will be deleted and their `V8` equivalent will be copied to the same location.
 
 References to the icon in customer source files (files such as `.css`, `.js`, `jspx`, etc.) are also updated.
-
-#### Ordering of rules
-
-The following steps determine the order of the rules:
-
-- All OOTB rules are loaded.
-- The rules are sorted by length, with the longest items first, inside each of their respective categories `SelectorRemove` and `SelectorReplace`.
-- The `SelectorRemove` rules are applied first, followed by the `SelectorReplace` rules.
-
-#### Updating the OOTB rules
-
-If you want to update the OOTB rules so other customers have access to them, [open a PR](https://github.com/IBM/spm-ui-upgrade-helper).
-
-### Icon Replacer Tool
-
-Scans customer files for references to v7 icons and replaces them with their v8 counterparts.
-
-Also scans for icon files and replaces them.
-
-- Loads icon replacement mappings from [packages/icon-replacer-tool/icon-mappings.json](https://github.com/IBM/spm-ui-upgrade-helper/blob/main/packages/icon-replacer-tool/icon_mappings.json).
-- Iterates over customer files and replaces any references to old icons with new icons.
-- It will also replace any icon files that it finds.
