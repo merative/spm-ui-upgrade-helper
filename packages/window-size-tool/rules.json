@@ -5,11 +5,11 @@
     "target": "xlg"
   },
   {
-    "width": ">= 768",
+    "width": "<= 768",
     "terms": [
       "//CLUSTER/@NUM_COLS >= 3",
       "count(//CLUSTER[@NUM_COLS >= 2]//LIST) > 0",
-      "count(//LIST/*) = 5 or count(//LIST/*) = 6"
+      "count(//LIST/*) = 5 or count(//LIST[count(*) > 6]) > 0"
     ],
     "target": "lg"
   },
