@@ -5,10 +5,14 @@
   - than 768 with a 3 of more column CLUSTER.
   -->
 <?xml version="1.0" encoding="UTF-8"?>
-<PAGE WINDOW_OPTIONS="width=800">
-  <CLUSTER NUM_COLS="3">
+<PAGE WINDOW_OPTIONS="width=700">
+ <CLUSTER NUM_COLS="3">
+  <LIST>
     <FIELD/>
     <FIELD/>
     <FIELD/>
-  </CLUSTER>
+    <FIELD/>
+    <FIELD/>
+  </LIST>
+ </CLUSTER>
 </PAGE>

@@ -6,6 +6,7 @@
   -->
 <?xml version="1.0" encoding="UTF-8"?>
 <PAGE WINDOW_OPTIONS="width=1000">
+ <CLUSTER NUM_COLS="3">
   <LIST>
     <FIELD/>
     <FIELD/>
@@ -14,4 +15,5 @@
     <FIELD/>
     <FIELD/>
   </LIST>
+ </CLUSTER>
 </PAGE>

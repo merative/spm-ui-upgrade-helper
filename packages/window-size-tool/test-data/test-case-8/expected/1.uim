@@ -9,6 +9,9 @@
   <CONTAINER>
     <LIST>
       <FIELD/>
+       <CONNECT>
+         <TARGET/>
+       </CONNECT>
       <FIELD/>
     </LIST>
   </CONTAINER>
