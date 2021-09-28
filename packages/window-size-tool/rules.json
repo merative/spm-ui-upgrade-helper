@@ -17,8 +17,8 @@
   {
     "width": "> 768",
     "terms": [
-      "//CLUSTER/@NUM_COLS = 2 and count(//CLUSTER[@NUM_COLS >= 2]//LIST) = 0 and count(//CLUSTER[@NUM_COLS > 2]) = 0",
-      "count(//LIST[count(FIELD | CONTAINER) < 5]) > 0"
+      "//CLUSTER/@NUM_COLS = 2 and count(//CLUSTER[@NUM_COLS >= 2]//LIST) = 0 and count(//CLUSTER[@NUM_COLS > 2]) = 0 and count(//LIST[count(FIELD | CONTAINER) > 4]) = 0",
+      "count(//LIST[count(FIELD | CONTAINER) < 5]) > 0 and count(//LIST[count(FIELD | CONTAINER) > 4]) = 0"
     ],
     "target": "md"
   },
