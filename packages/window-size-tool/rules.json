@@ -1,52 +1,57 @@
 [
   {
     "width": "< 1200",
-    "terms": ["//CLUSTER/@NUM_COLS > 4", "count(//LIST/*) > 6"],
+    "terms": ["//CLUSTER/@NUM_COLS > 4", "count(//LIST[count(FIELD | CONTAINER) > 6 ]) > 0"
+    ],
     "target": "xlg"
   },
   {
-    "width": ">= 768",
+    "width": "<= 768",
     "terms": [
       "//CLUSTER/@NUM_COLS >= 3",
       "count(//CLUSTER[@NUM_COLS >= 2]//LIST) > 0",
-      "count(//LIST/*) = 5 or count(//LIST/*) = 6"
+      "count(//LIST[count(FIELD | CONTAINER) > 4]) > 0 and count(//LIST[count(FIELD | CONTAINER) < 7]) > 0"
     ],
     "target": "lg"
   },
   {
     "width": "> 768",
     "terms": [
-      "//CLUSTER/@NUM_COLS = 2",
-      "count(//LIST) > 0 and count(//LIST/*) < 5"
+      "//CLUSTER/@NUM_COLS = 2 and count(//CLUSTER[@NUM_COLS >= 2]//LIST) = 0 and count(//CLUSTER[@NUM_COLS > 2]) = 0 and count(//LIST[count(FIELD | CONTAINER) > 4]) = 0",
+      "count(//LIST[count(FIELD | CONTAINER) < 5]) > 0 and count(//LIST[count(FIELD | CONTAINER) > 4]) = 0"
     ],
     "target": "md"
   },
   {
     "width": "<= 576",
-    "terms": ["//CLUSTER/@NUM_COLS = 2", "count(//LIST/*) = 4"],
+    "terms": [
+      "//CLUSTER/@NUM_COLS = 2", 
+      "count(//LIST[count(FIELD | CONTAINER) = 4]) > 0"
+    ],
     "target": "md"
   },
   {
     "width": "> 576 and <= 768",
     "terms": [
       "count(//CLUSTER[@NUM_COLS > 1 ]) = 0 and count(//CLUSTER) > 0",
-      "count(//LIST) > 0 and count(//LIST/*) <= 2"
+      "count(//LIST[count(FIELD | CONTAINER) <= 2]) > 0"
     ],
     "target": "sm"
   },
   {
     "width": "<= 420",
     "terms": [
-      "count(//LIST/*) = 2 or count(//LIST/*) = 3",
-      "count(//FIELD//TARGET) > 0"
+      "count(//LIST[count(FIELD | CONTAINER) = 2]) > 0 or count(//LIST[count(FIELD | CONTAINER) = 3]) > 0",
+      "count(//FIELD[count(//TARGET) > 0]) > 1"
     ],
     "target": "sm"
   },
   {
     "width": "> 420 and <= 576",
     "terms": [
-      "(count(//CLUSTER[not(@NUM_COLS)]) > 0 or //CLUSTER/@NUM_COLS = 1) and count(//FIELD//TARGET) = 0 and count(//ACTION_CONTROL) = 2"
+      "(count(//CLUSTER[not(@NUM_COLS)]) > 0 or //CLUSTER/@NUM_COLS = 1) and count(//FIELD//TARGET) = 0 and count(//ACTION_CONTROL) < 3"
     ],
     "target": "xs"
   }
 ]
+

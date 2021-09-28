@@ -5,7 +5,7 @@
   - than 768 with a nested 2 of more column CLUSTER that contains nested LISTs.
   -->
 <?xml version="1.0" encoding="UTF-8"?>
-<PAGE WINDOW_OPTIONS="width=800">
+<PAGE WINDOW_OPTIONS="width=700">
   <CONTAINER>
     <CLUSTER NUM_COLS="2">
     <CONTAINER>

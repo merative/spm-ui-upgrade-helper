@@ -11,4 +11,8 @@
 			<TARGET NAME="ACTION" PROPERTY="data"/>
 		</CONNECT>
 	</FIELD>
+  <LIST>
+  <FIELD/>
+  <CONTAINER/>
+  </LIST>
 </PAGE>
