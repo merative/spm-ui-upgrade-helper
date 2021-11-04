@@ -6,7 +6,10 @@
   -->
 <?xml version="1.0" encoding="UTF-8"?>
 <PAGE WINDOW_OPTIONS="width=500">
-  <CLUSTER>
-    <FIELD/>
+ <CLUSTER>
+    <LIST>
+      <FIELD/>
+      <FIELD/>
+    </LIST>
   </CLUSTER>
 </PAGE>
