@@ -42,14 +42,16 @@
     "width": "<= 420",
     "terms": [
       "count(//LIST[count(FIELD | CONTAINER) = 2]) > 0 or count(//LIST[count(FIELD | CONTAINER) = 3]) > 0",
-      "count(//FIELD[count(//TARGET) > 0]) > 1"
+      "count(//FIELD[count(//TARGET) > 0]) > 1",
+      "count(//FIELD//TARGET) > 0",
+      "count(//WIDGET//TARGET) > 0"
     ],
     "target": "sm"
   },
   {
     "width": "> 420 and <= 576",
     "terms": [
-      "count(//CLUSTER[@NUM_COLS > 1 ]) = 0 and (count(//CLUSTER[not(@NUM_COLS)]) > 0 or //CLUSTER/@NUM_COLS = 1) and count(//FIELD//TARGET) = 0 and count(//ACTION_CONTROL) < 3"
+      "count(//CLUSTER[@NUM_COLS > 1 ]) = 0 and (count(//CLUSTER[not(@NUM_COLS)]) > 0 or //CLUSTER/@NUM_COLS = 1) and count(//FIELD//TARGET) = 0 and count(//WIDGET//TARGET) = 0 and count(//ACTION_CONTROL) < 3"
     ],
     "target": "xs"
   }
