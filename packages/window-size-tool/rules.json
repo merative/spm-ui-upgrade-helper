@@ -33,8 +33,7 @@
   {
     "width": "> 576 and <= 768",
     "terms": [
-      "count(//CLUSTER[@NUM_COLS > 1 ]) = 0 and count(//CLUSTER) > 0",
-      "count(//LIST[count(FIELD | CONTAINER) <= 2]) > 0 and count(//LIST[count(FIELD | CONTAINER) > 2]) = 0"
+      "count(//CLUSTER[@NUM_COLS > 1 ]) = 0 and count(//LIST[count(FIELD | CONTAINER) > 2]) = 0"
     ],
     "target": "sm"
   },
