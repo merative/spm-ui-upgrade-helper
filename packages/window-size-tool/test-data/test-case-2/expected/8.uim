@@ -1,13 +1,14 @@
 <!--
-  - Expected: Width changes to 500 (small).
+  - Expected: No change.
   -
   - Reason: PAGE element WINDOW_OPTIONS attribute width is between 576 and 768 
-  - with a 2 column LIST.
+  - with a 3 column LIST.
   -->
 <?xml version="1.0" encoding="UTF-8"?>
-<PAGE WINDOW_OPTIONS="width=500">
+<PAGE WINDOW_OPTIONS="width=600">
   <LIST>
-    <FIELD/>
-    <FIELD/>
+   <FIELD/>
+   <FIELD/>
+   <FIELD/>
   </LIST>
 </PAGE>
