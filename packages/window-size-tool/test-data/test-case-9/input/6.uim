@@ -1,7 +1,7 @@
 <!--
   - Expected: No change.
   -
-  - Reason: PAGE element has no WINDOW_OPTIONS attribute width is between 
+  - Reason: PAGE element WINDOW_OPTIONS attribute width is between 
   - 420 and 576 with a 2 CLUSTER and contains a LIST.
   -->
 <?xml version="1.0" encoding="UTF-8"?>
@@ -16,3 +16,4 @@
     <FIELD/>
   </LIST>
 </PAGE>
+
