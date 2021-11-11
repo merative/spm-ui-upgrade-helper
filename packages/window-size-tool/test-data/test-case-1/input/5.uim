@@ -1,11 +1,11 @@
 <!--
-  - Expected: Width size changes to 700 (medium).
+  - Expected: No change.
   -
   - Reason: PAGE element WINDOW_OPTIONS attribute width is greater than 768 and 
   - contains a 4 column LIST.
   -->
 <?xml version="1.0" encoding="UTF-8"?>
-<PAGE WINDOW_OPTIONS="width=800">
+<PAGE WINDOW_OPTIONS="width=700">
   <LIST>
     <FIELD/>
     <FIELD/>
