@@ -32,6 +32,6 @@
     "name": "Run SPM UI Upgrade Helper - Window Size",
     "port": 4004,
     "commandName": "extension.runUIUpgradeHelperWindowSize",
-    "enabled": true
+    "enabled": false
   }
 ]
