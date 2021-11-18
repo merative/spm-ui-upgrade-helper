@@ -46,6 +46,7 @@ The following steps determine the order of the rules:
 
 If you want to update the OOTB rules so other customers have access to them, [open a PR](https://github.com/IBM/spm-ui-upgrade-helper).
 
+<!--
 ### Window Size Tool
 
 Scans customer UIM files and updates the width of modals that are either too wide or too narrow based on their content.
@@ -71,6 +72,7 @@ The `width` expression is used to determine which UIM files to match against (th
 The `terms` array defines [XPath](https://developer.mozilla.org/en-US/docs/Web/XPath) expressions that are run against each UIM file that matches the `width` expression. If any of the expressions evaluated to `true` the size of that UIM is updated.
 
 The `target` value is the new [Carbon modal size](https://www.carbondesignsystem.com/components/modal/style#sizes) category that should be applied to the modal if the `width` and any of the `terms` evaluate to `true`. The pixel values for each size category are codified in [packages/window-size-tool/sizes.js](https://github.com/IBM/spm-ui-upgrade-helper/tree/main/packages/window-size-tool/sizes.js).
+-->
 
 ### Icon Replacer Tool
 
