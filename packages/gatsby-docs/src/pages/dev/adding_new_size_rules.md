@@ -1,7 +1,6 @@
 <!--
----
 title: Adding new window size rules
----
+
 
 OOTB rules are stored in `packages/window-size-tool/rules.json`.
 
