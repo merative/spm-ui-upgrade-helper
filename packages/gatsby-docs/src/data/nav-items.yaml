@@ -27,8 +27,6 @@
       path: /dev/adding_a_new_tool
     - title: Adding new CSS rules
       path: /dev/adding_new_css_rules
-    - title: Adding new window size rules
-      path: /dev/adding_new_size_rules
     - title: Replacing new icons
       path: /dev/replacing_new_icons
     - title: Documentation
