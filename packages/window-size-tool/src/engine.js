@@ -108,7 +108,6 @@ function checkRule(node, rule, verbose = true) {
   } else if (!rule) {
     throw Error("You must supply a rules object");
   }
-
   rule.terms.forEach((term) => {
     if (!pass) {
       const result = xp.select(term, node);
@@ -123,8 +122,23 @@ function checkRule(node, rule, verbose = true) {
         );
       }
     }
+    if (pass == true){
+        pass = false;
+        rule.andTerms.forEach((term) => {
+        if (!pass) {
+          const result2 = xp.select(term, node);
+          pass = pass || result2;
+          if (verbose) {
+            console.debug(
+              ` term:  ${
+                result2 ? chalk.green(`${result2} `) : chalk.red(result2)
+              } <- [${chalk.magenta(term)}]`
+            );
+          }
+        }
+      });
+    }
   });
-
   return pass;
 }
 

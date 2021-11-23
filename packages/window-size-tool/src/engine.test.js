@@ -309,6 +309,7 @@ describe("checkRule", () => {
     const document = {};
     const rule = {
       terms: ["criteria.1"],
+      andTerms: ["criteria.3"],
     };
 
     xp.select.mockImplementation(() => false);
@@ -318,12 +319,13 @@ describe("checkRule", () => {
     expect(actual).toEqual(expected);
   });
 
-  test("should return 'true' when xpath rule passed matches document", () => {
+  test("should return 'true' when xpath rule passed matches document and there is no INCLUDES and WIZARD_PROGRESS_BAR", () => {
     const expected = true;
 
     const document = {};
     const rule = {
       terms: ["criteria.1"],
+      andTerms: ["criteria.3"],
     };
 
     xp.select.mockImplementation(() => true);
@@ -333,15 +335,16 @@ describe("checkRule", () => {
     expect(actual).toEqual(expected);
   });
 
-  test("should return 'true' when any of the xpath rules passed matches document", () => {
+  test("should return 'true' when any of the xpath rules passed matches document and there is no INCLUDES and WIZARD_PROGRESS_BAR", () => {
     const expected = true;
 
     const document = {};
     const rule = {
       terms: ["criteria.1", "criteria.2"],
+      andTerms:  ["criteria.3"],
     };
 
-    xp.select.mockImplementation((rule) => rule === "criteria.2");
+    xp.select.mockImplementation((rule) => true);
 
     const actual = checkRule(document, rule, false);
 
@@ -502,6 +505,7 @@ describe("applyRule", () => {
       {
         width: "> 576 and <= 768",
         terms: ["criteria.1", "criteria.2"],
+        andTerms:  ["criteria.3"],
         target: "sm",
       },
     ];
@@ -541,6 +545,7 @@ describe("applyRule", () => {
       {
         width: "> 768",
         terms: ["criteria.1", "criteria.2"],
+        andTerms:  ["criteria.3"],
         target: "md",
       },
     ];
@@ -580,6 +585,7 @@ describe("applyRule", () => {
       {
         width: "> 768",
         terms: ["criteria.1", "criteria.2"],
+        andTerms:  ["criteria.3"],
         target: "md",
       },
     ];
@@ -617,11 +623,13 @@ describe("applyRule", () => {
       {
         width: "> 768",
         terms: ["criteria.1"],
+        andTerms: ["criteria.3"],
         target: "md",
       },
       {
         width: "> 768",
         terms: ["criteria.1"],
+        andTerms: ["criteria.3"],
         target: "md",
       },
     ];
@@ -718,6 +726,7 @@ describe("applyRules", () => {
       {
         width: "> 768",
         terms: ["criteria.1"],
+        andTerms: ["createria.3"],
         target: "md",
       },
     ];

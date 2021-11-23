@@ -3,6 +3,9 @@
     "width": "< 1200",
     "terms": ["//CLUSTER/@NUM_COLS > 4", "count(//LIST[count(FIELD | CONTAINER) > 6 ]) > 0"
     ],
+    "andTerms": [
+      "count(//INCLUDE) = 0 and count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0" 
+     ],
     "target": "xlg"
   },
   {
@@ -12,13 +15,19 @@
       "count(//CLUSTER[@NUM_COLS >= 2]//LIST) > 0",
       "count(//LIST[count(FIELD | CONTAINER) > 4]) > 0 and count(//LIST[count(FIELD | CONTAINER) < 7]) > 0"
     ],
+    "andTerms": [
+      "count(//INCLUDE) = 0 and count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0" 
+     ],
     "target": "lg"
   },
   {
     "width": "> 768",
     "terms": [
-      "(count(//CLUSTER) > 0 or count(//LIST) > 0) and count(//CLUSTER[@NUM_COLS >= 2]//LIST) = 0 and count(//CLUSTER[@NUM_COLS > 2]) = 0 and count(//LIST[count(FIELD | CONTAINER) > 4]) = 0"
+     "(count(//CLUSTER) > 0 or count(//LIST) > 0) and count(//CLUSTER[@NUM_COLS >= 2]//LIST) = 0 and count(//CLUSTER[@NUM_COLS > 2]) = 0 and count(//LIST[count(FIELD | CONTAINER) > 4]) = 0"
     ],
+    "andTerms": [
+      "count(//INCLUDE) = 0 and count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0"
+     ],
     "target": "md"
   },
   {
@@ -27,6 +36,9 @@
       "//CLUSTER/@NUM_COLS = 2", 
       "count(//LIST[count(FIELD | CONTAINER) = 4]) > 0"
     ],
+    "andTerms": [
+      "count(//INCLUDE) = 0 and count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0"
+     ],
     "target": "md"
   },
   {
@@ -34,6 +46,9 @@
     "terms": [
       "count(//CLUSTER[@NUM_COLS > 1 ]) = 0 and count(//LIST[count(FIELD | CONTAINER) > 2]) = 0 and (count(//CLUSTER) > 0 or count(//LIST) > 0)"
     ],
+    "andTerms": [
+      "count(//INCLUDE) = 0 and count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0"
+     ],
     "target": "sm"
   },
   {
@@ -45,13 +60,19 @@
       "count(//FIELD//TARGET) > 0",
       "count(//WIDGET//TARGET) > 0"
     ],
-    "target": "sm"
+    "andTerms": [
+      "count(//INCLUDE) = 0 and count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0"
+     ],
+  "target": "sm"
   },
   {
     "width": "> 420 and <= 576",
     "terms": [
       "count(//CLUSTER[@NUM_COLS > 1 ]) = 0 and count(//CLUSTER) = 1 and count(//CLUSTER[count(FIELD | CONTAINER) > 2]) = 0 and count(//LIST) = 0 and count(//FIELD//TARGET) = 0 and count(//WIDGET//TARGET) = 0 and count(//ACTION_CONTROL) < 3"
     ],
+    "andTerms": [
+      "count(//INCLUDE) = 0 and count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0"
+     ],
     "target": "xs"
   }
 ]
