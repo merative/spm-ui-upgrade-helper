@@ -308,8 +308,8 @@ describe("checkRule", () => {
 
     const document = {};
     const rule = {
-      terms: ["criteria.1"],
-      andTerms: ["criteria.3"],
+      anyTerms: ["criteria.1"],
+      allTerms: ["criteria.3"],
     };
 
     xp.select.mockImplementation(() => false);
@@ -324,8 +324,8 @@ describe("checkRule", () => {
 
     const document = {};
     const rule = {
-      terms: ["criteria.1"],
-      andTerms: ["criteria.3"],
+      anyTerms: ["criteria.1"],
+      allTerms: ["criteria.3"],
     };
 
     xp.select.mockImplementation(() => true);
@@ -340,8 +340,8 @@ describe("checkRule", () => {
 
     const document = {};
     const rule = {
-      terms: ["criteria.1", "criteria.2"],
-      andTerms:  ["criteria.3"],
+      anyTerms: ["criteria.1", "criteria.2"],
+      allTerms:  ["criteria.3"],
     };
 
     xp.select.mockImplementation((rule) => true);
@@ -504,8 +504,8 @@ describe("applyRule", () => {
     const rules = [
       {
         width: "> 576 and <= 768",
-        terms: ["criteria.1", "criteria.2"],
-        andTerms:  ["criteria.3"],
+        anyTerms: ["criteria.1", "criteria.2"],
+        allTerms:  ["criteria.3"],
         target: "sm",
       },
     ];
@@ -544,8 +544,8 @@ describe("applyRule", () => {
     const rules = [
       {
         width: "> 768",
-        terms: ["criteria.1", "criteria.2"],
-        andTerms:  ["criteria.3"],
+        anyTerms: ["criteria.1", "criteria.2"],
+        allTerms:  ["criteria.3"],
         target: "md",
       },
     ];
@@ -584,8 +584,8 @@ describe("applyRule", () => {
     const rules = [
       {
         width: "> 768",
-        terms: ["criteria.1", "criteria.2"],
-        andTerms:  ["criteria.3"],
+        anyTerms: ["criteria.1", "criteria.2"],
+        allTerms:  ["criteria.3"],
         target: "md",
       },
     ];
@@ -622,14 +622,14 @@ describe("applyRule", () => {
     const rules = [
       {
         width: "> 768",
-        terms: ["criteria.1"],
-        andTerms: ["criteria.3"],
+        anyTerms: ["criteria.1"],
+        allTerms: ["criteria.3"],
         target: "md",
       },
       {
         width: "> 768",
-        terms: ["criteria.1"],
-        andTerms: ["criteria.3"],
+        anyTerms: ["criteria.1"],
+        allTerms: ["criteria.3"],
         target: "md",
       },
     ];
@@ -725,8 +725,8 @@ describe("applyRules", () => {
     const rules = [
       {
         width: "> 768",
-        terms: ["criteria.1"],
-        andTerms: ["createria.3"],
+        anyTerms: ["criteria.1"],
+        allTerms: ["criteria.3"],
         target: "md",
       },
     ];
