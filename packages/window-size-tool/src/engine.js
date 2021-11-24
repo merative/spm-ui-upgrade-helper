@@ -123,11 +123,10 @@ function checkRule(node, rule, verbose = true) {
       }
     }
     if (pass == true){
-        pass = false;
         rule.allTerms.forEach((term) => {
-        if (!pass) {
+        if (pass) {
           const result2 = xp.select(term, node);
-          pass = pass || result2;
+          pass = result2;
           if (verbose) {
             console.debug(
               ` term:  ${

@@ -5,7 +5,7 @@
     ],
     "allTerms": [
       "count(//INCLUDE) = 0",
-      "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0"
+      "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0" 
      ],
     "target": "xlg"
   },
@@ -29,7 +29,7 @@
     ],
     "allTerms": [
       "count(//INCLUDE) = 0",
-      "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0"
+      "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0"  
      ],
     "target": "md"
   },
@@ -41,7 +41,7 @@
     ],
     "allTerms": [
       "count(//INCLUDE) = 0",
-      "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0"
+      "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0" 
      ],
     "target": "md"
   },
@@ -52,7 +52,7 @@
     ],
     "allTerms": [
       "count(//INCLUDE) = 0",
-      "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0"
+      "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0"  
      ],
     "target": "sm"
   },
@@ -67,7 +67,7 @@
     ],
     "allTerms": [
       "count(//INCLUDE) = 0",
-      "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0"
+      "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0"  
      ],
   "target": "sm"
   },
@@ -78,7 +78,7 @@
     ],
     "allTerms": [
       "count(//INCLUDE) = 0",
-      "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0"
+      "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0"  
      ],
     "target": "xs"
   }
