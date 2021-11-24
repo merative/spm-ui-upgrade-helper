@@ -46,9 +46,11 @@ The following steps determine the order of the rules:
 
 If you want to update the OOTB rules so other customers have access to them, [open a PR](https://github.com/IBM/spm-ui-upgrade-helper).
 
-<!--
+
 ### Window Size Tool
 
+Coming soon
+<!--
 Scans customer UIM files and updates the width of modals that are either too wide or too narrow based on their content.
 
 - Iterates over customer UIM files and applies the rules codified in [packages/window-size-tool/rules.json](https://github.com/IBM/spm-ui-upgrade-helper/tree/main/packages/window-size-tool/rules.json).
