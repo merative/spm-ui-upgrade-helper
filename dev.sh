@@ -35,6 +35,12 @@ echo     INPUT_FOLDER_CMD = $INPUT_FOLDER_CMD
 echo     OUTPUT_FOLDER_CMD = $OUTPUT_FOLDER_CMD
 echo
 
-docker stop spm-ui-upgrade-helper
-docker rm spm-ui-upgrade-helper
-docker run -p 3000:3000 -p 4000-4004:4000-4004 $UIUH_DEV_CMD $INPUT_FOLDER_CMD $OUTPUT_FOLDER_CMD --name spm-ui-upgrade-helper spm-ui-upgrade-helper:$VERSION
+docker-compose stop  beanparser
+docker-compose down  beanparser
+docker-compose stop  nodefront
+docker-compose down  nodefront
+docker-compose stop upgradehelper
+docker-compose rm -f upgradehelper
+
+docker-compose run -p 3000:3000 -p 4000-4004:4000-4004  $UIUH_DEV_CMD $INPUT_FOLDER_CMD $OUTPUT_FOLDER_CMD  --name spm-ui-upgrade-helper_upgradehelper upgradehelper
+echo Docker run
