@@ -58,7 +58,7 @@ RUN chmod g+rw /home && \
     chown -R theia:theia /home/theia && \
     chown -R theia:theia /home/workspace && \
     chown -R theia:theia /home/project;
-RUN apk add --no-cache git openssh bash
+RUN apk add --no-cache git openssh bash libsecret
 ENV HOME /home/theia
 WORKDIR /home/theia
 COPY --from=copy-json --chown=theia:theia /home/theia /home/theia
@@ -66,7 +66,7 @@ COPY --from=plugins --chown=theia:theia /home/plugins/*.vsix /home/theia/plugins
 COPY --from=theia --chown=theia:theia /home/theia /home/theia/browser-app
 RUN cp -R /home/theia/browser-app/plugins/* /home/theia/plugins/
 EXPOSE 3000
-EXPOSE 4000-4004
+EXPOSE 4000-4005
 ENV SHELL=/bin/bash \
     THEIA_DEFAULT_PLUGINS=local-dir:/home/theia/plugins
 ENV USE_LOCAL_GIT true
