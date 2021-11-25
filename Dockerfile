@@ -42,7 +42,7 @@ RUN yarn compile
 RUN yarn build
 
 # Reference theia here because we will want to copy from it later
-FROM theiaide/theia:1.14.0 as theia
+FROM theiaide/theia:v1.14.0 as theia
 
 FROM node:${NODE_VERSION}-alpine AS final
 # See : https://github.com/theia-ide/theia-apps/issues/34
@@ -58,7 +58,7 @@ RUN chmod g+rw /home && \
     chown -R theia:theia /home/theia && \
     chown -R theia:theia /home/workspace && \
     chown -R theia:theia /home/project;
-RUN apk add --no-cache git openssh bash
+RUN apk add --no-cache git openssh bash libsecret
 ENV HOME /home/theia
 WORKDIR /home/theia
 COPY --from=copy-json --chown=theia:theia /home/theia /home/theia
