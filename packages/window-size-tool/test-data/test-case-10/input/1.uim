@@ -1,0 +1,25 @@
+<!--
+  - Expected: No change.
+  -
+  - Reason: The UIM file is part of Wizard
+  -
+  -->
+<?xml version="1.0" encoding="UTF-8"?>
+<PAGE WINDOW_OPTIONS="width=700">
+  <CLUSTER NUM_COLS="2">
+    <LIST>
+      <FIELD/>
+    </LIST>
+    <LIST>
+      <FIELD/>
+    </LIST>
+  </CLUSTER>
+  <MENU MODE="WIZARD_PROGRESS_BAR">
+    <CONNECT>
+      <SOURCE
+      NAME="DISPLAY"
+      PROPERTY="wizardMenu"
+      />
+    </CONNECT>
+  </MENU>
+</PAGE>
