@@ -92,6 +92,7 @@ const dockerTasks = (execFunction = shelljs, props, args) => {
 
   if (option === "build") {
     const r0 = validate("imageName");
+    console.log("r0", r0);
     if (r0) {
       return r0;
     }
@@ -102,7 +103,8 @@ const dockerTasks = (execFunction = shelljs, props, args) => {
     if (r1) {
       return r1;
     }
-    return exec(`docker build ${additionalArgs} --tag ${props.imageName}:latest .`);
+    exec(`docker-compose down`);
+    return exec(`docker-compose build ${additionalArgs}`);
   }
 
   if (option === "prune") {
@@ -114,10 +116,9 @@ const dockerTasks = (execFunction = shelljs, props, args) => {
     if (r0) {
       return r0;
     }
-    exec(`docker stop ${props.imageName}`);
-    exec(`docker rm ${props.imageName}`);
+    exec(`docker-compose down`);
     const runArgs = props.runArgs || "";
-    return exec(`docker run ${additionalArgs} ${runArgs} --name ${props.imageName} ${props.imageName}:latest`);
+    return exec(`docker-compose run ${additionalArgs} ${runArgs} upgradehelper`);
   }
 
   if (option === "clear") {
@@ -125,11 +126,10 @@ const dockerTasks = (execFunction = shelljs, props, args) => {
     if (r0) {
       return r0;
     }
-    const r1 = exec(`docker stop ${props.imageName}`);
+    const r1 = exec(`docker-compose down`);
     if (r1) {
       return r1;
     }
-    return exec(`docker rm ${props.imageName}`);
   }
 
   if (option === "debug") {
