@@ -305,24 +305,6 @@ function applyRules(
     throw Error("You must supply an serializer object");
   }
 
-  const http = require('http');
-  
-  const req = http.get('http://spm-ui-upgrade-helper_nodefront:4005/full/id$wizardStateID/getAvailablePods/CustomPageAdmin', res => {
-    console.log("check dev mode")
-  
-    res.on('data', d => {
-      process.stdout.write(d);
-        console.log(d);
-        console.log(d.type)
-    })
-  })
-  
-      req.on('error', error => {
-        console.error('hhhhhhhhh55556661119994488889999',error)
-  })
-  
-  req.end();
-
   const results = [];
 
   const pagedictionary = {};
