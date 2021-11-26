@@ -1,57 +1,85 @@
 [
   {
     "width": "< 1200",
-    "terms": ["//CLUSTER/@NUM_COLS > 4", "count(//LIST[count(FIELD | CONTAINER) > 6 ]) > 0"
+    "anyTerms": ["//CLUSTER/@NUM_COLS > 4", "count(//LIST[count(FIELD | CONTAINER) > 6 ]) > 0"
     ],
+    "allTerms": [
+      "count(//INCLUDE) = 0",
+      "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0" 
+     ],
     "target": "xlg"
   },
   {
     "width": "<= 768",
-    "terms": [
+    "anyTerms": [
       "//CLUSTER/@NUM_COLS >= 3",
       "count(//CLUSTER[@NUM_COLS >= 2]//LIST) > 0",
       "count(//LIST[count(FIELD | CONTAINER) > 4]) > 0 and count(//LIST[count(FIELD | CONTAINER) < 7]) > 0"
     ],
+    "allTerms": [
+      "count(//INCLUDE) = 0",
+      "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0" 
+     ],
     "target": "lg"
   },
   {
     "width": "> 768",
-    "terms": [
-      "(count(//CLUSTER) > 0 or count(//LIST) > 0) and count(//CLUSTER[@NUM_COLS >= 2]//LIST) = 0 and count(//CLUSTER[@NUM_COLS > 2]) = 0 and count(//LIST[count(FIELD | CONTAINER) > 4]) = 0"
+    "anyTerms": [
+     "(count(//CLUSTER) > 0 or count(//LIST) > 0) and count(//CLUSTER[@NUM_COLS >= 2]//LIST) = 0 and count(//CLUSTER[@NUM_COLS > 2]) = 0 and count(//LIST[count(FIELD | CONTAINER) > 4]) = 0"
     ],
+    "allTerms": [
+      "count(//INCLUDE) = 0",
+      "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0"  
+     ],
     "target": "md"
   },
   {
     "width": "<= 576",
-    "terms": [
+    "anyTerms": [
       "//CLUSTER/@NUM_COLS = 2", 
       "count(//LIST[count(FIELD | CONTAINER) = 4]) > 0"
     ],
+    "allTerms": [
+      "count(//INCLUDE) = 0",
+      "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0" 
+     ],
     "target": "md"
   },
   {
     "width": "> 576 and <= 768",
-    "terms": [
+    "anyTerms": [
       "count(//CLUSTER[@NUM_COLS > 1 ]) = 0 and count(//LIST[count(FIELD | CONTAINER) > 2]) = 0 and (count(//CLUSTER) > 0 or count(//LIST) > 0)"
     ],
+    "allTerms": [
+      "count(//INCLUDE) = 0",
+      "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0"  
+     ],
     "target": "sm"
   },
   {
     "width": "<= 420",
-    "terms": [
+    "anyTerms": [
       "count(//CLUSTER) > 1",
       "count(//LIST) > 0",
       "count(//FIELD[count(//TARGET) > 0]) > 1",
       "count(//FIELD//TARGET) > 0",
       "count(//WIDGET//TARGET) > 0"
     ],
-    "target": "sm"
+    "allTerms": [
+      "count(//INCLUDE) = 0",
+      "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0"  
+     ],
+  "target": "sm"
   },
   {
     "width": "> 420 and <= 576",
-    "terms": [
+    "anyTerms": [
       "count(//CLUSTER[@NUM_COLS > 1 ]) = 0 and count(//CLUSTER) = 1 and count(//CLUSTER[count(FIELD | CONTAINER) > 2]) = 0 and count(//LIST) = 0 and count(//FIELD//TARGET) = 0 and count(//WIDGET//TARGET) = 0 and count(//ACTION_CONTROL) < 3"
     ],
+    "allTerms": [
+      "count(//INCLUDE) = 0",
+      "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0"  
+     ],
     "target": "xs"
   }
 ]
