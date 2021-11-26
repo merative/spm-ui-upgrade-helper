@@ -37,17 +37,23 @@ echo     OUTPUT_FOLDER_CMD = %OUTPUT_FOLDER_CMD%
 echo     DETACH_CMD = %DETACH_CMD%
 echo.
 
-docker-compose stop  beanparser
-docker-compose down  beanparser
-docker-compose stop  nodefront
-docker-compose down  nodefront
-docker-compose stop upgradehelper
-docker-compose rm -f upgradehelper
-
+call docker-compose stop  parser_beanparser
+call docker-compose down  parser_beanparser
+call docker-compose stop  parser_nodefront
+call docker-compose down  parser_nodefront
+call docker-compose stop spm-ui-upgrade-helper
+call docker-compose rm -f spm-ui-upgrade-helper
 echo Logging in to Docker Hub...
 call docker login
 call docker pull ibmcom/spm-ui-upgrade-helper:%VERSION%
-call docker-compose run %DETACH_CMD% -p 3000:3000 -p 4000:4000 %UIUH_DEV_CMD% %INPUT_FOLDER_CMD% %OUTPUT_FOLDER_CMD% --name spm-ui-upgrade-helper_upgradehelper  ibmcom/spm-ui-upgrade-helper:%VERSION%
+call docker tag ibmcom/spm-ui-upgrade-helper:$VERSION  spm-ui-upgrade-helper:$VERSION 
+call docker-compose run $DETACH_CMD -p 3000:3000 -p 4000:4000 \
+    $UIUH_DEV_CMD \
+    $INPUT_FOLDER_CMD \
+    $OUTPUT_FOLDER_CMD \
+    --name spm-ui-upgrade-helper \
+    spm-ui-upgrade-helper
+
 endlocal
 
 goto end

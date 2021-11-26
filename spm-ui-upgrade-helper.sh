@@ -1,4 +1,4 @@
-#!/usr/bin/sh
+#!/bin/sh
 
 ERROR=
 if [[ -z "$1" ]]; then
@@ -36,28 +36,24 @@ echo     OUTPUT_FOLDER_CMD = $OUTPUT_FOLDER_CMD
 echo     DETACH_CMD = $DETACH_CMD
 echo
 
-docker-compose stop  beanparser
-docker-compose down  beanparser
-docker-compose stop  nodefront
-docker-compose down  nodefront
-docker-compose stop upgradehelper
-docker-compose rm -f upgradehelper
+docker-compose stop  parser_beanparser
+docker-compose down  parser_beanparser
+docker-compose stop  parser_nodefront
+docker-compose down  parser_nodefront
+docker-compose stop spm-ui-upgrade-helper
+docker-compose rm -f spm-ui-upgrade-helper
 
 echo Logging in to Docker Hub...
 docker login
 if [ "$?" != 0 ]; then echo "Error: Could not log in to Docker repo."; exit 1; fi
-docker pull ibmcom/spm-ui-upgrade-beanparser:latest
-if [ "$?" != 0 ]; then echo "Error: Could not pull $VERSION version."; exit 1; fi
-docker pull ibmcom/spm-ui-upgrade-nodefront:latest
-if [ "$?" != 0 ]; then echo "Error: Could not pull $VERSION version."; exit 1; fi
-docker pull ibmcom/spm-ui-upgrade-upgradehelper:latest
-if [ "$?" != 0 ]; then echo "Error: Could not pull $VERSION version."; exit 1; fi
+docker pull ibmcom/spm-ui-upgrade-helper:$VERSION
+docker tag ibmcom/spm-ui-upgrade-helper:$VERSION  spm-ui-upgrade-helper:$VERSION 
+docker-compose build 
 docker-compose run $DETACH_CMD -p 3000:3000 -p 4000:4000 \
     $UIUH_DEV_CMD \
     $INPUT_FOLDER_CMD \
     $OUTPUT_FOLDER_CMD \
-    --name spm-ui-upgrade-helper_upgradehelper \
-    ibmcom/spm-ui-upgrade-helper:latest
+    --name spm-ui-upgrade-helper \
+    spm-ui-upgrade-helper
 if [ "$?" != 0 ]; then echo "Error: Could not run $VERSION version."; exit 1; fi
-
 
