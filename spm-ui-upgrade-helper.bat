@@ -47,6 +47,7 @@ echo Logging in to Docker Hub...
 call docker login
 call docker pull ibmcom/spm-ui-upgrade-helper:%VERSION%
 call docker tag ibmcom/spm-ui-upgrade-helper:$VERSION  spm-ui-upgrade-helper:$VERSION 
+call docker-compose build
 call docker-compose run $DETACH_CMD -p 3000:3000 -p 4000:4000 \
     $UIUH_DEV_CMD \
     $INPUT_FOLDER_CMD \
