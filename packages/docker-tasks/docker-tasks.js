@@ -104,7 +104,7 @@ const dockerTasks = (execFunction = shelljs, props, args) => {
       return r1;
     }
     exec(`docker-compose down`);
-    return exec(`docker-compose build ${additionalArgs}`);
+    return exec(`docker-compose build ${additionalArgs} ${props.imageName}`);
   }
 
   if (option === "prune") {
