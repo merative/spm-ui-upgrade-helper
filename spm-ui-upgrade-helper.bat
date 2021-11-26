@@ -57,7 +57,6 @@ call docker-compose run $DETACH_CMD -p 3000:3000 -p 4000:4000 \
 endlocal
 
 goto end
-
 :printHelpAndExit
 echo Usage: spm-ui-upgrade-helper.bat ^<version^> ^<input folder^> ^<output folder^>
 exit /B 1

@@ -97,7 +97,7 @@ test("calling 'build' runs the correct commands", () => {
   const props = yaml.load(inputConfig.join("\n"));
   const inputArgs = "build".split(" ");
   const expectedCommands = [
-    "docker build --tag bar:latest ."
+    "docker-compose down", "docker-compose build"
   ];
   const expectedEchos = [];
   const expectedErrorCode = 0;
@@ -119,8 +119,7 @@ test("calling 'build -p' runs the correct commands", () => {
   const props = yaml.load(inputConfig.join("\n"));
   const inputArgs = "build -p".split(" ");
   const expectedCommands = [
-    "docker system prune --force",
-    "docker build --tag foo:latest ."
+    "docker system prune --force", "docker-compose down", "docker-compose build"
   ];
   const expectedEchos = [];
   const expectedErrorCode = 0;
@@ -142,8 +141,7 @@ test("calling 'clear' runs the correct commands", () => {
   const props = yaml.load(inputConfig.join("\n"));
   const inputArgs = "clear".split(" ");
   const expectedCommands = [
-    "docker stop bar",
-    "docker rm bar"
+    "docker-compose stop bar","docker-compose down"
   ];
   const expectedEchos = [];
   const expectedErrorCode = 0;
@@ -243,9 +241,7 @@ test("calling 'run' runs the correct commands", () => {
   const props = yaml.load(inputConfig.join("\n"));
   const inputArgs = "run".split(" ");
   const expectedCommands = [
-    "docker stop bar",
-    "docker rm bar",
-    "docker run -p 3000:3000 --name bar bar:latest"
+    "docker-compose down", "docker-compose run -p 3000:3000 --name bar bar"
   ];
   const expectedEchos = [];
   const expectedErrorCode = 0;
