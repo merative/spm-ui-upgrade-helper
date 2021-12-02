@@ -378,13 +378,10 @@ function applyRules(
   }  else if (!serializer) {
       throw Error("You must supply an serializer object");
     }
-  }
+  
 
   const results = [];
-
-  const pagedictionary = {};
-  
-  
+  const pagedictionary = {};   
   const uims = files.map((file) => {
     const contents = io.readLines(file).join("\n");
     const document = parser.parseFromString(contents);
