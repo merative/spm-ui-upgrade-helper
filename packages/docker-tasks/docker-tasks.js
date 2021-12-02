@@ -103,7 +103,7 @@ const dockerTasks = (execFunction = shelljs, props, args) => {
     if (r1) {
       return r1;
     }
-    exec(`docker-compose down`);
+    exec(`docker-compose down --rmi all`);
     return exec(`docker-compose build ${additionalArgs} ${props.imageName}`);
   }
 
