@@ -36,18 +36,18 @@ echo     OUTPUT_FOLDER_CMD = $OUTPUT_FOLDER_CMD
 echo     DETACH_CMD = $DETACH_CMD
 echo     TEST
 
-# docker-compose stop  parser_beanparser
-# docker-compose down  parser_beanparser
-# docker-compose stop  parser_nodefront
-# docker-compose down  parser_nodefront
-# docker-compose stop spm-ui-upgrade-helper
-# docker-compose rm -f spm-ui-upgrade-helper
-# docker image rm ibmcom/spm-ui-upgrade-helper
+docker-compose stop  parser_beanparser
+docker-compose down  parser_beanparser
+docker-compose stop  parser_nodefront
+docker-compose down  parser_nodefront
+docker-compose stop spm-ui-upgrade-helper
+docker-compose rm -f spm-ui-upgrade-helper
+docker image rm ibmcom/spm-ui-upgrade-helper
 
 echo Logging in to Docker Hub...
 docker login
 if [ "$?" != 0 ]; then echo "Error: Could not log in to Docker repo."; exit 1; fi
-docker pull whgovspm/spm-ui-upgrade-helper:latest
+docker pull whgovspm/spm-ui-upgrade-helper:$VERSION 
 docker tag whgovspm/spm-ui-upgrade-helper:$VERSION spm-ui-upgrade-helper:$VERSION 
 echo done
 # docker pull whgovspm/spm-ui-upgrade-helper_nodefront:$VERSION
