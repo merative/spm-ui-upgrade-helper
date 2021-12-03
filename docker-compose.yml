@@ -13,8 +13,7 @@ services:
     image: spm-ui-upgrade-helper_beanparser
     container_name: spm-ui-upgrade-helper_beanparser
     volumes:
-      - ${INPUT_FOLDER}${SERVER_ACCESS_BEAN}:/usr/src/sabparser/input
-      - ./packages/window-size-tool/parser/real_input:/usr/src/sabparser/input2
+      - ./packages/window-size-tool/parser/real_input:/usr/src/sabparser/input
   nodefront:
     build:
       context: ./packages/window-size-tool/parser/frontend
