@@ -36,13 +36,13 @@ echo     OUTPUT_FOLDER_CMD = $OUTPUT_FOLDER_CMD
 echo     DETACH_CMD = $DETACH_CMD
 echo
 
-docker-compose stop  parser_beanparser
-docker-compose down  parser_beanparser
-docker-compose stop  parser_nodefront
-docker-compose down  parser_nodefront
-docker-compose stop spm-ui-upgrade-helper
-docker-compose rm -f spm-ui-upgrade-helper
-docker image rm ibmcom/spm-ui-upgrade-helper
+# docker-compose stop  parser_beanparser
+# docker-compose down  parser_beanparser
+# docker-compose stop  parser_nodefront
+# docker-compose down  parser_nodefront
+# docker-compose stop spm-ui-upgrade-helper
+# docker-compose rm -f spm-ui-upgrade-helper
+# docker image rm ibmcom/spm-ui-upgrade-helper
 
 echo Logging in to Docker Hub...
 docker login
