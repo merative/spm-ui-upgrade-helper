@@ -48,12 +48,12 @@ echo Logging in to Docker Hub...
 docker login
 if [ "$?" != 0 ]; then echo "Error: Could not log in to Docker repo."; exit 1; fi
 docker pull whgovspm/spm-ui-upgrade-helper:$VERSION 
-docker tag whgovspm/spm-ui-upgrade-helper:$VERSION spm-ui-upgrade-helper:$VERSION 
+docker tag whgovspm/spm-ui-upgrade-helper:$VERSION spm-ui-upgrade-helper
 echo done3
 docker pull whgovspm/spm-ui-upgrade-helper_nodefront:$VERSION
-docker tag whgovspm/spm-ui-upgrade-helper_nodefront:$VERSION spm-ui-upgrade-helper_nodefron:$VERSION 
+docker tag whgovspm/spm-ui-upgrade-helper_nodefront:$VERSION spm-ui-upgrade-helper_nodefron
 docker pull whgovspm/spm-ui-upgrade-helper_beanparser:$VERSION
-docker tag whgovspm/spm-ui-upgrade-helper_beanparser:$VERSION whgovspm/spm-ui-upgrade-helper_beanparser:$VERSION 
+docker tag whgovspm/spm-ui-upgrade-helper_beanparser:$VERSION spm-ui-upgrade-helper_beanparser
 docker-compose build 
 docker-compose run $DETACH_CMD -p 3000:3000 -p 4000:4000 \
     $UIUH_DEV_CMD \
