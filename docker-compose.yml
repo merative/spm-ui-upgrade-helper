@@ -10,7 +10,7 @@ services:
       - nodefront
   beanparser:
     build: 
-      context: packages/window-size-tool/parser
+      context: /packages/window-size-tool/parser
       dockerfile: Dockerfile
     image: spm-ui-upgrade-helper_beanparser
     container_name: spm-ui-upgrade-helper_beanparser
