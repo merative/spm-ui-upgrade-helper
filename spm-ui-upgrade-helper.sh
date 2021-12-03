@@ -47,7 +47,7 @@ echo     TEST
 echo Logging in to Docker Hub...
 docker login
 if [ "$?" != 0 ]; then echo "Error: Could not log in to Docker repo."; exit 1; fi
-docker pull whgovspm/spm-ui-upgrade-helper:$VERSION
+docker pull whgovspm/spm-ui-upgrade-helper:latest
 docker tag whgovspm/spm-ui-upgrade-helper:$VERSION spm-ui-upgrade-helper:$VERSION 
 echo done
 # docker pull whgovspm/spm-ui-upgrade-helper_nodefront:$VERSION
