@@ -34,7 +34,7 @@ echo     VERSION = $VERSION
 echo     INPUT_FOLDER_CMD = $INPUT_FOLDER_CMD
 echo     OUTPUT_FOLDER_CMD = $OUTPUT_FOLDER_CMD
 echo     DETACH_CMD = $DETACH_CMD
-echo
+echo     TEST
 
 # docker-compose stop  parser_beanparser
 # docker-compose down  parser_beanparser
