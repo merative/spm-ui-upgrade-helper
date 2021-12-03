@@ -39,6 +39,10 @@ echo     TEST
 
 docker stop spm-ui-upgrade-helper
 docker rm spm-ui-upgrade-helper
+docker stop spm-ui-upgrade-helper_beanparser
+docker rm spm-ui-upgrade-helper_beanparser
+docker stop spm-ui-upgrade-helper_nodefront
+docker rm spm-ui-upgrade-elper_nodefront
 docker image rm spm-ui-upgrade-helper_beanparser
 docker image rm spm-ui-upgrade-helper
 docker image rm spm-ui-upgrade-helper_nodefront
