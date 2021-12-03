@@ -1,0 +1,15 @@
+version: '3'
+services:
+  beanparser:
+    build: .
+    volumes:
+      - ./real_input:/usr/src/sabparser/input
+  nodefront:
+    build:
+      context: frontend
+    ports:
+      - "4005:4005"
+    volumes:
+      - ./frontend/src:/app/src
+    depends_on:
+      - beanparser

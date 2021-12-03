@@ -36,12 +36,13 @@ echo     OUTPUT_FOLDER_CMD = $OUTPUT_FOLDER_CMD
 echo     DETACH_CMD = $DETACH_CMD
 echo     TEST
 
-docker-compose rm -f spm-ui-upgrade-helper_beanparser
-docker-compose rm -f spm-ui-upgrade-helper_nodefront
-docker-compose rm -f spm-ui-upgrade-helper
-docker-compose rm -f whgovspm/spm-ui-upgrade-helper_beanparser
-docker-compose rm -f whgovspm/spm-ui-upgrade-helper_nodefront
-docker-compose rm -f whgovspm/spm-ui-upgrade-helper
+docker image rm spm-ui-upgrade-helper_beanparser
+docker image rm spm-ui-upgrade-helper
+docker image rm spm-ui-upgrade-helper_nodefront
+docker image rm spm-ui-upgrade-helper_nodefron
+docker image rm whgovspm/spm-ui-upgrade-helper_beanparser
+docker image rm  whgovspm/spm-ui-upgrade-helper_nodefront
+docker image rm  whgovspm/spm-ui-upgrade-helper
 
 echo Logging in to Docker Hub...
 docker login
@@ -50,7 +51,7 @@ docker pull whgovspm/spm-ui-upgrade-helper:$VERSION
 docker tag whgovspm/spm-ui-upgrade-helper:$VERSION spm-ui-upgrade-helper
 echo done3
 docker pull whgovspm/spm-ui-upgrade-helper_nodefront:$VERSION
-docker tag whgovspm/spm-ui-upgrade-helper_nodefront:$VERSION spm-ui-upgrade-helper_nodefron
+docker tag whgovspm/spm-ui-upgrade-helper_nodefront:$VERSION spm-ui-upgrade-helper_nodefront
 docker pull whgovspm/spm-ui-upgrade-helper_beanparser:$VERSION
 docker tag whgovspm/spm-ui-upgrade-helper_beanparser:$VERSION spm-ui-upgrade-helper_beanparser
 docker-compose build 
