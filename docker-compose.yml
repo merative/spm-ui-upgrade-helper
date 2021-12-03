@@ -9,8 +9,7 @@ services:
     depends_on: 
       - nodefront
   beanparser:
-    build: 
-      context: ./packages/window-size-tool/parser
+    build: ./packages/window-size-tool/parser
     image: spm-ui-upgrade-helper_beanparser
     container_name: spm-ui-upgrade-helper_beanparser
     volumes:
