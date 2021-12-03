@@ -2,7 +2,7 @@ version: '3.8'
 services:
   spm-ui-upgrade-helper:
     build: .
-    image: spm-ui-upgrade-helper:${TAG}
+    image: spm-ui-upgrade-helper
     container_name: spm-ui-upgrade-helper
     ports:
       - "3000:3000"  
@@ -10,14 +10,15 @@ services:
       - nodefront
   beanparser:
     build: ./packages/window-size-tool/parser
-    image: spm-ui-upgrade-helper_beanparser:${TAG}
+    image: spm-ui-upgrade-helper_beanparser
     container_name: spm-ui-upgrade-helper_beanparser
     volumes:
-      - ./packages/window-size-tool/parser/real_input:/usr/src/sabparser/input
+      - ${INPUT_FOLDER}${SERVER_ACCESS_BEAN}:/usr/src/sabparser/input
+      - ./packages/window-size-tool/parser/real_input:/usr/src/sabparser/input2
   nodefront:
     build:
       context: ./packages/window-size-tool/parser/frontend
-    image: spm-ui-upgrade-helper_nodefront:${TAG}
+    image: spm-ui-upgrade-helper_nodefront
     container_name: spm-ui-upgrade-helper_nodefront
     ports:
       - "4005:4005"
