@@ -42,12 +42,17 @@ docker-compose stop  parser_nodefront
 docker-compose down  parser_nodefront
 docker-compose stop spm-ui-upgrade-helper
 docker-compose rm -f spm-ui-upgrade-helper
+docker image rm ibmcom/spm-ui-upgrade-helper
 
 echo Logging in to Docker Hub...
 docker login
 if [ "$?" != 0 ]; then echo "Error: Could not log in to Docker repo."; exit 1; fi
-docker pull whgovspm/spm-ui-upgrade-helper:$VERSION
-docker tag whgovspm/spm-ui-upgrade-helper:$VERSION  spm-ui-upgrade-helper:$VERSION 
+docker-compose pull whgovspm/spm-ui-upgrade-helper:$VERSION
+docker tag whgovspm/spm-ui-upgrade-helper:$VERSION spm-ui-upgrade-helper:$VERSION 
+# docker pull whgovspm/spm-ui-upgrade-helper_nodefront:$VERSION
+# docker tag whgovspm/spm-ui-upgrade-helper_nodefront:$VERSION spm-ui-upgrade-helper_nodefron:$VERSION 
+# docker pull whgovspm/spm-ui-upgrade-helper_beanparser:$VERSION
+# docker tag whgovspm/spm-ui-upgrade-helper_beanparser:$VERSION whgovspm/spm-ui-upgrade-helper_beanparser:$VERSION 
 docker-compose build 
 docker-compose run $DETACH_CMD -p 3000:3000 -p 4000:4000 \
     $UIUH_DEV_CMD \
