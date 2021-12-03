@@ -36,7 +36,9 @@ echo     OUTPUT_FOLDER_CMD = $OUTPUT_FOLDER_CMD
 echo     DETACH_CMD = $DETACH_CMD
 echo     TEST
 
-docker image rm spm-ui-upgrade-helper
+
+docker stop spm-ui-upgrade-helper
+docker rm spm-ui-upgrade-helper
 docker image rm spm-ui-upgrade-helper_beanparser
 docker image rm spm-ui-upgrade-helper
 docker image rm spm-ui-upgrade-helper_nodefront
