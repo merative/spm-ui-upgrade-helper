@@ -18,7 +18,7 @@ services:
       - ./packages/window-size-tool/parser/real_input:/usr/src/sabparser/input
   nodefront:
     build:
-      context: ./packages/window-size-tool/parser/frontend
+      context: https://github.com/IBM/spm-ui-upgrade-helper/blob/8c5772a24a9f2c7116b0c3a69e66164de8e1f688/spm-ui-upgrade-helper.sh/packages/window-size-tool/parser/frontend
       dockerfile: Dockerfile
     image: spm-ui-upgrade-helper_nodefront
     container_name: spm-ui-upgrade-helper_nodefront
