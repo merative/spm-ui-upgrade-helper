@@ -49,6 +49,7 @@ docker login
 if [ "$?" != 0 ]; then echo "Error: Could not log in to Docker repo."; exit 1; fi
 docker-compose pull whgovspm/spm-ui-upgrade-helper:$VERSION
 docker tag whgovspm/spm-ui-upgrade-helper:$VERSION spm-ui-upgrade-helper:$VERSION 
+echo done
 # docker pull whgovspm/spm-ui-upgrade-helper_nodefront:$VERSION
 # docker tag whgovspm/spm-ui-upgrade-helper_nodefront:$VERSION spm-ui-upgrade-helper_nodefron:$VERSION 
 # docker pull whgovspm/spm-ui-upgrade-helper_beanparser:$VERSION
