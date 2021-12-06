@@ -46,7 +46,6 @@ docker rm spm-ui-upgrade-elper_nodefront
 docker image rm spm-ui-upgrade-helper_beanparser
 docker image rm spm-ui-upgrade-helper
 docker image rm spm-ui-upgrade-helper_nodefront
-docker image rm spm-ui-upgrade-helper_nodefron
 docker image rm whgovspm/spm-ui-upgrade-helper_beanparser
 docker image rm  whgovspm/spm-ui-upgrade-helper_nodefront
 docker image rm  whgovspm/spm-ui-upgrade-helper
@@ -61,6 +60,9 @@ docker pull whgovspm/spm-ui-upgrade-helper_nodefront:$VERSION
 docker tag whgovspm/spm-ui-upgrade-helper_nodefront:$VERSION spm-ui-upgrade-helper_nodefront
 docker pull whgovspm/spm-ui-upgrade-helper_beanparser:$VERSION
 docker tag whgovspm/spm-ui-upgrade-helper_beanparser:$VERSION spm-ui-upgrade-helper_beanparser
+docker image rm whgovspm/spm-ui-upgrade-helper_beanparser
+docker image rm  whgovspm/spm-ui-upgrade-helper_nodefront
+docker image rm  whgovspm/spm-ui-upgrade-helper
 
 docker-compose up --no-build
 docker-compose build
