@@ -14,6 +14,9 @@ const {
   setPageOptions,
   setLinkOptions,
 } = require("./uim");
+const {
+  doRequest,
+} = require("./httpUtils");
 const { connect } = require("http2");
 
 // console.log('xp',xp);
@@ -354,6 +357,8 @@ async function applyRule(
   } else if (!pagedictionary) {
     throw Error("You must supply a PAGE dictionary map");
   }
+
+  console.log("IM NEING CALLED");
   const newArray=[];
   const pageNode = document.documentElement;
   newArray.push(pageNode);
@@ -399,7 +404,7 @@ async function applyRule(
    console.log("connection -------",  connections
    );
    const result = await doRequest(connections[i], filename);
-   console.log("Result", result);
+   console.log("ResultYY", result);
    connections[i].result== result;
   //  if (result == false) { 
   //   console.log("we want to finish that task",flag);
@@ -514,7 +519,7 @@ function applyRules(
   } else if (!parser) {
     throw Error("You must supply an parser object"); 
   }  else if (!serializer) {
-      throw Error("You must supply an serializer object");
+     throw Error("You must supply an serializer object");
     }
   
 
@@ -560,7 +565,7 @@ function applyRules(
  * Send http request
  * @param {object} connection connection object 
  */
- const doRequest =(connection, filename) => new Promise(function(resolve,reject){
+ const doRequest_1 =(connection, filename) => new Promise(function(resolve,reject){
    let newFlag=true;
       req = http.get( `http://spm-ui-upgrade-helper_nodefront:4005/full/${connection.property}/${connection.operation}/${connection.name}`, res => {
           console.log("----------------------------");
