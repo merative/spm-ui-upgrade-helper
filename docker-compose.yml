@@ -15,7 +15,7 @@ services:
     image: spm-ui-upgrade-helper_beanparser
     container_name: spm-ui-upgrade-helper_beanparser
     volumes:
-      - ./packages/window-size-tool/parser/real_input:/usr/src/sabparser/input
+      - "./packages/window-size-tool/parser/real_input:/usr/src/sabparser/input"
   nodefront:
     build:
       context: packages/window-size-tool/parser/frontend
@@ -25,6 +25,6 @@ services:
     ports:
       - "4005:4005"
     volumes:
-      - ./packages/window-size-tool/parser/frontend/src:/app/src
+      - "./packages/window-size-tool/parser/frontend/src:/app/src"
     depends_on:
       -  beanparser
