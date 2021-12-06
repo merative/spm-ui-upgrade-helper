@@ -14,6 +14,9 @@ const {
   setPageOptions,
   setLinkOptions,
 } = require("./uim");
+const {
+  doRequest,
+} = require("./httpUtils");
 const { connect } = require("http2");
 
 // console.log('xp',xp);
@@ -196,7 +199,145 @@ function checkWidth(width, rule, verbose = true) {
  * @param {boolean} verbose Will log debug messages if true (true by default).
  * @returns Returns whether the document was updated by the rules or not.
  */
- async function applyRule(
+async function applyRule(
+  document,
+  filename,
+  rules,
+  sizes,
+  pagedictionary,
+  usePixelWidths,
+  verbose = true
+) {
+  let serverAccessBeans = [];
+  let connectionsAreAllowListed = true;
+  const pageNode = document.documentElement;
+
+
+  const severBeanXP= xp.select(
+    `//SERVER_INTERFACE`,
+    pageNode
+  );
+ 
+
+  severBeanXP.forEach((bean) => {
+    serverAccessBeans.push({
+      class: bean.getAttribute("CLASS"),
+      name:bean.getAttribute("NAME"),
+      operation:bean.getAttribute("OPERATION"),
+    });
+  });
+
+  const clusterFieldConnectionsXP= xp.select(
+    `//CLUSTER/FIELD/CONNECT/*`,
+    pageNode
+  ); 
+
+  let connections=[];
+
+  clusterFieldConnectionsXP.forEach((connection) => {
+    const name= connection.getAttribute("NAME");
+    const property = connection.getAttribute("PROPERTY");  
+      serverAccessBeans.forEach((bean) => {
+        if(name==bean.name){    
+             connections.push({
+              property: property,
+              name:bean.class,
+              operation:bean.operation,
+              result:false,
+            });
+       }
+   }); 
+  });
+
+  const connectionPromises = [];
+  for(let i=0; i < connections.length; i++){
+    const connection = connections[i];
+    //const result = await doRequest(connections[i], filename);
+    const result = await doRequest(connection, filename);
+    connectionPromises.push({result: result, property:  connection.property});
+  }
+
+  let connectionResults = await Promise.all(connectionPromises);
+  console.log(connectionResults);
+  for(let j=0; j < connectionResults.length; j++) {
+    if(connectionResults[j].result == false) {
+      connectionsAreAllowListed = false; 
+      break;
+    }
+  }
+  console.log("FLAG: " + connectionsAreAllowListed);
+  // connections are allow listed and number of connections is bigger than 0
+  const connectionsNotEmotyAndAllowed = connections.length > 0 && connectionsAreAllowListed == true;
+
+
+  let hasChanges = false;
+
+
+  if(connectionsNotEmotyAndAllowed){
+    console.log("Appliying rule for: " + filename);
+    rules.forEach((rule, index) => {
+    if (!hasChanges) {
+      if (verbose) {
+        console.debug(`rule: ${chalk.yellow(index + 1)}`);
+      }
+      console.log("apply rules to uim  ")
+      if (checkPageWidth(pageNode, rule.width, verbose)) {
+        const pass = checkRule(pageNode, rule, verbose);
+
+        if (pass) {
+          hasChanges = true;
+          const windowOptions = getPageOptions(pageNode);
+
+          updateWidthOption(windowOptions, sizes, rule.target, usePixelWidths);
+
+          setPageOptions(pageNode, windowOptions);
+        }
+      }
+
+      const linkMatches = checkLinkWidth(pageNode, rule, verbose);
+
+      linkMatches.forEach(({ pageId, options, link }) => {
+        let pass = false;
+
+        const pageReference = pagedictionary[pageId];
+
+        if (pageReference) {
+          pass = checkRule(
+            pageReference.document.documentElement,
+            rule,
+            verbose
+          );
+
+          hasChanges = hasChanges || pass;
+
+          updateWidthOption(options, sizes, rule.target, usePixelWidths);
+
+          if (pass) {
+            setLinkOptions(link, options);
+          }
+        }
+      });
+    }
+  });
+  }
+  
+}
+
+/**
+ * Applies xPath rules to a UIM XML document.
+ *
+ * @param {object} document Parsed UIM XML document.
+ * @param {string} filename Filename of UIM XML document.
+ * @param {array} rules Rules to apply to the UIM XML document.
+ * @param {object} sizes Mapping breakpoints to be applied to UIMs if rules
+ * criteria a met.
+ * @param {object} pagedictionary A dictionary used to lookup UIM pages by id.
+ * @param {boolean} usePixelWidths Determines whether width is set as a pixel value
+ * or a size category.
+ * @param {boolean} verbose Will log debug messages if true (true by default).
+ * @returns Returns whether the document was updated by the rules or not.
+ */
+ async function applyRule_1(
   document,
   filename,
   rules,
@@ -216,6 +357,8 @@ function checkWidth(width, rule, verbose = true) {
   } else if (!pagedictionary) {
     throw Error("You must supply a PAGE dictionary map");
   }
+
+  console.log("IM NEING CALLED");
   const newArray=[];
   const pageNode = document.documentElement;
   newArray.push(pageNode);
@@ -261,7 +404,7 @@ function checkWidth(width, rule, verbose = true) {
    console.log("connection -------",  connections
    );
    const result = await doRequest(connections[i], filename);
-   console.log("Result", result);
+   console.log("ResultYY", result);
    connections[i].result== result;
   //  if (result == false) { 
   //   console.log("we want to finish that task",flag);
@@ -376,7 +519,7 @@ function applyRules(
   } else if (!parser) {
     throw Error("You must supply an parser object"); 
   }  else if (!serializer) {
-      throw Error("You must supply an serializer object");
+     throw Error("You must supply an serializer object");
     }
   
 
@@ -422,7 +565,7 @@ function applyRules(
  * Send http request
  * @param {object} connection connection object 
  */
- const doRequest =(connection, filename) => new Promise(function(resolve,reject){
+ const doRequest_1 =(connection, filename) => new Promise(function(resolve,reject){
    let newFlag=true;
       req = http.get( `http://spm-ui-upgrade-helper_nodefront:4005/full/${connection.property}/${connection.operation}/${connection.name}`, res => {
           console.log("----------------------------");
