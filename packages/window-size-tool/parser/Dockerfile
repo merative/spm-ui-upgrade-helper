@@ -1,6 +1,6 @@
 FROM openjdk:latest
 COPY ./lib /usr/src/sabparser/lib
-COPY ./input /usr/src/sabparser/input
+COPY ./real_input /usr/src/sabparser/input
 ADD ./beanparsertool.jar /usr/src/sabparser
 
 WORKDIR /usr/src/sabparser
