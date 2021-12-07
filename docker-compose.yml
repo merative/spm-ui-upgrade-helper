@@ -16,8 +16,6 @@ services:
       dockerfile: Dockerfile
     image: spm-ui-upgrade-helper_beanparser
     container_name: spm-ui-upgrade-helper_beanparser
-    volumes:
-      - ./packages/window-size-tool/parser/real_input:/usr/src/sabparser/input:rw
     networks:
       - spm-ui-upgrade-helper
   nodefront:
@@ -28,8 +26,6 @@ services:
     container_name: spm-ui-upgrade-helper_nodefront
     ports:
       - "4005:4005"
-    volumes:
-      - ./packages/window-size-tool/parser/frontend/src:/app/src:rw
     depends_on:
       -  beanparser
     networks:
