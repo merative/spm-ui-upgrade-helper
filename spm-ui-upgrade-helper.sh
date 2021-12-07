@@ -60,13 +60,13 @@ docker pull whgovspm/spm-ui-upgrade-helper_nodefront:$VERSION
 docker tag whgovspm/spm-ui-upgrade-helper_nodefront:$VERSION spm-ui-upgrade-helper_nodefront
 docker pull whgovspm/spm-ui-upgrade-helper_beanparser:$VERSION
 docker tag whgovspm/spm-ui-upgrade-helper_beanparser:$VERSION spm-ui-upgrade-helper_beanparser
-docker image rm whgovspm/spm-ui-upgrade-helper_beanparser
-docker image rm  whgovspm/spm-ui-upgrade-helper_nodefront
-docker image rm  whgovspm/spm-ui-upgrade-helper
+docker image rm whgovspm/spm-ui-upgrade-helper_beanparser:$VERSION
+docker image rm  whgovspm/spm-ui-upgrade-helper_nodefront:$VERSION
+docker image rm  whgovspm/spm-ui-upgrade-helper:$VERSION
 
-docker-compose up --no-build
+docker-compose up --no-build 
 docker-compose build
-docker-compose run $DETACH_CMD -p 3000:3000 -p 4000:4000 \
+docker-compose run -v $DETACH_CMD -p 3000:3000 -p 4000:4000 \
     $UIUH_DEV_CMD \
     $INPUT_FOLDER_CMD \
     $OUTPUT_FOLDER_CMD \
