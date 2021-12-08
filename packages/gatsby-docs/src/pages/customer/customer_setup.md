@@ -9,9 +9,9 @@ title: Setting up
 3. Install Docker Desktop for [Windows](https://docs.docker.com/docker-for-windows/install/) or [Mac](https://docs.docker.com/docker-for-mac/install/).
 4. Install [curl](https://curl.se/download.html).
 
-## Docker Desktop configuration
+## Configuring Docker Desktop
 
-After installation, you must configure Docker Desktop to access paths to the folders where the tools work on the local filesystem. 
+After installation, you must configure Docker Desktop to access paths to the folders where the tools work on the local file system. 
 
 - The Social Program Management source code folder that provides the input data. 
 - An output folder to write the modified data.
@@ -26,11 +26,11 @@ After installation, you must configure Docker Desktop to access paths to the fol
 
 ## Downloading the tool
 
-1. Run `docker login`
+1. Run `docker login`.
 2. Download the batch file or shell script:
     - `curl -L https://raw.githubusercontent.com/IBM/spm-ui-upgrade-helper/main/spm-ui-upgrade-helper.bat -o spm-ui-upgrade-helper.bat` (Windows)
     - `curl -L https://raw.githubusercontent.com/IBM/spm-ui-upgrade-helper/main/spm-ui-upgrade-helper.sh -o spm-ui-upgrade-helper.sh` (Linux)
-3. If using Linux, make the shell script executable with `chmod +x spm-ui-upgrade-helper.sh`
+3. For Linux, make the shell script executable with `chmod +x spm-ui-upgrade-helper.sh`
 
 ## Running the tool
 
@@ -48,8 +48,8 @@ After installation, you must configure Docker Desktop to access paths to the fol
 3. Press `F1` or `cmd + shift + p`.
 4. Type "Run SPM UI Upgrade Helper" and click on the shortcut.
 5. Wait a few minutes for the tool to finish.
-8. The files in `<input folder>` will be scanned and the results placed in `<output folder>`.
-7.  Click the `Source Control: Git` button on the left sidebar to inspect the changes.
+8. The files in `<input folder>` are scanned and the results are placed in `<output folder>`.
+7. Click the `Source Control: Git` button on the left sidebar to inspect the changes.
 
 ![1. Press F1, 2. Type "Run SPM UI Upgrade Helper", 3. Select the shortcut, 4. Wait for the tool to finish, 5. Click "Source Control: Git" to see the output](../../images/upgrade-helper.gif "Running the UI Upgrade Helper tool")
 
