@@ -1,23 +1,26 @@
 ---
-title: Setup
+title: Setting up
 ---
 
 ## Initial setup
 
 1. Set up a 7.0.11.0 development environment.
-2. Set up a v8 development environment.
+2. Set up a 8.0.0 or later development environment.
 3. Install Docker Desktop for [Windows](https://docs.docker.com/docker-for-windows/install/) or [Mac](https://docs.docker.com/docker-for-mac/install/).
-4. Install [Curl](https://curl.se/download.html)
+4. Install [curl](https://curl.se/download.html).
 
-## Docker Desktop setup
+## Docker Desktop configuration
 
-Once installed, you will need to allow Docker Desktop to access certain paths on the local filesystem. These will be the folders that the tool will work on i.e. your SPM source code folder that will provide the input data, plus an output folder where it will write the modified data.
+After installation, you must configure Docker Desktop to access paths to the directories where the tools work on the local filesystem. 
+
+- The Social Program Management source code directory that provides the input data. 
+- An output directory to write the modified data.
 
 1. Open Docker Desktop.
 2. Click Settings > Resources > File Sharing.
-3. Share your 7.0.11.0 development environment folder
-4. Share a temporary output folder, e.g. `/tmp/upgrade` or `c:\temp\upgrade`
-    - Note that the output folder will be wiped by the SPM UI Upgrade Helper, so be careful! Do NOT point this at your v8 development environment.
+3. Share your 7.0.11.0 development environment directory.
+4. Share a temporary output directory, e.g. `/tmp/upgrade` or `c:\temp\upgrade`
+    - Note that the output directory will be wiped by the SPM UI Upgrade Helper, so be careful! Do NOT point this at your v8 development environment.
 
 ![1. Open Docker Desktop, 2. Click the Settings button then Resources then File Sharing, 3. Add the folder you want to share with the Docker container](../../images/docker-volume-sharing.png "Docker volume sharing screenshot")
 
