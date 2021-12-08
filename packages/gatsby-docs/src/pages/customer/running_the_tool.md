@@ -1,6 +1,6 @@
-## Running the tool
-
-## Running the tool
+---
+title: Running the tool
+---
 
 1. Start the tool:
     - `spm-ui-upgrade-helper.bat <version> <input folder> <output folder>` (Windows)
