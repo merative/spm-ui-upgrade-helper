@@ -2,17 +2,15 @@
 title: Overview
 ---
 
-The SPM UI Upgrade Helper helps to automates the upgrade process by applying the same UI changes we have made in SPM v8 to a customer's SPM 7.0.11.0 development environment.
-
-To get started, see the [UI Upgrade Helper guide](customer/customer_setup).
+The SPM UI Upgrade Helper is a suite of tools that help to automate the UI upgrade process by applying Social Program Management v8 changes to a 7.0.11.0 development environment.
 
 ## Tools
 
-All of the tools are run sequentially via a single command, as detailed in the [UI Upgrade Helper guide](customer/customer_setup).
+You can run all of the tools sequentially with a single command.
 
 ### CSS Rules Tool
 
-Scans customer stylesheets and updates the CSS selectors to match the changes we have made when moving to the Carbon design system.
+Scans customer stylesheets and updates the CSS selectors to match the changes made when moving to the Carbon Design System.
 
 - Iterates over customer CSS files and applies the rules codified in [packages/css-rules-tool/rules/*.json](https://github.com/IBM/spm-ui-upgrade-helper/tree/main/packages/css-rules-tool/rules).
 
@@ -32,7 +30,7 @@ Example rules file:
       ]
     }
 
-All of the values in `SelectorRemove` will be deleted. The values in `SelectorReplace` will be replaced by `newValue`. The order in which the rules are applied is described below.
+All of the values in `SelectorRemove` are deleted. The values in `SelectorReplace` are replaced by `newValue`.
 
 #### Ordering of rules
 
@@ -41,11 +39,6 @@ The following steps determine the order of the rules:
 - All OOTB rules are loaded.
 - The rules are sorted by length, with the longest items first, inside each of their respective categories `SelectorRemove` and `SelectorReplace`.
 - The `SelectorRemove` rules are applied first, followed by the `SelectorReplace` rules.
-
-#### Updating the OOTB rules
-
-If you want to update the OOTB rules so other customers have access to them, [open a PR](https://github.com/IBM/spm-ui-upgrade-helper).
-
 
 ### Window Size Tool
 
@@ -96,6 +89,6 @@ Example `V8` icon files:
 
     `/source_files/overflow-menu-horizontal--20-on-dark.svg`
 
-All `V7` icon files that are found will be deleted and their `V8` equivalent will be copied to the same location.
+All `V7` icon files that are found are deleted and their `V8` equivalents are copied to the same location.
 
 References to the icon in customer source files (files such as `.css`, `.js`, `jspx`, etc.) are also updated.
