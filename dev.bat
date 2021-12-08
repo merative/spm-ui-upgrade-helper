@@ -36,11 +36,7 @@ echo     INPUT_FOLDER_CMD = %INPUT_FOLDER_CMD%
 echo     OUTPUT_FOLDER_CMD = %OUTPUT_FOLDER_CMD%
 echo.
 
-call docker-compose stop  parser_beanparser
-call docker-compose down  parser_beanparser
-call docker-compose stop  parser_nodefront
-call docker-compose down  parser_nodefront
-call docker-compose stop spm-ui-upgrade-helper 
-call docker-compose rm -f spm-ui-upgrade-helper 
+call docker-compose rm -f spm-ui-upgrade-helper
+
 call docker-compose run -p 3000:3000 -p 4000-4004:4000-4004  $UIUH_DEV_CMD $INPUT_FOLDER_CMD $OUTPUT_FOLDER_CMD  --name spm-ui-upgrade-helper spm-ui-upgrade-helper
 endlocal

@@ -46,6 +46,9 @@ call docker pull whgovspm/spm-ui-upgrade-helper_nodefront:$VERSION
 call docker tag whgovspm/spm-ui-upgrade-helper_nodefront:$VERSION spm-ui-upgrade-helper_nodefront
 call docker pull whgovspm/spm-ui-upgrade-helper_beanparser:$VERSION
 call docker tag whgovspm/spm-ui-upgrade-helper_beanparser:$VERSION spm-ui-upgrade-helper_beanparser
+call docker image rm -f whgovspm/spm-ui-upgrade-helper_beanparser:$VERSION
+call docker image rm -f whgovspm/spm-ui-upgrade-helper_nodefront:$VERSION
+call docker image rm -f whgovspm/spm-ui-upgrade-helper:$VERSION
 
 call docker-compose build
 call docker-compose run $DETACH_CMD -p 3000:3000 -p 4000:4000 \
