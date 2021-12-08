@@ -31,3 +31,10 @@ After installation, you must configure Docker Desktop to access paths to the fol
     - `curl -L https://raw.githubusercontent.com/IBM/spm-ui-upgrade-helper/main/spm-ui-upgrade-helper.bat -o spm-ui-upgrade-helper.bat` (Windows)
     - `curl -L https://raw.githubusercontent.com/IBM/spm-ui-upgrade-helper/main/spm-ui-upgrade-helper.sh -o spm-ui-upgrade-helper.sh` (Linux)
 3. For Linux, make the shell script executable with `chmod +x spm-ui-upgrade-helper.sh`
+
+
+## Ignoring files
+
+In most cases, you can run the tools without modification, assuming a standard Social Program Management installation.
+
+If your installation is non-standard, you might need to ignore certain files and folders, see [ignoring files page](customer_ignores).
