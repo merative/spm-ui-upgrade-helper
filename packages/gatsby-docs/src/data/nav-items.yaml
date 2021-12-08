@@ -3,8 +3,10 @@
     - path: /overview
 - title: UI Upgrade Helper Guide
   pages:
-    - title: Setup
+    - title: Setting up
       path: /customer/customer_setup
+    - title: Running the tool
+      path: /customer/running_the_tool
     - title: Ignoring files
       path: /customer/customer_ignores
     - title: Custom configuration
