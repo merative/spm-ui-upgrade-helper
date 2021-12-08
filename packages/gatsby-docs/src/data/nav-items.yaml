@@ -5,11 +5,11 @@
   pages:
     - title: Setting up
       path: /setup/customer_setup
-    - title: Running the tool
-      path: /run/running_the_tool
     - title: Ignoring files
       path: /setup/customer_ignores
     - title: Custom configuration
-      path: /customer/customer_configuration
-    - title: Customer font replacement
+      path: /setup/customer_configuration
+    - title: Running the tool
+      path: /run/running_the_tool
+    - title: Manual font replacement
       path: /customer/customer_font_replacement
