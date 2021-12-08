@@ -11,16 +11,16 @@ title: Setting up
 
 ## Docker Desktop configuration
 
-After installation, you must configure Docker Desktop to access paths to the directories where the tools work on the local filesystem. 
+After installation, you must configure Docker Desktop to access paths to the folders where the tools work on the local filesystem. 
 
-- The Social Program Management source code directory that provides the input data. 
-- An output directory to write the modified data.
+- The Social Program Management source code folder that provides the input data. 
+- An output folder to write the modified data.
 
 1. Open Docker Desktop.
 2. Click Settings > Resources > File Sharing.
-3. Share your 7.0.11.0 development environment directory.
-4. Share a temporary output directory, e.g. `/tmp/upgrade` or `c:\temp\upgrade`
-    - Note that the output directory will be wiped by the SPM UI Upgrade Helper, so be careful! Do NOT point this at your v8 development environment.
+3. Share your 7.0.11.0 development environment folder.
+4. Share a temporary output folder, e.g. `/tmp/upgrade` or `c:\temp\upgrade`
+    - Note that the output folder will be wiped by the SPM UI Upgrade Helper, so be careful! Do NOT point this at your v8 development environment.
 
 ![1. Open Docker Desktop, 2. Click the Settings button then Resources then File Sharing, 3. Add the folder you want to share with the Docker container](../../images/docker-volume-sharing.png "Docker volume sharing screenshot")
 
