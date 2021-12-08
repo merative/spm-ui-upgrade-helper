@@ -4,11 +4,11 @@
 - title: UI Upgrade Helper Guide
   pages:
     - title: Setting up
-      path: /customer/customer_setup
+      path: /setup/customer_setup
     - title: Running the tool
-      path: /customer/running_the_tool
+      path: /run/running_the_tool
     - title: Ignoring files
-      path: /customer/customer_ignores
+      path: /setup/customer_ignores
     - title: Custom configuration
       path: /customer/customer_configuration
     - title: Customer font replacement
