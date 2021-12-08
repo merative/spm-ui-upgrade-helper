@@ -2,7 +2,9 @@
 title: Ignoring files
 ---
 
-You can ignore files that you do not want to be affected by the tool. Ignore certain files by creating a file called `.spm-uiuh-ignore` that contains patterns to ignore. Place the `.spm-uiuh-ignore` file in the root of your 7.0.11.0 development environment.
+You can ignore files that you do not want to be affected by the tool by creating a file called `.spm-uiuh-ignore` that contains the patterns to ignore. 
+
+Place the `.spm-uiuh-ignore` file in the root of your 7.0.11.0 development environment.
 
 The file follows the same rules as a [.gitignore](http://git-scm.com/docs/gitignore) file. All paths are relative to the `.spm-uiuh-ignore` file location.
 
