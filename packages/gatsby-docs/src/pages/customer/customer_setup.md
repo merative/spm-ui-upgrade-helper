@@ -55,33 +55,3 @@ After installation, you must configure Docker Desktop to access paths to the fol
 
 8. Copy the contents of `<output folder>` into your v8 development environment.
 9. Build and test v8.
-
-## Errors
-
-Docker container logs should be visible in the console, or via `docker logs spm-ui-upgrade-helper`.
-
-You can save the logs to a file using e.g. `docker logs spm-ui-upgrade-helper > /tmp/logs.txt`.
-
-## Additional options
-
-In most cases, you can run this tool without modification, assuming that your SPM version is a standard installation.
-
-If your installation is non-standard, you might need to ignore certain files and folders to suit your customer environment.
-
-### Ignoring files
-
-See the [ignoring files page](customer_ignores) for steps to ignore certain files and folders.
-
-### Custom configuration
-
-If custom configuration is required, this can be achieved by using an `.spm-uiuh-config` file as detailed [here](customer_configuration).
-
-## Troubleshooting
-
-- Make sure you are logged in to Docker (run `docker login`.)
-- Make sure folders are shared in Docker Desktop.
-- Restart Docker Desktop.
-- Delete `<output folder>` and try again.
-- Make sure you have run `chmod -R 777 <output folder>` so that Docker can write to it.
-- Don't refresh http://localhost:3000/#/home/workspace/output, instead go to http://localhost:3000.
-- To kill the Docker container use `docker stop spm-ui-upgrade-helper` followed by `docker rm spm-ui-upgrade-helper`.
