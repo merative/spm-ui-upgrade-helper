@@ -11,27 +11,3 @@
       path: /customer/customer_configuration
     - title: Customer font replacement
       path: /customer/customer_font_replacement
-- title: UI Upgrade Helper Developer Guide
-  pages:
-    - title: Project overview
-      path: /dev/project_overview
-    - title: Installation
-      path: /dev/installation
-    - title: Running the tool
-      path: /dev/running_the_tool
-    - title: Tests
-      path: /dev/tests
-    - title: Coding
-      path: /dev/coding
-    - title: Adding a new tool
-      path: /dev/adding_a_new_tool
-    - title: Adding new CSS rules
-      path: /dev/adding_new_css_rules
-    - title: Replacing new icons
-      path: /dev/replacing_new_icons
-    - title: Documentation
-      path: /dev/documentation
-    - title: Debugging
-      path: /dev/debugging
-    - title: Releasing
-      path: /dev/releasing
