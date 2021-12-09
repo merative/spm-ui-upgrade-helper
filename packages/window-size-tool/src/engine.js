@@ -147,6 +147,21 @@ function checkRule(node, rule, verbose = true) {
         }
       });
     }
+   /* if (pass == true){
+      rule.containsAllowedDomainsOnly.forEach((term) => {
+      if (pass) {
+        const result3 = xp.select(term, node);
+        pass = result3;
+        if (verbose) {
+          console.debug(
+            ` term:  ${
+              result3 ? chalk.green(`${result3} `) : chalk.red(result3)
+            } <- [${chalk.magenta(term)}]`
+          );
+        }
+      }
+    });
+   } */
   });
   return pass;
 }
@@ -475,17 +490,34 @@ function applyRules(
       file,
       rules,
       sizes,
+      term,
       pagedictionary,
       usePixelWidths,
       verbose,
     );
 
     // Only mark the files as 'for writing' if the contents changed
-    if (hasChanges) {     
+    if (hasChanges) {  
       results[file] = serializer.serializeToString(document);
     }
+    console.log("haschanged", hasChanges);  
+   });
+   
+  if (checkAllowedDomainsForResizing == true){
+    rule.containsAllowedDomainsOnly.forEach((term) => {
+    if (checkAllowedDomainsForResizing) {
+      const result = xp.select(term, node);
+      checkAllowedDomainsForResizing = result;
+      if (verbose) {
+        console.debug(
+          ` term:  ${
+            result ? chalk.green(`${result} `) : chalk.red(result)
+          } <- [${chalk.magenta(term)}]`
+        );
+      }
+    }
   });
-
+}
   return results;
 }
 

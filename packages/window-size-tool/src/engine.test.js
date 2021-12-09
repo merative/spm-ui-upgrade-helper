@@ -511,6 +511,7 @@ describe("applyRule", () => {
         width: "> 576 and <= 768",
         anyTerms: ["criteria.1", "criteria.2"],
         allTerms:  ["criteria.3"],
+        "containsAllowedDomainsOnly": true,
         target: "sm",
       },
     ];
@@ -775,7 +776,7 @@ describe("applyRules", () => {
       }
     });
 
-    applyRules(files, rules, sizes, io, parser, serializer, usePixelWidths, false, false);
+    applyRules(files, rules, sizes, io, parser, serializer, usePixelWidths, false, true);
     const actual = mockSerializeToString.mock.calls.length > 0;
 
     expect(actual).toEqual(expected);
