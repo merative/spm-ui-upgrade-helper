@@ -118,32 +118,36 @@ function checkRule(node, rule, verbose = true) {
   } else if (!rule) {
     throw Error("You must supply a rules object");
   }
-  rule.anyTerms.forEach((term) => {
-    if (!pass) {
-      const result = xp.select(term, node);
+  if (rule.anyTerms.length > 0) {
+    rule.anyTerms.forEach((term) => {
+      if (!pass) {
+        const result = xp.select(term, node);
 
-      pass = pass || result;
+        pass = pass || result;
 
-      if (verbose) {
-        console.debug(
-          ` term:  ${
-            result ? chalk.green(`${result} `) : chalk.red(result)
-          } <- [${chalk.magenta(term)}]`
-        );
+        if (verbose) {
+          console.debug(
+            ` term:  ${
+              result ? chalk.green(`${result} `) : chalk.red(result)
+            } <- [${chalk.magenta(term)}]`
+          );
+        }
       }
-    }
-    if (pass == true){
-        rule.allTerms.forEach((term) => {
-        if (pass) {
-          const result2 = xp.select(term, node);
-          pass = result2;
-          if (verbose) {
-            console.debug(
-              ` term:  ${
-                result2 ? chalk.green(`${result2} `) : chalk.red(result2)
-              } <- [${chalk.magenta(term)}]`
-            );
-          }
+    });
+  } else if (rule.allTerms.length > 0) {
+    pass = true;
+  }
+  if (pass == true) {
+    rule.allTerms.forEach((term) => {
+      if (pass) {
+        const result2 = xp.select(term, node);
+        pass = result2;
+        if (verbose) {
+          console.debug(
+            ` term:  ${
+              result2 ? chalk.green(`${result2} `) : chalk.red(result2)
+            } <- [${chalk.magenta(term)}]`
+          );
         }
       });
     }
@@ -163,6 +167,9 @@ function checkRule(node, rule, verbose = true) {
     });
    } */
   });
+      }
+    });
+  }
   return pass;
 }
 
@@ -176,12 +183,7 @@ function checkRule(node, rule, verbose = true) {
  * @param {boolean} usePixelWidths Determines whether width is set as a pixel value
  * or a size category.
  */
-function updateWidthOption(
-  windowOptions,
-  sizes,
-  target,
-  usePixelWidths
-) {
+function updateWidthOption(windowOptions, sizes, target, usePixelWidths) {
   if (!windowOptions) {
     throw Error("You must supply a WINDOW_OPTIONS string");
   } else if (!sizes) {
@@ -493,7 +495,7 @@ function applyRules(
       term,
       pagedictionary,
       usePixelWidths,
-      verbose,
+      verbose
     );
 
     // Only mark the files as 'for writing' if the contents changed

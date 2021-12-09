@@ -24,10 +24,12 @@
   },
   {
     "width": "> 768",
-    "anyTerms": [
-     "(count(//CLUSTER) > 0 or count(//LIST) > 0) and count(//CLUSTER[@NUM_COLS >= 2]//LIST) = 0 and count(//CLUSTER[@NUM_COLS > 2]) = 0 and count(//LIST[count(FIELD | CONTAINER) > 4]) = 0"
-    ],
+    "anyTerms": [],
     "allTerms": [
+      "count(//CLUSTER) > 0 or count(//LIST) > 0",
+      "count(//CLUSTER[@NUM_COLS >= 2]//LIST) = 0",
+      "count(//CLUSTER[@NUM_COLS > 2]) = 0",
+      "count(//LIST[count(FIELD | CONTAINER) > 4]) = 0",
       "count(//INCLUDE) = 0",
       "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0"  
      ],
@@ -47,10 +49,11 @@
   },
   {
     "width": "> 576 and <= 768",
-    "anyTerms": [
-      "count(//CLUSTER[@NUM_COLS > 1 ]) = 0 and count(//LIST[count(FIELD | CONTAINER) > 2]) = 0 and (count(//CLUSTER) > 0 or count(//LIST) > 0)"
-    ],
+    "anyTerms": [],
     "allTerms": [
+      "count(//CLUSTER[@NUM_COLS > 1 ]) = 0",
+      "count(//LIST[count(FIELD | CONTAINER) > 2]) = 0",
+      "count(//CLUSTER) > 0 or count(//LIST) > 0",
       "count(//INCLUDE) = 0",
       "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0"  
      ],
@@ -75,10 +78,15 @@
   },
   {
     "width": "> 420 and <= 576",
-    "anyTerms": [
-      "count(//CLUSTER[@NUM_COLS > 1 ]) = 0 and count(//CLUSTER) = 1 and count(//CLUSTER[count(FIELD | CONTAINER) > 2]) = 0 and count(//LIST) = 0 and count(//FIELD//TARGET) = 0 and count(//WIDGET//TARGET) = 0 and count(//ACTION_CONTROL) < 3"
-    ],
+    "anyTerms": [],
     "allTerms": [
+      "count(//CLUSTER[@NUM_COLS > 1 ]) = 0",
+      "count(//CLUSTER) = 1",
+      "count(//CLUSTER[count(FIELD | CONTAINER) > 2]) = 0",
+      "count(//LIST) = 0",
+      "count(//FIELD//TARGET) = 0",
+      "count(//WIDGET//TARGET) = 0",
+      "count(//ACTION_CONTROL) < 3",
       "count(//INCLUDE) = 0",
       "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0"  
      ],
