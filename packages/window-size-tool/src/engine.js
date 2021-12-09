@@ -74,6 +74,8 @@ function checkWidth(width, rule, verbose = true) {
 function checkPageWidth(pageNode, rule, verbose = true) {
   const pageOptions = getPageOptions(pageNode);
 
+  console.log(pageOptions);
+
   if (!pageOptions || !pageOptions.width) {
     return false;
   }
@@ -335,22 +337,29 @@ function applyRule(
     throw Error("You must supply a PAGE dictionary map");
   }
 
+ 
+
   const pageNode = document.documentElement;
   if (verbose) {
     console.debug(`filename: ${chalk.cyan(filename)}`);
   }
 
   let hasChanges = false;
+  console.log("IM HERE: " + rules);
   rules.forEach((rule, index) => {
+   
     if (!hasChanges) {
       if (verbose) {
         console.debug(`rule: ${chalk.yellow(index + 1)}`);
       }
 
       if (checkPageWidth(pageNode, rule.width, verbose)) {
+        console.log("IM HERE: jhjkhjkhjkhjkhjkhkjh ");
         const pass = checkRule(pageNode, rule, verbose);
 
         if (pass) {
+          console.log("RULE: " + rule);
+          
           hasChanges = true;
           const windowOptions = getPageOptions(pageNode);
 
@@ -385,7 +394,7 @@ function applyRule(
       });
     }
   });
-
+ console.log("has changes: " + hasChanges);
   return hasChanges;
 }
 
@@ -480,11 +489,15 @@ function applyRules(
       verbose,
     );
 
+    console.log("has FUCKING CHAGES: " + hasChanges);
+
     // Only mark the files as 'for writing' if the contents changed
-    if (hasChanges) {     
+    if (hasChanges === true) {
+      console.log("serializer: " + serializer.serializeToString);   
       results[file] = serializer.serializeToString(document);
     }
   });
+  console.log(results); 
 
   return results;
 }

@@ -89,17 +89,26 @@ describe("applyRules, domainCheck", () => {
     lg: 1000,
     xlg: 1200,
   };
+  const rules = [
+    {
+      width: "> 768",
+      anyTerms: ["criteria.1"],
+      allTerms: ["criteria.3"],
+      target: "md",
+    },
+  ];
   
 
   test("domainCheck for all rules on all files in test folder", async () => {
+      let serilizationCalls = 0;
+       const mockSerializeToString = function() {
+         serilizationCalls ++;
+       };
         const serializer = {
-          serializeToString: jest.fn(),
+          serializeToString: mockSerializeToString,
         };
       
-        applyRules(testFiles, [], sizes, fileio, parser, serializer, true, false);
-
-
-        // TODO: Apply rules to be true also
+        await applyRules(testFiles, rules, sizes, fileio, parser, serializer, true, true);
        
   });
 });
