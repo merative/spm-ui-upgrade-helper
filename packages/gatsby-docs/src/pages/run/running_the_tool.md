@@ -28,7 +28,7 @@ title: Running the tool
 
 Docker container logs should be visible in the console, or via `docker logs spm-ui-upgrade-helper`.
 
-You can save the logs to a file using e.g. `docker logs spm-ui-upgrade-helper > /tmp/logs.txt`.
+You can save the logs to a file by using e.g. `docker logs spm-ui-upgrade-helper > /tmp/logs.txt`.
 
 ## Troubleshooting
 
