@@ -280,7 +280,7 @@ async function applyRule(
       if (verbose) {
         console.debug(`rule: ${chalk.yellow(index + 1)}`);
       }
-      console.log("apply rules to uim  ")
+      console.log("apply rules to uim ")
       if (checkPageWidth(pageNode, rule.width, verbose)) {
         const pass = checkRule(pageNode, rule, verbose);
 
@@ -560,7 +560,6 @@ function applyRules(
 
   return results;
 }
-
 /**
  * Send http request
  * @param {object} connection connection object 
@@ -568,7 +567,6 @@ function applyRules(
  const doRequest_1 =(connection, filename) => new Promise(function(resolve,reject){
    let newFlag=true;
       req = http.get( `http://spm-ui-upgrade-helper_nodefront:4005/full/${connection.property}/${connection.operation}/${connection.name}`, res => {
-          console.log("----------------------------");
           console.log("File name", filename);
           console.log("Property:  ", connection.property);
           console.log ("Class: ", connection.name);
