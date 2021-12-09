@@ -104,9 +104,8 @@ const dockerTasks = (execFunction = shelljs, props, args) => {
       return r1;
     }
     exec(`docker-compose down --rmi all`);
-    return exec(`docker-compose build ${additionalArgs} ${props.imageName}`);
+    return exec(`docker-compose build ${additionalArgs}`);
   }
-
   if (option === "prune") {
     return exec(`docker system prune --force ${additionalArgs}`);
   }
@@ -119,7 +118,7 @@ const dockerTasks = (execFunction = shelljs, props, args) => {
     exec(`docker-compose down`);
     const runArgs = props.runArgs || "";
     return exec(`docker-compose run ${additionalArgs} ${runArgs} --name ${props.imageName} ${props.imageName}`);
-  }
+  } 
 
   if (option === "clear") {
     const r0 = validate("imageName");
@@ -161,9 +160,15 @@ const dockerTasks = (execFunction = shelljs, props, args) => {
     }
     if (version !== "latest") {
       cmds.push(`docker image tag ${additionalArgs} ${props.imageName}:latest ${props.imageName}:${version}`);
+      cmds.push(`docker image tag ${additionalArgs} ${props.parserImageName}:latest ${props.imageName}:${version}`);
+      cmds.push(`docker image tag ${additionalArgs} ${props.nodeImageName}:latest ${props.imageName}:${version}`);
     }
     cmds.push(`docker image tag ${additionalArgs} ${props.imageName}:latest docker.io/${props.username}/${props.imageName}:${version}`);
+    cmds.push(`docker image tag ${additionalArgs} ${props.parserImageName}:latest docker.io/${props.username}/${props.parserImageName}:${version}`);
+    cmds.push(`docker image tag ${additionalArgs} ${props.nodeImageName}:latest docker.io/${props.username}/${props.nodeImageName}:${version}`);
     cmds.push(`docker image push ${additionalArgs} docker.io/${props.username}/${props.imageName}:${version}`);
+    cmds.push(`docker image push ${additionalArgs} docker.io/${props.username}/${props.parserImageName}:${version}`);
+    cmds.push(`docker image push ${additionalArgs} docker.io/${props.username}/${props.nodeImageName}:${version}`);
 
     for (let i = 0; i < cmds.length; i++) {
       exec(cmds[i]);
