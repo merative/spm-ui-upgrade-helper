@@ -97,7 +97,7 @@ test("calling 'build' runs the correct commands", () => {
   const props = yaml.load(inputConfig.join("\n"));
   const inputArgs = "build".split(" ");
   const expectedCommands = [
-    "docker-compose down", "docker-compose build bar"
+    "docker-compose down --rmi all", "docker-compose build bar"
   ];
   const expectedEchos = [];
   const expectedErrorCode = 0;
@@ -119,7 +119,7 @@ test("calling 'build -p' runs the correct commands", () => {
   const props = yaml.load(inputConfig.join("\n"));
   const inputArgs = "build -p".split(" ");
   const expectedCommands = [
-    "docker system prune --force", "docker-compose down", "docker-compose build foo"
+    "docker system prune --force", "docker-compose down --rmi all", "docker-compose build foo"
   ];
   const expectedEchos = [];
   const expectedErrorCode = 0;

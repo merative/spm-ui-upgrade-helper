@@ -8,23 +8,30 @@ services:
       - "3000:3000"  
     depends_on: 
       - nodefront
+    networks:
+      - spm-ui-upgrade-helper
   beanparser:
     build: 
-      context: ./packages/window-size-tool/parser
+      context: packages/window-size-tool/parser
       dockerfile: Dockerfile
     image: spm-ui-upgrade-helper_beanparser
     container_name: spm-ui-upgrade-helper_beanparser
     volumes:
-      - ./packages/window-size-tool/parser/real_input:/usr/src/sabparser/input
+      - ${SERVER_DIR}${SERVER_ACCESS_BEAN}:/usr/src/sabparser/input_SAB
+    networks:
+      - spm-ui-upgrade-helper
   nodefront:
     build:
-      context: ./packages/window-size-tool/parser/frontend
+      context: packages/window-size-tool/parser/frontend
       dockerfile: Dockerfile
     image: spm-ui-upgrade-helper_nodefront
     container_name: spm-ui-upgrade-helper_nodefront
     ports:
       - "4005:4005"
-    volumes:
-      - ./packages/window-size-tool/parser/frontend/src:/app/src
     depends_on:
       -  beanparser
+    networks:
+      - spm-ui-upgrade-helper
+networks:
+ spm-ui-upgrade-helper:
+

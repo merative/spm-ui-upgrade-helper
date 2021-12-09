@@ -37,16 +37,19 @@ echo     OUTPUT_FOLDER_CMD = %OUTPUT_FOLDER_CMD%
 echo     DETACH_CMD = %DETACH_CMD%
 echo.
 
-call docker-compose stop  parser_beanparser
-call docker-compose down  parser_beanparser
-call docker-compose stop  parser_nodefront
-call docker-compose down  parser_nodefront
-call docker-compose stop spm-ui-upgrade-helper
-call docker-compose rm -f spm-ui-upgrade-helper
+call docker-compose rm -v -s -f
 echo Logging in to Docker Hub...
 call docker login
-call docker pull ibmcom/spm-ui-upgrade-helper:%VERSION%
-call docker tag ibmcom/spm-ui-upgrade-helper:$VERSION  spm-ui-upgrade-helper:$VERSION 
+call docker pull whgovspm/spm-ui-upgrade-helper:$VERSION 
+call docker tag whgovspm/spm-ui-upgrade-helper:$VERSION spm-ui-upgrade-helper
+call docker pull whgovspm/spm-ui-upgrade-helper_nodefront:$VERSION
+call docker tag whgovspm/spm-ui-upgrade-helper_nodefront:$VERSION spm-ui-upgrade-helper_nodefront
+call docker pull whgovspm/spm-ui-upgrade-helper_beanparser:$VERSION
+call docker tag whgovspm/spm-ui-upgrade-helper_beanparser:$VERSION spm-ui-upgrade-helper_beanparser
+call docker image rm -f whgovspm/spm-ui-upgrade-helper_beanparser:$VERSION
+call docker image rm -f whgovspm/spm-ui-upgrade-helper_nodefront:$VERSION
+call docker image rm -f whgovspm/spm-ui-upgrade-helper:$VERSION
+
 call docker-compose build
 call docker-compose run $DETACH_CMD -p 3000:3000 -p 4000:4000 \
     $UIUH_DEV_CMD \

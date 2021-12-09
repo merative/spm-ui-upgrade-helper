@@ -41,4 +41,4 @@ function delegateAndWait(pathBase, pathParams, callback) {
         e => console.error(`Problem with the request delegation: ${e.message}`));
     backendReq.end();
 }
-wserver.listen(4005, _ => console.log('Sample bean tool query bridge is ready on localhost:4005...\n/full,/base,/ct,/complex,/whitelisted paths please. '));
+wserver.listen(4005, _ => console.log('Sample bean tool query bridge is ready on localhost:4003...\n/full,/base,/ct,/complex,/whitelisted paths please. '));
