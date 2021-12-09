@@ -1,11 +1,6 @@
 const chalk = require("chalk");
 const xp = require("xpath");
-const http = require('http');
-let flag = true;
-let responseAsJson={};
-let whitelisted='';
-let codeTable='';
-let req;
+const path = require('path');
 
 const { evaluateInequality } = require("./util");
 const {
@@ -17,9 +12,12 @@ const {
 const {
   doRequest,
 } = require("./httpUtils");
-const { connect } = require("http2");
 
-// console.log('xp',xp);
+
+let parserToUse = null;
+
+
+let ioToUse = null;
 
 /**
  * Compares a width value to a rule and returns whether the width passes the
@@ -73,7 +71,7 @@ function checkWidth(width, rule, verbose = true) {
  * @param {boolean} verbose Will log debug messages if true (true by default).
  * @returns Whether UIM PAGE element width passes the rule or not.
  */
- function checkPageWidth(pageNode, rule, verbose = true) {
+function checkPageWidth(pageNode, rule, verbose = true) {
   const pageOptions = getPageOptions(pageNode);
 
   if (!pageOptions || !pageOptions.width) {
@@ -92,7 +90,7 @@ function checkWidth(width, rule, verbose = true) {
  * @param {boolean} verbose Will log debug messages if true (true by default).
  * @returns Returns an array of LINK elements who's widths pass the rule.
  */
- function checkLinkWidth(pageNode, rule, verbose = true) {
+function checkLinkWidth(pageNode, rule, verbose = true) {
   const links = getLinkOptions(pageNode).filter((link) => {
     if (!link.options || !link.options.width) {
       return false;
@@ -112,7 +110,7 @@ function checkWidth(width, rule, verbose = true) {
  * @param {boolean} verbose Will log debug messages if true (true by default).
  * @returns Whether the DOM node meets the rules criteria or not.
  */
- function checkRule(node, rule, verbose = true) {
+function checkRule(node, rule, verbose = true) {
   let pass = false;
 
   if (!node) {
@@ -163,7 +161,7 @@ function checkWidth(width, rule, verbose = true) {
  * @param {boolean} usePixelWidths Determines whether width is set as a pixel value
  * or a size category.
  */
- function updateWidthOption(
+function updateWidthOption(
   windowOptions,
   sizes,
   target,
@@ -186,37 +184,32 @@ function checkWidth(width, rule, verbose = true) {
 }
 
 /**
- * Applies xPath rules to a UIM XML document.
+ * Checks the domain definitions of UIM XML document are valid with respect to
+ * allowing it to be resized down.
  *
- * @param {object} document Parsed UIM XML document.
+ * @param {Element} rootUIMNode The root node of the UIM XML document.
  * @param {string} filename Filename of UIM XML document.
- * @param {array} rules Rules to apply to the UIM XML document.
- * @param {object} sizes Mapping breakpoints to be applied to UIMs if rules
- * criteria a met.
- * @param {object} pagedictionary A dictionary used to lookup UIM pages by id.
- * @param {boolean} usePixelWidths Determines whether width is set as a pixel value
- * or a size category.
- * @param {boolean} verbose Will log debug messages if true (true by default).
- * @returns Returns whether the document was updated by the rules or not.
  */
-async function applyRule(
-  document,
-  filename,
-  rules,
-  sizes,
-  pagedictionary,
-  usePixelWidths,
-  verbose = true
-) {
+async function checkUIMDomainsAreValidToResizeDown(rootUIMNode, filename) {
   let serverAccessBeans = [];
   let connectionsAreAllowListed = true;
-  const pageNode = document.documentElement;
-
-
+  const fileNameAndExtenionWithoutPath = path.basename(filename);
+  
   const severBeanXP= xp.select(
     `//SERVER_INTERFACE`,
-    pageNode
+    rootUIMNode
   );
+
+  const includeVimsXP = xp.select(
+    `//INCLUDE`,
+    rootUIMNode
+  );
+
+  const vimsToBeProcessed = [];
+  includeVimsXP.forEach((include) => {
+    // TODO: How about if the VIM is not in the same directory??
+    vimsToBeProcessed.push(path.dirname(filename) + "/" + include.getAttribute("FILE_NAME"));
+  });
  
 
   severBeanXP.forEach((bean) => {
@@ -229,7 +222,7 @@ async function applyRule(
 
   const clusterFieldConnectionsXP= xp.select(
     `//CLUSTER/FIELD/CONNECT/*`,
-    pageNode
+    rootUIMNode
   ); 
 
   let connections=[];
@@ -243,84 +236,68 @@ async function applyRule(
               property: property,
               name:bean.class,
               operation:bean.operation,
-              result:false,
             });
        }
    }); 
   });
 
+   // Processing VIMS, scope for refactoring here
+   for (let i = 0; i < vimsToBeProcessed.length;i++) {
+    const rootNode = getRootNodeFromUIM(vimsToBeProcessed[i], parserToUse, ioToUse);
+    const severBeanXPForVim= xp.select(
+      `//SERVER_INTERFACE`,
+      rootNode
+    );
+    severBeanXPForVim.forEach((bean) => {
+      const beanName = bean.getAttribute("NAME");
+      if (!serverAccessBeans.find(({name}) => name === beanName)) {
+        serverAccessBeans.push({
+          class: bean.getAttribute("CLASS"),
+          name:bean.getAttribute("NAME"),
+          operation:bean.getAttribute("OPERATION"),
+        });
+      }      
+    });
+    const clusterFieldConnectionsXPForVims = xp.select(
+      `//CLUSTER/FIELD/CONNECT/*`,
+      rootNode
+    );
+    clusterFieldConnectionsXPForVims.forEach((connection) => {
+      const connName= connection.getAttribute("NAME");
+      const connProperty = connection.getAttribute("PROPERTY");
+        serverAccessBeans.forEach((bean) => {
+          if(connName==bean.name){
+            // TODO: Need to check that names don't match either??
+            if (!connections.find(({property}) => property === connProperty)) {    
+               connections.push({
+                property: connProperty,
+                name:bean.class,
+                operation:bean.operation,
+              });
+            }
+         }
+     });
+    });
+  }
+
   const connectionPromises = [];
   for(let i=0; i < connections.length; i++){
     const connection = connections[i];
-    //const result = await doRequest(connections[i], filename);
-    const result = await doRequest(connection, filename);
-    connectionPromises.push({result: result, property:  connection.property});
+    const result = await doRequest(connection, fileNameAndExtenionWithoutPath);
+    connectionPromises.push({result: result, property: connection.property, filename: fileNameAndExtenionWithoutPath});
   }
 
   let connectionResults = await Promise.all(connectionPromises);
-  console.log(connectionResults);
   for(let j=0; j < connectionResults.length; j++) {
     if(connectionResults[j].result == false) {
       connectionsAreAllowListed = false; 
       break;
     }
   }
-  console.log("FLAG: " + connectionsAreAllowListed);
+
   // connections are allow listed and number of connections is bigger than 0
   const connectionsNotEmotyAndAllowed = connections.length > 0 && connectionsAreAllowListed == true;
-
-
-  let hasChanges = false;
-
-
-  if(connectionsNotEmotyAndAllowed){
-    console.log("Appliying rule for: " + filename);
-    rules.forEach((rule, index) => {
-    if (!hasChanges) {
-      if (verbose) {
-        console.debug(`rule: ${chalk.yellow(index + 1)}`);
-      }
-      console.log("apply rules to uim ")
-      if (checkPageWidth(pageNode, rule.width, verbose)) {
-        const pass = checkRule(pageNode, rule, verbose);
-
-        if (pass) {
-          hasChanges = true;
-          const windowOptions = getPageOptions(pageNode);
-
-          updateWidthOption(windowOptions, sizes, rule.target, usePixelWidths);
-
-          setPageOptions(pageNode, windowOptions);
-        }
-      }
-
-      const linkMatches = checkLinkWidth(pageNode, rule, verbose);
-
-      linkMatches.forEach(({ pageId, options, link }) => {
-        let pass = false;
-
-        const pageReference = pagedictionary[pageId];
-
-        if (pageReference) {
-          pass = checkRule(
-            pageReference.document.documentElement,
-            rule,
-            verbose
-          );
-
-          hasChanges = hasChanges || pass;
-
-          updateWidthOption(options, sizes, rule.target, usePixelWidths);
-
-          if (pass) {
-            setLinkOptions(link, options);
-          }
-        }
-      });
-    }
-  });
-  }
-  
+  return connectionsNotEmotyAndAllowed; 
 }
 
 /**
@@ -337,7 +314,7 @@ async function applyRule(
  * @param {boolean} verbose Will log debug messages if true (true by default).
  * @returns Returns whether the document was updated by the rules or not.
  */
- async function applyRule_1(
+function applyRule(
   document,
   filename,
   rules,
@@ -358,85 +335,18 @@ async function applyRule(
     throw Error("You must supply a PAGE dictionary map");
   }
 
-  console.log("IM NEING CALLED");
-  const newArray=[];
   const pageNode = document.documentElement;
-  newArray.push(pageNode);
-  console.log("PageNode",newArray.length);
-  let serverAccessBeans = [];
-  
-  const severBeanXPClass= xp.select(
-    `//SERVER_INTERFACE`,
-    pageNode
-  );
-
-  severBeanXPClass.forEach((bean) => {
-    serverAccessBeans.push({
-      class: bean.getAttribute("CLASS"),
-      name:bean.getAttribute("NAME"),
-      operation:bean.getAttribute("OPERATION"),
-    });
-  });
- 
-  const clusterFieldConnections= xp.select(
-    `//CLUSTER/FIELD/CONNECT/*`,
-    pageNode
-  ); 
-
-  let connections=[];
-
-  clusterFieldConnections.forEach((connection) => {
-    const name=connection.getAttribute("NAME");
-    const property =connection.getAttribute("PROPERTY");  
-      serverAccessBeans.forEach((bean) => {
-        if(name==bean.name){    
-             connections.push({
-              property: property,
-              name:bean.class,
-              operation:bean.operation,
-              result:false,
-            });
-       }
-   }); 
-  });
-
- for(let i=0; i < connections.length; i++){
-   console.log("connection -------",  connections
-   );
-   const result = await doRequest(connections[i], filename);
-   console.log("ResultYY", result);
-   connections[i].result== result;
-  //  if (result == false) { 
-  //   console.log("we want to finish that task",flag);
-  //   flag=false;
-  //   console.log("we want to finish that task2",flag);
-  //   break;
-//  }
-    console.log("end of for loop",flag);
- }
-
-   for (let j=0; j< connections.length;j++){
-     if(connections[j].result == false) {
-       console.log("Check if we have connection", connections[j].result);
-       flag = false; 
-       break;
-     }
-   }
-
- console.log('I AM outside',flag);
   if (verbose) {
     console.debug(`filename: ${chalk.cyan(filename)}`);
   }
 
   let hasChanges = false;
-
-  if(flag==true){
-    rules.forEach((rule, index) => {
+  rules.forEach((rule, index) => {
     if (!hasChanges) {
       if (verbose) {
         console.debug(`rule: ${chalk.yellow(index + 1)}`);
       }
-      console.log("apply rules to uim  ")
+
       if (checkPageWidth(pageNode, rule.width, verbose)) {
         const pass = checkRule(pageNode, rule, verbose);
 
@@ -475,10 +385,19 @@ async function applyRule(
       });
     }
   });
-  }
-console.log("haschanges in the end", hasChanges);
+
   return hasChanges;
-  
+}
+
+
+function getDocumentFromUIM(file, parser, io) {
+  const contents = io.readLines(file).join("\n");
+  const document = parser.parseFromString(contents);
+  return document;
+}
+
+function getRootNodeFromUIM(file, parser, io) {
+  return getDocumentFromUIM(file, parser, io).documentElement;
 }
 
 /**
@@ -506,8 +425,9 @@ function applyRules(
   parser,
   serializer,
   usePixelWidths,
-  verbose = true
-) { 
+  verbose = true,
+  checkAllowedDomainsForResizing = true,
+) {
   if (!files) {
     throw Error("You must supply a globbed files array");
   } else if (!rules) {
@@ -517,18 +437,23 @@ function applyRules(
   } else if (!io) {
     throw Error("You must supply an io object");
   } else if (!parser) {
-    throw Error("You must supply an parser object"); 
-  }  else if (!serializer) {
-     throw Error("You must supply an serializer object");
-    }
-  
+    throw Error("You must supply an parser object");
+  } else if (!serializer) {
+    throw Error("You must supply an serializer object");
+  }
+
+  parserToUse = parser;
+  ioToUse = io;
 
   const results = [];
-  const pagedictionary = {};   
+  const pagedictionary = {};
+
   const uims = files.map((file) => {
     const contents = io.readLines(file).join("\n");
     const document = parser.parseFromString(contents);
+
     const pageId = document.documentElement.getAttribute("PAGE_ID");
+
     pagedictionary[pageId] = {
       file,
       document,
@@ -541,8 +466,11 @@ function applyRules(
     };
   });
 
-  uims.forEach(({ document, file }) => {
-    const hasChanges = applyRule(
+  uims.forEach(async({ document, file }) => {
+    const fileExtension = path.extname(file);
+    // only do domain check for UIM files (Need to update) and if this flag is set. If tthe flag not set the check always passes
+    const domainCheckPassed = checkAllowedDomainsForResizing && fileExtension === ".uim" ? await checkUIMDomainsAreValidToResizeDown(document.documentElement, file) : true;
+    const hasChanges = domainCheckPassed && applyRule(
       document,
       file,
       rules,
@@ -553,45 +481,13 @@ function applyRules(
     );
 
     // Only mark the files as 'for writing' if the contents changed
-    if (hasChanges) {
+    if (hasChanges) {     
       results[file] = serializer.serializeToString(document);
     }
   });
 
   return results;
 }
-/**
- * Send http request
- * @param {object} connection connection object 
- */
- const doRequest_1 =(connection, filename) => new Promise(function(resolve,reject){
-   let newFlag=true;
-      req = http.get( `http://spm-ui-upgrade-helper_nodefront:4005/full/${connection.property}/${connection.operation}/${connection.name}`, res => {
-          console.log("File name", filename);
-          console.log("Property:  ", connection.property);
-          console.log ("Class: ", connection.name);
-          console.log ("Operation: ", connection.operation);
-          console.log ("----------------------------");
-          res.on('data', d => {
-              responseAsJson = JSON.parse(d.toString());  
-              whitelisted = responseAsJson.whitelisted;
-              codeTable = responseAsJson.codetable;  
-              console.log(responseAsJson); 
-              if (whitelisted ==="false" && codeTable === "false"){
-                console.log("Change the flag");
-                newFlag=false;                       
-              }
-              resolve(newFlag);
-            })
-          }) 
-        req.on('error', error => {
-          console.error('Error',error);
-          reject(newFlag);
-        }) 
-        req.end();
-  })
-
-
 
 module.exports = {
   checkWidth,
@@ -601,4 +497,6 @@ module.exports = {
   updateWidthOption,
   applyRule,
   applyRules,
+  checkUIMDomainsAreValidToResizeDown,
+  getRootNodeFromUIM
 };

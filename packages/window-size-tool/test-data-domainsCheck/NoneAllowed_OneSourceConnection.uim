@@ -1,0 +1,96 @@
+<!--
+  - Expected: No change.
+  -
+  - Reason: PAGE element WINDOW_OPTIONS attribute is an empty string.
+  -->
+<?xml version="1.0" encoding="UTF-8"?>
+<PAGE
+  PAGE_ID="NoneAllowed_OneSourceConnection"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="file://Curam/UIMSchema.xsd"
+>
+
+  <PAGE_TITLE DESCRIPTION="Page.Desc">
+    <CONNECT>
+      <SOURCE
+        NAME="TEXT"
+        PROPERTY="PageTitle.StaticText1"
+      />
+    </CONNECT>
+    <CONNECT>	
+      <SOURCE NAME="TEXT" PROPERTY="PageTitle.Separator"/>	
+    </CONNECT>	
+    <CONNECT>	
+      <SOURCE NAME="DISPLAY" PROPERTY="firstName"/>	
+    </CONNECT>	
+  </PAGE_TITLE>
+
+  <SERVER_INTERFACE
+    CLASS="PersonAdmin"
+    PHASE="DISPLAY"
+    NAME="DISPLAY_2"
+    OPERATION="read"
+  />
+
+  <SERVER_INTERFACE
+    CLASS="PersonAdmin"
+    PHASE="DISPLAY"
+    NAME="DISPLAY_3"
+    OPERATION="read"
+  />
+
+  <ACTION_SET ALIGNMENT="CENTER">
+    <ACTION_CONTROL
+      LABEL="ActionControl.Label.Edit"
+    >
+      <LINK
+        PAGE_ID="Person_modifyPerson"
+      >
+        <CONNECT>
+          <SOURCE
+            NAME="DISPLAY"
+            PROPERTY="key$identifier"
+          />
+          <TARGET
+            NAME="PAGE"
+            PROPERTY="id"
+          />
+        </CONNECT>
+      </LINK>
+    </ACTION_CONTROL>
+  </ACTION_SET>
+  
+  <PAGE_PARAMETER NAME="id"/>
+
+
+  <CONNECT>
+    <SOURCE
+      NAME="PAGE"
+      PROPERTY="id"
+    />
+    <TARGET
+      NAME="DISPLAY"
+      PROPERTY="key$identifier"
+    />
+  </CONNECT>
+
+
+    <CLUSTER
+      NUM_COLS="1"
+      TITLE="Cluster.Label.Name"
+      DESCRIPTION="Page.Desc"
+    >
+      <FIELD LABEL="Field.Label.Ref">
+        <CONNECT>
+          <SOURCE
+    	NAME="DISPLAY_2"
+    	PROPERTY="key$identifier"
+          />
+    </CONNECT>
+    
+    </FIELD>
+
+
+    </CLUSTER>
+
+</PAGE>
