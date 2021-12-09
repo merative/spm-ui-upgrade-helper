@@ -2,25 +2,31 @@
 title: Setting up the tools
 ---
 
+Complete the following steps to install and configure the required software, and to prepare a development environment to run the tools. 
+
+Assuming a standard Social Program Management installation, in most cases you can run the tools without modification. However, if your installation is non-standard, you might need to ignore certain files and folder.
+
 ## Initial setup
 
-1. Set up a 7.0.11.0 development environment.
-2. Set up a 8.0.0 or later development environment.
+1. Set up a 7.0.11.0 development environment with your custom changes, which provide the input data.
+2. Set up an 8.0.0 or later development environment, to apply the updates.
 3. Install Docker Desktop for [Windows](https://docs.docker.com/docker-for-windows/install/) or [Mac](https://docs.docker.com/docker-for-mac/install/).
 4. Install [curl](https://curl.se/download.html).
 
 ## Configuring Docker Desktop
 
-After installation, you must configure Docker Desktop to access paths to the folders where the tools work on the local file system. 
+After installation, you must configure Docker Desktop to provide access to folders on the local file system that are needed by the tools. 
 
 - The Social Program Management source code folder that provides the input data. 
-- An output folder to write the modified data.
+- An temporary output folder to write the modified data. This temporary folder is wiped each time the UI Upgrade Helper runs.
+
+
 
 1. Open Docker Desktop.
 2. Click Settings > Resources > File Sharing.
 3. Share your 7.0.11.0 development environment folder.
 4. Share a temporary output folder, e.g. `/tmp/upgrade` or `c:\temp\upgrade`
-    - Note that the output folder will be wiped by the SPM UI Upgrade Helper, so be careful! Do NOT point this at your v8 development environment.
+    - Warning: Do not point at your v8 development environment. This temporary folder is wiped when the UI Upgrade Helper runs.
 
 ![1. Open Docker Desktop, 2. Click the Settings button then Resources then File Sharing, 3. Add the folder you want to share with the Docker container](../../images/docker-volume-sharing.png "Docker volume sharing screenshot")
 
