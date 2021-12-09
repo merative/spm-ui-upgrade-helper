@@ -1,6 +1,9 @@
 - title: Overview
   pages:
     - path: /overview
+- title: UI Upgrade Helper tools
+  pages:
+    - path: /customer/tools
 - title: Setting up
   pages:
     - title: Setting up
