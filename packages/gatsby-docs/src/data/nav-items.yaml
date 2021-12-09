@@ -8,8 +8,6 @@
   pages:
     - title: Setting up
       path: /setup/customer_setup
-    - title: Ignoring files
-      path: /setup/customer_ignores
     - title: Custom configuration
       path: /setup/customer_configuration
 - title: Running the tool
