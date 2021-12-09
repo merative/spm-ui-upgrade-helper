@@ -10,7 +10,7 @@
     - title: Custom configuration
       path: /setup/customer_configuration
 - title: Running the tool
-   pages:
+  pages:
     - path: /run/running_the_tool
 - title: Manually upgrading fonts
   pages:
