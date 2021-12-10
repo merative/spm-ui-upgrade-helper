@@ -494,7 +494,7 @@ function applyRules(
         pagedictionary,
         usePixelWidths,
         verbose,
-        domainCheckPassed.pass
+        domainCheckPassed.pass || domainCheckPassed
       );
   
       // Only mark the files as 'for writing' if the contents changed
@@ -517,6 +517,7 @@ function applyRules(
           pagedictionary,
           usePixelWidths,
           verbose,
+          domainCheckPassed.pass || domainCheckPassed
         );
 
         if (vimHasChanges === true) {
