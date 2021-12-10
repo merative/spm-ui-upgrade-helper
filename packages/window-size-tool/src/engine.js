@@ -507,23 +507,23 @@ function applyRules(
     // Process VIMS
     const vims = domainCheckPassed.vims;
     if (vims.length > 0) {
-      vims.forEach((vimFile) => {
-        const vimDocument = getDocumentFromUIM(vimFile, parser, io);
-        const vimHasChanges = applyRule(
-          vimDocument ,
-          vimFile,
-          rules,
-          sizes,
-          pagedictionary,
-          usePixelWidths,
-          verbose,
-          domainCheckPassed.pass || domainCheckPassed
-        );
+      // vims.forEach((vimFile) => {
+      //   const vimDocument = getDocumentFromUIM(vimFile, parser, io);
+      //   const vimHasChanges = applyRule(
+      //     vimDocument ,
+      //     vimFile,
+      //     rules,
+      //     sizes,
+      //     pagedictionary,
+      //     usePixelWidths,
+      //     verbose,
+      //     domainCheckPassed.pass || domainCheckPassed
+      //   );
 
-        if (vimHasChanges === true) {
-          results[vimFile] = serializer.serializeToString(vimDocument);
-        }
-      });
+      //   if (vimHasChanges === true) {
+      //     results[vimFile] = serializer.serializeToString(vimDocument);
+      //   }
+      // });
     }
   });
 
