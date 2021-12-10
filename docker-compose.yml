@@ -17,7 +17,7 @@ services:
     image: spm-ui-upgrade-helper_beanparser
     container_name: spm-ui-upgrade-helper_beanparser
     volumes:
-      - ${SERVER_DIR}${SERVER_ACCESS_BEAN}:/usr/src/sabparser/input_SAB
+      - ${SERVER_DIR}:/usr/src/sabparser/input_SAB
     networks:
       - spm-ui-upgrade-helper
   nodefront:
