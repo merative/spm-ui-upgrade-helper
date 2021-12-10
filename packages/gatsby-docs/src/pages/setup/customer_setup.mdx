@@ -4,35 +4,41 @@ title: Setting up the tools
 
 Complete the following steps to install and configure the required software, and to prepare a development environment to run the tools. 
 
-Assuming a standard Social Program Management installation, in most cases you can run the tools without modification. However, if your installation is non-standard, you might need to ignore certain files and folder.
+Assuming a standard IBM Social Program Management installation, in most cases you can run the tools without modification. However, if your installation is non-standard, you might need to ignore certain files and folder.
 
 ## Initial setup
 
-1. Set up a 7.0.11.0 development environment with your custom changes, which provide the input data.
-2. Set up an 8.0.0 or later development environment, to apply the updates.
-3. Install Docker Desktop for [Windows](https://docs.docker.com/docker-for-windows/install/) or [Mac](https://docs.docker.com/docker-for-mac/install/).
-4. Install [curl](https://curl.se/download.html).
+1. Set up a 7.0.11.0 development environment with your custom changes, which provides the input data for the tool.
+2. Decide on a temporary output folder, where you can review the suggested changes.
+3. Set up an 8.0.0 or later development environment, where you can manually apply and test the updates.
+4. Install Docker Desktop for [Windows](https://docs.docker.com/docker-for-windows/install/) or [Mac](https://docs.docker.com/docker-for-mac/install/).
+5. Install [curl](https://curl.se/download.html).
 
 ## Configuring Docker Desktop
 
-After installation, you must configure Docker Desktop to provide access to folders on the local file system that are needed by the tools. 
+After installation, you must configure Docker Desktop to provide access to certain folders on the local file system. 
 
-- The Social Program Management source code folder that provides the input data. 
-- An temporary output folder to write the modified data. This temporary folder is wiped each time the UI Upgrade Helper runs.
-
-
+- The Social Program Management 7.0.11.0 source code folder that provides the input data. 
+- An temporary output folder to write the modified data, which is wiped each time you run the UI Upgrade Helper.
 
 1. Open Docker Desktop.
 2. Click Settings > Resources > File Sharing.
 3. Share your 7.0.11.0 development environment folder.
-4. Share a temporary output folder, e.g. `/tmp/upgrade` or `c:\temp\upgrade`
-    - Warning: Do not point at your v8 development environment. This temporary folder is wiped when the UI Upgrade Helper runs.
+4. Share your temporary output folder.
+   
+    <InlineNotification>
+
+    Warning: Do not point at your v8 development environment. This temporary folder is wiped when the UI Upgrade Helper runs.
+
+    </InlineNotification>
+    
+   For example, enter `/tmp/upgrade` or `c:\temp\upgrade`.
 
 ![1. Open Docker Desktop, 2. Click the Settings button then Resources then File Sharing, 3. Add the folder you want to share with the Docker container](../../images/docker-volume-sharing.png "Docker volume sharing screenshot")
 
 ## Downloading the tool
 
-1. Run `docker login`
+1. Run `docker login`.
 2. Download the batch file or shell script:
     - `curl -L https://raw.githubusercontent.com/IBM/spm-ui-upgrade-helper/main/spm-ui-upgrade-helper.bat -o spm-ui-upgrade-helper.bat` (Windows)
     - `curl -L https://raw.githubusercontent.com/IBM/spm-ui-upgrade-helper/main/spm-ui-upgrade-helper.sh -o spm-ui-upgrade-helper.sh` (Linux)
@@ -41,7 +47,7 @@ After installation, you must configure Docker Desktop to provide access to folde
 
 ## Ignoring files
 
-You can ignore files that you do not want to be affected by the tool by creating a file called `.spm-uiuh-ignore` that contains the patterns to ignore. 
+You can ignore any files that you do not want to be affected by the tool by creating a file called `.spm-uiuh-ignore` that contains the patterns to ignore. 
 
 Place the `.spm-uiuh-ignore` file in the root of your 7.0.11.0 development environment.
 
