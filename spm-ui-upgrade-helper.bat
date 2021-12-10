@@ -51,12 +51,7 @@ call docker image rm -f whgovspm/spm-ui-upgrade-helper_nodefront:%VERSION%
 call docker image rm -f whgovspm/spm-ui-upgrade-helper:%VERSION%
 
 call docker-compose build
-call docker-compose run %DETACH_CMD% -p 3000:3000 -p 4000:4000 \
-    %UIUH_DEV_CMD% \
-    %INPUT_FOLDER_CMD% \
-    %OUTPUT_FOLDER_CMD% \
-    --name spm-ui-upgrade-helper \
-    spm-ui-upgrade-helper
+call docker-compose run %DETACH_CMD% -p 3000:3000 -p 4000:4000 %UIUH_DEV_CMD% %INPUT_FOLDER_CMD% %OUTPUT_FOLDER_CMD% --name spm-ui-upgrade-helper spm-ui-upgrade-helper
 
 endlocal
 
