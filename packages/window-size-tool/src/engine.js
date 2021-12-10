@@ -1,6 +1,7 @@
 const chalk = require("chalk");
 const xp = require("xpath");
 const path = require('path');
+const fs = require('fs');
 
 const { evaluateInequality } = require("./util");
 const {
@@ -15,8 +16,6 @@ const {
 
 
 let parserToUse = null;
-
-
 let ioToUse = null;
 
 /**
@@ -110,13 +109,20 @@ function checkLinkWidth(pageNode, rule, verbose = true) {
  * @param {boolean} verbose Will log debug messages if true (true by default).
  * @returns Whether the DOM node meets the rules criteria or not.
  */
-function checkRule(node, rule, verbose = true) {
+function checkRule(node, rule, verbose = true, domainCheckPass = false) {
   let pass = false;
 
   if (!node) {
     throw Error("You must supply a node");
   } else if (!rule) {
     throw Error("You must supply a rules object");
+  }
+  if (rule.containsAllowedDomainsOnly === true) {
+    // if containsAllowedDomainsOnly set and the check has failed return with failure, ohterwise 
+    // check the other rules
+    if (!domainCheckPass) {
+      return;
+    }
   }
   rule.anyTerms.forEach((term) => {
     if (!pass) {
@@ -207,8 +213,13 @@ async function checkUIMDomainsAreValidToResizeDown(rootUIMNode, filename) {
 
   const vimsToBeProcessed = [];
   includeVimsXP.forEach((include) => {
-    // TODO: How about if the VIM is not in the same directory??
-    vimsToBeProcessed.push(path.dirname(filename) + "/" + include.getAttribute("FILE_NAME"));
+    const vim = path.dirname(filename) + "/" + include.getAttribute("FILE_NAME");
+    if (fs.existsSync(vim))  {
+      vimsToBeProcessed.push(vim);
+    } else {
+       // TODO: How about if the VIM is not in the same directory??
+      console.log("VIM file:" +  vim + "does not exist");
+    }  
   });
  
 
@@ -297,7 +308,8 @@ async function checkUIMDomainsAreValidToResizeDown(rootUIMNode, filename) {
 
   // connections are allow listed and number of connections is bigger than 0
   const connectionsNotEmotyAndAllowed = connections.length > 0 && connectionsAreAllowListed == true;
-  return connectionsNotEmotyAndAllowed; 
+  //return connectionsNotEmotyAndAllowed; 
+  return {pass: connectionsNotEmotyAndAllowed, vims: vimsToBeProcessed}; 
 }
 
 /**
@@ -321,7 +333,8 @@ function applyRule(
   sizes,
   pagedictionary,
   usePixelWidths,
-  verbose = true
+  verbose = true,
+  domainsCheckPass = false
 ) {
   if (!document) {
     throw Error("You must supply a UIM document");
@@ -342,15 +355,16 @@ function applyRule(
 
   let hasChanges = false;
   rules.forEach((rule, index) => {
+   
     if (!hasChanges) {
       if (verbose) {
         console.debug(`rule: ${chalk.yellow(index + 1)}`);
       }
 
       if (checkPageWidth(pageNode, rule.width, verbose)) {
-        const pass = checkRule(pageNode, rule, verbose);
+        const pass = checkRule(pageNode, rule, verbose, domainsCheckPass);
 
-        if (pass) {
+        if (pass) {        
           hasChanges = true;
           const windowOptions = getPageOptions(pageNode);
 
@@ -371,7 +385,8 @@ function applyRule(
           pass = checkRule(
             pageReference.document.documentElement,
             rule,
-            verbose
+            verbose,
+            domainsCheckPass
           );
 
           hasChanges = hasChanges || pass;
@@ -385,7 +400,6 @@ function applyRule(
       });
     }
   });
-
   return hasChanges;
 }
 
@@ -469,20 +483,47 @@ function applyRules(
   uims.forEach(async({ document, file }) => {
     const fileExtension = path.extname(file);
     // only do domain check for UIM files (Need to update) and if this flag is set. If tthe flag not set the check always passes
-    const domainCheckPassed = checkAllowedDomainsForResizing && fileExtension === ".uim" ? await checkUIMDomainsAreValidToResizeDown(document.documentElement, file) : true;
-    const hasChanges = domainCheckPassed && applyRule(
-      document,
-      file,
-      rules,
-      sizes,
-      pagedictionary,
-      usePixelWidths,
-      verbose,
-    );
+    const domainCheckPassed = checkAllowedDomainsForResizing ? await checkUIMDomainsAreValidToResizeDown(document.documentElement, file) : true;
 
-    // Only mark the files as 'for writing' if the contents changed
-    if (hasChanges) {     
-      results[file] = serializer.serializeToString(document);
+    if (fileExtension === ".uim") {
+      const hasChanges = applyRule(
+        document,
+        file,
+        rules,
+        sizes,
+        pagedictionary,
+        usePixelWidths,
+        verbose,
+        domainCheckPassed.pass || domainCheckPassed
+      );
+  
+      // Only mark the files as 'for writing' if the contents changed
+      if (hasChanges === true) {
+        results[file] = serializer.serializeToString(document);
+      }
+  
+    }
+
+    // Process VIMS
+    const vims = domainCheckPassed.vims;
+    if (vims.length > 0) {
+      // vims.forEach((vimFile) => {
+      //   const vimDocument = getDocumentFromUIM(vimFile, parser, io);
+      //   const vimHasChanges = applyRule(
+      //     vimDocument ,
+      //     vimFile,
+      //     rules,
+      //     sizes,
+      //     pagedictionary,
+      //     usePixelWidths,
+      //     verbose,
+      //     domainCheckPassed.pass || domainCheckPassed
+      //   );
+
+      //   if (vimHasChanges === true) {
+      //     results[vimFile] = serializer.serializeToString(vimDocument);
+      //   }
+      // });
     }
   });
 
