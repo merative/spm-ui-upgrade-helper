@@ -101,6 +101,8 @@
             PROPERTY="turkeys"
           />
         </CONNECT>
+        <LINK WINDOW_OPTIONS="width=940" PAGE_ID="someUIMPage">
+        </LINK>
       </FIELD>
 
 

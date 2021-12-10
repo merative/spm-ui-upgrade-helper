@@ -53,31 +53,31 @@ describe("checkUIMDomainsAreValidToResizeDown", () => {
 
   test("checkUIMDomainsAreValidToResizeDown, each file", async () => {
       const files = testFiles;
-        let testFile;
-        let rootNode;
-        let domainsCheckPassed;
+      let testFile;
+      let rootNode;
+      let domainsCheckPassed;
 
-        testFile = files[1];
-        rootNode = getRootNodeFromUIM(testFile, parser, fileio);
-        domainsCheckPassed = await checkUIMDomainsAreValidToResizeDown(rootNode, testFile);
-        expect(domainsCheckPassed).toEqual(true);
-     
-
-      testFile = files[2];
+      testFile = files[1];
       rootNode = getRootNodeFromUIM(testFile, parser, fileio);
       domainsCheckPassed = await checkUIMDomainsAreValidToResizeDown(rootNode, testFile);
-      expect(domainsCheckPassed).toEqual(true);
+      expect(domainsCheckPassed).toEqual({"pass": true, "vims": []});
+     
+
+      testFile = files[2];  
+      rootNode = getRootNodeFromUIM(testFile, parser, fileio);
+      domainsCheckPassed = await checkUIMDomainsAreValidToResizeDown(rootNode, testFile);
+      expect(domainsCheckPassed).toEqual({"pass": true, "vims": []});
 
 
       testFile = files[3];
       rootNode = getRootNodeFromUIM(testFile, parser, fileio);
       domainsCheckPassed = await checkUIMDomainsAreValidToResizeDown(rootNode, testFile);
-      expect(domainsCheckPassed).toEqual(false);
+      expect(domainsCheckPassed).toEqual({"pass": false, "vims": []});
       
       testFile = files[4];
       rootNode = getRootNodeFromUIM(testFile, parser, fileio);
       domainsCheckPassed = await checkUIMDomainsAreValidToResizeDown(rootNode, testFile);
-      expect(domainsCheckPassed).toEqual(false);
+      expect(domainsCheckPassed).toEqual({"pass": false, "vims": []});
   });
 });
 
@@ -95,11 +95,12 @@ describe("applyRules, domainCheck", () => {
       anyTerms: ["criteria.1"],
       allTerms: ["criteria.3"],
       target: "md",
+      containsAllowedDomainsOnly: true
     },
   ];
   
 
-  test("domainCheck for all rules on all files in test folder", async () => {
+  test("domainCheck for all rules on all files in test folder", () => {
       let serilizationCalls = 0;
        const mockSerializeToString = function() {
          serilizationCalls ++;
@@ -108,7 +109,7 @@ describe("applyRules, domainCheck", () => {
           serializeToString: mockSerializeToString,
         };
       
-        await applyRules(testFiles, rules, sizes, fileio, parser, serializer, true, true);
+        applyRules(testFiles, rules, sizes, fileio, parser, serializer, true, true);
        
   });
 });
