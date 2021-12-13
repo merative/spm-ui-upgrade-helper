@@ -12,7 +12,7 @@ services:
       - spm-ui-upgrade-helper
   beanparser:
     build: 
-      context: home/theia/packages/window-size-tool/parser
+      context:  home/theia/packages/window-size-tool/parser
       dockerfile: Dockerfile
     image: spm-ui-upgrade-helper_beanparser
     container_name: spm-ui-upgrade-helper_beanparser
@@ -22,7 +22,7 @@ services:
       - spm-ui-upgrade-helper
   nodefront:
     build:
-      context: home/theia/packages/window-size-tool/parser/frontend
+      context:  home/theia/packages/window-size-tool/parser/frontend
       dockerfile: Dockerfile
     image: spm-ui-upgrade-helper_nodefront
     container_name: spm-ui-upgrade-helper_nodefront
