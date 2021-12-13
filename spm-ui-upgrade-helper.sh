@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/sh
 
 ERROR=
 if [[ -z "$1" ]]; then
@@ -51,7 +51,7 @@ docker image rm -f whgovspm/spm-ui-upgrade-helper_beanparser:$VERSION
 docker image rm -f whgovspm/spm-ui-upgrade-helper_nodefront:$VERSION
 docker image rm -f whgovspm/spm-ui-upgrade-helper:$VERSION
 
-docker-compose up --no-build
+# docker-compose up --no-build
 docker-compose build
 docker-compose run $DETACH_CMD -p 3000:3000 -p 4000:4000 \
     $UIUH_DEV_CMD \
