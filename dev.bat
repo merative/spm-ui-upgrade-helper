@@ -38,5 +38,5 @@ echo.
 
 call docker-compose rm -f -s -v  spm-ui-upgrade-helper
 
-call docker-compose run -p 3000:3000 -p 4000-4004:4000-4004  %UIUH_DEV_CMD% %INPUT_FOLDER_CMD% %OUTPUT_FOLDER_CMD%  --name spm-ui-upgrade-helper spm-ui-upgrade-helper
+call docker-compose up --no-build -p 3000:3000 -p 4000-4004:4000-4004  %UIUH_DEV_CMD% %INPUT_FOLDER_CMD% %OUTPUT_FOLDER_CMD%  --name spm-ui-upgrade-helper spm-ui-upgrade-helper
 endlocal
