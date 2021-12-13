@@ -53,7 +53,7 @@ docker image rm -f whgovspm/spm-ui-upgrade-helper:$VERSION
 
 docker-compose up --no-build
 docker-compose build
-docker-compose up $DETACH_CMD -p 3000:3000 -p 4000:4000 \
+docker-compose run $DETACH_CMD -p 3000:3000 -p 4000:4000 \
     $UIUH_DEV_CMD \
     $INPUT_FOLDER_CMD \
     $OUTPUT_FOLDER_CMD \
