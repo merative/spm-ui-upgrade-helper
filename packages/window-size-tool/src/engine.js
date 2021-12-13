@@ -117,7 +117,9 @@ function checkRule(node, rule, verbose = true, domainCheckPass = false) {
   } else if (!rule) {
     throw Error("You must supply a rules object");
   }
-  if (rule.containsAllowedDomainsOnly === true) {
+  console.log("rule.containsAllowedDomainsOnly ", rule.containsAllowedDomainsOnly );
+  console.log("domainCheckPass",domainCheckPass);
+  if (rule.containsAllowedDomainsOnly !== undefined && rule.containsAllowedDomainsOnly === true) {
     // if containsAllowedDomainsOnly set and the check has failed return with failure, ohterwise 
     // check the other rules
     if (!domainCheckPass) {
@@ -173,6 +175,7 @@ function updateWidthOption(
   target,
   usePixelWidths
 ) {
+  console.log("I am updating width", windowOptions.width,"+",target);
   if (!windowOptions) {
     throw Error("You must supply a WINDOW_OPTIONS string");
   } else if (!sizes) {
@@ -187,6 +190,7 @@ function updateWidthOption(
     delete windowOptions.width;
     windowOptions.size = target;
   }
+  console.log("window size", windowOptions.width);
 }
 
 /**
@@ -197,6 +201,7 @@ function updateWidthOption(
  * @param {string} filename Filename of UIM XML document.
  */
 async function checkUIMDomainsAreValidToResizeDown(rootUIMNode, filename) {
+  console.log(" I am in here 2", filename);
   let serverAccessBeans = [];
   let connectionsAreAllowListed = true;
   const fileNameAndExtenionWithoutPath = path.basename(filename);
@@ -206,21 +211,21 @@ async function checkUIMDomainsAreValidToResizeDown(rootUIMNode, filename) {
     rootUIMNode
   );
 
-  const includeVimsXP = xp.select(
-    `//INCLUDE`,
-    rootUIMNode
-  );
+  // const includeVimsXP = xp.select(
+  //   `//INCLUDE`,
+  //   rootUIMNode
+  // );
 
   const vimsToBeProcessed = [];
-  includeVimsXP.forEach((include) => {
-    const vim = path.dirname(filename) + "/" + include.getAttribute("FILE_NAME");
-    if (fs.existsSync(vim))  {
-      vimsToBeProcessed.push(vim);
-    } else {
-       // TODO: How about if the VIM is not in the same directory??
-      console.log("VIM file:" +  vim + "does not exist");
-    }  
-  });
+  // includeVimsXP.forEach((include) => {
+  //   const vim = path.dirname(filename) + "/" + include.getAttribute("FILE_NAME");
+  //   if (fs.existsSync(vim))  {
+  //     vimsToBeProcessed.push(vim);
+  //   } else {
+  //      // TODO: How about if the VIM is not in the same directory??
+  //     console.log("VIM file:" +  vim + "does not exist");
+  //   }  
+  // });
  
 
   severBeanXP.forEach((bean) => {
@@ -231,17 +236,23 @@ async function checkUIMDomainsAreValidToResizeDown(rootUIMNode, filename) {
     });
   });
 
+
   const clusterFieldConnectionsXP= xp.select(
-    `//CLUSTER/FIELD/CONNECT/*`,
+    `(//FIELD | //WIDGET)//CONNECT/*`, // change to include widgets, 
     rootUIMNode
   ); 
 
   let connections=[];
 
+
   clusterFieldConnectionsXP.forEach((connection) => {
+    console.log('1', connection.getAttribute("NAME"));
+    console.log("server I", serverAccessBeans);
     const name= connection.getAttribute("NAME");
     const property = connection.getAttribute("PROPERTY");  
+    console.log("server I", serverAccessBeans);
       serverAccessBeans.forEach((bean) => {
+        console.log("Bean", bean);
         if(name==bean.name){    
              connections.push({
               property: property,
@@ -252,49 +263,55 @@ async function checkUIMDomainsAreValidToResizeDown(rootUIMNode, filename) {
    }); 
   });
 
+  console.log("Aray",connections);
+
+
+
    // Processing VIMS, scope for refactoring here
-   for (let i = 0; i < vimsToBeProcessed.length;i++) {
-    const rootNode = getRootNodeFromUIM(vimsToBeProcessed[i], parserToUse, ioToUse);
-    const severBeanXPForVim= xp.select(
-      `//SERVER_INTERFACE`,
-      rootNode
-    );
-    severBeanXPForVim.forEach((bean) => {
-      const beanName = bean.getAttribute("NAME");
-      if (!serverAccessBeans.find(({name}) => name === beanName)) {
-        serverAccessBeans.push({
-          class: bean.getAttribute("CLASS"),
-          name:bean.getAttribute("NAME"),
-          operation:bean.getAttribute("OPERATION"),
-        });
-      }      
-    });
-    const clusterFieldConnectionsXPForVims = xp.select(
-      `//CLUSTER/FIELD/CONNECT/*`,
-      rootNode
-    );
-    clusterFieldConnectionsXPForVims.forEach((connection) => {
-      const connName= connection.getAttribute("NAME");
-      const connProperty = connection.getAttribute("PROPERTY");
-        serverAccessBeans.forEach((bean) => {
-          if(connName==bean.name){
-            // TODO: Need to check that names don't match either??
-            if (!connections.find(({property}) => property === connProperty)) {    
-               connections.push({
-                property: connProperty,
-                name:bean.class,
-                operation:bean.operation,
-              });
-            }
-         }
-     });
-    });
-  }
+  //  for (let i = 0; i < vimsToBeProcessed.length;i++) {
+  //   const rootNode = getRootNodeFromUIM(vimsToBeProcessed[i], parserToUse, ioToUse);
+  //   const severBeanXPForVim= xp.select(
+  //     `//SERVER_INTERFACE`,
+  //     rootNode
+  //   );
+  //   severBeanXPForVim.forEach((bean) => {
+  //     const beanName = bean.getAttribute("NAME");
+  //     if (!serverAccessBeans.find(({name}) => name === beanName)) {
+  //       serverAccessBeans.push({
+  //         class: bean.getAttribute("CLASS"),
+  //         name:bean.getAttribute("NAME"),
+  //         operation:bean.getAttribute("OPERATION"),
+  //       });
+  //     }      
+  //   });
+  //   const clusterFieldConnectionsXPForVims = xp.select(
+  //     `//CLUSTER/FIELD/CONNECT/*`,
+  //     rootNode
+  //   );
+  //   clusterFieldConnectionsXPForVims.forEach((connection) => {
+  //     const connName= connection.getAttribute("NAME");
+  //     const connProperty = connection.getAttribute("PROPERTY");
+  //       serverAccessBeans.forEach((bean) => {
+  //         if(connName==bean.name){
+  //           // TODO: Need to check that names don't match either??
+  //           if (!connections.find(({property}) => property === connProperty)) {    
+  //              connections.push({
+  //               property: connProperty,
+  //               name:bean.class,
+  //               operation:bean.operation,
+  //             });
+  //           }
+  //        }
+  //    });
+  //   });
+  // }
 
   const connectionPromises = [];
   for(let i=0; i < connections.length; i++){
     const connection = connections[i];
-    const result = await doRequest(connection, fileNameAndExtenionWithoutPath);
+    console.log("connections", connections);
+    let result = await doRequest(connection, fileNameAndExtenionWithoutPath);
+    console.log("Result", result);
     connectionPromises.push({result: result, property: connection.property, filename: fileNameAndExtenionWithoutPath});
   }
 
@@ -309,6 +326,7 @@ async function checkUIMDomainsAreValidToResizeDown(rootUIMNode, filename) {
   // connections are allow listed and number of connections is bigger than 0
   const connectionsNotEmotyAndAllowed = connections.length > 0 && connectionsAreAllowListed == true;
   //return connectionsNotEmotyAndAllowed; 
+
   return {pass: connectionsNotEmotyAndAllowed, vims: vimsToBeProcessed}; 
 }
 
@@ -353,6 +371,8 @@ function applyRule(
     console.debug(`filename: ${chalk.cyan(filename)}`);
   }
 
+  console.log("I am going to that rules", filename);
+
   let hasChanges = false;
   rules.forEach((rule, index) => {
    
@@ -361,7 +381,9 @@ function applyRule(
         console.debug(`rule: ${chalk.yellow(index + 1)}`);
       }
 
+
       if (checkPageWidth(pageNode, rule.width, verbose)) {
+        console.log(rule.width);
         const pass = checkRule(pageNode, rule, verbose, domainsCheckPass);
 
         if (pass) {        
@@ -371,6 +393,7 @@ function applyRule(
           updateWidthOption(windowOptions, sizes, rule.target, usePixelWidths);
 
           setPageOptions(pageNode, windowOptions);
+          console.log("windowOption", windowOptions);
         }
       }
 
@@ -431,7 +454,7 @@ function getRootNodeFromUIM(file, parser, io) {
  * @returns A list of files that have met the rules criteria and had their
  * width's updated.
  */
-function applyRules(
+async function applyRules(
   files,
   rules,
   sizes,
@@ -480,15 +503,19 @@ function applyRules(
     };
   });
 
-  uims.forEach(async({ document, file }) => {
-    const fileExtension = path.extname(file);
+//  uims.forEach(async({ document, file }) => {
+  for (let i=0; i<uims.length; i++){
+    console.log("UIM",uims[i]);
+    const fileExtension = path.extname(uims[i].file);
     // only do domain check for UIM files (Need to update) and if this flag is set. If tthe flag not set the check always passes
-    const domainCheckPassed = checkAllowedDomainsForResizing ? await checkUIMDomainsAreValidToResizeDown(document.documentElement, file) : true;
-
+    const domainCheckPassed = checkAllowedDomainsForResizing ? await checkUIMDomainsAreValidToResizeDown(uims[i].document.documentElement, uims[i].file) : true;
+    // const domainCheckPassed =true;
+    console.log("checkAllowedDomainsForResizing ",checkAllowedDomainsForResizing );
+    console.log("domainCheckPassed",domainCheckPassed);
     if (fileExtension === ".uim") {
       const hasChanges = applyRule(
-        document,
-        file,
+        uims[i].document,
+        uims[i].file,
         rules,
         sizes,
         pagedictionary,
@@ -496,17 +523,20 @@ function applyRules(
         verbose,
         domainCheckPassed.pass || domainCheckPassed
       );
+      console.log("hasChanges", hasChanges);
   
       // Only mark the files as 'for writing' if the contents changed
       if (hasChanges === true) {
-        results[file] = serializer.serializeToString(document);
+        results[uims[i].file] = serializer.serializeToString(uims[i].document);
+        console.log("serialize",  results[uims[i].file]);
       }
+      console.log("done with uim", results);
   
     }
 
     // Process VIMS
-    const vims = domainCheckPassed.vims;
-    if (vims.length > 0) {
+    // const vims = domainCheckPassed.vims;
+    // if (vims.length > 0) {
       // vims.forEach((vimFile) => {
       //   const vimDocument = getDocumentFromUIM(vimFile, parser, io);
       //   const vimHasChanges = applyRule(
@@ -524,9 +554,11 @@ function applyRules(
       //     results[vimFile] = serializer.serializeToString(vimDocument);
       //   }
       // });
-    }
-  });
+    // }
+  // });
+  }
 
+console.log("final rsult", results);
   return results;
 }
 
