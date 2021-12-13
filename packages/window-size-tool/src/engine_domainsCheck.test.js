@@ -6,6 +6,8 @@ const xmldom = require("xmldom");
 const utils = require("../../shared-utils/sharedUtils.js");
 const fileio = { readLines: utils.readLines };
 
+//jest.setTimeout(8000);
+
 
 const {
   applyRules,
@@ -14,6 +16,7 @@ const {
 } = require("./engine");
 
 const testDirectory = path.join(__dirname, "../test-data-domainsCheck");
+//const testDirectory = path.join(__dirname, "../test-data-domainsCheck");
 
 const testFiles = [];
 fs.readdirSync(testDirectory).forEach(file => {
@@ -100,16 +103,27 @@ describe("applyRules, domainCheck", () => {
   ];
   
 
-  test("domainCheck for all rules on all files in test folder", () => {
+  test("domainCheck for all rules on all files in test folder",  done => {
       let serilizationCalls = 0;
-       const mockSerializeToString = function() {
+      let uimsSerialized = [];
+       const mockSerializeToString = function(document) {
+         uimsSerialized.push(document.documentElement.getAttribute("PAGE_ID"));
          serilizationCalls ++;
        };
         const serializer = {
           serializeToString: mockSerializeToString,
         };
-      
+
         applyRules(testFiles, rules, sizes, fileio, parser, serializer, true, true);
+      
+        setTimeout(function() {
+         expect(serilizationCalls).toEqual(2);
+
+         expect(uimsSerialized[0]).toEqual("AllAllowed_TwoSourceConnections");
+         expect(uimsSerialized[1]).toEqual("AllAllowed_SourceConnectionsWithVims");
+          done();
+        }, 300);
+      
        
-  });
+  });   
 });
