@@ -14,4 +14,6 @@
 - title: Manually upgrading fonts
   pages:
     - path: /customer/customer_font_replacement
-
+- title: Feedback
+  pages:
+    - path: /contact/contact_us
