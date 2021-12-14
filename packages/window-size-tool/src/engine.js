@@ -190,7 +190,7 @@ function updateWidthOption(
     delete windowOptions.width;
     windowOptions.size = target;
   }
-  console.log("window size", windowOptions.width);
+ // console.log("window size", windowOptions.width);
 }
 
 /**
@@ -252,7 +252,6 @@ async function checkUIMDomainsAreValidToResizeDown(rootUIMNode, filename) {
     const property = connection.getAttribute("PROPERTY");  
     console.log("server I", serverAccessBeans);
       serverAccessBeans.forEach((bean) => {
-        console.log("Bean", bean);
         if(name==bean.name){    
              connections.push({
               property: property,
@@ -263,7 +262,7 @@ async function checkUIMDomainsAreValidToResizeDown(rootUIMNode, filename) {
    }); 
   });
 
-  console.log("Aray",connections);
+  //console.log("Aray",connections);
 
 
 
@@ -309,9 +308,7 @@ async function checkUIMDomainsAreValidToResizeDown(rootUIMNode, filename) {
   const connectionPromises = [];
   for(let i=0; i < connections.length; i++){
     const connection = connections[i];
-    console.log("connections", connections);
     let result = await doRequest(connection, fileNameAndExtenionWithoutPath);
-    console.log("Result", result);
     connectionPromises.push({result: result, property: connection.property, filename: fileNameAndExtenionWithoutPath});
   }
 
@@ -371,7 +368,6 @@ function applyRule(
     console.debug(`filename: ${chalk.cyan(filename)}`);
   }
 
-  console.log("I am going to that rules", filename);
 
   let hasChanges = false;
   rules.forEach((rule, index) => {
@@ -393,7 +389,6 @@ function applyRule(
           updateWidthOption(windowOptions, sizes, rule.target, usePixelWidths);
 
           setPageOptions(pageNode, windowOptions);
-          console.log("windowOption", windowOptions);
         }
       }
 
@@ -505,7 +500,7 @@ async function applyRules(
 
 //  uims.forEach(async({ document, file }) => {
   for (let i=0; i<uims.length; i++){
-    console.log("UIM",uims[i]);
+    //console.log("UIM",uims[i]);
     const fileExtension = path.extname(uims[i].file);
     // only do domain check for UIM files (Need to update) and if this flag is set. If tthe flag not set the check always passes
     const domainCheckPassed = checkAllowedDomainsForResizing ? await checkUIMDomainsAreValidToResizeDown(uims[i].document.documentElement, uims[i].file) : true;
@@ -530,7 +525,7 @@ async function applyRules(
         results[uims[i].file] = serializer.serializeToString(uims[i].document);
         console.log("serialize",  results[uims[i].file]);
       }
-      console.log("done with uim", results);
+      //console.log("done with uim", results);
   
     }
 
@@ -558,7 +553,7 @@ async function applyRules(
   // });
   }
 
-console.log("final rsult", results);
+console.log("final result", results);
   return results;
 }
 
