@@ -2,17 +2,22 @@
 title: Running the tools
 ---
 
-When you have configured your input and output folders with the required permissions, you can run the tools.
+Complete the following steps to run the tool and implement any required changes.
 
-Before you begin, remember that `<output folder>` will be wiped, so be careful!
+    <InlineNotification>
 
-1. Start the tool:
+    Warning: Remember that the temporary output folder is wiped when the UI Upgrade Helper runs. Do not point it at your v8 environment.
+
+    </InlineNotification>
+
+1. Run `chmod -R 777 <output folder>`so that Docker can interact with the temporary output folder. For example, `c:\temp\upgrade` or `/tmp/upgrade`.
+2. Run the tool:
     - (Windows ™️) `spm-ui-upgrade-helper.bat <version> <input folder> <output folder>` 
     - (Linux ®️) `./spm-ui-upgrade-helper.sh <version> <input folder> <output folder>` 
     - Where:
         - `<version>` is typically "latest".
         - `<input folder>` is the absolute path to the root of your 7.0.11.0 development environment.
-        - `<output folder>` is the absolute path to your temporary folder. For example, `c:\temp\upgrade` or `/tmp/upgrade`. Run `chmod -R 777 <output folder>`           so that Docker can interact with the output folder.
+        - `<output folder>` is the absolute path to your temporary output folder.
 2. Open your browser to http://localhost:3000.
 3. Press `F1` or `cmd + shift + p`.
 4. Type "Run SPM UI Upgrade Helper" and click on the shortcut. The files in `<input folder>` are scanned and the results are placed in `<output folder>`.
