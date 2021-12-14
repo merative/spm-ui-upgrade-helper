@@ -26,17 +26,14 @@ if "%OUTPUT_FOLDER%" == "" (
   set OUTPUT_FOLDER=C:\git\spm-ui-upgrade-helper\workspace\output
 )
 
-set INPUT_FOLDER_CMD=-v %INPUT_FOLDER%:/home/workspace/input
-set OUTPUT_FOLDER_CMD=-v %OUTPUT_FOLDER%:/home/workspace/output
-
 echo Starting spm-ui-upgrade-helper
 echo.
 echo     VERSION = %VERSION%
-echo     INPUT_FOLDER_CMD = %INPUT_FOLDER_CMD%
-echo     OUTPUT_FOLDER_CMD = %OUTPUT_FOLDER_CMD%
+echo     INPUT_FOLDER = %INPUT_FOLDER%
+echo     OUTPUT_FOLDER= %OUTPUT_FOLDER_CMD%
 echo.
 
 call docker-compose rm -f -s -v  spm-ui-upgrade-helper
 
-call docker-compose up --no-build -p 3000:3000 -p 4000-4004:4000-4004  %UIUH_DEV_CMD% %INPUT_FOLDER_CMD% %OUTPUT_FOLDER_CMD%  --name spm-ui-upgrade-helper spm-ui-upgrade-helper
+call docker-compose run -p 3000:3000 -p 4000-4004:4000-4004  %UIUH_DEV_CMD% --name spm-ui-upgrade-helper spm-ui-upgrade-helper
 endlocal
