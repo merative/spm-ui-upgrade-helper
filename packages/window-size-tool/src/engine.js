@@ -118,15 +118,17 @@ function checkRule(node, rule, verbose = true, domainCheckPass = false) {
     throw Error("You must supply a rules object");
   }
   if (rule.containsAllowedDomainsOnly !== undefined && rule.containsAllowedDomainsOnly === true) {
+    console.log('domainCheckPass',domainCheckPass);
     // if containsAllowedDomainsOnly set and the check has failed return with failure, ohterwise 
     // check the other rules
-    if (!domainCheckPass) {
+    if (domainCheckPass===false) { 
       return;
     }
   }
+  console.log('domainCheckPass-----', pass);
   if (rule.anyTerms.length > 0) {
   rule.anyTerms.forEach((term) => {
-    if (!pass) {
+    if (!pass) { console.log("1");
       const result = xp.select(term, node);
 
       pass = pass || result;
@@ -144,7 +146,7 @@ function checkRule(node, rule, verbose = true, domainCheckPass = false) {
       pass = true;
     }
     if (pass == true){
-        rule.allTerms.forEach((term) => {
+        rule.allTerms.forEach((term) => {console.log("2");
         if (pass) {
           const result2 = xp.select(term, node);
           pass = result2;
@@ -314,7 +316,7 @@ async function checkUIMDomainsAreValidToResizeDown(rootUIMNode, filename) {
   const connectionsNotEmotyAndAllowed = connections.length > 0 && connectionsAreAllowListed == true;
   //return connectionsNotEmotyAndAllowed; 
 
-  return {pass: connectionsNotEmotyAndAllowed, vims: vimsToBeProcessed}; 
+  return connectionsNotEmotyAndAllowed; 
 }
 
 /**
@@ -497,7 +499,7 @@ async function applyRules(
         pagedictionary,
         usePixelWidths,
         verbose,
-        domainCheckPassed.pass || domainCheckPassed
+        domainCheckPassed
       ); 
       // Only mark the files as 'for writing' if the contents changed
       if (hasChanges === true) {
