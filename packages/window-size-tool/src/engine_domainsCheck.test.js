@@ -63,24 +63,24 @@ describe("checkUIMDomainsAreValidToResizeDown", () => {
       testFile = files[1];
       rootNode = getRootNodeFromUIM(testFile, parser, fileio);
       domainsCheckPassed = await checkUIMDomainsAreValidToResizeDown(rootNode, testFile);
-      expect(domainsCheckPassed).toEqual({"pass": true, "vims": []});
+      expect(domainsCheckPassed).toEqual(true);
      
 
       testFile = files[2];  
       rootNode = getRootNodeFromUIM(testFile, parser, fileio);
       domainsCheckPassed = await checkUIMDomainsAreValidToResizeDown(rootNode, testFile);
-      expect(domainsCheckPassed).toEqual({"pass": true, "vims": []});
+      expect(domainsCheckPassed).toEqual(true);
 
 
       testFile = files[3];
       rootNode = getRootNodeFromUIM(testFile, parser, fileio);
       domainsCheckPassed = await checkUIMDomainsAreValidToResizeDown(rootNode, testFile);
-      expect(domainsCheckPassed).toEqual({"pass": false, "vims": []});
+      expect(domainsCheckPassed).toEqual(false);
       
       testFile = files[4];
       rootNode = getRootNodeFromUIM(testFile, parser, fileio);
       domainsCheckPassed = await checkUIMDomainsAreValidToResizeDown(rootNode, testFile);
-      expect(domainsCheckPassed).toEqual({"pass": false, "vims": []});
+      expect(domainsCheckPassed).toEqual(false);
   });
 });
 
@@ -117,12 +117,10 @@ describe("applyRules, domainCheck", () => {
         applyRules(testFiles, rules, sizes, fileio, parser, serializer, true, true);
       
         setTimeout(function() {
-         expect(serilizationCalls).toEqual(4);
+         expect(serilizationCalls).toEqual(2);
 
          expect(uimsSerialized[0]).toEqual("One");
          expect(uimsSerialized[1]).toEqual("AllAllowed_TwoSourceConnections");
-         expect(uimsSerialized[2]).toEqual("NoneAllowed_OneSourceConnection");
-         expect(uimsSerialized[3]).toEqual("SomeAllowed_MultipleSourceConnections");
           done();
         }, 300);
       
