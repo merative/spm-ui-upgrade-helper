@@ -117,8 +117,6 @@ function checkRule(node, rule, verbose = true, domainCheckPass = false) {
   } else if (!rule) {
     throw Error("You must supply a rules object");
   }
-  console.log("rule.containsAllowedDomainsOnly ", rule.containsAllowedDomainsOnly );
-  console.log("domainCheckPass",domainCheckPass);
   if (rule.containsAllowedDomainsOnly !== undefined && rule.containsAllowedDomainsOnly === true) {
     // if containsAllowedDomainsOnly set and the check has failed return with failure, ohterwise 
     // check the other rules
@@ -126,6 +124,7 @@ function checkRule(node, rule, verbose = true, domainCheckPass = false) {
       return;
     }
   }
+  if (rule.anyTerms.length > 0) {
   rule.anyTerms.forEach((term) => {
     if (!pass) {
       const result = xp.select(term, node);
@@ -137,8 +136,12 @@ function checkRule(node, rule, verbose = true, domainCheckPass = false) {
           ` term:  ${
             result ? chalk.green(`${result} `) : chalk.red(result)
           } <- [${chalk.magenta(term)}]`
-        );
+          );
+        }
       }
+     });
+    } else if (rule.allTerms.length > 0) {
+      pass = true;
     }
     if (pass == true){
         rule.allTerms.forEach((term) => {
@@ -155,7 +158,6 @@ function checkRule(node, rule, verbose = true, domainCheckPass = false) {
         }
       });
     }
-  });
   return pass;
 }
 
@@ -175,7 +177,6 @@ function updateWidthOption(
   target,
   usePixelWidths
 ) {
-  console.log("I am updating width", windowOptions.width,"+",target);
   if (!windowOptions) {
     throw Error("You must supply a WINDOW_OPTIONS string");
   } else if (!sizes) {
@@ -190,7 +191,6 @@ function updateWidthOption(
     delete windowOptions.width;
     windowOptions.size = target;
   }
- // console.log("window size", windowOptions.width);
 }
 
 /**
@@ -201,7 +201,6 @@ function updateWidthOption(
  * @param {string} filename Filename of UIM XML document.
  */
 async function checkUIMDomainsAreValidToResizeDown(rootUIMNode, filename) {
-  console.log(" I am in here 2", filename);
   let serverAccessBeans = [];
   let connectionsAreAllowListed = true;
   const fileNameAndExtenionWithoutPath = path.basename(filename);
@@ -236,7 +235,6 @@ async function checkUIMDomainsAreValidToResizeDown(rootUIMNode, filename) {
     });
   });
 
-
   const clusterFieldConnectionsXP= xp.select(
     `(//FIELD | //WIDGET)//CONNECT/*`, // change to include widgets, 
     rootUIMNode
@@ -244,13 +242,9 @@ async function checkUIMDomainsAreValidToResizeDown(rootUIMNode, filename) {
 
   let connections=[];
 
-
   clusterFieldConnectionsXP.forEach((connection) => {
-    console.log('1', connection.getAttribute("NAME"));
-    console.log("server I", serverAccessBeans);
     const name= connection.getAttribute("NAME");
     const property = connection.getAttribute("PROPERTY");  
-    console.log("server I", serverAccessBeans);
       serverAccessBeans.forEach((bean) => {
         if(name==bean.name){    
              connections.push({
@@ -262,11 +256,7 @@ async function checkUIMDomainsAreValidToResizeDown(rootUIMNode, filename) {
    }); 
   });
 
-  //console.log("Aray",connections);
-
-
-
-   // Processing VIMS, scope for refactoring here
+  // Processing VIMS, scope for refactoring here
   //  for (let i = 0; i < vimsToBeProcessed.length;i++) {
   //   const rootNode = getRootNodeFromUIM(vimsToBeProcessed[i], parserToUse, ioToUse);
   //   const severBeanXPForVim= xp.select(
@@ -368,7 +358,6 @@ function applyRule(
     console.debug(`filename: ${chalk.cyan(filename)}`);
   }
 
-
   let hasChanges = false;
   rules.forEach((rule, index) => {
    
@@ -377,9 +366,7 @@ function applyRule(
         console.debug(`rule: ${chalk.yellow(index + 1)}`);
       }
 
-
       if (checkPageWidth(pageNode, rule.width, verbose)) {
-        console.log(rule.width);
         const pass = checkRule(pageNode, rule, verbose, domainsCheckPass);
 
         if (pass) {        
@@ -420,7 +407,6 @@ function applyRule(
   });
   return hasChanges;
 }
-
 
 function getDocumentFromUIM(file, parser, io) {
   const contents = io.readLines(file).join("\n");
@@ -498,15 +484,10 @@ async function applyRules(
     };
   });
 
-//  uims.forEach(async({ document, file }) => {
-  for (let i=0; i<uims.length; i++){
-    //console.log("UIM",uims[i]);
+  for (let i=0; i<uims.length; i++ ){
     const fileExtension = path.extname(uims[i].file);
     // only do domain check for UIM files (Need to update) and if this flag is set. If tthe flag not set the check always passes
     const domainCheckPassed = checkAllowedDomainsForResizing ? await checkUIMDomainsAreValidToResizeDown(uims[i].document.documentElement, uims[i].file) : true;
-    // const domainCheckPassed =true;
-    console.log("checkAllowedDomainsForResizing ",checkAllowedDomainsForResizing );
-    console.log("domainCheckPassed",domainCheckPassed);
     if (fileExtension === ".uim") {
       const hasChanges = applyRule(
         uims[i].document,
@@ -517,16 +498,11 @@ async function applyRules(
         usePixelWidths,
         verbose,
         domainCheckPassed.pass || domainCheckPassed
-      );
-      console.log("hasChanges", hasChanges);
-  
+      ); 
       // Only mark the files as 'for writing' if the contents changed
       if (hasChanges === true) {
         results[uims[i].file] = serializer.serializeToString(uims[i].document);
-        console.log("serialize",  results[uims[i].file]);
       }
-      //console.log("done with uim", results);
-  
     }
 
     // Process VIMS
@@ -552,8 +528,7 @@ async function applyRules(
     // }
   // });
   }
-
-console.log("final result", results);
+  console.log("final result", results);
   return results;
 }
 

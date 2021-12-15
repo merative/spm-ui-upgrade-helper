@@ -8,14 +8,13 @@ let req;
  */
  const doRequest =(connection, filename) => new Promise(function(resolve,reject){
    let newFlag=true;
-   console.log("THE REAL ONE");
       req = http.get( `http://spm-ui-upgrade-helper_nodefront:4005/full/${connection.property}/${connection.operation}/${connection.name}`, res => {
           console.log("----------------------------");
           console.log("File name", filename);
           console.log("Property:  ", connection.property);
-          console.log ("Class: ", connection.name);
-          console.log ("Operation: ", connection.operation);
-          console.log ("----------------------------");
+          console.log("Class: ", connection.name);
+          console.log("Operation: ", connection.operation);
+          console.log("----------------------------");
           res.on('data', d => {
               responseAsJson = JSON.parse(d.toString());  
               whitelisted = responseAsJson.whitelisted;
@@ -34,8 +33,6 @@ let req;
         }) 
         req.end();
   })
-
-
 
 module.exports = {
   doRequest
