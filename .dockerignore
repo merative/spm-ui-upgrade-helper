@@ -1,8 +1,8 @@
-**/node_modules
-Dockerfile
-*.xlsx
-/_notes/
-/_old/
-/_scripts/
-**/yarn-error.log
-*.bat
+# **/node_modules
+# Dockerfile
+# *.xlsx
+# /_notes/
+# /_old/
+# /_scripts/
+# **/yarn-error.log
+# *.bat
