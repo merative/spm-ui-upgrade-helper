@@ -673,52 +673,56 @@ describe("applyRules", () => {
     xp.select.mockReset();
   });
 
-  test("should throw an error when no files are passed", () => {
-    const actual = () => applyRules();
-
-    expect(actual).toThrow();
+  test("should throw an error when no files are passed", async () => {
+     let error;
+     try{ await applyRules(files);} catch (e){ error = e;}
+     expect(error).toEqual(new Error("files is not defined"));
   });
 
-  test("should throw an error when no rules is passed", () => {
-    const files = [];
-    const actual = () => applyRules(files);
+  test("should throw an error when no rules is passed", async () => {
+     const files = [];
+     let error;
+     try{ await applyRules(files);} catch (e){ error = e;}
+     expect(error).toEqual(new Error("You must supply a rules array"));
+   });
 
-    expect(actual).toThrow();
+  test("should throw an error when no sizes are passed", async () => {
+     const files = [];
+     const rules =[];
+     let error;
+     try{ await applyRules(files, rules);} catch (e){ error = e;}
+     expect(error).toEqual(new Error("You must supply a size object"));
+ });
+
+
+  test("should throw an error when no io is passed", async () => {
+    const files = [];
+    const rules =[];
+    const size ="md";
+    let error;
+    try{ await applyRules(files, rules, size);} catch (e){ error = e;}
+    expect(error).toEqual(new Error("You must supply an io object"));
   });
 
-  test("should throw an error when no sizes are passed", () => {
+  test("should throw an error when no parser is passed", async () => {
     const files = [];
-    const rules = [];
-    const actual = () => applyRules(files, rules);
-
-    expect(actual).toThrow();
-  });
-
-  test("should throw an error when no io is passed", () => {
-    const files = [];
-    const rules = [];
-    const actual = () => applyRules(files, rules, sizes);
-
-    expect(actual).toThrow();
-  });
-
-  test("should throw an error when no parser is passed", () => {
-    const files = [];
-    const rules = [];
+    const rules =[];
+    const size ="md";
     const io = {};
-    const actual = () => applyRules(files, rules, sizes, io);
-
-    expect(actual).toThrow();
+    let error;
+    try{ await applyRules(files, rules, size, io);} catch (e){ error = e;}
+    expect(error).toEqual(new Error("You must supply an parser object"));
   });
 
-  test("should throw an error when no serializer is passed", () => {
+  test("should throw an error when no serializer is passed", async  () => {
     const files = [];
-    const rules = [];
+    const rules =[];
+    const size ="md";
     const io = {};
-    const parser = {};
-    const actual = () => applyRules(files, rules, sizes, io, parser);
-
-    expect(actual).toThrow();
+    const parser ={};
+    let error;
+    try{ await applyRules(files, rules, size, io, parser);} catch (e){ error = e;}
+    expect(error).toEqual(new Error("You must supply an serializer object"));
   });
 
   test("should serialize UIM documents to strings when the document matches the rules", () => {

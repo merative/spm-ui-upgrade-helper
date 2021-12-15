@@ -117,10 +117,12 @@ describe("applyRules, domainCheck", () => {
         applyRules(testFiles, rules, sizes, fileio, parser, serializer, true, true);
       
         setTimeout(function() {
-         expect(serilizationCalls).toEqual(2);
+         expect(serilizationCalls).toEqual(4);
 
-         expect(uimsSerialized[0]).toEqual("AllAllowed_TwoSourceConnections");
-         expect(uimsSerialized[1]).toEqual("AllAllowed_SourceConnectionsWithVims");
+         expect(uimsSerialized[0]).toEqual("One");
+         expect(uimsSerialized[1]).toEqual("AllAllowed_TwoSourceConnections");
+         expect(uimsSerialized[2]).toEqual("NoneAllowed_OneSourceConnection");
+         expect(uimsSerialized[3]).toEqual("SomeAllowed_MultipleSourceConnections");
           done();
         }, 300);
       
