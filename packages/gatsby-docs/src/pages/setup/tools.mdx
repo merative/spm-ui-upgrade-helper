@@ -114,7 +114,7 @@ Where:
 - The `width` parameter is the modal width in pixels. This value is compared to the WINDOW_OPTIONS attribute of any <PAGE> or <LINK> elements found.
 - The `anyTerms` array defines [XPath](https://developer.mozilla.org/en-US/docs/Web/XPath) expressions that are run against each UIM file that matches the `width` expression. If any of the expressions are true, and all other rule criteria are met, the size of the UIM file is updated.
 - The `allTerms` array defines XPath expressions that are run against each UIM file that matches the `width` expression. If all of the expressions are true, and all other rule criteria is met, the size of that UIM file is updated.
-- The `containsAllowedDomainsOnly`  parameter is set to true, so all domains rendered in the file must be on the allow list. The default value is false.
+- The `containsAllowedDomainsOnly`  parameter is set to true, so all domains that are rendered in the file must be on the allow list. The default value is false.
 - The `target` parameter is the new modal size: `xs` for extra-small, `sm` for small, `md` for medium/default, `lg` for large and `xlg` for extra-large.
 
 After Window Size Tool runs, the changes that you see are pixel values, such as 700, rather than a size name, such as `sm`.
