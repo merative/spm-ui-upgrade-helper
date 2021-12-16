@@ -100,7 +100,7 @@ Where:
 - The `allTerms` array defines XPath expressions that are run against each UIM file that matches the `width` expression. If all of the expressions are true, and all other rule criteria is met, the size of that UIM file is updated.
 - The `target` parameter is the new modal size: `xs` for extra-small, `sm` for small, `md` for medium/default, `lg` for large and `xlg` for extra-large.
 
-After Window Size Tool runs, the changes you see are pixel values, such as 700, rather than a size name, such as 'sm'.
+After Window Size Tool runs, the changes that you see are pixel values, such as 700, rather than a size name, such as `sm`.
 As WINDOW_OPTIONS in UIM are expressed as pixels, each target size is translated to a pixel width value that is used to set the WINDOW_OPTIONS attribute, see [packages/window-size-tool/sizes.js](https://github.com/IBM/spm-ui-upgrade-helper/blob/main/packages/window-size-tool/sizes.js). The UIM rendering framework maps the pixel value of WINDOW_OPTIONS to a Carbon modal size when rendering. For more information about the mappings from WINDOW_OPTIONS to Carbon modal sizes, see [PAGE element](https://www.ibm.com/docs/en/spm/8.0.1?topic=reference-page-element).
 
 ### Icon Replacer Tool
