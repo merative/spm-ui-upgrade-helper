@@ -29,7 +29,7 @@ let ioToUse = null;
  */
 function checkWidth(width, rule, verbose = true) {
   if (!width) {
-    throw Error("You must supply a width");
+    throw Error("You must supply a width ");
   } else if (!rule) {
     throw Error("You must supply a rules string");
   }
