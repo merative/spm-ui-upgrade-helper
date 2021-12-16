@@ -118,17 +118,15 @@ function checkRule(node, rule, verbose = true, domainCheckPass = false) {
     throw Error("You must supply a rules object");
   }
   if (rule.containsAllowedDomainsOnly !== undefined && rule.containsAllowedDomainsOnly === true) {
-    console.log('domainCheckPass',domainCheckPass);
     // if containsAllowedDomainsOnly set and the check has failed return with failure, ohterwise 
     // check the other rules
     if (domainCheckPass===false) { 
       return;
     }
   }
-  console.log('domainCheckPass-----', pass);
   if (rule.anyTerms.length > 0) {
   rule.anyTerms.forEach((term) => {
-    if (!pass) { console.log("1");
+    if (!pass) { 
       const result = xp.select(term, node);
 
       pass = pass || result;
@@ -146,7 +144,7 @@ function checkRule(node, rule, verbose = true, domainCheckPass = false) {
       pass = true;
     }
     if (pass == true){
-        rule.allTerms.forEach((term) => {console.log("2");
+        rule.allTerms.forEach((term) => {
         if (pass) {
           const result2 = xp.select(term, node);
           pass = result2;
@@ -530,7 +528,6 @@ async function applyRules(
     // }
   // });
   }
-  console.log("final result", results);
   return results;
 }
 
