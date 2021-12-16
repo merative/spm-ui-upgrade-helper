@@ -77,9 +77,7 @@ The window sizing rules define the criteria that are used to identify UIMs to re
 
 #### Example rules
 
-The first rule finds UIM files that contain modals with a width of 576px or lower (x-small or small modals), and contain either a two-column cluster or a four-column list, and changes the size to medium (`700` in the code).
-
-The second rule finds UIM files that contains modals with a width between 576 and 769 pixels ('medium' sized modals) and doesn't contain any clusters with more than one column, lists with more than two columns, includes of other files, and isn't part of a wizard. In addition, all domains that are rendered by this UIM file must be on the domain allow list to allow this file be modified. 
+This rule finds UIM files that contain modals with a width of 576px or lower (x-small or small modals), and contain either a two-column cluster or a four-column list, and changes the size to medium (`700` in the code).
 
 ```
   {
@@ -94,6 +92,11 @@ The second rule finds UIM files that contains modals with a width between 576 an
      ],
     "target": "md"
   },
+```
+
+This rule rule finds UIM files that contains modals with a width between 576 and 769 pixels ('medium' sized modals) and doesn't contain any clusters with more than one column, lists with more than two columns, includes of other files, and isn't part of a wizard. In addition, all domains that are rendered by this UIM file must be on the domain allow list to allow this file be modified. 
+
+```
   {
     "width": "> 576 and <= 768",
     "anyTerms": [],
