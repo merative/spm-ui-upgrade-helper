@@ -2,6 +2,8 @@
 title: Replacing font-faces in SPM
 ---
 
+If you use Social Program Management font-faces in your CSS, you must complete the following manual steps to update the font-faces.
+
 ## Documentation ID
 
 259811
@@ -85,7 +87,7 @@ For example, the following table shows the change needed for a medium weighted f
 | Change from literal fonts in the font attribute to inheriting the font family from the internal infrastructure property | font: 15px HelvNeueMediumforIBM,Arial,sans-serif; | font: 15px $infrastructure_main-regular_font-family; |
 | Change from literal fonts in the font-family attribute to inheriting the font family from the internal infrastructure property | font-family: HelvNeueMediumforIBM,Arial,sans-serif; | font-family: $infrastructure_main-regular_font-family;
 
-See below a list of the available weights and properties that can be used in your (non-IEG) CSS.
+See this list of the available weights and properties that can be used in your (non-IEG) CSS.
 
 | Font weight | Template Engine Property for font-family |
 | ----------- | ---------------------------------------- |
@@ -97,7 +99,7 @@ The value for these properties is defined in SPM and should not be changed for a
 
 ### Verification
 
-On completion of the above upgrade steps there should be no instances of the pattern "HelvNeue*forIBM" in the CSS associated with the SPM application. In order to verify the changes have been made correctly, load the application pages that use the affected CSS and inspect the affected elements using the browser development tools.
+On completion of the above upgrade steps, there should be no instances of the pattern "HelvNeue*forIBM" in the CSS associated with the SPM application. In order to verify the changes have been made correctly, load the application pages that use the affected CSS and inspect the affected elements using the browser development tools.
 
 The font or font-family attributes should now be using one of the new SPM font-faces. 
 
@@ -108,6 +110,6 @@ If you implemented option 2b, then the font or font-family attributes value shou
 | Regular | infrastructure_main-regular_font-family | MainRegularFontforIBM, 'Helvetica Neue', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Droid Sans', Helvetica, Arial, sans-serif |
 | Bold | infrastructure_main-bold_font-family | MainBoldFontforIBM, 'Helvetica Neue', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Droid Sans', Helvetica, Arial, sans-serif |
 
-These font family values are the SPM values for v8.0 and are subject to change in future releases. The release notes should be consulted for details of these changes.
+These font family values are the SPM values for v8.0 and are subject to change in future releases. For more information about these changes, see the release notes.
 
-Using the browsers development tools, verify that the computed font is one of the expected Main*FontforIBM fonts, where the weight matches that of the previously used font-face.
+Using browser development tools, verify that the computed font is one of the expected Main*FontforIBM fonts, where the weight matches that of the previously used font-face.
