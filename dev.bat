@@ -35,6 +35,5 @@ echo.
 
 call docker-compose rm -f -s -v 
 
-call docker-compose up --no-build 
-
+call docker-compose run -p 3000:3000 -p 4000-4004:4000-4004  %UIUH_DEV_CMD% --name spm-ui-upgrade-helper spm-ui-upgrade-helper
 endlocal
