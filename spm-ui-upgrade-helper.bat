@@ -50,7 +50,6 @@ call docker image rm -f whgovspm/spm-ui-upgrade-helper_beanparser:%VERSION%
 call docker image rm -f whgovspm/spm-ui-upgrade-helper_nodefront:%VERSION%
 call docker image rm -f whgovspm/spm-ui-upgrade-helper:%VERSION%
 
-
 call docker-compose up %DETACH_CMD% --no-build 
 
 endlocal

@@ -51,7 +51,6 @@ docker image rm -f whgovspm/spm-ui-upgrade-helper_beanparser:$VERSION
 docker image rm -f whgovspm/spm-ui-upgrade-helper_nodefront:$VERSION
 docker image rm -f whgovspm/spm-ui-upgrade-helper:$VERSION
 
- 
 docker-compose up $DETACH_CMD --no-build 
 
 if [ "$?" != 0 ]; then echo "Error: Could not run $VERSION version."; exit 1; fi

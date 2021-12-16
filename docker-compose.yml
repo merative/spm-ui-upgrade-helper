@@ -5,11 +5,14 @@ services:
     image: spm-ui-upgrade-helper
     container_name: spm-ui-upgrade-helper
     ports:
-      - "3000:3000"  
+      - "3000:3000"     
     depends_on: 
       - nodefront
     networks:
       - spm-ui-upgrade-helper
+    volumes:
+      - ${INPUT_FOLDER}:/home/workspace/input
+      - ${OUTPUT_FOLDER}:/home/workspace/output
   beanparser:
     build: 
       context: packages/window-size-tool/parser
@@ -34,3 +37,5 @@ services:
       - spm-ui-upgrade-helper
 networks:
  spm-ui-upgrade-helper:
+
+
