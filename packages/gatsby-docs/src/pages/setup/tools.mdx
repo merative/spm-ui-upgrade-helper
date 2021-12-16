@@ -12,8 +12,11 @@ Scans customer stylesheets and updates the CSS selectors to match the changes ma
 
 - Iterates over customer CSS files and applies the rules codified in [packages/css-rules-tool/rules/*.json](https://github.com/IBM/spm-ui-upgrade-helper/tree/main/packages/css-rules-tool/rules).
 
-Example rules file:
+#### Example CSS rules file
 
+In this example, all the values in `SelectorRemove` are deleted. The values in `SelectorReplace` are replaced by `newValue`.
+
+```
     {
       "SelectorRemove": [
         { "value": ".delete-this-selector" },
@@ -27,8 +30,7 @@ Example rules file:
         }
       ]
     }
-
-All of the values in `SelectorRemove` are deleted. The values in `SelectorReplace` are replaced by `newValue`.
+```
 
 #### Ordering of rules
 
@@ -38,36 +40,88 @@ The following steps determine the order of the rules:
 - The rules are sorted by length, with the longest items first, inside each of their respective categories `SelectorRemove` and `SelectorReplace`.
 - The `SelectorRemove` rules are applied first, followed by the `SelectorReplace` rules.
 
-<!--
-
 ### Window Size Tool
 
-Coming soon
+The Window Size Tool scans UIM files and applies rules to change modals to an appropriate size, based on their content. Where appropriate, UIM files are modified to resize modals to one of five sizes. The IBM Social Program Management Modal component in v8.0.1 has five sizes, the four standard [Carbon modal sizes](https://www.carbondesignsystem.com/components/modal/usage/#sizing), 'extra-small', 'small', 'medium', and 'large', and a custom 'extra-large' size. All modified files are listed and displayed in a diff view that shows the previous width value and the new width value. You can keep or discard the changes.
 
-Scans customer UIM files and updates the width of modals that are either too wide or too narrow based on their content.
+The Window Size Tool ignores UIM files that contain certain types of content:
 
-- Iterates over customer UIM files and applies the rules codified in [packages/window-size-tool/rules.json](https://github.com/IBM/spm-ui-upgrade-helper/tree/main/packages/window-size-tool/rules.json).
-- Any given UIM file will only match with one rule, so rule order matters.
+- Wizards.
+- An include of another UIM or VIM file.
+- Optionally, fields that render domains that are not specified in a provided allow list.
 
-Example rules file:
+#### The domain allow list
 
-    // Find UIMs that have a width of 576px or lower, and contains a 2 column CLUSTER or a 4 column LIST, and update it's width to 'md'.
+Some content needs to be displayed on a larger modal and must not be resized. You can use a provided allow list to help you to filter out files that must not be resized. If you set the `containsAllowedDomainsOnly` parameter in a rule, the modal size is only reduced if all of the domains that are rendered in a UIM page are in the allow list.
 
-    {
-      "width": "<= 576",
-      "terms": [
-        "//CLUSTER/@NUM_COLS = 2",
-        "count(//LIST/*) = 4"
-      ],
-      "target": "md"
-    }
+The allow list contains the following field domains:
 
-The `width` expression is used to determine which UIM files to match against (the tool is inspecting the `WINDOW_OPTIONS` attribute of any `<PAGE>` or `<LINK>` elements it finds).
+| Domain | Description |
+|---- | ---- |
+|SVR_STRING | Maps to strings with a length less than 300 to accommodate names, labels and comments. |
+|CODETABLE_CODE | Maps to a dropdown. |
+|SHORT_CODETABLE_CODE | Maps to a Radio button. |
+|SVR_DATETIME | Maps to a date time input. |
+|SVR_DATE | Maps to a date input. |
+|SVR_INT8, SVR_INT16, SVR_INT32, SVR_INT64 | Maps to an integer. |
+|SVR_MONEY | Maps to a money value. |
+|INTERNAL_ID | Maps to an integer. |
+|SVR_BOOLEAN | Maps to a checkbox. |
 
-The `terms` array defines [XPath](https://developer.mozilla.org/en-US/docs/Web/XPath) expressions that are run against each UIM file that matches the `width` expression. If any of the expressions evaluated to `true` the size of that UIM is updated.
+#### Window sizing rules
 
-The `target` value is the new [Carbon modal size](https://www.carbondesignsystem.com/components/modal/style#sizes) category that should be applied to the modal if the `width` and any of the `terms` evaluate to `true`. The pixel values for each size category are codified in [packages/window-size-tool/sizes.js](https://github.com/IBM/spm-ui-upgrade-helper/tree/main/packages/window-size-tool/sizes.js).
--->
+The window sizing rules define the criteria that are used to identify UIMs to resize. Where the rules are matched based on the width and content of a modal, a new size is set.
+
+- The order of the rules is important, as the first rule that matches is applied to each UIM file.
+- The rules for modal width and content are codified in [packages/window-size-tool/rules.json](https://github.com/IBM/spm-ui-upgrade-helper/blob/main/packages/window-size-tool/sizes.js).
+
+#### Example rules
+
+This rule finds UIM files that contain modals with a width of 576px or lower (x-small or small modals), and contain either a two-column cluster or a four-column list, and changes the size to medium (`700` in the code).
+
+```
+  {
+    "width": "<= 576",
+    "anyTerms": [
+      "//CLUSTER/@NUM_COLS = 2", 
+      "count(//LIST[count(FIELD | CONTAINER) = 4]) > 0"
+    ],
+   "allTerms": [
+      "count(//INCLUDE) = 0",
+      "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0" 
+     ],
+    "target": "md"
+  },
+```
+
+This rule rule finds UIM files that contains modals with a width between 576 and 769 pixels ('medium' sized modals) and doesn't contain any clusters with more than one column, lists with more than two columns, includes of other files, and isn't part of a wizard. In addition, all domains that are rendered by this UIM file must be on the domain allow list to allow this file be modified. 
+
+```
+  {
+    "width": "> 576 and <= 768",
+    "anyTerms": [],
+    "allTerms": [
+      "count(//CLUSTER[@NUM_COLS > 1 ]) = 0",
+      "count(//LIST[count(FIELD | CONTAINER) > 2]) = 0",
+      "count(//CLUSTER) > 0 or count(//LIST) > 0",
+      "count(//INCLUDE) = 0",
+      "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0"  
+     ],
+     "containsAllowedDomainsOnly":true,
+    "target": "sm"
+  },
+```
+
+Where:
+
+- The `width` parameter is the modal width in pixels. This value is compared to the WINDOW_OPTIONS attribute of any <PAGE> or <LINK> elements found.
+- The `anyTerms` array defines [XPath](https://developer.mozilla.org/en-US/docs/Web/XPath) expressions that are run against each UIM file that matches the `width` expression. If any of the expressions are true, and all other rule criteria are met, the size of the UIM file is updated.
+- The `allTerms` array defines XPath expressions that are run against each UIM file that matches the `width` expression. If all of the expressions are true, and all other rule criteria is met, the size of that UIM file is updated.
+- The `containsAllowedDomainsOnly`  parameter is set to true, so all domains that are rendered in the file must be on the allow list. The default value is false.
+- The `target` parameter is the new modal size: `xs` for extra-small, `sm` for small, `md` for medium/default, `lg` for large and `xlg` for extra-large.
+
+After Window Size Tool runs, the changes that you see are pixel values, such as 700, rather than a size name, such as `sm`.
+As WINDOW_OPTIONS in UIM are expressed as pixels, each target size is translated to a pixel width value that is used to set the WINDOW_OPTIONS attribute, see [packages/window-size-tool/sizes.js](https://github.com/IBM/spm-ui-upgrade-helper/blob/main/packages/window-size-tool/sizes.js). The UIM rendering framework maps the pixel value of WINDOW_OPTIONS to a Carbon modal size when rendering. For more information about the mappings from WINDOW_OPTIONS to Carbon modal sizes, see [PAGE element](https://www.ibm.com/docs/en/spm/8.0.1?topic=reference-page-element).
 
 ### Icon Replacer Tool
 
@@ -91,4 +145,4 @@ Example `V8` icon files:
 
 All `V7` icon files that are found are deleted and their `V8` equivalents are copied to the same location.
 
-References to the icon in customer source files (files such as `.css`, `.js`, `jspx`, etc.) are also updated.
+References to the icon in customer source files, such as `.css`, `.js`, `jspx`, are also updated.
