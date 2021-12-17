@@ -40,6 +40,31 @@ The following steps determine the order of the rules:
 - The rules are sorted by length, with the longest items first, inside each of their respective categories `SelectorRemove` and `SelectorReplace`.
 - The `SelectorRemove` rules are applied first, followed by the `SelectorReplace` rules.
 
+### Icon Replacer Tool
+
+Scans customer source files for `V7` icons that have been replaced by `V8` equivalents.
+
+- Iterates over customer source files and replaces the icons codified in [packages/icon-replacer-tool/icons_mappings.json](https://github.com/IBM/spm-ui-upgrade-helper/tree/main/packages/icon-replacer-tool/icon_mappings.json).
+
+Example icons mappings (`"v7_FILENAME":"V8_FILENAME"`):
+
+    {
+      "Actions_Blue30_20px.png": "overflow-menu-horizontal--20-on-dark.svg",
+      "Actions_Blue50_20px.png": "overflow-menu-horizontal--20-enabled.svg",
+      "Calendar_Blue50_20px.png": "calendar--20-enabled.svg",
+      "Day_Blue50_20px.png": "calendar__day--20-enabled.svg",
+      "Gotodate_Blue50_20px.png": "calendar__go-to-date--20-enabled.svg",
+    }
+
+Example `V8` icon files:
+
+    `/source_files/overflow-menu-horizontal--20-on-dark.svg`
+
+All `V7` icon files that are found are deleted and their `V8` equivalents are copied to the same location.
+
+References to the icon in customer source files, such as `.css`, `.js`, `jspx`, are also updated.
+
+
 ### Window Size Tool
 
 The Window Size Tool scans UIM files and applies rules to change modals to an appropriate size, based on their content. Where appropriate, UIM files are modified to resize modals to one of five sizes. The IBM Social Program Management Modal component in v8.0.1 has five sizes, the four standard [Carbon modal sizes](https://www.carbondesignsystem.com/components/modal/usage/#sizing), 'extra-small', 'small', 'medium', and 'large', and a custom 'extra-large' size. All modified files are listed and displayed in a diff view that shows the previous width value and the new width value. You can keep or discard the changes.
@@ -123,26 +148,59 @@ Where:
 After Window Size Tool runs, the changes that you see are pixel values, such as 700, rather than a size name, such as `sm`.
 As WINDOW_OPTIONS in UIM are expressed as pixels, each target size is translated to a pixel width value that is used to set the WINDOW_OPTIONS attribute, see [packages/window-size-tool/sizes.js](https://github.com/IBM/spm-ui-upgrade-helper/blob/main/packages/window-size-tool/sizes.js). The UIM rendering framework maps the pixel value of WINDOW_OPTIONS to a Carbon modal size when rendering. For more information about the mappings from WINDOW_OPTIONS to Carbon modal sizes, see [PAGE element](https://www.ibm.com/docs/en/spm/8.0.1?topic=reference-page-element).
 
-### Icon Replacer Tool
+### Reviewing Window Size Tool changes
 
-Scans customer source files for `V7` icons that have been replaced by `V8` equivalents.
+All modified files are listed and displayed in a diff view that shows the previous width value and the new width value. You can keep or discard the proposed changes or make your own changes.
 
-- Iterates over customer source files and replaces the icons codified in [packages/icon-replacer-tool/icons_mappings.json](https://github.com/IBM/spm-ui-upgrade-helper/tree/main/packages/icon-replacer-tool/icon_mappings.json).
+WINDOW_OPTIONS in UIM are expressed as pixels so changes are made to the WINDOW_OPTIONS `width` in pixels, such as 700, rather than a size, such as `sm`. Each target size in a rule is translated to an equivalent pixel width value that is used to set the WINDOW_OPTIONS attribute, see packages/window-size-tool/sizes.js.
+    
+When a UIM file is rendered, the pixel value of WINDOW_OPTIONS maps to the appropriate Carbon modal size. For more information about the mappings, see the PAGE element.
+For example, if a modal previously had a width of 550 (between 421 and 576), it was "Small". If the new modal size is 700 (between 577 and 768), it is now "Medium".
 
-Example icons mappings (`"v7_FILENAME":"V8_FILENAME"`):
+#### Example UIM file modification
 
-    {
-      "Actions_Blue30_20px.png": "overflow-menu-horizontal--20-on-dark.svg",
-      "Actions_Blue50_20px.png": "overflow-menu-horizontal--20-enabled.svg",
-      "Calendar_Blue50_20px.png": "calendar--20-enabled.svg",
-      "Day_Blue50_20px.png": "calendar__day--20-enabled.svg",
-      "Gotodate_Blue50_20px.png": "calendar__go-to-date--20-enabled.svg",
-    }
+This example page originally had a width of 550, which according to the WINDOW_OPTIONS to Carbon modal sizes mappings, renders as a small sized modal. However, as the page contains a two-column cluster, according to the rules the size increases to 700 and it renders as a medium sized modal. You can accept the change, reject it or choose a different size.
+    
+```diff
+- <PAGE PAGE_ID="myExamplePage" WINDOW_OPTIONS="width=550">
++ <PAGE PAGE_ID="myExamplePage" WINDOW_OPTIONS="width=700">
+  <CLUSTER NUM_COLS="2">
+    <FIELD>
+      …
+    </FIELD>
+    <FIELD>
+      …
+    </FIELD> 
+</PAGE>
+```
+When reviewing a modified file, looking up its page preview in IBM Cúram Analysis Documentation Generator (CADG) can give you a quick visual of the layout of the existing page and whether the new size is appropriate. For example, if you see in the page preview that the modal contains a six column list and the width of the modal was updated to 1000 (large), then you can reason that the rules were applied as expected and the new size is appropriate. Note that while CADG page previews are not displayed with SPM v8 styling, (for example, v8 labels are always displayed above input fields), they still provide a useful visual of the structure and contents of a page.
+    
+#### LINK Elements
+    
+Not all UIM files that are modified by the tool have WINDOW_OPTIONS on the PAGE element. Typically, these UIM files contain one or more LINK elements, which can open a linked page as a modal by specifying WINDOW_OPTIONS on the LINK element.
 
-Example `V8` icon files:
+The Window Size Tool evaluates the contents of the linked file. If a rule matches, then the WINDOW_OPTIONS on the LINK element are updated, and the UIM file that contains the LINK is modified.
 
-    `/source_files/overflow-menu-horizontal--20-on-dark.svg`
-
-All `V7` icon files that are found are deleted and their `V8` equivalents are copied to the same location.
-
-References to the icon in customer source files, such as `.css`, `.js`, `jspx`, are also updated.
+#### Example UIM file modification based on the content of a linked file.
+    
+```diff
+// myRegularPage.uim
+<PAGE PAGE_ID="myRegularPage">
+-  <LINK PAGE_ID="myModalPage" WINDOW_OPTIONS="width=550">
++  <LINK PAGE_ID="myModalPage"WINDOW_OPTIONS="width=700">
+    …
+  </LINK>
+</PAGE>
+```
+```
+// myModalPage.uim
+<PAGE PAGE_ID="myModalPage">
+  <CLUSTER NUM_COLS="2">
+    <FIELD>
+      …
+    </FIELD>
+    <FIELD>
+      …
+    </FIELD> 
+</PAGE>
+```
