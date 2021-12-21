@@ -28,8 +28,8 @@ fi
 echo Starting spm-ui-upgrade-helper
 echo
 echo     VERSION = $VERSION
-echo     INPUT_FOLDER_CMD = $INPUT_FOLDER_CMD
-echo     OUTPUT_FOLDER_CMD = $OUTPUT_FOLDER_CMD
+echo     INPUT_FOLDER_CMD = $INPUT_FOLDER
+echo     OUTPUT_FOLDER_CMD = $OUTPUT_FOLDER
 echo
 
 docker-compose rm -f -s -v 

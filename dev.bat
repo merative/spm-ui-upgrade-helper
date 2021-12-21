@@ -30,7 +30,7 @@ echo Starting spm-ui-upgrade-helper
 echo.
 echo     VERSION = %VERSION%
 echo     INPUT_FOLDER = %INPUT_FOLDER%
-echo     OUTPUT_FOLDER= %OUTPUT_FOLDER_CMD%
+echo     OUTPUT_FOLDER= %OUTPUT_FOLDER%
 echo.
 
 call docker-compose rm -f -s -v 
