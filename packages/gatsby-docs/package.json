@@ -21,5 +21,14 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "shelljs": "^0.8.4"
+  },
+  "resolutions": {
+    "immer": "9.0.6",
+    "trim":"0.0.3",
+    "glob-parent":"5.1.2",
+    "object-path":"0.11.8",
+    "tar":"6.1.9",
+    "axios":"0.21.2",
+    "trim-newlines":"3.0.1"
   }
 }

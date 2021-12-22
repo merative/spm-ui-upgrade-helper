@@ -30,5 +30,10 @@
   "dependencies": {
     "lerna": "^4.0.0",
     "npm-run-all": "^4.1.5"
+  },
+  "resolutions": {
+    "tar": "6.1.9",
+    "json-schema":"0.4.0",
+    "ansi-regex":"5.0.1"
   }
 }
