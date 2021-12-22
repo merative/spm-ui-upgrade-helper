@@ -92,7 +92,6 @@ const dockerTasks = (execFunction = shelljs, props, args) => {
 
   if (option === "build") { 
     const r0 = validate("imageName");
-    console.log("r0", r0);
     if (r0) {
       return r0;
     }        
