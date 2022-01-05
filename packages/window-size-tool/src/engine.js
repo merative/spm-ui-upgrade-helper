@@ -1,5 +1,7 @@
 const chalk = require("chalk");
 const xp = require("xpath");
+const path = require('path');
+const fs = require('fs');
 
 const { evaluateInequality } = require("./util");
 const {
@@ -8,6 +10,13 @@ const {
   setPageOptions,
   setLinkOptions,
 } = require("./uim");
+const {
+  doRequest,
+} = require("./httpUtils");
+
+
+let parserToUse = null;
+let ioToUse = null;
 
 /**
  * Compares a width value to a rule and returns whether the width passes the
@@ -20,7 +29,7 @@ const {
  */
 function checkWidth(width, rule, verbose = true) {
   if (!width) {
-    throw Error("You must supply a width");
+    throw Error("You must supply a width ");
   } else if (!rule) {
     throw Error("You must supply a rules string");
   }
@@ -100,7 +109,7 @@ function checkLinkWidth(pageNode, rule, verbose = true) {
  * @param {boolean} verbose Will log debug messages if true (true by default).
  * @returns Whether the DOM node meets the rules criteria or not.
  */
-function checkRule(node, rule, verbose = true) {
+function checkRule(node, rule, verbose = true, domainCheckPass = false) {
   let pass = false;
 
   if (!node) {
@@ -108,40 +117,47 @@ function checkRule(node, rule, verbose = true) {
   } else if (!rule) {
     throw Error("You must supply a rules object");
   }
+  if (rule.containsAllowedDomainsOnly !== undefined && rule.containsAllowedDomainsOnly === true) {
+    // if containsAllowedDomainsOnly set and the check has failed return with failure, ohterwise 
+    // check the other rules
+    if (domainCheckPass===false) { 
+      return;
+    }
+  }
   if (rule.anyTerms.length > 0) {
-    rule.anyTerms.forEach((term) => {
-      if (!pass) {
-        const result = xp.select(term, node);
+  rule.anyTerms.forEach((term) => {
+    if (!pass) { 
+      const result = xp.select(term, node);
 
-        pass = pass || result;
+      pass = pass || result;
 
-        if (verbose) {
-          console.debug(
-            ` term:  ${
-              result ? chalk.green(`${result} `) : chalk.red(result)
-            } <- [${chalk.magenta(term)}]`
+      if (verbose) {
+        console.debug(
+          ` term:  ${
+            result ? chalk.green(`${result} `) : chalk.red(result)
+          } <- [${chalk.magenta(term)}]`
           );
         }
       }
-    });
-  } else if (rule.allTerms.length > 0) {
-    pass = true;
-  }
-  if (pass == true) {
-    rule.allTerms.forEach((term) => {
-      if (pass) {
-        const result2 = xp.select(term, node);
-        pass = result2;
-        if (verbose) {
-          console.debug(
-            ` term:  ${
-              result2 ? chalk.green(`${result2} `) : chalk.red(result2)
-            } <- [${chalk.magenta(term)}]`
-          );
+     });
+    } else if (rule.allTerms.length > 0) {
+      pass = true;
+    }
+    if (pass == true){
+        rule.allTerms.forEach((term) => {
+        if (pass) {
+          const result2 = xp.select(term, node);
+          pass = result2;
+          if (verbose) {
+            console.debug(
+              ` term:  ${
+                result2 ? chalk.green(`${result2} `) : chalk.red(result2)
+              } <- [${chalk.magenta(term)}]`
+            );
+          }
         }
-      }
-    });
-  }
+      });
+    }
   return pass;
 }
 
@@ -155,7 +171,12 @@ function checkRule(node, rule, verbose = true) {
  * @param {boolean} usePixelWidths Determines whether width is set as a pixel value
  * or a size category.
  */
-function updateWidthOption(windowOptions, sizes, target, usePixelWidths) {
+function updateWidthOption(
+  windowOptions,
+  sizes,
+  target,
+  usePixelWidths
+) {
   if (!windowOptions) {
     throw Error("You must supply a WINDOW_OPTIONS string");
   } else if (!sizes) {
@@ -170,6 +191,130 @@ function updateWidthOption(windowOptions, sizes, target, usePixelWidths) {
     delete windowOptions.width;
     windowOptions.size = target;
   }
+}
+
+/**
+ * Checks the domain definitions of UIM XML document are valid with respect to
+ * allowing it to be resized down.
+ *
+ * @param {Element} rootUIMNode The root node of the UIM XML document.
+ * @param {string} filename Filename of UIM XML document.
+ */
+async function checkUIMDomainsAreValidToResizeDown(rootUIMNode, filename) {
+  let serverAccessBeans = [];
+  let connectionsAreAllowListed = true;
+  const fileNameAndExtenionWithoutPath = path.basename(filename);
+  
+  const severBeanXP= xp.select(
+    `//SERVER_INTERFACE`,
+    rootUIMNode
+  );
+
+  // const includeVimsXP = xp.select(
+  //   `//INCLUDE`,
+  //   rootUIMNode
+  // );
+
+  const vimsToBeProcessed = [];
+  // includeVimsXP.forEach((include) => {
+  //   const vim = path.dirname(filename) + "/" + include.getAttribute("FILE_NAME");
+  //   if (fs.existsSync(vim))  {
+  //     vimsToBeProcessed.push(vim);
+  //   } else {
+  //      // TODO: How about if the VIM is not in the same directory??
+  //     console.log("VIM file:" +  vim + "does not exist");
+  //   }  
+  // });
+ 
+
+  severBeanXP.forEach((bean) => {
+    serverAccessBeans.push({
+      class: bean.getAttribute("CLASS"),
+      name:bean.getAttribute("NAME"),
+      operation:bean.getAttribute("OPERATION"),
+    });
+  });
+
+  const clusterFieldConnectionsXP= xp.select(
+    `(//FIELD | //WIDGET)//CONNECT/*`, // change to include widgets, 
+    rootUIMNode
+  ); 
+
+  let connections=[];
+
+  clusterFieldConnectionsXP.forEach((connection) => {
+    const name= connection.getAttribute("NAME");
+    const property = connection.getAttribute("PROPERTY");  
+      serverAccessBeans.forEach((bean) => {
+        if(name==bean.name){    
+             connections.push({
+              property: property,
+              name:bean.class,
+              operation:bean.operation,
+            });
+       }
+   }); 
+  });
+
+  // Processing VIMS, scope for refactoring here
+  //  for (let i = 0; i < vimsToBeProcessed.length;i++) {
+  //   const rootNode = getRootNodeFromUIM(vimsToBeProcessed[i], parserToUse, ioToUse);
+  //   const severBeanXPForVim= xp.select(
+  //     `//SERVER_INTERFACE`,
+  //     rootNode
+  //   );
+  //   severBeanXPForVim.forEach((bean) => {
+  //     const beanName = bean.getAttribute("NAME");
+  //     if (!serverAccessBeans.find(({name}) => name === beanName)) {
+  //       serverAccessBeans.push({
+  //         class: bean.getAttribute("CLASS"),
+  //         name:bean.getAttribute("NAME"),
+  //         operation:bean.getAttribute("OPERATION"),
+  //       });
+  //     }      
+  //   });
+  //   const clusterFieldConnectionsXPForVims = xp.select(
+  //     `//CLUSTER/FIELD/CONNECT/*`,
+  //     rootNode
+  //   );
+  //   clusterFieldConnectionsXPForVims.forEach((connection) => {
+  //     const connName= connection.getAttribute("NAME");
+  //     const connProperty = connection.getAttribute("PROPERTY");
+  //       serverAccessBeans.forEach((bean) => {
+  //         if(connName==bean.name){
+  //           // TODO: Need to check that names don't match either??
+  //           if (!connections.find(({property}) => property === connProperty)) {    
+  //              connections.push({
+  //               property: connProperty,
+  //               name:bean.class,
+  //               operation:bean.operation,
+  //             });
+  //           }
+  //        }
+  //    });
+  //   });
+  // }
+
+  const connectionPromises = [];
+  for(let i=0; i < connections.length; i++){
+    const connection = connections[i];
+    let result = await doRequest(connection, fileNameAndExtenionWithoutPath);
+    connectionPromises.push({result: result, property: connection.property, filename: fileNameAndExtenionWithoutPath});
+  }
+
+  let connectionResults = await Promise.all(connectionPromises);
+  for(let j=0; j < connectionResults.length; j++) {
+    if(connectionResults[j].result == false) {
+      connectionsAreAllowListed = false; 
+      break;
+    }
+  }
+
+  // connections are allow listed and number of connections is bigger than 0
+  const connectionsNotEmotyAndAllowed = connections.length > 0 && connectionsAreAllowListed == true;
+  //return connectionsNotEmotyAndAllowed; 
+
+  return connectionsNotEmotyAndAllowed; 
 }
 
 /**
@@ -193,7 +338,8 @@ function applyRule(
   sizes,
   pagedictionary,
   usePixelWidths,
-  verbose = true
+  verbose = true,
+  domainsCheckPass = false
 ) {
   if (!document) {
     throw Error("You must supply a UIM document");
@@ -208,23 +354,22 @@ function applyRule(
   }
 
   const pageNode = document.documentElement;
-
   if (verbose) {
     console.debug(`filename: ${chalk.cyan(filename)}`);
   }
 
   let hasChanges = false;
-
   rules.forEach((rule, index) => {
+   
     if (!hasChanges) {
       if (verbose) {
         console.debug(`rule: ${chalk.yellow(index + 1)}`);
       }
 
       if (checkPageWidth(pageNode, rule.width, verbose)) {
-        const pass = checkRule(pageNode, rule, verbose);
+        const pass = checkRule(pageNode, rule, verbose, domainsCheckPass);
 
-        if (pass) {
+        if (pass) {        
           hasChanges = true;
           const windowOptions = getPageOptions(pageNode);
 
@@ -245,7 +390,8 @@ function applyRule(
           pass = checkRule(
             pageReference.document.documentElement,
             rule,
-            verbose
+            verbose,
+            domainsCheckPass
           );
 
           hasChanges = hasChanges || pass;
@@ -259,8 +405,17 @@ function applyRule(
       });
     }
   });
-
   return hasChanges;
+}
+
+function getDocumentFromUIM(file, parser, io) {
+  const contents = io.readLines(file).join("\n");
+  const document = parser.parseFromString(contents);
+  return document;
+}
+
+function getRootNodeFromUIM(file, parser, io) {
+  return getDocumentFromUIM(file, parser, io).documentElement;
 }
 
 /**
@@ -280,7 +435,7 @@ function applyRule(
  * @returns A list of files that have met the rules criteria and had their
  * width's updated.
  */
-function applyRules(
+async function applyRules(
   files,
   rules,
   sizes,
@@ -288,7 +443,8 @@ function applyRules(
   parser,
   serializer,
   usePixelWidths,
-  verbose = true
+  verbose = true,
+  checkAllowedDomainsForResizing = true,
 ) {
   if (!files) {
     throw Error("You must supply a globbed files array");
@@ -304,8 +460,10 @@ function applyRules(
     throw Error("You must supply an serializer object");
   }
 
-  const results = [];
+  parserToUse = parser;
+  ioToUse = io;
 
+  const results = [];
   const pagedictionary = {};
 
   const uims = files.map((file) => {
@@ -326,23 +484,50 @@ function applyRules(
     };
   });
 
-  uims.forEach(({ document, file }) => {
-    const hasChanges = applyRule(
-      document,
-      file,
-      rules,
-      sizes,
-      pagedictionary,
-      usePixelWidths,
-      verbose
-    );
-
-    // Only mark the files as 'for writing' if the contents changed
-    if (hasChanges) {
-      results[file] = serializer.serializeToString(document);
+  for (let i=0; i<uims.length; i++ ){
+    const fileExtension = path.extname(uims[i].file);
+    // only do domain check for UIM files (Need to update) and if this flag is set. If tthe flag not set the check always passes
+    const domainCheckPassed = checkAllowedDomainsForResizing ? await checkUIMDomainsAreValidToResizeDown(uims[i].document.documentElement, uims[i].file) : true;
+    if (fileExtension === ".uim") {
+      const hasChanges = applyRule(
+        uims[i].document,
+        uims[i].file,
+        rules,
+        sizes,
+        pagedictionary,
+        usePixelWidths,
+        verbose,
+        domainCheckPassed
+      ); 
+      // Only mark the files as 'for writing' if the contents changed
+      if (hasChanges === true) {
+        results[uims[i].file] = serializer.serializeToString(uims[i].document);
+      }
     }
-  });
 
+    // Process VIMS
+    // const vims = domainCheckPassed.vims;
+    // if (vims.length > 0) {
+      // vims.forEach((vimFile) => {
+      //   const vimDocument = getDocumentFromUIM(vimFile, parser, io);
+      //   const vimHasChanges = applyRule(
+      //     vimDocument ,
+      //     vimFile,
+      //     rules,
+      //     sizes,
+      //     pagedictionary,
+      //     usePixelWidths,
+      //     verbose,
+      //     domainCheckPassed.pass || domainCheckPassed
+      //   );
+
+      //   if (vimHasChanges === true) {
+      //     results[vimFile] = serializer.serializeToString(vimDocument);
+      //   }
+      // });
+    // }
+  // });
+  }
   return results;
 }
 
@@ -354,4 +539,6 @@ module.exports = {
   updateWidthOption,
   applyRule,
   applyRules,
+  checkUIMDomainsAreValidToResizeDown,
+  getRootNodeFromUIM
 };

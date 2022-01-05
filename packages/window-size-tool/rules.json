@@ -33,6 +33,7 @@
       "count(//INCLUDE) = 0",
       "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0"  
      ],
+     "containsAllowedDomainsOnly":true,
     "target": "md"
   },
   {
@@ -57,6 +58,7 @@
       "count(//INCLUDE) = 0",
       "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0"  
      ],
+     "containsAllowedDomainsOnly":true,
     "target": "sm"
   },
   {
@@ -72,7 +74,7 @@
       "count(//INCLUDE) = 0",
       "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0"  
      ],
-  "target": "sm"
+     "target": "sm"
   },
   {
     "width": "> 420 and <= 576",
@@ -88,6 +90,7 @@
       "count(//INCLUDE) = 0",
       "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0"  
      ],
+     "containsAllowedDomainsOnly":true,
     "target": "xs"
   }
 ]

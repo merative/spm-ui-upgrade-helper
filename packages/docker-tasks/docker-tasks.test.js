@@ -97,7 +97,7 @@ test("calling 'build' runs the correct commands", () => {
   const props = yaml.load(inputConfig.join("\n"));
   const inputArgs = "build".split(" ");
   const expectedCommands = [
-    "docker build --tag bar:latest ."
+    "docker-compose down --rmi all", "docker-compose build"
   ];
   const expectedEchos = [];
   const expectedErrorCode = 0;
@@ -118,10 +118,7 @@ test("calling 'build -p' runs the correct commands", () => {
   const inputConfig = [ "imageName: foo" ];
   const props = yaml.load(inputConfig.join("\n"));
   const inputArgs = "build -p".split(" ");
-  const expectedCommands = [
-    "docker system prune --force",
-    "docker build --tag foo:latest ."
-  ];
+  const expectedCommands = ["docker system prune --force", "docker-compose down --rmi all", "docker-compose build"];
   const expectedEchos = [];
   const expectedErrorCode = 0;
 
@@ -142,8 +139,7 @@ test("calling 'clear' runs the correct commands", () => {
   const props = yaml.load(inputConfig.join("\n"));
   const inputArgs = "clear".split(" ");
   const expectedCommands = [
-    "docker stop bar",
-    "docker rm bar"
+    "docker-compose stop bar","docker-compose down"
   ];
   const expectedEchos = [];
   const expectedErrorCode = 0;
@@ -185,13 +181,19 @@ test("calling 'release latest' runs the correct commands", () => {
   // Arrange
   const inputConfig = [
     "imageName: foo",
+    "parserImageName: bar",
+    "nodeImageName: baz",
     "username: folkforms"
   ];
   const props = yaml.load(inputConfig.join("\n"));
   const inputArgs = "release latest".split(" ");
   const expectedCommands = [
     "docker image tag foo:latest docker.io/folkforms/foo:latest",
-    "docker image push docker.io/folkforms/foo:latest"
+    "docker image tag bar:latest docker.io/folkforms/bar:latest",
+    "docker image tag baz:latest docker.io/folkforms/baz:latest",
+    "docker image push docker.io/folkforms/foo:latest",
+    "docker image push docker.io/folkforms/bar:latest",
+    "docker image push docker.io/folkforms/baz:latest"
   ];
   const expectedEchos = [];
   const expectedErrorCode = 0;
@@ -211,15 +213,13 @@ test("calling 'release <version>' runs the correct commands", () => {
   // Arrange
   const inputConfig = [
     "imageName: foo",
+    "parserImageName: bar",
+    "nodeImageName: baz",
     "username: folkforms"
   ];
   const props = yaml.load(inputConfig.join("\n"));
   const inputArgs = "release 0.0.1".split(" ");
-  const expectedCommands = [
-    "docker image tag foo:latest foo:0.0.1",
-    "docker image tag foo:latest docker.io/folkforms/foo:0.0.1",
-    "docker image push docker.io/folkforms/foo:0.0.1",
-  ];
+  const expectedCommands = ["docker image tag foo:latest foo:0.0.1", "docker image tag bar:latest foo:0.0.1", "docker image tag baz:latest foo:0.0.1", "docker image tag foo:latest docker.io/folkforms/foo:0.0.1", "docker image tag bar:latest docker.io/folkforms/bar:0.0.1", "docker image tag baz:latest docker.io/folkforms/baz:0.0.1", "docker image push docker.io/folkforms/foo:0.0.1", "docker image push docker.io/folkforms/bar:0.0.1", "docker image push docker.io/folkforms/baz:0.0.1"];
   const expectedEchos = [];
   const expectedErrorCode = 0;
 
@@ -243,9 +243,7 @@ test("calling 'run' runs the correct commands", () => {
   const props = yaml.load(inputConfig.join("\n"));
   const inputArgs = "run".split(" ");
   const expectedCommands = [
-    "docker stop bar",
-    "docker rm bar",
-    "docker run -p 3000:3000 --name bar bar:latest"
+    "docker-compose down", "docker-compose run -p 3000:3000 --name bar bar"
   ];
   const expectedEchos = [];
   const expectedErrorCode = 0;

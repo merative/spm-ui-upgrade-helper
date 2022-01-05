@@ -1,0 +1,41 @@
+version: '3.8'
+services:
+  spm-ui-upgrade-helper:
+    build: .
+    image: spm-ui-upgrade-helper
+    container_name: spm-ui-upgrade-helper
+    ports:
+      - "3000:3000"     
+    depends_on: 
+      - nodefront
+    networks:
+      - spm-ui-upgrade-helper
+    volumes:
+      - ${INPUT_FOLDER}:/home/workspace/input
+      - ${OUTPUT_FOLDER}:/home/workspace/output
+  beanparser:
+    build: 
+      context: packages/window-size-tool/parser
+      dockerfile: Dockerfile
+    image: spm-ui-upgrade-helper_beanparser
+    container_name: spm-ui-upgrade-helper_beanparser
+    volumes:
+      - ${SERVER_DIR}:/usr/src/sabparser/input_SAB
+    networks:
+      - spm-ui-upgrade-helper
+  nodefront:
+    build:
+      context: packages/window-size-tool/parser/frontend
+      dockerfile: Dockerfile
+    image: spm-ui-upgrade-helper_nodefront
+    container_name: spm-ui-upgrade-helper_nodefront
+    ports:
+      - "4005:4005"
+    depends_on:
+      -  beanparser
+    networks:
+      - spm-ui-upgrade-helper
+networks:
+ spm-ui-upgrade-helper:
+
+
