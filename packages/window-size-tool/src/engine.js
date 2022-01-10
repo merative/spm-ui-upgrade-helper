@@ -2,6 +2,8 @@ const chalk = require("chalk");
 const xp = require("xpath");
 const path = require('path');
 const fs = require('fs');
+const utils = require("../../shared-utils/sharedUtils");
+
 
 const { evaluateInequality } = require("./util");
 const {
@@ -17,6 +19,7 @@ const {
 
 let parserToUse = null;
 let ioToUse = null;
+let initialFileList = null;
 
 /**
  * Compares a width value to a rule and returns whether the width passes the
@@ -109,21 +112,18 @@ function checkLinkWidth(pageNode, rule, verbose = true) {
  * @param {boolean} verbose Will log debug messages if true (true by default).
  * @returns Whether the DOM node meets the rules criteria or not.
  */
-function checkRule(node, rule, verbose = true, domainCheckPass = false) {
+async function checkRule(node, filename, rule, verbose = true, domainsCheckEnabledForAllRules = true) {
   let pass = false;
+  let domainsCheckPass = false;
 
   if (!node) {
     throw Error("You must supply a node");
   } else if (!rule) {
     throw Error("You must supply a rules object");
   }
-  if (rule.containsAllowedDomainsOnly !== undefined && rule.containsAllowedDomainsOnly === true) {
-    // if containsAllowedDomainsOnly set and the check has failed return with failure, ohterwise 
-    // check the other rules
-    if (domainCheckPass===false) { 
-      return;
-    }
-  }
+
+  const domainsCheckForSpecificRule = rule && rule.containsAllowedDomainsOnly;
+  const executeDomainCheck = domainsCheckForSpecificRule != undefined ? domainsCheckForSpecificRule : domainsCheckEnabledForAllRules;
   if (rule.anyTerms.length > 0) {
   rule.anyTerms.forEach((term) => {
     if (!pass) { 
@@ -158,7 +158,15 @@ function checkRule(node, rule, verbose = true, domainCheckPass = false) {
         }
       });
     }
-  return pass;
+    if (pass) {
+      if (executeDomainCheck === true) {
+        domainsCheckPass = await checkUIMDomainsAreValidToResizeDown(node, filename);
+      } else {
+        // if there is no domain check to be done just set the check to pass
+        domainsCheckPass = true;  
+      }    
+    }
+    return domainsCheckPass;
 }
 
 /**
@@ -317,6 +325,15 @@ async function checkUIMDomainsAreValidToResizeDown(rootUIMNode, filename) {
   return connectionsNotEmotyAndAllowed; 
 }
 
+updateDocument = (serializer, filename, document, results) => {
+  const updatedDocument = serializer.serializeToString(document);
+  console.log("document to update: " + updatedDocument);
+  if (updatedDocument) {
+    results[filename] = updatedDocument;
+    utils.writeFiles(results);
+  }
+}
+
 /**
  * Applies xPath rules to a UIM XML document.
  *
@@ -331,20 +348,24 @@ async function checkUIMDomainsAreValidToResizeDown(rootUIMNode, filename) {
  * @param {boolean} verbose Will log debug messages if true (true by default).
  * @returns Returns whether the document was updated by the rules or not.
  */
-function applyRule(
+async function applyRule(
   document,
   filename,
+  serializer,
   rules,
   sizes,
   pagedictionary,
   usePixelWidths,
   verbose = true,
-  domainsCheckPass = false
+  domainsCheckEnabledForAllRules = true,
+  testMode = false
 ) {
   if (!document) {
     throw Error("You must supply a UIM document");
   } else if (!filename && filename !== "") {
     throw Error("You must supply a filename");
+  } else if (!serializer) {
+    throw Error("You must supply an serializer object");
   } else if (!rules) {
     throw Error("You must supply a rules array");
   } else if (!sizes) {
@@ -354,57 +375,68 @@ function applyRule(
   }
 
   const pageNode = document.documentElement;
+  let hasChanges = false;
   if (verbose) {
     console.debug(`filename: ${chalk.cyan(filename)}`);
   }
+  let linkPass = false;
+  let results = [];
+  let hasPageChanges = false;
 
-  let hasChanges = false;
-  rules.forEach((rule, index) => {
-   
-    if (!hasChanges) {
+  rules.forEach(async(rule, index) => { 
       if (verbose) {
         console.debug(`rule: ${chalk.yellow(index + 1)}`);
       }
 
-      if (checkPageWidth(pageNode, rule.width, verbose)) {
-        const pass = checkRule(pageNode, rule, verbose, domainsCheckPass);
+      const linkMatches = checkLinkWidth(pageNode, rule, verbose);
+      const hasLinks = linkMatches.length > 0;
 
-        if (pass) {        
-          hasChanges = true;
+      if (checkPageWidth(pageNode, rule.width, verbose)) {
+        const pagePass = await checkRule(pageNode, filename, rule, verbose, domainsCheckEnabledForAllRules);
+        hasChanges = true;
+
+        if (pagePass) {        
           const windowOptions = getPageOptions(pageNode);
 
           updateWidthOption(windowOptions, sizes, rule.target, usePixelWidths);
 
           setPageOptions(pageNode, windowOptions);
+          hasPageChanges = true;
         }
       }
 
-      const linkMatches = checkLinkWidth(pageNode, rule, verbose);
-
-      linkMatches.forEach(({ pageId, options, link }) => {
-        let pass = false;
-
+      linkMatches.forEach(async({ pageId, options, link }) => {
         const pageReference = pagedictionary[pageId];
 
         if (pageReference) {
-          pass = checkRule(
+          linkPass = await checkRule(
             pageReference.document.documentElement,
+            pageReference.file,
             rule,
             verbose,
-            domainsCheckPass
+            domainsCheckEnabledForAllRules
           );
 
-          hasChanges = hasChanges || pass;
-
           updateWidthOption(options, sizes, rule.target, usePixelWidths);
+         
 
-          if (pass) {
+          if (linkPass) {
             setLinkOptions(link, options);
+            updateDocument(serializer, filename, document, results);
           }
-        }
+        }       
       });
-    }
+      if (!hasLinks && hasPageChanges === true) {
+        updateDocument(serializer, filename, document, results);
+      }
   });
+  if (testMode) {
+    return new Promise(function(resolve,reject){
+      setTimeout(function() {
+         resolve(hasChanges);
+      }, 100);
+     });
+  }
   return hasChanges;
 }
 
@@ -444,7 +476,7 @@ async function applyRules(
   serializer,
   usePixelWidths,
   verbose = true,
-  checkAllowedDomainsForResizing = true,
+  domainsCheckEnabledForAllRules = true,
 ) {
   if (!files) {
     throw Error("You must supply a globbed files array");
@@ -462,6 +494,7 @@ async function applyRules(
 
   parserToUse = parser;
   ioToUse = io;
+  initialFileList = files;
 
   const results = [];
   const pagedictionary = {};
@@ -487,22 +520,19 @@ async function applyRules(
   for (let i=0; i<uims.length; i++ ){
     const fileExtension = path.extname(uims[i].file);
     // only do domain check for UIM files (Need to update) and if this flag is set. If tthe flag not set the check always passes
-    const domainCheckPassed = checkAllowedDomainsForResizing ? await checkUIMDomainsAreValidToResizeDown(uims[i].document.documentElement, uims[i].file) : true;
+   // const domainCheckPassed = checkAllowedDomainsForResizing ? await checkUIMDomainsAreValidToResizeDown(uims[i].document.documentElement, uims[i].file) : true;
     if (fileExtension === ".uim") {
-      const hasChanges = applyRule(
+      await applyRule(
         uims[i].document,
         uims[i].file,
+        serializer,
         rules,
         sizes,
         pagedictionary,
         usePixelWidths,
         verbose,
-        domainCheckPassed
-      ); 
-      // Only mark the files as 'for writing' if the contents changed
-      if (hasChanges === true) {
-        results[uims[i].file] = serializer.serializeToString(uims[i].document);
-      }
+        domainsCheckEnabledForAllRules
+      );
     }
 
     // Process VIMS

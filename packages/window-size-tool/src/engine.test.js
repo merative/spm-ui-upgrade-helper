@@ -295,20 +295,23 @@ describe("checkLinkWidth", () => {
 });
 
 describe("checkRule", () => {
-  test("should throw an error when no node is supplied", () => {
-    const actual = () => checkRule();
-
-    expect(actual).toThrow();
+  test("should throw an error when no node is supplied", async() => {
+    try {
+      await checkRule();
+    } catch(e) {
+      expect(e).toEqual(new Error("You must supply a node"));
+    }
   });
 
-  test("should throw an error when a rule object is not supplied", () => {
-    const node = {};
-    const actual = () => checkRule(node);
-
-    expect(actual).toThrow();
+  test("should throw an error when a rule object is not supplied", async() => {
+    try {
+      await checkRule(node);
+    } catch(e) {
+      expect(e).toEqual(new Error("node is not defined"));
+    }
   });
 
-  test("should return 'false' when xpath rule passed matches document", () => {
+  test("should return 'false' when xpath rule passed matches document", async () => {
     const expected = false;
 
     const document = {};
@@ -319,12 +322,12 @@ describe("checkRule", () => {
 
     xp.select.mockImplementation(() => false);
 
-    const actual = checkRule(document, rule, false);
+    const actual = await checkRule(document, "test.uim", rule, false, false);
 
     expect(actual).toEqual(expected);
   });
 
-  test("should return 'true' when xpath rule passed matches document and there is no INCLUDES and WIZARD_PROGRESS_BAR", () => {
+  test("should return 'true' when xpath rule passed matches document and there is no INCLUDES and WIZARD_PROGRESS_BAR", async() => {
     const expected = true;
 
     const document = {};
@@ -335,12 +338,12 @@ describe("checkRule", () => {
 
     xp.select.mockImplementation(() => true);
 
-    const actual = checkRule(document, rule, false);
+    const actual = await checkRule(document, "test.uim", rule, false, false);
 
     expect(actual).toEqual(expected);
   });
 
-  test("should return 'true' when any of the xpath rules passed matches document and there is no INCLUDES and WIZARD_PROGRESS_BAR", () => {
+  test("should return 'true' when any of the xpath rules passed matches document and there is no INCLUDES and WIZARD_PROGRESS_BAR", async () => {
     const expected = true;
 
     const document = {};
@@ -351,7 +354,7 @@ describe("checkRule", () => {
 
     xp.select.mockImplementation((rule) => true);
 
-    const actual = checkRule(document, rule, false);
+    const actual = await checkRule(document, "test.uim", rule, false, false);
 
     expect(actual).toEqual(expected);
   });
@@ -423,48 +426,62 @@ describe("applyRule", () => {
     lg: 1000,
     xlg: 1200,
   };
+  const serializer = {
+    serializeToString: jest.fn(),
+  };
 
   beforeEach(() => {
     xp.select.mockReset();
+    document = undefined;
   });
 
-  test("should throw an error when no document is passed", () => {
-    const actual = () => applyRule();
-
-    expect(actual).toThrow();
+  test("should throw an error when no document is passed", async() => {
+    try {
+      await applyRule();
+    } catch(e) {
+      expect(e).toEqual(new Error("You must supply a UIM document"));
+    }
   });
 
-  test("should throw an error when no filename is passed", () => {
+  test("should throw an error when no filename is passed", async() => {
     const document = {};
-    const actual = () => applyRule(document);
-
-    expect(actual).toThrow();
+    try {
+      await applyRule(document);
+    } catch(e) {
+      expect(e).toEqual(new Error("You must supply a filename"));
+    }
   });
 
-  test("should throw an error when no rules are passed", () => {
+  test("should throw an error when no rules are passed", async() => {
     const document = {};
-    const actual = () => applyRule(document, filename);
-
-    expect(actual).toThrow();
+    try {
+      await applyRule(document, filename, serializer);
+    } catch(e) {
+      expect(e).toEqual(new Error("You must supply a rules array"));
+    }
   });
 
-  test("should throw an error when no sizes are passed", () => {
+  test("should throw an error when no sizes are passed", async() => {
     const document = {};
     const rules = [];
-    const actual = () => applyRule(document, filename, rules);
-
-    expect(actual).toThrow();
+    try {
+      await applyRule(document, filename, serializer, rules);
+    } catch(e) {
+      expect(e).toEqual(new Error("You must supply a size object"));
+    }
   });
 
-  test("should throw an error when no PAGE dictionary is passed", () => {
+  test("should throw an error when no PAGE dictionary is passed", async() => {
     const document = {};
     const rules = [];
-    const actual = () => applyRule(document, filename, rules, sizes);
-
-    expect(actual).toThrow();
+    try {
+      await applyRule(document, filename, serializer, rules, sizes);
+    } catch(e) {
+      expect(e).toEqual(new Error("You must supply a PAGE dictionary map"));
+    }
   });
 
-  test('should not update the document and return "false" when no rules are passed', () => {
+  test('should not update the document and return "false" when no rules are passed', async() => {
     const expected = false;
 
     const mockSetAttribute = jest.fn();
@@ -482,13 +499,15 @@ describe("applyRule", () => {
         setAttribute: mockSetAttribute,
       },
     ]);
-    const actual = applyRule(
+    const actual = await applyRule(
       document,
       filename,
+      serializer,
       rules,
       sizes,
       pagedictionary,
       usePixelWidths,
+      false,
       false
     );
 
@@ -496,7 +515,7 @@ describe("applyRule", () => {
     expect(mockSetAttribute.mock.calls.length).toEqual(0);
   });
 
-  test("should update width to 'small' size when width '600' matches the rule '> 576 and <= 768' and terms pass", () => {
+  test("should update width to 'small' size when width '600' matches the rule '> 576 and <= 768' and terms pass", async() => {
     const expected = true;
 
     const mockSetAttribute = jest.fn();
@@ -520,23 +539,27 @@ describe("applyRule", () => {
     xp.select.mockImplementation((xPath) =>
       xPath.includes("LINK") ? [] : true
     );
-    const actual = applyRule(
+    const actual = await applyRule(
       document,
       filename,
+      serializer,
       rules,
       sizes,
       pagedictionary,
       usePixelWidths,
-      false
+      false,
+      false,
+      true
     );
-
+    
     expect(actual).toEqual(expected);
 
     const [property, result] = mockSetAttribute.mock.calls[0];
     expect(result).toEqual(`width=${sizes.sm}`);
+   
   });
 
-  test("should update width to 'medium' size when width '800' matches the rule '> 768' and terms pass", () => {
+  test("should update width to 'medium' size when width '800' matches the rule '> 768' and terms pass", async() => {
     const expected = true;
 
     const mockSetAttribute = jest.fn();
@@ -560,14 +583,17 @@ describe("applyRule", () => {
     xp.select.mockImplementation((xPath) =>
       xPath.includes("LINK") ? [] : true
     );
-    const actual = applyRule(
+    const actual = await applyRule(
       document,
       filename,
+      serializer,
       rules,
       sizes,
       pageDictionary,
       usePixelWidths,
-      false
+      false,
+      false,
+      true
     );
 
     expect(actual).toEqual(expected);
@@ -576,7 +602,7 @@ describe("applyRule", () => {
     expect(result).toEqual(`width=${sizes.md}`);
   });
 
-  test("should not update width when width '800' matches the rule '> 768' but terms are not met", () => {
+  test("should not update width when width '800' matches the rule '> 768' but terms are not met", async() => {
     const expected = false;
 
     const mockSetAttribute = jest.fn();
@@ -600,13 +626,15 @@ describe("applyRule", () => {
     xp.select.mockImplementation((xPath) =>
       xPath.includes("LINK") ? [] : false
     );
-    const actual = applyRule(
+    const actual = await applyRule(
       document,
       filename,
+      serializer,
       rules,
       sizes,
       pagedictionary,
       usePixelWidths,
+      false,
       false
     );
 
@@ -616,9 +644,9 @@ describe("applyRule", () => {
     expect(result).toEqual(0);
   });
 
-  test("should only match the first rule when the first rule is passed", () => {
+  test("should only match the first rule when the first rule is passed", async() => {
     const mockSetAttribute = jest.fn();
-    const document = {
+    let document = {
       documentElement: {
         getAttribute: () => "width=800",
         setAttribute: mockSetAttribute,
@@ -644,18 +672,20 @@ describe("applyRule", () => {
     xp.select.mockImplementation((xPath) =>
       xPath.includes("LINK") ? [] : true
     );
-    const actual = applyRule(
+    const actual = await applyRule(
       document,
       filename,
+      serializer,
       rules,
       sizes,
       pagedictionary,
       usePixelWidths,
+      false, 
       false
     );
 
     const result = mockSetAttribute.mock.calls.length;
-    expect(result).toEqual(1);
+    expect(result).toEqual(2);
   });
 });
 
@@ -714,7 +744,7 @@ describe("applyRules", () => {
     expect(error).toEqual(new Error("You must supply an parser object"));
   });
 
-  test("should throw an error when no serializer is passed", async  () => {
+  test("should throw an error when no serializer is passed", async() => {
     const files = [];
     const rules =[];
     const size ="md";
@@ -725,7 +755,7 @@ describe("applyRules", () => {
     expect(error).toEqual(new Error("You must supply an serializer object"));
   });
 
-  test("should serialize UIM documents to strings when the document matches the rules", () => {
+  test("should serialize UIM documents to strings when the document matches the rules", async() => {
     const expected = true;
 
     const mockSerializeToString = jest.fn();
@@ -779,7 +809,7 @@ describe("applyRules", () => {
       }
     });
 
-    applyRules(files, rules, sizes, io, parser, serializer, usePixelWidths, false, false);
+    await applyRules(files, rules, sizes, io, parser, serializer, usePixelWidths, false, false);
     const actual = mockSerializeToString.mock.calls.length > 0;
 
     expect(actual).toEqual(expected);

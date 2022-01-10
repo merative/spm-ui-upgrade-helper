@@ -7,7 +7,8 @@
       "count(//INCLUDE) = 0",
       "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0" 
      ],
-    "target": "xlg"
+    "target": "xlg",
+    "containsAllowedDomainsOnly":false
   },
   {
     "width": "<= 768",
@@ -20,7 +21,8 @@
       "count(//INCLUDE) = 0",
       "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0" 
      ],
-    "target": "lg"
+    "target": "lg",
+    "containsAllowedDomainsOnly":false
   },
   {
     "width": "> 768",
@@ -33,7 +35,7 @@
       "count(//INCLUDE) = 0",
       "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0"  
      ],
-     "containsAllowedDomainsOnly":true,
+    
     "target": "md"
   },
   {
@@ -46,7 +48,8 @@
       "count(//INCLUDE) = 0",
       "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0" 
      ],
-    "target": "md"
+    "target": "md",
+    "containsAllowedDomainsOnly":false
   },
   {
     "width": "> 576 and <= 768",
@@ -58,7 +61,6 @@
       "count(//INCLUDE) = 0",
       "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0"  
      ],
-     "containsAllowedDomainsOnly":true,
     "target": "sm"
   },
   {
@@ -74,7 +76,8 @@
       "count(//INCLUDE) = 0",
       "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0"  
      ],
-     "target": "sm"
+     "target": "sm",
+     "containsAllowedDomainsOnly":false
   },
   {
     "width": "> 420 and <= 576",
@@ -90,7 +93,6 @@
       "count(//INCLUDE) = 0",
       "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0"  
      ],
-     "containsAllowedDomainsOnly":true,
     "target": "xs"
   }
 ]

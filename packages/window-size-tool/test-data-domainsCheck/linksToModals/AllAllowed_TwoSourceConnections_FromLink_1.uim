@@ -5,8 +5,7 @@
   -->
 <?xml version="1.0" encoding="UTF-8"?>
 <PAGE
-  PAGE_ID="AllAllowed_SourceConnectionsWithVims"
-   WINDOW_OPTIONS="width=900"
+  PAGE_ID="AllAllowed_TwoSourceConnections_FromLink_1"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:noNamespaceSchemaLocation="file://Curam/UIMSchema.xsd"
 >
@@ -35,7 +34,7 @@
   <SERVER_INTERFACE
     CLASS="PersonAdmin"
     PHASE="DISPLAY"
-    NAME="DISPLAY_4"
+    NAME="DISPLAY_2"
     OPERATION="read"
   />
 
@@ -83,16 +82,21 @@
       <FIELD LABEL="Field.Label.Title">
         <CONNECT>
           <SOURCE
-            NAME="DISPLAY_4"
-            PROPERTY="dateOfBirth"
+            NAME="DISPLAY_1"
+            PROPERTY="title"
+          />
+        </CONNECT>
+      </FIELD>
+      <FIELD LABEL="Field.Label.FirstName">
+        <CONNECT>
+          <SOURCE
+            NAME="DISPLAY_1"
+            PROPERTY="firstName"
           />
         </CONNECT>
       </FIELD>
 
 
     </CLUSTER>
-
-    <INCLUDE FILE_NAME="AllAllowed_SourceConnectionsWithVims.vim"/>
-    <INCLUDE FILE_NAME="NotExist.vim"/>
 
 </PAGE>
