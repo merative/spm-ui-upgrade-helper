@@ -18,7 +18,7 @@ async function execute (overrides){
   const inputFiles = utils.keepFiles(config.internal.files, "uim", "vim");
   const rules = utils.readJson(config.windowSizeTool.rules);
 
-  const outputFiles = await engine.applyRules(
+  await engine.applyRules(
     inputFiles,
     rules,
     sizes,
@@ -27,9 +27,6 @@ async function execute (overrides){
     serializer,
     config.windowSizeTool.usePixelWidths
   );
-  console.log("OF",outputFiles);
-
-  utils.writeFiles(outputFiles);
 
   console.info("window-size-tool finished");
 };
