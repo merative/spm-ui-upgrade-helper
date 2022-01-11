@@ -518,22 +518,17 @@ async function applyRules(
   });
 
   for (let i=0; i<uims.length; i++ ){
-    const fileExtension = path.extname(uims[i].file);
-    // only do domain check for UIM files (Need to update) and if this flag is set. If tthe flag not set the check always passes
-   // const domainCheckPassed = checkAllowedDomainsForResizing ? await checkUIMDomainsAreValidToResizeDown(uims[i].document.documentElement, uims[i].file) : true;
-    if (fileExtension === ".uim") {
-      await applyRule(
-        uims[i].document,
-        uims[i].file,
-        serializer,
-        rules,
-        sizes,
-        pagedictionary,
-        usePixelWidths,
-        verbose,
-        domainsCheckEnabledForAllRules
-      );
-    }
+    await applyRule(
+      uims[i].document,
+      uims[i].file,
+      serializer,
+      rules,
+      sizes,
+      pagedictionary,
+      usePixelWidths,
+      verbose,
+      domainsCheckEnabledForAllRules
+    );
 
     // Process VIMS
     // const vims = domainCheckPassed.vims;

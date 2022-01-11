@@ -22,12 +22,12 @@ const testDirectoryLinksToModals = testDirectory + "/linksToModals";
 
 const testFiles = [];
 fs.readdirSync(testDirectory).forEach(file => {
-  if (path.extname(file) === ".uim") {
+  if (path.extname(file) === ".uim" || path.extname(file) === ".vim") {
     testFiles.push(path.join(testDirectory, file));
   }
 });
 fs.readdirSync(testDirectoryLinksToModals).forEach(file => {
-  if (path.extname(file) === ".uim") {
+  if (path.extname(file) === ".uim" || path.extname(file) === ".vim") {
     testFiles.push(path.join(testDirectoryLinksToModals, file));
   }
 });
@@ -132,6 +132,8 @@ describe("applyRules, domainCheck", () => {
         serializeToString: mockSerializeToString,
       };
 
+      console.log(testFiles);
+
         applyRules(testFiles, rules, sizes, fileio, parser, serializer, true, true);
       
         setTimeout(function() {
@@ -142,7 +144,7 @@ describe("applyRules, domainCheck", () => {
         let linkOptions;
 
         // Expect 3 UIM to be update
-        expect(results.length).toEqual(4);
+        expect(results.length).toEqual(6);
 
         // FIRST UIM
         document = parser.parseFromString(results[0]);
@@ -157,8 +159,24 @@ describe("applyRules, domainCheck", () => {
         // check links are expected
         expect(linkOptions).toEqual([]);
 
-        // SECOND UIM
         document = parser.parseFromString(results[1]);
+        pageNode = document.documentElement;
+        pageId = pageNode.getAttribute("PAGE_ID");
+        // NO Page ID becuase it is a VIM
+        expect(pageId).toEqual("");
+        pageOptions = getPageOptions(pageNode);
+        // check page width is updated as expected
+        //expect(pageOptions.width).toEqual("");
+        linkOptions = getLinkOptions(pageNode);
+        // check links are expected
+        expect(linkOptions.length).toEqual(1);
+        // check firts link
+        let link1 = linkOptions[0];
+        expect(link1.pageId).toEqual("AllAllowed_TwoSourceConnections_FromLink");
+        expect(link1.options.width).toEqual("700");
+
+        // SECOND UIM
+        document = parser.parseFromString(results[2]);
         pageNode = document.documentElement;
         pageId = pageNode.getAttribute("PAGE_ID");
         // check page ID
@@ -169,9 +187,27 @@ describe("applyRules, domainCheck", () => {
         linkOptions = getLinkOptions(pageNode);
         // check links are expected
         expect(linkOptions).toEqual([]);
+        
+        // VIM FILE
+        document = parser.parseFromString(results[3]);
+        pageNode = document.documentElement;
+        pageId = pageNode.getAttribute("PAGE_ID");
+        // NO Page ID becuase it is a VIM
+        expect(pageId).toEqual("");
+        pageOptions = getPageOptions(pageNode);
+        // check page width is updated as expected
+        //expect(pageOptions.width).toEqual("");
+        linkOptions = getLinkOptions(pageNode);
+        // check links are expected
+        expect(linkOptions.length).toEqual(1);
+        // check firts link
+        link1 = linkOptions[0];
+        expect(link1.pageId).toEqual("AllAllowed_TwoSourceConnections_FromLink");
+        expect(link1.options.width).toEqual("700");
+        
 
         // THIRD UIM
-        document = parser.parseFromString(results[2]);
+        document = parser.parseFromString(results[4]);
         pageNode = document.documentElement;
         pageId = pageNode.getAttribute("PAGE_ID");
         // check page ID
@@ -183,7 +219,7 @@ describe("applyRules, domainCheck", () => {
         // check links are expected
         expect(linkOptions.length).toEqual(4);
         // check firts link
-        let link1 = linkOptions[0];
+        link1 = linkOptions[0];
         expect(link1.pageId).toEqual("Participant_searchPersonAndProspectPerson");
         expect(link1.options.width).toEqual("700");
         let link2 = linkOptions[1];
@@ -197,7 +233,7 @@ describe("applyRules, domainCheck", () => {
         expect(link4.options.width).toEqual("1200");
 
         // FOURTH UIM
-        document = parser.parseFromString(results[3]);
+        document = parser.parseFromString(results[5]);
         pageNode = document.documentElement;
         pageId = pageNode.getAttribute("PAGE_ID");
         // check page ID

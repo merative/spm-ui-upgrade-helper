@@ -101,9 +101,19 @@
             PROPERTY="turkeys"
           />
         </CONNECT>
-        <LINK WINDOW_OPTIONS="width=940" PAGE_ID="someUIMPage">
+        <LINK WINDOW_OPTIONS="width=940" PAGE_ID="AllAllowed_TwoSourceConnections_FromLink">
         </LINK>
       </FIELD>
+      <!--FIELD LABEL="Field.Label.Title">
+        <CONNECT>
+          <SOURCE
+            NAME="DISPLAY_4"
+            PROPERTY="turkeys"
+          />
+        </CONNECT>
+        <LINK WINDOW_OPTIONS="width=1000" PAGE_ID="someUIMPage">
+         </LINK>
+      </FIELD-->
 
 
     </CLUSTER>
