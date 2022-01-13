@@ -11,6 +11,9 @@
     {"rootName": "SVR_INT64"},
     {"rootName": "SVR_MONEY"},
     {"rootName": "INTERNAL_ID"},
-    {"rootName": "SVR_BOOLEAN"}
+    {"rootName": "SVR_BOOLEAN"},
+    {"rootName": "SVR_FLOAT"},
+    {"rootName": "SVR_DOUBLE"},
+    {"rootName": "SVR_CHAR"}
   ]
 }
