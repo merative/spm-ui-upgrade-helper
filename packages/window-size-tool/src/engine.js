@@ -4,6 +4,7 @@ const path = require('path');
 const fs = require('fs');
 const utils = require("../../shared-utils/sharedUtils");
 
+
 const { evaluateInequality } = require("./util");
 const {
   getPageOptions,
@@ -14,7 +15,7 @@ const {
 const {
   doRequest,
 } = require("./httpUtils");
-const { Console } = require("console");
+
 
 let parserToUse = null;
 let ioToUse = null;
@@ -326,7 +327,7 @@ async function checkUIMDomainsAreValidToResizeDown(rootUIMNode, filename) {
 
 updateDocument = (serializer, filename, document, results) => {
   const updatedDocument = serializer.serializeToString(document);
-  // console.log("document to update: " + updatedDocument);
+  console.log("document to update: " + updatedDocument);
   if (updatedDocument) {
     results[filename] = updatedDocument;
     utils.writeFiles(results);
@@ -497,41 +498,37 @@ async function applyRules(
 
   const results = [];
   const pagedictionary = {};
-  
+
   const uims = files.map((file) => {
     const contents = io.readLines(file).join("\n");
     const document = parser.parseFromString(contents);
-   
-    if(document.documentElement !== null){
-      const pageId = document.documentElement.getAttribute("PAGE_ID");
-      pagedictionary[pageId] = {
-        file,
-        document,
-      };
 
-      return {
-        pageId,
-        file,
-        document,
-      };
-    } 
+    const pageId = document.documentElement.getAttribute("PAGE_ID");
+
+    pagedictionary[pageId] = {
+      file,
+      document,
+    };
+
+    return {
+      pageId,
+      file,
+      document,
+    };
   });
-  
 
-    for (let i=0; i<uims.length; i++ ){
-     if(uims[i]!== undefined){
-      await applyRule(
-        uims[i].document,
-        uims[i].file,
-        serializer,
-        rules,
-        sizes,
-        pagedictionary,
-        usePixelWidths,
-        verbose,
-        domainsCheckEnabledForAllRules
-       );
-      }
+  for (let i=0; i<uims.length; i++ ){
+    await applyRule(
+      uims[i].document,
+      uims[i].file,
+      serializer,
+      rules,
+      sizes,
+      pagedictionary,
+      usePixelWidths,
+      verbose,
+      domainsCheckEnabledForAllRules
+    );
 
     // Process VIMS
     // const vims = domainCheckPassed.vims;
