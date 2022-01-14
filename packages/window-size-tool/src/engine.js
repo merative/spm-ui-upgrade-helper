@@ -14,7 +14,6 @@ const {
 const {
   doRequest,
 } = require("./httpUtils");
-const { Console } = require("console");
 
 let parserToUse = null;
 let ioToUse = null;
