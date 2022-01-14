@@ -1,0 +1,5 @@
+<!--
+  - Expected: No change.
+  -
+  - Reason: PAGE element has no WINDOW_OPTIONS attribute.
+  -->
