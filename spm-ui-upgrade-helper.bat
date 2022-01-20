@@ -14,8 +14,8 @@ if "%OUTPUT_FOLDER%" == "" (
   echo ERROR: Missing output folder argument
   set ERROR=true
 )
-if "%SERVER_DIR%" == "" (
-  echo ERROR: Missing path to ServerAccessBean
+if "%$INPUT_FOLDER%%SERVER_ACCESS_BEANS%" == "" (
+  echo ERROR: You must build the server or at least build the model. For example: serverbuild.model
   set ERROR=true
 )
 if not "%ERROR%"=="" (
