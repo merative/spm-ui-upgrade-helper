@@ -13,8 +13,8 @@ if [[ -z "$OUTPUT_FOLDER" ]]; then
   echo ERROR: Missing output folder argument
   ERROR=true
 fi
-if [[ -z "$SERVER_DIR" ]]; then
-  echo ERROR: Missing path to ServerAccessBean
+if [[ -z "$INPUT_FOLDER/EJBServer/build" ]]; then
+  echo ERROR: The ServerAccessBean path is missing. Build the server or the model to generate EJBserver/build, e.g. serverbuild.model
   ERROR=true
 fi
 if [[ -n "$ERROR" ]]; then
