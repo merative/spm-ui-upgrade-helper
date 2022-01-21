@@ -14,8 +14,8 @@ if "%OUTPUT_FOLDER%" == "" (
   echo ERROR: Missing output folder argument
   set ERROR=true
 )
-if "%INPUT_FOLDER%/EJBServer/build" == "" (
-  echo ERROR: You must build the server or at least build the model. For example: serverbuild.model
+if "%INPUT_FOLDER%\EJBServer\build" == "" (
+  echo ERROR: The ServerAccessBean path is missing. Build the server or the model to generate EJBserver\build, e.g. serverbuild.model
   set ERROR=true
 )
 if not "%ERROR%"=="" (

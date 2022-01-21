@@ -14,7 +14,7 @@ if [[ -z "$OUTPUT_FOLDER" ]]; then
   ERROR=true
 fi
 if [[ -z "$INPUT_FOLDER/EJBServer/build" ]]; then
-  echo ERROR: You must build the server or at least build the model. For example: serverbuild.model
+  echo ERROR: The ServerAccessBean path is missing. Build the server or the model to generate EJBserver/build, e.g. serverbuild.model
   ERROR=true
 fi
 if [[ -n "$ERROR" ]]; then
