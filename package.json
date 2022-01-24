@@ -26,11 +26,11 @@
     "tar": "6.1.9",
     "json-schema": "0.4.0",
     "ansi-regex": "5.0.1",
-    "follow-redirects": "1.14.7",
-    "engine.io": "4.1.2"
+    "node-fetch":"2.6.7"
+
   },
   "devDependencies": {
-    "shelljs": "^0.8.4"
+    "shelljs": "^0.8.5"
   },
   "dependencies": {
     "lerna": "^4.0.0",
