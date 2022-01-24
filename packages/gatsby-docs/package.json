@@ -31,6 +31,8 @@
     "axios":"0.21.2",
     "trim-newlines":"3.0.1",
     "follow-redirects": "1.14.7",
-    "engine.io": "4.1.2"
+    "engine.io": "4.1.2",
+    "node-fetch":"2.6.7"
   }
 }
+
