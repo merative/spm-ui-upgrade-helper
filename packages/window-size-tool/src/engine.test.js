@@ -26,6 +26,7 @@ describe("checkWidth", () => {
 
   test("should throw an error when no rule is supplied", () => {
     const width = 400;
+    const rule = null;
     const actual = () => checkWidth(width);
 
     expect(actual).toThrow();

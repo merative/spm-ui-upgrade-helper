@@ -330,3 +330,21 @@ test("apply Rules, containsAllowedDomainsOnly enabled for rule",  done => {
    }, 120);    
 });
 });
+
+describe("Links without page_Id tests", () => {
+
+  test("Get link option, where PageId is provided", async () => {
+      let testFile;
+      testFile = getTestFile("Link_WithoutPageId.uim");
+      const pageNode= getRootNodeFromUIM(testFile, parser, fileio);
+      const pageId = pageNode.getAttribute("PAGE_ID");
+      expect(pageId).toEqual("OutcomePlanFactor_recommendations");   
+      const linkOptions = getLinkOptions(pageNode);
+      // check links are expected
+      expect(linkOptions.length).toEqual(1);
+      // skip first link without Page_Id
+      // check second link
+      let link0 = linkOptions[0];
+      expect(link0.options.width).toEqual("800");  
+  });
+});
