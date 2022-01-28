@@ -91,6 +91,11 @@ function checkPageWidth(pageNode, rule, verbose = true) {
  * @returns Returns an array of LINK elements who's widths pass the rule.
  */
 function checkLinkWidth(pageNode, rule, verbose = true) {
+  if (!pageNode) {
+    throw Error("You must supply a pageNode");
+  } else if (!rule) {
+    throw Error("You must supply a rules string");
+  }
   const links = getLinkOptions(pageNode).filter((link) => {
     if (!link.options || !link.options.width) {
       return false;

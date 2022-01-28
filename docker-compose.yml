@@ -20,7 +20,7 @@ services:
     image: spm-ui-upgrade-helper_beanparser
     container_name: spm-ui-upgrade-helper_beanparser
     volumes:
-      - ${INPUT_FOLDER}${SERVER_ACCESS_BEANS_PATH}:/usr/src/sabparser/input_SAB
+      - ${INPUT_FOLDER}/EJBServer/build/svr/gen/client:/usr/src/sabparser/input_SAB
     networks:
       - spm-ui-upgrade-helper
   nodefront:
