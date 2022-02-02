@@ -35,7 +35,6 @@ fs.readdirSync(testDirectoryLinksToModals).forEach(file => {
 const getTestFile = (filename) => {
   for(let i = 0; i < testFiles.length; i++) {
     if (path.basename(testFiles[i]) === filename) {
-      //console.log(testFiles[i]);
       return testFiles[i];
     }
     
@@ -131,8 +130,6 @@ describe("applyRules, domainCheck", () => {
       const serializer = {
         serializeToString: mockSerializeToString,
       };
-
-      console.log(testFiles);
 
         applyRules(testFiles, rules, sizes, fileio, parser, serializer, true, true);
       
