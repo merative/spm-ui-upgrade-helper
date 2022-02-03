@@ -330,7 +330,7 @@ async function checkUIMDomainsAreValidToResizeDown(rootUIMNode, filename) {
 
 updateDocument = (serializer, filename, document, results) => {
   const updatedDocument = serializer.serializeToString(document);
-  // console.log("document to update: " + updatedDocument);
+
   if (updatedDocument) {
     results[filename] = updatedDocument;
     utils.writeFiles(results);
