@@ -5,7 +5,8 @@
     ],
     "allTerms": [
       "count(//INCLUDE) = 0",
-      "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0" 
+      "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0",
+      "count(//INLINE_PAGE) = 0" 
      ],
     "target": "xlg",
     "containsAllowedDomainsOnly":false
@@ -19,7 +20,8 @@
     ],
     "allTerms": [
       "count(//INCLUDE) = 0",
-      "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0" 
+      "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0",
+      "count(//INLINE_PAGE) = 0"
      ],
     "target": "lg",
     "containsAllowedDomainsOnly":false
@@ -33,7 +35,8 @@
       "count(//CLUSTER[@NUM_COLS > 2]) = 0",
       "count(//LIST[count(FIELD | CONTAINER) > 4]) = 0",
       "count(//INCLUDE) = 0",
-      "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0"  
+      "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0",
+      "count(//INLINE_PAGE) = 0"
      ],
     
     "target": "md"
@@ -46,7 +49,8 @@
     ],
     "allTerms": [
       "count(//INCLUDE) = 0",
-      "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0" 
+      "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0",
+      "count(//INLINE_PAGE) = 0"
      ],
     "target": "md",
     "containsAllowedDomainsOnly":false
@@ -59,7 +63,8 @@
       "count(//LIST[count(FIELD | CONTAINER) > 2]) = 0",
       "count(//CLUSTER) > 0 or count(//LIST) > 0",
       "count(//INCLUDE) = 0",
-      "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0"  
+      "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0",
+      "count(//INLINE_PAGE) = 0" 
      ],
     "target": "sm"
   },
@@ -74,7 +79,8 @@
     ],
     "allTerms": [
       "count(//INCLUDE) = 0",
-      "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0"  
+      "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0",
+      "count(//INLINE_PAGE) = 0"  
      ],
      "target": "sm",
      "containsAllowedDomainsOnly":false
@@ -91,7 +97,8 @@
       "count(//WIDGET//TARGET) = 0",
       "count(//ACTION_CONTROL) < 3",
       "count(//INCLUDE) = 0",
-      "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0"  
+      "count(//MENU[@MODE='WIZARD_PROGRESS_BAR']) = 0",
+      "count(//INLINE_PAGE) = 0" 
      ],
     "target": "xs"
   }
