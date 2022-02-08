@@ -681,7 +681,8 @@ describe("applyRule", () => {
       pagedictionary,
       usePixelWidths,
       false, 
-      false
+      false,
+      true
     );
 
     const result = mockSetAttribute.mock.calls.length;
