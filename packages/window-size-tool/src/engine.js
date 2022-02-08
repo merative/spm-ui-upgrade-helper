@@ -46,7 +46,6 @@ function checkWidth(width, rule, verbose = true) {
 
     pass = limits.reduce((result, limit) => {
       const [operator, ruleWidth] = limit;
-
       return result && evaluateInequality(width, ruleWidth, operator);
     }, true);
   }
@@ -118,7 +117,6 @@ function checkLinkWidth(pageNode, rule, verbose = true) {
 async function checkRule(node, filename, rule, verbose = true, domainsCheckEnabledForAllRules = true) {
   let pass = false;
   let domainsCheckPass = false;
-
   if (!node) {
     throw Error("You must supply a node");
   } else if (!rule) {
@@ -131,9 +129,7 @@ async function checkRule(node, filename, rule, verbose = true, domainsCheckEnabl
   rule.anyTerms.forEach((term) => {
     if (!pass) { 
       const result = xp.select(term, node);
-
       pass = pass || result;
-
       if (verbose) {
         console.debug(
           ` term:  ${
@@ -377,6 +373,7 @@ async function applyRule(
     throw Error("You must supply a PAGE dictionary map");
   }
 
+  
   const pageNode = document.documentElement;
   let hasChanges = false;
   if (verbose) {
@@ -386,43 +383,42 @@ async function applyRule(
   let results = [];
   let hasPageChanges = false;
 
-  rules.forEach(async(rule, index) => { 
+
+  for(i=0; i<rules.length; i++){
       if (verbose) {
-        console.debug(`rule: ${chalk.yellow(index + 1)}`);
+        console.debug(`rule: ${chalk.yellow(i + 1)}`);
       }
-
-      const linkMatches = checkLinkWidth(pageNode, rule, verbose);
+      const linkMatches = checkLinkWidth(pageNode,rules[i], verbose);
       const hasLinks = linkMatches.length > 0;
-
-      if (checkPageWidth(pageNode, rule.width, verbose)) {
-        const pagePass = await checkRule(pageNode, filename, rule, verbose, domainsCheckEnabledForAllRules);
-        hasChanges = true;
-
-        if (pagePass) {        
+   
+      if(!hasChanges){
+      if (checkPageWidth(pageNode, rules[i].width, verbose)) {
+        const pagePass = await checkRule(pageNode, filename, rules[i], verbose, domainsCheckEnabledForAllRules);     
+        if (pagePass) {   
           const windowOptions = getPageOptions(pageNode);
-
-          updateWidthOption(windowOptions, sizes, rule.target, usePixelWidths);
-
+         
+          updateWidthOption(windowOptions, sizes, rules[i].target, usePixelWidths);
+          hasChanges = true;
           setPageOptions(pageNode, windowOptions);
           hasPageChanges = true;
         }
       }
-
+    
+    
       linkMatches.forEach(async({ pageId, options, link }) => {
         const pageReference = pagedictionary[pageId];
-
         if (pageReference) {
           linkPass = await checkRule(
             pageReference.document.documentElement,
             pageReference.file,
-            rule,
+            rules[i],
             verbose,
             domainsCheckEnabledForAllRules
           );
+          if(rules[i]){
 
-          updateWidthOption(options, sizes, rule.target, usePixelWidths);
-         
-
+          updateWidthOption(options, sizes, rules[i].target, usePixelWidths);     
+          }
           if (linkPass) {
             setLinkOptions(link, options);
             updateDocument(serializer, filename, document, results);
@@ -432,7 +428,9 @@ async function applyRule(
       if (!hasLinks && hasPageChanges === true) {
         updateDocument(serializer, filename, document, results);
       }
-  });
+    }
+  }
+
   if (testMode) {
     return new Promise(function(resolve,reject){
       setTimeout(function() {
@@ -443,6 +441,7 @@ async function applyRule(
   return hasChanges;
 }
 
+
 function getDocumentFromUIM(file, parser, io) {
   const contents = io.readLines(file).join("\n");
   const document = parser.parseFromString(contents);
@@ -452,6 +451,7 @@ function getDocumentFromUIM(file, parser, io) {
 function getRootNodeFromUIM(file, parser, io) {
   return getDocumentFromUIM(file, parser, io).documentElement;
 }
+
 
 /**
  * .
