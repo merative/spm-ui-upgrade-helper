@@ -79,36 +79,34 @@ jest.mock('./httpUtils', () => (
 
 describe("checkUIMDomainsAreValidToResizeDown", () => {
 
-  // test("checkUIMDomainsAreValidToResizeDown, each file", async () => {
-  //     const files = testFiles;
-  //     let testFile;
-  //     let rootNode;
-  //     let domainsCheckPassed;
+  test("checkUIMDomainsAreValidToResizeDown, each file", async () => {
+      const files = testFiles;
+      let testFile;
+      let rootNode;
+      let domainsCheckPassed;
 
-  //     testFile =  getTestFile("AllAllowed_TwoSourceConnections.uim");
-  //     rootNode = getRootNodeFromUIM(testFile, parser, fileio);
-  //     domainsCheckPassed = await checkUIMDomainsAreValidToResizeDown(rootNode, testFile);
-  //     expect(domainsCheckPassed).toEqual(true);
+      testFile =  getTestFile("AllAllowed_TwoSourceConnections.uim");
+      rootNode = getRootNodeFromUIM(testFile, parser, fileio);
+      domainsCheckPassed = await checkUIMDomainsAreValidToResizeDown(rootNode, testFile);
+      expect(domainsCheckPassed).toEqual(true);
      
-  //     // TODO: Investigate why this UIM that contains a VIM is being domain checked
-  //     // it shold NOT be because of the term "count(//INCLUDE) = 0"
-  //     testFile =  getTestFile("AllAllowed_SourceConnectionsWithVims.uim");
-  //     rootNode = getRootNodeFromUIM(testFile, parser, fileio);
-  //     domainsCheckPassed = await checkUIMDomainsAreValidToResizeDown(rootNode, testFile);
-  //     expect(domainsCheckPassed).toEqual(true);
+      // TODO: Investigate why this UIM that contains a VIM is being domain checked
+      // it shold NOT be because of the term "count(//INCLUDE) = 0"
+      testFile =  getTestFile("AllAllowed_SourceConnectionsWithVims.uim");
+      rootNode = getRootNodeFromUIM(testFile, parser, fileio);
+      domainsCheckPassed = await checkUIMDomainsAreValidToResizeDown(rootNode, testFile);
+      expect(domainsCheckPassed).toEqual(true);
 
-  //     testFile =  getTestFile("NoneAllowed_OneSourceConnection.uim");
-  //     rootNode = getRootNodeFromUIM(testFile, parser, fileio);
-  //     domainsCheckPassed = await checkUIMDomainsAreValidToResizeDown(rootNode, testFile);
-  //     expect(domainsCheckPassed).toEqual(false);
+      testFile =  getTestFile("NoneAllowed_OneSourceConnection.uim");
+      rootNode = getRootNodeFromUIM(testFile, parser, fileio);
+      domainsCheckPassed = await checkUIMDomainsAreValidToResizeDown(rootNode, testFile);
+      expect(domainsCheckPassed).toEqual(false);
       
-  //     testFile =  getTestFile("SomeAllowed_MultipleSourceConnections.uim");
-  //     rootNode = getRootNodeFromUIM(testFile, parser, fileio);
-  //     domainsCheckPassed = await checkUIMDomainsAreValidToResizeDown(rootNode, testFile);
-  //     expect(domainsCheckPassed).toEqual(false);
-  // });
-
-
+      testFile =  getTestFile("SomeAllowed_MultipleSourceConnections.uim");
+      rootNode = getRootNodeFromUIM(testFile, parser, fileio);
+      domainsCheckPassed = await checkUIMDomainsAreValidToResizeDown(rootNode, testFile);
+      expect(domainsCheckPassed).toEqual(false);
+  });
 
 });
 
@@ -273,7 +271,7 @@ describe("applyRules, domainCheck", () => {
         }, 100);    
   });
  
-  test("domainCheck for all rules on all files in test folder4",  done => {
+  test("ApplyRules checked for all files/links in test-data-rules-order",  done => {
     let results = [];
     const mockSerializeToString = function(document) {
     const serializedDoc = realSerializer.serializeToString(document);
