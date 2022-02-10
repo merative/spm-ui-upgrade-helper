@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed Materials - Property of IBM
+ 
+  Copyright IBM Corporation 2008, 2017. All Rights Reserved.
+
+  US Government Users Restricted Rights - Use, duplication or disclosure 
+  restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<!-- Copyright 2008-2011 Curam Software Ltd.                                -->
+<!-- All rights reserved.                                                   -->
+<!-- This software is the confidential and proprietary information of Curam -->
+<!-- Software, Ltd. ("Confidential Information"). You shall not disclose    -->
+<!-- such Confidential Information and shall use it only in accordance with -->
+<!-- the terms of the license agreement you entered into with Curam         -->
+<!-- Software.                                                              -->
+<!-- Description -->
+<!-- =========== -->
+<!-- This is the duplicate Person and Prospect Person search page.          -->
+<!-- BEGIN, CR00350370, PB -->
+<PAGE PAGE_ID="Link_AllAllowed_TwoSourceRules" WINDOW_OPTIONS="width=900" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file://Curam/UIMSchema.xsd">
+  <!-- END, CR00350370 -->
+  <PAGE_TITLE>
+    <CONNECT>
+      <SOURCE NAME="TEXT" PROPERTY="PageTitle.StaticText1"/>
+    </CONNECT>
+  </PAGE_TITLE>
+
+
+  <PAGE_PARAMETER NAME="originalConcernRoleID"/>
+
+
+  <!-- BEGIN, CR00282028, IBM -->
+  <INFORMATIONAL>
+    <CONNECT>
+      <SOURCE NAME="ACTION" PROPERTY="informationMsgTxt"/>
+    </CONNECT>
+  </INFORMATIONAL>
+
+
+  <SERVER_INTERFACE CLASS="ClientMerge" NAME="ACTION" OPERATION="searchNonDuplicatePersonDetails" PHASE="ACTION"/>
+  <!-- END, CR00282028 -->
+
+
+  <SERVER_INTERFACE CLASS="ClientMerge" NAME="DISPLAY" OPERATION="searchDuplicateDisplay" PHASE="DISPLAY"/>
+
+
+  <SERVER_INTERFACE CLASS="Person" NAME="READNICKNAMESIND" OPERATION="readSearchWithNicknamesIndicator"/>
+
+
+  <CONNECT>
+    <SOURCE NAME="PAGE" PROPERTY="originalConcernRoleID"/>
+    <TARGET NAME="DISPLAY" PROPERTY="concernRoleID"/>
+  </CONNECT>
+
+
+  <CONNECT>
+    <SOURCE NAME="PAGE" PROPERTY="originalConcernRoleID"/>
+    <TARGET NAME="ACTION" PROPERTY="key$originalConcernRoleID"/>
+  </CONNECT>
+
+
+  <ACTION_SET>
+    <ACTION_CONTROL IMAGE="CancelButton" LABEL="ActionControl.Label.Cancel">
+      <LINK PAGE_ID="Participant_listDuplicates">
+        <CONNECT>
+          <SOURCE NAME="PAGE" PROPERTY="originalConcernRoleID"/>
+          <TARGET NAME="PAGE" PROPERTY="concernRoleID"/>
+        </CONNECT>
+      </LINK>
+    </ACTION_CONTROL>
+  </ACTION_SET>
+
+
+  <CLUSTER LABEL_WIDTH="45" NUM_COLS="2" TITLE="Cluster.Title.SearchCriteria">
+
+
+    <FIELD LABEL="Field.Label.ReferenceNumber">
+      <CONNECT>
+        <TARGET NAME="ACTION" PROPERTY="personSearchKey$referenceNumber"/>
+      </CONNECT>
+    </FIELD>
+
+
+    <FIELD CONTROL="SKIP"/>
+
+
+  </CLUSTER>
+
+
+  <CLUSTER LABEL_WIDTH="45" NUM_COLS="2" TITLE="Cluster.Title.AdditionalSearchCriteria">
+
+
+    <FIELD LABEL="Field.Label.FirstName">
+      <CONNECT>
+        <SOURCE NAME="DISPLAY" PROPERTY="firstName"/>
+      </CONNECT>
+      <CONNECT>
+        <TARGET NAME="ACTION" PROPERTY="personSearchKey$forename"/>
+      </CONNECT>
+    </FIELD>
+
+
+    <FIELD LABEL="Field.Label.LastName">
+      <CONNECT>
+        <SOURCE NAME="DISPLAY" PROPERTY="lastName"/>
+      </CONNECT>
+      <CONNECT>
+        <TARGET NAME="ACTION" PROPERTY="personSearchKey$surname"/>
+      </CONNECT>
+    </FIELD>
+
+
+    <FIELD LABEL="Field.Label.DateOfBirth" USE_DEFAULT="false">
+      <CONNECT>
+        <SOURCE NAME="DISPLAY" PROPERTY="dateOfBirth"/>
+      </CONNECT>
+      <CONNECT>
+        <TARGET NAME="ACTION" PROPERTY="personSearchKey$dateOfBirth"/>
+      </CONNECT>
+    </FIELD>
+
+
+    <FIELD LABEL="Field.Label.AddressLineOne">
+      <CONNECT>
+        <TARGET NAME="ACTION" PROPERTY="personSearchKey$addressDtls$addressLine1"/>
+      </CONNECT>
+    </FIELD>
+
+
+    <FIELD LABEL="Field.Label.City">
+      <CONNECT>
+        <TARGET NAME="ACTION" PROPERTY="personSearchKey$addressDtls$city"/>
+      </CONNECT>
+    </FIELD>
+
+
+    <FIELD LABEL="Field.Label.Nickname">
+      <CONNECT>
+        <SOURCE NAME="READNICKNAMESIND" PROPERTY="result$dtls$searchWithNicknamesInd"/>
+      </CONNECT>
+      <CONNECT>
+        <TARGET NAME="ACTION" PROPERTY="personSearchKey$nicknameInd"/>
+      </CONNECT>
+    </FIELD>
+
+
+    <FIELD LABEL="Field.Label.DoubleMetaphone">
+      <CONNECT>
+        <TARGET NAME="ACTION" PROPERTY="personSearchKey$soundsLikeInd"/>
+      </CONNECT>
+    </FIELD>
+
+
+    <FIELD LABEL="Field.Label.Gender" USE_BLANK="true" USE_DEFAULT="false" WIDTH="35">
+      <CONNECT>
+        <SOURCE NAME="DISPLAY" PROPERTY="gender"/>
+      </CONNECT>
+      <CONNECT>
+        <TARGET NAME="ACTION" PROPERTY="personSearchKey$gender"/>
+      </CONNECT>
+    </FIELD>
+
+
+    <FIELD LABEL="Field.Label.AddressLineTwo">
+      <CONNECT>
+        <TARGET NAME="ACTION" PROPERTY="personSearchKey$addressDtls$addressLine2"/>
+      </CONNECT>
+    </FIELD>
+
+
+    <FIELD LABEL="Field.Label.BirthLastName">
+      <CONNECT>
+        <TARGET NAME="ACTION" PROPERTY="personSearchKey$birthSurname"/>
+      </CONNECT>
+    </FIELD>
+
+
+  </CLUSTER>
+
+
+  <CLUSTER>
+    <ACTION_SET ALIGNMENT="CENTER" TOP="false">
+      <ACTION_CONTROL DEFAULT="true" IMAGE="SearchButton" LABEL="ActionControl.Label.Search" TYPE="SUBMIT">
+        <LINK PAGE_ID="THIS"/>
+      </ACTION_CONTROL>
+
+
+      <ACTION_CONTROL IMAGE="ResetButton" LABEL="ActionControl.Label.Reset">
+        <LINK PAGE_ID="test_1" WINDOW_OPTIONS="width=300">
+          <CONNECT>
+            <SOURCE NAME="PAGE" PROPERTY="originalConcernRoleID"/>
+            <TARGET NAME="PAGE" PROPERTY="originalConcernRoleID"/>
+          </CONNECT>
+        </LINK>
+      </ACTION_CONTROL>
+    </ACTION_SET>
+  </CLUSTER>
+
+
+  <LIST TITLE="List.Title.PersonSearchResults">
+
+
+    <CONTAINER LABEL="Container.Label.Action" WIDTH="8">
+      <ACTION_CONTROL LABEL="ActionControl.Label.Select">
+        <LINK PAGE_ID="test_2" WINDOW_OPTIONS="width=300">
+          <CONNECT>
+            <SOURCE NAME="PAGE" PROPERTY="originalConcernRoleID"/>
+            <TARGET NAME="PAGE" PROPERTY="originalConcernRoleID"/>
+          </CONNECT>
+          <CONNECT>
+            <SOURCE NAME="ACTION" PROPERTY="dtlsList$concernRoleID"/>
+            <TARGET NAME="PAGE" PROPERTY="duplicateConcernRoleID"/>
+          </CONNECT>
+        </LINK>
+      </ACTION_CONTROL>
+    </CONTAINER>
+
+
+    <FIELD LABEL="Field.Title.FirstName" WIDTH="35">
+      <CONNECT>
+        <SOURCE NAME="ACTION" PROPERTY="dtlsList$xmlPersonData"/>
+      </CONNECT>
+    </FIELD>
+
+
+    <FIELD LABEL="Field.Title.AddressLineOne" WIDTH="40">
+      <CONNECT>
+        <SOURCE NAME="ACTION" PROPERTY="dtlsList$formattedAddress"/>
+      </CONNECT>
+    </FIELD>
+
+
+    <FIELD LABEL="Field.Title.DateOfBirth" WIDTH="17">
+      <CONNECT>
+        <SOURCE NAME="ACTION" PROPERTY="dtlsList$dateOfBirth"/>
+      </CONNECT>
+    </FIELD>
+  </LIST>
+
+
+</PAGE>

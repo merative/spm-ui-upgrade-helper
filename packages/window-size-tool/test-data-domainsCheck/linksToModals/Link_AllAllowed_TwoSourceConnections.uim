@@ -99,7 +99,7 @@
 
 
         </CONDITION>
-        <LINK OPEN_MODAL="TRUE" PAGE_ID="AllAllowed_TwoSourceConnections_FromLink" WINDOW_OPTIONS="width=1200,height=600">
+        <LINK OPEN_MODAL="TRUE" PAGE_ID="AllAllowed_TwoSourceConnections_FromLink"  WINDOW_OPTIONS="width=940">
           <CONNECT>
             <!-- BEGIN, CR00281651, KRK -->
             <SOURCE NAME="DISPLAY" PROPERTY="dtls$concernRoleDuplicateID"/>

@@ -19,8 +19,10 @@ const {
 
 const testDirectory = path.join(__dirname, "../test-data-domainsCheck");
 const testDirectoryLinksToModals = testDirectory + "/linksToModals";
+const testDirectoryRulesOrder = path.join(__dirname, "../test-data-rules-order");
 
 const testFiles = [];
+const rulesOrderTestFiles = [];
 fs.readdirSync(testDirectory).forEach(file => {
   if (path.extname(file) === ".uim" || path.extname(file) === ".vim") {
     testFiles.push(path.join(testDirectory, file));
@@ -29,6 +31,11 @@ fs.readdirSync(testDirectory).forEach(file => {
 fs.readdirSync(testDirectoryLinksToModals).forEach(file => {
   if (path.extname(file) === ".uim" || path.extname(file) === ".vim") {
     testFiles.push(path.join(testDirectoryLinksToModals, file));
+  }
+});
+fs.readdirSync(testDirectoryRulesOrder).forEach(file => {
+  if (path.extname(file) === ".uim" || path.extname(file) === ".vim") {
+    rulesOrderTestFiles.push(path.join(testDirectoryRulesOrder, file));
   }
 });
 
@@ -72,51 +79,66 @@ jest.mock('./httpUtils', () => (
 
 describe("checkUIMDomainsAreValidToResizeDown", () => {
 
-  test("checkUIMDomainsAreValidToResizeDown, each file", async () => {
-      const files = testFiles;
-      let testFile;
-      let rootNode;
-      let domainsCheckPassed;
+  // test("checkUIMDomainsAreValidToResizeDown, each file", async () => {
+  //     const files = testFiles;
+  //     let testFile;
+  //     let rootNode;
+  //     let domainsCheckPassed;
 
-      testFile =  getTestFile("AllAllowed_TwoSourceConnections.uim");
-      rootNode = getRootNodeFromUIM(testFile, parser, fileio);
-      domainsCheckPassed = await checkUIMDomainsAreValidToResizeDown(rootNode, testFile);
-      expect(domainsCheckPassed).toEqual(true);
+  //     testFile =  getTestFile("AllAllowed_TwoSourceConnections.uim");
+  //     rootNode = getRootNodeFromUIM(testFile, parser, fileio);
+  //     domainsCheckPassed = await checkUIMDomainsAreValidToResizeDown(rootNode, testFile);
+  //     expect(domainsCheckPassed).toEqual(true);
      
-      // TODO: Investigate why this UIM that contains a VIM is being domain checked
-      // it shold NOT be because of the term "count(//INCLUDE) = 0"
-      testFile =  getTestFile("AllAllowed_SourceConnectionsWithVims.uim");
-      rootNode = getRootNodeFromUIM(testFile, parser, fileio);
-      domainsCheckPassed = await checkUIMDomainsAreValidToResizeDown(rootNode, testFile);
-      expect(domainsCheckPassed).toEqual(true);
+  //     // TODO: Investigate why this UIM that contains a VIM is being domain checked
+  //     // it shold NOT be because of the term "count(//INCLUDE) = 0"
+  //     testFile =  getTestFile("AllAllowed_SourceConnectionsWithVims.uim");
+  //     rootNode = getRootNodeFromUIM(testFile, parser, fileio);
+  //     domainsCheckPassed = await checkUIMDomainsAreValidToResizeDown(rootNode, testFile);
+  //     expect(domainsCheckPassed).toEqual(true);
 
-      testFile =  getTestFile("NoneAllowed_OneSourceConnection.uim");
-      rootNode = getRootNodeFromUIM(testFile, parser, fileio);
-      domainsCheckPassed = await checkUIMDomainsAreValidToResizeDown(rootNode, testFile);
-      expect(domainsCheckPassed).toEqual(false);
+  //     testFile =  getTestFile("NoneAllowed_OneSourceConnection.uim");
+  //     rootNode = getRootNodeFromUIM(testFile, parser, fileio);
+  //     domainsCheckPassed = await checkUIMDomainsAreValidToResizeDown(rootNode, testFile);
+  //     expect(domainsCheckPassed).toEqual(false);
       
-      testFile =  getTestFile("SomeAllowed_MultipleSourceConnections.uim");
-      rootNode = getRootNodeFromUIM(testFile, parser, fileio);
-      domainsCheckPassed = await checkUIMDomainsAreValidToResizeDown(rootNode, testFile);
-      expect(domainsCheckPassed).toEqual(false);
-  });
+  //     testFile =  getTestFile("SomeAllowed_MultipleSourceConnections.uim");
+  //     rootNode = getRootNodeFromUIM(testFile, parser, fileio);
+  //     domainsCheckPassed = await checkUIMDomainsAreValidToResizeDown(rootNode, testFile);
+  //     expect(domainsCheckPassed).toEqual(false);
+  // });
+
+
+
 });
 
 describe("applyRules, domainCheck", () => {
-  const sizes = {
-    xs: 0,
-    sm: 500,
-    md: 700,
-    lg: 1000,
-    xlg: 1200,
-  };
-  let rules = [
+    const sizes = {
+      xs: 0,
+      sm: 500,
+      md: 700,
+      lg: 1000,
+      xlg: 1200,
+    };
+    let rules = [
+    {
+      width: "< 1200",
+      anyTerms: ["criteria.1"],
+      allTerms: ["criteria.3"],
+      target: "lg",
+    },
     {
       width: "> 768",
       anyTerms: ["criteria.1"],
       allTerms: ["criteria.3"],
-      target: "md"
+      target: "md",
     },
+    {
+      width: "< 400",
+      anyTerms: ["criteria.1"],
+      allTerms: ["criteria.3"],
+      target: "sm",
+    }
   ];
   const realSerializer = new xmldom.XMLSerializer();
  
@@ -140,139 +162,118 @@ describe("applyRules, domainCheck", () => {
         let pageOptions;
         let linkOptions;
 
-        // Expect 3 UIM to be update
-        expect(results.length).toEqual(6);
+            // first file AllAllowed_SourceConnectionsWithVims.uim
+            document = parser.parseFromString(results[0]);
+            pageNode = document.documentElement;
+            pageId = pageNode.getAttribute("PAGE_ID");
+            // check page ID
+            expect(pageId).toEqual("AllAllowed_SourceConnectionsWithVims");
+            pageOptions = getPageOptions(pageNode);
+            // check page width is updated as expected
+            expect(pageOptions.width).toEqual("1000");
+            linkOptions = getLinkOptions(pageNode);
+            // check links are expected
+            expect(linkOptions).toEqual([]);
 
-        // FIRST UIM
-        document = parser.parseFromString(results[0]);
-        pageNode = document.documentElement;
-        pageId = pageNode.getAttribute("PAGE_ID");
-        // check page ID
-        expect(pageId).toEqual("AllAllowed_SourceConnectionsWithVims");
-        pageOptions = getPageOptions(pageNode);
-        // check page width is updated as expected
-        expect(pageOptions.width).toEqual("700");
-        linkOptions = getLinkOptions(pageNode);
-        // check links are expected
-        expect(linkOptions).toEqual([]);
-
-        document = parser.parseFromString(results[1]);
-        pageNode = document.documentElement;
-        pageId = pageNode.getAttribute("PAGE_ID");
-        // NO Page ID becuase it is a VIM
-        expect(pageId).toEqual("");
-        pageOptions = getPageOptions(pageNode);
-        // check page width is updated as expected
-        //expect(pageOptions.width).toEqual("");
-        linkOptions = getLinkOptions(pageNode);
-        // check links are expected
-        expect(linkOptions.length).toEqual(1);
-        // check firts link
-        let link1 = linkOptions[0];
-        expect(link1.pageId).toEqual("AllAllowed_TwoSourceConnections_FromLink");
-        expect(link1.options.width).toEqual("700");
-
-        // SECOND UIM
-        document = parser.parseFromString(results[2]);
-        pageNode = document.documentElement;
-        pageId = pageNode.getAttribute("PAGE_ID");
-        // check page ID
-        expect(pageId).toEqual("AllAllowed_TwoSourceConnections");
-        pageOptions = getPageOptions(pageNode);
-        // check page width is updated as expected
-        expect(pageOptions.width).toEqual("700");
-        linkOptions = getLinkOptions(pageNode);
-        // check links are expected
-        expect(linkOptions).toEqual([]);
         
-        // VIM FILE
-        document = parser.parseFromString(results[3]);
-        pageNode = document.documentElement;
-        pageId = pageNode.getAttribute("PAGE_ID");
-        // NO Page ID becuase it is a VIM
-        expect(pageId).toEqual("");
-        pageOptions = getPageOptions(pageNode);
-        // check page width is updated as expected
-        //expect(pageOptions.width).toEqual("");
-        linkOptions = getLinkOptions(pageNode);
-        // check links are expected
-        expect(linkOptions.length).toEqual(1);
-        // check firts link
-        link1 = linkOptions[0];
-        expect(link1.pageId).toEqual("AllAllowed_TwoSourceConnections_FromLink");
-        expect(link1.options.width).toEqual("700");
-        
+            // second file VIM AllAllowed_SourceConnectionsWithVims.vim
+            document = parser.parseFromString(results[3]);
+            pageNode = document.documentElement;
+            pageId = pageNode.getAttribute("PAGE_ID");
+            // NO Page ID becuase it is a VIM
+            expect(pageId).toEqual("");
+            pageOptions = getPageOptions(pageNode);
+            // check page width is updated as expected
+            expect(pageOptions.width).toEqual(undefined);
+            linkOptions = getLinkOptions(pageNode);
+            // check links are expected
+            expect(linkOptions.length).toEqual(1);
+            // check firts link
+            let link1 = linkOptions[0];
+            expect(link1.pageId).toEqual("AllAllowed_TwoSourceConnections_FromLink");
+            expect(link1.options.width).toEqual("1000");
 
-        // THIRD UIM
-        document = parser.parseFromString(results[4]);
-        pageNode = document.documentElement;
-        pageId = pageNode.getAttribute("PAGE_ID");
-        // check page ID
-        expect(pageId).toEqual("Link_AllAllowed_TwoSourceConnections");
-        pageOptions = getPageOptions(pageNode);
-        // check page width is updated as expected
-        expect(pageOptions.width).toEqual("700");
-        linkOptions = getLinkOptions(pageNode);
-        // check links are expected
-        expect(linkOptions.length).toEqual(4);
-        // check firts link
-        link1 = linkOptions[0];
-        expect(link1.pageId).toEqual("Participant_searchPersonAndProspectPerson");
-        expect(link1.options.width).toEqual("700");
-        let link2 = linkOptions[1];
-        expect(link2.pageId).toEqual("AllAllowed_TwoSourceConnections_FromLink");
-        expect(link2.options.width).toEqual("700");
-        let link3 = linkOptions[2];
-        expect(link3.pageId).toEqual("AllAllowed_TwoSourceConnections_FromLink_1");
-        expect(link3.options.width).toEqual("1200");
-        let link4 = linkOptions[3];
-        expect(link4.pageId).toEqual("Participant_mergeWizardForViewDuplicate");
-        expect(link4.options.width).toEqual("1200");
+            // thirth file UIM - AllAllowed_TwoSourceConnections.uim
+            document = parser.parseFromString(results[5]);
+            pageNode = document.documentElement;
+            pageId = pageNode.getAttribute("PAGE_ID");
+            // check page ID
+            expect(pageId).toEqual("AllAllowed_TwoSourceConnections");
+            pageOptions = getPageOptions(pageNode);
+            // check page width is updated as expected
+            expect(pageOptions.width).toEqual("1000");
+            linkOptions = getLinkOptions(pageNode);
+            // check links are expected
+            expect(linkOptions).toEqual([])      
 
-        // FOURTH UIM
-        document = parser.parseFromString(results[5]);
-        pageNode = document.documentElement;
-        pageId = pageNode.getAttribute("PAGE_ID");
-        // check page ID
-        expect(pageId).toEqual("Link_AllAllowed_TwoSourceConnections");
-        pageOptions = getPageOptions(pageNode);
-        // check page width is updated as expected
-        expect(pageOptions.width).toEqual("700");
-        linkOptions = getLinkOptions(pageNode);
-        // check links are expected
-        expect(linkOptions.length).toEqual(4);
-        // check firts link
-        link1 = linkOptions[0];
-        expect(link1.pageId).toEqual("Participant_searchPersonAndProspectPerson");
-        expect(link1.options.width).toEqual("700");
-        link2 = linkOptions[1];
-        expect(link2.pageId).toEqual("AllAllowed_TwoSourceConnections_FromLink");
-        expect(link2.options.width).toEqual("700");
-        link3 = linkOptions[2];
-        expect(link3.pageId).toEqual("AllAllowed_TwoSourceConnections_FromLink_1");
-        expect(link3.options.width).toEqual("700");
-        link4 = linkOptions[3];
-        expect(link4.pageId).toEqual("Participant_mergeWizardForViewDuplicate");
-        expect(link4.options.width).toEqual("1200");
+            // fifth file UIM - AllAllowed_TwoSourceConnections_FromLink
+            document = parser.parseFromString(results[8]);
+            pageNode = document.documentElement;
+            pageId = pageNode.getAttribute("PAGE_ID");
+            // check page ID
+            expect(pageId).toEqual("AllAllowed_TwoSourceConnections_FromLink");
+            pageOptions = getPageOptions(pageNode);
+            // check page width is updated as expected
+            expect(pageOptions.width).toEqual("1000");
 
-        done();  
+            // sixth file UIM - AllAllowed_TwoSourceConnections_FromLink_1
+            document = parser.parseFromString(results[11]);
+            pageNode = document.documentElement;
+            pageId = pageNode.getAttribute("PAGE_ID");
+            // check page ID
+            expect(pageId).toEqual("AllAllowed_TwoSourceConnections_FromLink_1");
+            pageOptions = getPageOptions(pageNode);
+            // check page width is updated as expected
+            expect(pageOptions.width).toEqual("700");
+
+
+            // eight file UIM - Link_AllAllowed_TwoSourceConnections.uim
+            document = parser.parseFromString(results[14]);
+            pageNode = document.documentElement;
+            pageId = pageNode.getAttribute("PAGE_ID");
+            expect(pageId).toEqual("Link_AllAllowed_TwoSourceConnections");
+            linkOptions = getLinkOptions(pageNode);
+            // check links are expected
+            expect(linkOptions.length).toEqual(4);
+            // check firts link
+            link1 = linkOptions[0];
+            expect(link1.pageId).toEqual("Participant_searchPersonAndProspectPerson");
+            expect(link1.options.width).toEqual("700");
+            link2 = linkOptions[1];
+            expect(link2.pageId).toEqual("AllAllowed_TwoSourceConnections_FromLink");
+            expect(link2.options.width).toEqual("1000");
+            link3 = linkOptions[2];
+            expect(link3.pageId).toEqual("AllAllowed_TwoSourceConnections_FromLink_1");
+            expect(link3.options.width).toEqual("700");
+            link4 = linkOptions[3];
+            expect(link4.pageId).toEqual("Participant_mergeWizardForViewDuplicate");
+            expect(link4.options.width).toEqual("1200");
+
+
+            // tenth file UIM - Link_AllAllowed_TwoSourceRules
+            document = parser.parseFromString(results[16]);
+            pageNode = document.documentElement;
+            pageId = pageNode.getAttribute("PAGE_ID");
+            // no Page_Id vim file
+            expect(pageId).toEqual("Link_AllAllowed_TwoSourceRules");
+            linkOptions = getLinkOptions(pageNode);
+            // check links are expected
+            expect(linkOptions.length).toEqual(2);
+            // check firts link
+            link1 = linkOptions[0];
+            // check second link
+            link2 = linkOptions[1];
+            expect(link1.pageId).toEqual("test_1");
+            expect(link1.options.width).toEqual("1000");
+            // link file is not passing domain definitions
+            expect(link2.pageId).toEqual("test_2");
+            expect(link2.options.width).toEqual("300");
+         
+         done();  
         }, 100);    
   });
-
-  test("apply Rules, containsAllowedDomainsOnly enabled for rule",  done => {
-
-    rules = [
-      {
-        width: "> 768",
-        anyTerms: ["criteria.1"],
-        allTerms: ["criteria.3"],
-        target: "md",
-        containsAllowedDomainsOnly: true
-      },
-    ];
-    const testFiles2 = [];
-    testFiles2.push(getTestFile("NoneAllowed_OneSourceConnection.uim"));
-
+ 
+  test("domainCheck for all rules on all files in test folder4",  done => {
     let results = [];
     const mockSerializeToString = function(document) {
     const serializedDoc = realSerializer.serializeToString(document);
@@ -282,50 +283,109 @@ describe("applyRules, domainCheck", () => {
         serializeToString: mockSerializeToString,
       };
 
-     applyRules(testFiles2, rules, sizes, fileio, parser, serializer, true, true);
-   
-     setTimeout(function() {
+        applyRules(rulesOrderTestFiles, rules, sizes, fileio, parser, serializer, true, true);
+      
+        setTimeout(function() {
+        let document;
+        let pageNode;
+        let pageId;
+        let pageOptions;
+        let linkOptions;
 
-     // Expect 0 UIM to be update i.e no further updates made
-     expect(results.length).toEqual(0);
-     
-     done();  
-     }, 100);    
-});
+         // first file UIM - AllAllowed_ISP_listApplications
+         document = parser.parseFromString(results[0]);
+         pageNode = document.documentElement;
+         pageId = pageNode.getAttribute("PAGE_ID");
+         expect(pageId).toEqual("AllAllowed_ISP_listApplications");
+         // check page ID
+         pageOptions = getPageOptions(pageNode);
+         // // check page width is updated as expected
+         linkOptions = getLinkOptions(pageNode);
+         link1 = linkOptions[0];
+         expect(link1.pageId).toEqual("AllAllowed_ISP_listICCaseMembers");
+         expect(link1.options.width).toEqual("700");
 
-test("apply Rules, containsAllowedDomainsOnly enabled for rule",  done => {
+         // first file UIM - AllAllowed_ISP_listICCaseMembers
+         document = parser.parseFromString(results[2]);
+         pageNode = document.documentElement;
+         pageId = pageNode.getAttribute("PAGE_ID");
+         // check page ID
+         expect(pageId).toEqual("AllAllowed_ISP_listICCaseMembers");
+         pageOptions = getPageOptions(pageNode);
+         // // check page width is updated as expected
+          expect(pageOptions.width).toEqual("700");
+         
+         done();  
+        }, 100);    
+  });
 
-  rules = [
-    {
-      width: "> 768",
-      anyTerms: ["criteria.1"],
-      allTerms: ["criteria.3"],
-      target: "md",
-      containsAllowedDomainsOnly: false
-    },
-  ];
-  const testFiles2 = [];
-  testFiles2.push(getTestFile("NoneAllowed_OneSourceConnection.uim"));
+  test("apply Rules, containsAllowedDomainsOnly enabled for rule",  done => {
+        rules = [
+          {
+            width: "> 768",
+            anyTerms: ["criteria.1"],
+            allTerms: ["criteria.3"],
+            target: "md",
+            containsAllowedDomainsOnly: true
+          },
+        ];
+        const testFiles2 = [];
+        testFiles2.push(getTestFile("NoneAllowed_OneSourceConnection.uim"));
 
-  let results = [];
-  const mockSerializeToString = function(document) {
-  const serializedDoc = realSerializer.serializeToString(document);
-    results.push(serializedDoc);
-  };
-    const serializer = {
-      serializeToString: mockSerializeToString,
-    };
+        let results = [];
+        const mockSerializeToString = function(document) {
+        const serializedDoc = realSerializer.serializeToString(document);
+          results.push(serializedDoc);
+        };
+          const serializer = {
+            serializeToString: mockSerializeToString,
+          };
 
-   applyRules(testFiles2, rules, sizes, fileio, parser, serializer, true, true);
- 
-   setTimeout(function() {
+        applyRules(testFiles2, rules, sizes, fileio, parser, serializer, true, true);
+      
+        setTimeout(function() {
 
-   // Expect 0 UIM to be update i.e no further updates made
-   expect(results.length).toEqual(1);
-   
-   done();  
-   }, 120);    
-});
+        // Expect 0 UIM to be update i.e no further updates made
+        expect(results.length).toEqual(0);
+        
+        done();  
+        }, 100);    
+    });
+
+    test("apply Rules, containsAllowedDomainsOnly enabled for rule",  done => {
+
+      rules = [
+        {
+          width: "> 768",
+          anyTerms: ["criteria.1"],
+          allTerms: ["criteria.3"],
+          target: "md",
+          containsAllowedDomainsOnly: false
+        },
+      ];
+      const testFiles2 = [];
+      testFiles2.push(getTestFile("NoneAllowed_OneSourceConnection.uim"));
+      console.log("document1", testFiles2);
+
+      let results = [];
+      const mockSerializeToString = function(document) {
+      const serializedDoc = realSerializer.serializeToString(document);
+        results.push(serializedDoc);
+      };
+        const serializer = {
+          serializeToString: mockSerializeToString,
+        };
+
+      applyRules(testFiles2, rules, sizes, fileio, parser, serializer, true, true);
+    
+      setTimeout(function() {
+
+      // Expect 0 UIM to be update i.e no further updates made
+      expect(results.length).toEqual(1);
+      
+      done();  
+      }, 120);    
+    });
 });
 
 describe("Links without page_Id tests", () => {

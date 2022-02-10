@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed Materials - Property of IBM
+ 
+  Copyright IBM Corporation 2012,2017. All Rights Reserved.
+
+  US Government Users Restricted Rights - Use, duplication or disclosure 
+  restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<!-- ====================================================================== -->
+<!-- Copyright 2011 Curam Software Ltd.                                     -->
+<!-- All rights reserved.                                                   -->
+<!-- This software is the confidential and proprietary information of Curam -->
+<!-- Software, Ltd. ("Confidential Information"). You shall not disclose    -->
+<!-- such Confidential Information and shall use it only in accordance with -->
+<!-- the terms of the license agreement you entered into with Curam         -->
+<!-- Software.                                                              -->
+<!-- Description                                                            -->
+<!-- ====================================================================== -->
+<!-- This page allows user to list program Types configured	  	            -->
+<!-- in the Application configuration. 										                  -->
+<PAGE
+  PAGE_ID="test_2"
+  SCRIPT_FILE="IntakeValidations.js"
+  WINDOW_OPTIONS="width=1200,height=600"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="file://Curam/UIMSchema.xsd"
+>
+
+
+  <PAGE_TITLE>
+    <CONNECT>
+      <SOURCE
+        NAME="TEXT"
+        PROPERTY="PageTitle.StaticText"
+      />
+    </CONNECT>
+  </PAGE_TITLE>
+
+
+  <SERVER_INTERFACE
+    CLASS="Application"
+    NAME="DISPLAY1"
+    OPERATION="readProgramAppTypesForCaseApplication"
+    PHASE="DISPLAY"
+  />
+
+
+  <SERVER_INTERFACE
+    CLASS="IntakeInformation"
+    NAME="DISPLAY2"
+    OPERATION="isMappingRequired"
+    PHASE="DISPLAY"
+  />
+
+
+  <SERVER_INTERFACE
+    CLASS="Application"
+    NAME="ACTION1"
+    OPERATION="validateSelectProgramTypesForCase"
+    PHASE="ACTION"
+  />
+
+
+  <PAGE_PARAMETER NAME="concernRoleID"/>
+  <PAGE_PARAMETER NAME="programTypeID"/>
+  <PAGE_PARAMETER NAME="caseID"/>
+
+
+  <CONNECT>
+    <SOURCE
+      NAME="PAGE"
+      PROPERTY="caseID"
+    />
+    <TARGET
+      NAME="DISPLAY1"
+      PROPERTY="applicationForCaseTypeKey$caseID"
+    />
+  </CONNECT>
+
+
+  <CONNECT>
+    <SOURCE
+      NAME="DISPLAY1"
+      PROPERTY="result$applicationTypeCode"
+    />
+    <TARGET
+      NAME="ACTION1"
+      PROPERTY="programTypeKey$applicationTypeCode"
+    />
+  </CONNECT>
+
+
+  <ACTION_SET TOP="false">
+
+
+    <ACTION_CONTROL
+      ALIGNMENT="LEFT"
+      IMAGE="QuitButton"
+      LABEL="ActionControl.Label.Cancel"
+      STYLE="screening-link"
+    />
+
+
+    <ACTION_CONTROL
+      ALIGNMENT="RIGHT"
+      IMAGE="NextButton"
+      LABEL="ActionControl.Label.Next"
+      STYLE="application-next-link"
+      TYPE="SUBMIT"
+    >
+      <CONDITION>
+        <IS_TRUE
+          NAME="DISPLAY2"
+          PROPERTY="isMappingRequired"
+        />
+      </CONDITION>
+      <SCRIPT
+        ACTION="validateCheckBoxSelection('At least one program must be selected to continue.')"
+        EVENT="ONCLICK"
+      />
+      <LINK
+        DISMISS_MODAL="false"
+        PAGE_ID="Intake_resolveApplicationStartForCase"
+        SAVE_LINK="false"
+      >
+        <CONNECT>
+          <SOURCE
+            NAME="ACTION1"
+            PROPERTY="programTypeKey$applicationTypeCode"
+          />
+          <TARGET
+            NAME="PAGE"
+            PROPERTY="intakeApplicationTypeID"
+          />
+        </CONNECT>
+        <CONNECT>
+          <SOURCE
+            NAME="PAGE"
+            PROPERTY="concernRoleID"
+          />
+          <TARGET
+            NAME="PAGE"
+            PROPERTY="concernRoleID"
+          />
+        </CONNECT>
+        <CONNECT>
+          <SOURCE
+            NAME="ACTION1"
+            PROPERTY="programTypeKey$programTypeCodes"
+          />
+          <TARGET
+            NAME="PAGE"
+            PROPERTY="programTypeCodes"
+          />
+        </CONNECT>
+        <CONNECT>
+          <SOURCE
+            NAME="PAGE"
+            PROPERTY="caseID"
+          />
+          <TARGET
+            NAME="PAGE"
+            PROPERTY="caseID"
+          />
+        </CONNECT>
+      </LINK>
+    </ACTION_CONTROL>
+    <ACTION_CONTROL
+      ALIGNMENT="RIGHT"
+      IMAGE="NextButton"
+      LABEL="ActionControl.Label.Next"
+      STYLE="application-next-link"
+      TYPE="SUBMIT"
+    >
+      <CONDITION>
+        <IS_FALSE
+          NAME="DISPLAY2"
+          PROPERTY="isMappingRequired"
+        />
+      </CONDITION>
+      <SCRIPT
+        ACTION="validateCheckBoxSelection('At least one program must be selected to continue.')"
+        EVENT="ONCLICK"
+      />
+      <LINK
+        DISMISS_MODAL="false"
+        PAGE_ID="CGISS_resolveAdditionalApplicationStartForCase"
+        SAVE_LINK="false"
+      >
+        <CONNECT>
+          <SOURCE
+            NAME="ACTION1"
+            PROPERTY="programTypeKey$applicationTypeCode"
+          />
+          <TARGET
+            NAME="PAGE"
+            PROPERTY="intakeApplicationTypeID"
+          />
+        </CONNECT>
+        <CONNECT>
+          <SOURCE
+            NAME="PAGE"
+            PROPERTY="concernRoleID"
+          />
+          <TARGET
+            NAME="PAGE"
+            PROPERTY="concernRoleID"
+          />
+        </CONNECT>
+        <CONNECT>
+          <SOURCE
+            NAME="ACTION1"
+            PROPERTY="programTypeKey$programTypeCodes"
+          />
+          <TARGET
+            NAME="PAGE"
+            PROPERTY="programTypeCodes"
+          />
+        </CONNECT>
+        <CONNECT>
+          <SOURCE
+            NAME="PAGE"
+            PROPERTY="caseID"
+          />
+          <TARGET
+            NAME="PAGE"
+            PROPERTY="caseID"
+          />
+        </CONNECT>
+      </LINK>
+    </ACTION_CONTROL>
+  </ACTION_SET>
+
+
+  <CLUSTER SHOW_LABELS="false">
+    <LIST
+      STYLE="screening-select-list"
+    >
+      <CONTAINER>
+        <WIDGET
+          ALIGNMENT="CENTER"
+          TYPE="MULTISELECT"
+          WIDTH="100"
+          WIDTH_UNITS="PERCENT"
+        >
+          <WIDGET_PARAMETER NAME="MULTI_SELECT_TARGET">
+            <CONNECT>
+              <TARGET
+                NAME="ACTION1"
+                PROPERTY="programTypeKey$programTypeCodes"
+              />
+            </CONNECT>
+          </WIDGET_PARAMETER>
+          <WIDGET_PARAMETER NAME="MULTI_SELECT_SOURCE">
+            <CONNECT>
+              <SOURCE
+                NAME="DISPLAY1"
+                PROPERTY="result$list$programTypeCode"
+              />
+            </CONNECT>
+          </WIDGET_PARAMETER>
+          <WIDGET_PARAMETER NAME="MULTI_SELECT_INITIAL">
+            <CONNECT>
+              <SOURCE
+                NAME="DISPLAY1"
+                PROPERTY="result$selectedProgramTypeCodes"
+              />
+            </CONNECT>
+          </WIDGET_PARAMETER>
+        </WIDGET>
+      </CONTAINER>
+      <FIELD
+        LABEL="Field.Label.Name"
+        WIDTH="20"
+      >
+        <CONNECT>
+          <SOURCE
+            NAME="DISPLAY1"
+            PROPERTY="result$list$description"
+          />
+        </CONNECT>
+      </FIELD>
+      <FIELD
+        LABEL="Field.Label.Description"
+        WIDTH="80"
+      >
+        <CONNECT>
+          <SOURCE
+            NAME="DISPLAY1"
+            PROPERTY="result$list$programDescription"
+          />
+        </CONNECT>
+      </FIELD>
+    </LIST>
+  </CLUSTER>
+</PAGE>
