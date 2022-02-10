@@ -325,7 +325,6 @@ async function applyRule(
   let linkPass = false;
   let results = [];
 
-  const pageId = document.documentElement.getAttribute("PAGE_ID");  
   let apdatedLinks=[];
   
   for(i=0; i<rules.length; i++){
@@ -334,7 +333,6 @@ async function applyRule(
       }
       const linkMatches = checkLinkWidth(pageNode,rules[i], verbose);
       const hasLinks = linkMatches.length > 0;
-      console.log("Pages", pageId);
       if(!hasChanges){
         if (checkPageWidth(pageNode, rules[i].width, verbose)) {
           const pagePass = await checkRule(pageNode, filename, rules[i], verbose, domainsCheckEnabledForAllRules);     
