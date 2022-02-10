@@ -371,7 +371,7 @@ async function applyRule(
         updateDocument(serializer, filename, document, results);
       }
   }
-  console.log("tak wszystkie updatowane linki", apdatedLinks);
+
   if (testMode) {
     return new Promise(function(resolve,reject){
       setTimeout(function() {
