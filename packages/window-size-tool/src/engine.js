@@ -46,7 +46,6 @@ function checkWidth(width, rule, verbose = true) {
 
     pass = limits.reduce((result, limit) => {
       const [operator, ruleWidth] = limit;
-
       return result && evaluateInequality(width, ruleWidth, operator);
     }, true);
   }
@@ -118,7 +117,6 @@ function checkLinkWidth(pageNode, rule, verbose = true) {
 async function checkRule(node, filename, rule, verbose = true, domainsCheckEnabledForAllRules = true) {
   let pass = false;
   let domainsCheckPass = false;
-
   if (!node) {
     throw Error("You must supply a node");
   } else if (!rule) {
@@ -131,9 +129,7 @@ async function checkRule(node, filename, rule, verbose = true, domainsCheckEnabl
   rule.anyTerms.forEach((term) => {
     if (!pass) { 
       const result = xp.select(term, node);
-
       pass = pass || result;
-
       if (verbose) {
         console.debug(
           ` term:  ${
@@ -221,23 +217,8 @@ async function checkUIMDomainsAreValidToResizeDown(rootUIMNode, filename) {
     rootUIMNode
   );
 
-  // const includeVimsXP = xp.select(
-  //   `//INCLUDE`,
-  //   rootUIMNode
-  // );
-
   const vimsToBeProcessed = [];
-  // includeVimsXP.forEach((include) => {
-  //   const vim = path.dirname(filename) + "/" + include.getAttribute("FILE_NAME");
-  //   if (fs.existsSync(vim))  {
-  //     vimsToBeProcessed.push(vim);
-  //   } else {
-  //      // TODO: How about if the VIM is not in the same directory??
-  //     console.log("VIM file:" +  vim + "does not exist");
-  //   }  
-  // });
  
-
   severBeanXP.forEach((bean) => {
     serverAccessBeans.push({
       class: bean.getAttribute("CLASS"),
@@ -267,45 +248,6 @@ async function checkUIMDomainsAreValidToResizeDown(rootUIMNode, filename) {
    }); 
   });
 
-  // Processing VIMS, scope for refactoring here
-  //  for (let i = 0; i < vimsToBeProcessed.length;i++) {
-  //   const rootNode = getRootNodeFromUIM(vimsToBeProcessed[i], parserToUse, ioToUse);
-  //   const severBeanXPForVim= xp.select(
-  //     `//SERVER_INTERFACE`,
-  //     rootNode
-  //   );
-  //   severBeanXPForVim.forEach((bean) => {
-  //     const beanName = bean.getAttribute("NAME");
-  //     if (!serverAccessBeans.find(({name}) => name === beanName)) {
-  //       serverAccessBeans.push({
-  //         class: bean.getAttribute("CLASS"),
-  //         name:bean.getAttribute("NAME"),
-  //         operation:bean.getAttribute("OPERATION"),
-  //       });
-  //     }      
-  //   });
-  //   const clusterFieldConnectionsXPForVims = xp.select(
-  //     `//CLUSTER/FIELD/CONNECT/*`,
-  //     rootNode
-  //   );
-  //   clusterFieldConnectionsXPForVims.forEach((connection) => {
-  //     const connName= connection.getAttribute("NAME");
-  //     const connProperty = connection.getAttribute("PROPERTY");
-  //       serverAccessBeans.forEach((bean) => {
-  //         if(connName==bean.name){
-  //           // TODO: Need to check that names don't match either??
-  //           if (!connections.find(({property}) => property === connProperty)) {    
-  //              connections.push({
-  //               property: connProperty,
-  //               name:bean.class,
-  //               operation:bean.operation,
-  //             });
-  //           }
-  //        }
-  //    });
-  //   });
-  // }
-
   const connectionPromises = [];
   for(let i=0; i < connections.length; i++){
     const connection = connections[i];
@@ -323,8 +265,6 @@ async function checkUIMDomainsAreValidToResizeDown(rootUIMNode, filename) {
 
   // connections are allow listed and number of connections is bigger than 0
   const connectionsNotEmotyAndAllowed = connections.length > 0 && connectionsAreAllowListed == true;
-  //return connectionsNotEmotyAndAllowed; 
-
   return connectionsNotEmotyAndAllowed; 
 }
 
@@ -376,7 +316,7 @@ async function applyRule(
   } else if (!pagedictionary) {
     throw Error("You must supply a PAGE dictionary map");
   }
-
+  
   const pageNode = document.documentElement;
   let hasChanges = false;
   if (verbose) {
@@ -384,55 +324,54 @@ async function applyRule(
   }
   let linkPass = false;
   let results = [];
-  let hasPageChanges = false;
 
-  rules.forEach(async(rule, index) => { 
+  let apdatedLinks=[];
+  
+  for(i=0; i<rules.length; i++){
       if (verbose) {
-        console.debug(`rule: ${chalk.yellow(index + 1)}`);
+        console.debug(`rule: ${chalk.yellow(i + 1)}`);
       }
-
-      const linkMatches = checkLinkWidth(pageNode, rule, verbose);
+      const linkMatches = checkLinkWidth(pageNode,rules[i], verbose);
       const hasLinks = linkMatches.length > 0;
-
-      if (checkPageWidth(pageNode, rule.width, verbose)) {
-        const pagePass = await checkRule(pageNode, filename, rule, verbose, domainsCheckEnabledForAllRules);
-        hasChanges = true;
-
-        if (pagePass) {        
-          const windowOptions = getPageOptions(pageNode);
-
-          updateWidthOption(windowOptions, sizes, rule.target, usePixelWidths);
-
-          setPageOptions(pageNode, windowOptions);
-          hasPageChanges = true;
+      if(!hasChanges){
+        if (checkPageWidth(pageNode, rules[i].width, verbose)) {
+          const pagePass = await checkRule(pageNode, filename, rules[i], verbose, domainsCheckEnabledForAllRules);     
+          if (pagePass) {         
+            const windowOptions = getPageOptions(pageNode);        
+            updateWidthOption(windowOptions, sizes, rules[i].target, usePixelWidths);
+            hasChanges = true;
+            setPageOptions(pageNode, windowOptions);
+          }
         }
       }
-
-      linkMatches.forEach(async({ pageId, options, link }) => {
-        const pageReference = pagedictionary[pageId];
-
-        if (pageReference) {
+      
+      for(j=0;j<linkMatches.length;j++){
+        const pageReference = pagedictionary[linkMatches[j].pageId];
+        if (pageReference && apdatedLinks.includes(linkMatches[j].pageId)==false) {
           linkPass = await checkRule(
             pageReference.document.documentElement,
             pageReference.file,
-            rule,
+            rules[i],
             verbose,
             domainsCheckEnabledForAllRules
           );
-
-          updateWidthOption(options, sizes, rule.target, usePixelWidths);
-         
-
-          if (linkPass) {
-            setLinkOptions(link, options);
-            updateDocument(serializer, filename, document, results);
+  
+          if(rules[i]){
+             updateWidthOption(linkMatches[j].options, sizes, rules[i].target, usePixelWidths);     
           }
-        }       
-      });
-      if (!hasLinks && hasPageChanges === true) {
+          if (linkPass) { 
+            setLinkOptions(linkMatches[j].link, linkMatches[j].options);           
+            updateDocument(serializer, filename, document, results);
+            apdatedLinks.push(linkMatches[j].pageId);
+          } 
+        }
+       
+      }       
+      if (!hasLinks && hasChanges === true) { 
         updateDocument(serializer, filename, document, results);
       }
-  });
+  }
+
   if (testMode) {
     return new Promise(function(resolve,reject){
       setTimeout(function() {
@@ -440,8 +379,11 @@ async function applyRule(
       }, 100);
      });
   }
+
   return hasChanges;
+
 }
+
 
 function getDocumentFromUIM(file, parser, io) {
   const contents = io.readLines(file).join("\n");
@@ -452,6 +394,7 @@ function getDocumentFromUIM(file, parser, io) {
 function getRootNodeFromUIM(file, parser, io) {
   return getDocumentFromUIM(file, parser, io).documentElement;
 }
+
 
 /**
  * .
@@ -521,7 +464,6 @@ async function applyRules(
     } 
   });
   
-
     for (let i=0; i<uims.length; i++ ){
      if(uims[i]!== undefined){
       await applyRule(
@@ -536,29 +478,6 @@ async function applyRules(
         domainsCheckEnabledForAllRules
        );
       }
-
-    // Process VIMS
-    // const vims = domainCheckPassed.vims;
-    // if (vims.length > 0) {
-      // vims.forEach((vimFile) => {
-      //   const vimDocument = getDocumentFromUIM(vimFile, parser, io);
-      //   const vimHasChanges = applyRule(
-      //     vimDocument ,
-      //     vimFile,
-      //     rules,
-      //     sizes,
-      //     pagedictionary,
-      //     usePixelWidths,
-      //     verbose,
-      //     domainCheckPassed.pass || domainCheckPassed
-      //   );
-
-      //   if (vimHasChanges === true) {
-      //     results[vimFile] = serializer.serializeToString(vimDocument);
-      //   }
-      // });
-    // }
-  // });
   }
   return results;
 }

@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed Materials - Property of IBM
+ 
+  Copyright IBM Corporation 2012. All Rights Reserved.
+
+  US Government Users Restricted Rights - Use, duplication or disclosure 
+  restricted by GSA ADP Schedule Contract with IBM Corp.
+-->
+<!-- ====================================================================== -->
+<!-- Copyright 2011 Curam Software Ltd.                                     -->
+<!-- All rights reserved.                                                   -->
+<!-- This software is the confidential and proprietary information of Curam -->
+<!-- Software, Ltd. ("Confidential Information"). You shall not disclose    -->
+<!-- such Confidential Information and shall use it only in accordance with -->
+<!-- the terms of the license agreement you entered into with Curam         -->
+<!-- Software.                                                              -->
+<!-- Description                                                            -->
+<!-- ====================================================================== -->
+<!-- This page allows user to list applications for the case.               -->
+<PAGE
+  HIDE_CONDITIONAL_LINKS="false"
+  PAGE_ID="AllAllowed_ISP_listApplications"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="file://Curam/UIMSchema.xsd"
+>
+
+
+  <SERVER_INTERFACE
+    CLASS="ISPCase"
+    NAME="DISPLAY"
+    OPERATION="listApplicationsByCase"
+    PHASE="DISPLAY"
+  />
+
+
+  <PAGE_PARAMETER NAME="caseID"/>
+
+
+  <CONNECT>
+    <SOURCE
+      NAME="PAGE"
+      PROPERTY="caseID"
+    />
+    <TARGET
+      NAME="DISPLAY"
+      PROPERTY="key$caseID"
+    />
+  </CONNECT>
+
+
+  <ACTION_SET BOTTOM="false">
+    <ACTION_CONTROL
+      IMAGE="NewButton"
+      LABEL="ActionControl.Label.AddApplication"
+    >
+      <LINK
+        DISMISS_MODAL="false"
+        OPEN_MODAL="true"
+        PAGE_ID="AllAllowed_ISP_listICCaseMembers"
+        SAVE_LINK="false"
+        WINDOW_OPTIONS="width=1200,height=600"
+      >
+        <CONNECT>
+          <SOURCE
+            NAME="PAGE"
+            PROPERTY="caseID"
+          />
+          <TARGET
+            NAME="PAGE"
+            PROPERTY="caseID"
+          />
+        </CONNECT>
+      </LINK>
+    </ACTION_CONTROL>
+  </ACTION_SET>
+
+
+  <LIST>
+    <FIELD
+      LABEL="Field.Label.Reference"
+      WIDTH="12"
+    >
+      <CONNECT>
+        <SOURCE
+          NAME="DISPLAY"
+          PROPERTY="result$list$displayDtls$entityDtls$reference"
+        />
+      </CONNECT>
+
+
+      <LINK
+        URI_SOURCE_NAME="DISPLAY"
+        URI_SOURCE_PROPERTY="pageURL"
+      >
+        <CONDITION>
+          <IS_FALSE
+            NAME="DISPLAY"
+            PROPERTY="result$list$displayMenuPrimary"
+          />
+        </CONDITION>
+      </LINK>
+    </FIELD>
+
+
+    <FIELD
+      LABEL="Field.Label.Programs"
+      WIDTH="29"
+    >
+      <CONNECT>
+        <SOURCE
+          NAME="DISPLAY"
+          PROPERTY="result$list$programName"
+        />
+      </CONNECT>
+    </FIELD>
+
+
+    <FIELD
+      LABEL="Field.Label.ApplicationDate"
+      WIDTH="18"
+    >
+      <CONNECT>
+        <SOURCE
+          NAME="DISPLAY"
+          PROPERTY="result$list$displayDtls$entityDtls$filingDate"
+        />
+      </CONNECT>
+    </FIELD>
+
+
+    <FIELD
+      LABEL="Field.Label.DueDate"
+      WIDTH="12"
+    >
+      <CONNECT>
+        <SOURCE
+          NAME="DISPLAY"
+          PROPERTY="result$list$displayDtls$entityDtls$filingDate"
+        />
+      </CONNECT>
+    </FIELD>
+
+
+    <FIELD
+      LABEL="Field.Label.Owner"
+      WIDTH="15"
+    >
+      <CONNECT>
+        <SOURCE
+          NAME="DISPLAY"
+          PROPERTY="worker"
+        />
+      </CONNECT>
+      <LINK
+        OPEN_MODAL="true"
+        PAGE_ID="Organization_viewUserDetails"
+      >
+        <CONDITION>
+          <IS_FALSE
+            NAME="DISPLAY"
+            PROPERTY="result$list$displayMenuPrimary"
+          />
+        </CONDITION>
+        <CONNECT>
+          <SOURCE
+            NAME="DISPLAY"
+            PROPERTY="userName"
+          />
+          <TARGET
+            NAME="PAGE"
+            PROPERTY="userName"
+          />
+        </CONNECT>
+      </LINK>
+    </FIELD>
+
+
+    <FIELD
+      LABEL="Field.Label.Status"
+      WIDTH="14"
+    >
+      <CONNECT>
+        <SOURCE
+          NAME="DISPLAY"
+          PROPERTY="result$list$applicationStatus"
+        />
+      </CONNECT>
+    </FIELD>
+
+
+    <ACTION_SET TYPE="LIST_ROW_MENU">
+      <ACTION_CONTROL
+        IMAGE="DeleteButton"
+        LABEL="ActionControl.Label.Delete"
+      >
+        <CONDITION>
+          <IS_TRUE
+            NAME="DISPLAY"
+            PROPERTY="displayMenuPrimary"
+          />
+        </CONDITION>
+        <LINK
+          OPEN_MODAL="true"
+          PAGE_ID="Intake_deleteApplication"
+        >
+          <CONNECT>
+            <SOURCE
+              NAME="DISPLAY"
+              PROPERTY="applicationID"
+            />
+            <TARGET
+              NAME="PAGE"
+              PROPERTY="applicationID"
+            />
+          </CONNECT>
+          <CONNECT>
+            <SOURCE
+              NAME="DISPLAY"
+              PROPERTY="result$list$versionNo"
+            />
+            <TARGET
+              NAME="PAGE"
+              PROPERTY="versionNo"
+            />
+          </CONNECT>
+        </LINK>
+      </ACTION_CONTROL>
+
+
+      <ACTION_CONTROL
+        IMAGE="DeleteButton"
+        LABEL="ActionControl.Label.Resume"
+      >
+        <CONDITION>
+          <IS_TRUE
+            NAME="DISPLAY"
+            PROPERTY="displayMenuPrimary"
+          />
+        </CONDITION>
+        <LINK
+          OPEN_MODAL="true"
+          PAGE_ID="Intake_resumeApplication"
+          WINDOW_OPTIONS="width=1200,height=600"
+        >
+          <CONNECT>
+            <SOURCE
+              NAME="DISPLAY"
+              PROPERTY="iegExecutionID"
+            />
+            <TARGET
+              NAME="PAGE"
+              PROPERTY="executionID"
+            />
+          </CONNECT>
+        </LINK>
+      </ACTION_CONTROL>
+
+
+      <ACTION_CONTROL
+        IMAGE="OpenMSWordButton"
+        LABEL="ActionControl.Label.ViewApplicationPDF"
+        TYPE="FILE_DOWNLOAD"
+      >
+        <CONDITION>
+          <IS_FALSE
+            NAME="DISPLAY"
+            PROPERTY="displayMenuPrimary"
+          />
+        </CONDITION>
+        <LINK>
+          <CONNECT>
+            <SOURCE
+              NAME="DISPLAY"
+              PROPERTY="result$list$displayDtls$entityDtls$pdfID"
+            />
+            <TARGET
+              NAME="PAGE"
+              PROPERTY="attachmentID"
+            />
+          </CONNECT>
+        </LINK>
+      </ACTION_CONTROL>
+
+
+      <ACTION_CONTROL
+        IMAGE="DeleteButton"
+        LABEL="ActionControl.Label.AttachDocument"
+      >
+        <CONDITION>
+          <IS_TRUE
+            NAME="DISPLAY"
+            PROPERTY="displayMenuSecondary"
+          />
+        </CONDITION>
+        <LINK
+          OPEN_MODAL="true"
+          PAGE_ID="ApplicationAttachments"
+          WINDOW_OPTIONS="width=1200,height=600"
+        >
+          <CONNECT>
+            <SOURCE
+              NAME="DISPLAY"
+              PROPERTY="result$list$displayDtls$entityDtls$applicationID"
+            />
+            <TARGET
+              NAME="PAGE"
+              PROPERTY="applicationID"
+            />
+          </CONNECT>
+        </LINK>
+
+
+      </ACTION_CONTROL>
+    </ACTION_SET>
+
+
+    <DETAILS_ROW>
+      <CONDITION>
+        <IS_TRUE
+          NAME="DISPLAY"
+          PROPERTY="showPreviewPanel"
+        />
+      </CONDITION>
+      <INLINE_PAGE
+        URI_SOURCE_NAME="DISPLAY"
+        URI_SOURCE_PROPERTY="previewPanelURL"
+      >
+        <CONNECT>
+          <SOURCE
+            NAME="DISPLAY"
+            PROPERTY="applicationID"
+          />
+          <TARGET
+            NAME="PAGE"
+            PROPERTY="applicationID"
+          />
+        </CONNECT>
+      </INLINE_PAGE>
+    </DETAILS_ROW>
+
+
+  </LIST>
+</PAGE>

@@ -6,6 +6,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PAGE
   PAGE_ID="AllAllowed_TwoSourceConnections_FromLink_1"
+  WINDOW_OPTIONS="width=1200,height=600"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:noNamespaceSchemaLocation="file://Curam/UIMSchema.xsd"
 >

@@ -54,7 +54,7 @@
 
 
       </CONDITION>
-      <LINK OPEN_MODAL="true" PAGE_ID="AllAllowed_TwoSourceConnections_FromLink" WINDOW_OPTIONS="width=900,height=600">
+      <LINK OPEN_MODAL="true" PAGE_ID="AllAllowed_TwoSourceConnections_FromLink" WINDOW_OPTIONS="width=940">
         <CONNECT>
           <SOURCE NAME="PAGE" PROPERTY="concernRoleID"/>
           <TARGET NAME="PAGE" PROPERTY="originalConcernRoleID"/>

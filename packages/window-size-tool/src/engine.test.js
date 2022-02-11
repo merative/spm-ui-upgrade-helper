@@ -636,11 +636,10 @@ describe("applyRule", () => {
       pagedictionary,
       usePixelWidths,
       false,
-      false
+      false,
     );
 
     expect(actual).toEqual(expected);
-
     const result = mockSetAttribute.mock.calls.length;
     expect(result).toEqual(0);
   });
@@ -682,11 +681,62 @@ describe("applyRule", () => {
       pagedictionary,
       usePixelWidths,
       false, 
-      false
+      false,
+      true
     );
 
     const result = mockSetAttribute.mock.calls.length;
-    expect(result).toEqual(2);
+    expect(result).toEqual(1);
+  });
+
+  test(" should update width to 1200, matches the rule '<1200' is apply", async() => {
+    const expected = true;
+
+    const mockSetAttribute = jest.fn();
+    const document = {
+      documentElement: {
+        getAttribute: () => "width=400",
+        setAttribute: mockSetAttribute,
+      },
+    };
+    const rules = [
+      {
+        width: "< 1200",
+        anyTerms: ["criteria.1", "criteria.2"],
+        allTerms:  ["criteria.3"],
+        target: "xlg",
+      },
+      {
+        width: "< 768",
+        anyTerms: ["criteria.1", "criteria.2"],
+        allTerms:  ["criteria.3"],
+        target: "md",
+      }
+    ];
+    const pageDictionary = {};
+    const usePixelWidths = true;
+
+    xp.select.mockImplementation((xPath) =>
+      xPath.includes("LINK") ? [] : true
+    );
+    const actual = await applyRule(
+      document,
+      filename,
+      serializer,
+      rules,
+      sizes,
+      pageDictionary,
+      usePixelWidths,
+      false,
+      false,
+      true
+    );;
+
+    const result2 = mockSetAttribute.mock.calls.length;
+    expect(result2).toEqual(1);
+    const [property, result] = mockSetAttribute.mock.calls[0];
+    expect(result).toEqual(`width=${sizes.xlg}`);
+  
   });
 });
 
