@@ -363,8 +363,6 @@ describe("applyRules, domainCheck", () => {
       ];
       const testFiles2 = [];
       testFiles2.push(getTestFile("NoneAllowed_OneSourceConnection.uim"));
-      console.log("document1", testFiles2);
-
       let results = [];
       const mockSerializeToString = function(document) {
       const serializedDoc = realSerializer.serializeToString(document);
