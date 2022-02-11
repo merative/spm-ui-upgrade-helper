@@ -38,8 +38,10 @@ echo     DETACH_CMD = %DETACH_CMD%
 echo.
 
 call docker-compose rm -v -s -f
+call docker image rm -f whgovspm/theia:v1.14.0
 echo Logging in to Docker Hub...
 call docker login
+call docker pull whgovspm/theia:v1.14.0
 call docker pull whgovspm/spm-ui-upgrade-helper:%VERSION%
 call docker tag whgovspm/spm-ui-upgrade-helper:%VERSION% spm-ui-upgrade-helper
 call docker pull whgovspm/spm-ui-upgrade-helper_nodefront:%VERSION%

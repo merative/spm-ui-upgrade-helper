@@ -37,10 +37,13 @@ echo     DETACH_CMD = $DETACH_CMD
 echo     
 
 docker-compose rm -v -s -f
+docker image rm -f whgovspm/theia:v1.14.0
 
 echo Logging in to Docker Hub...
 docker login
 if [ "$?" != 0 ]; then echo "Error: Could not log in to Docker repo."; exit 1; fi
+
+docker pull whgovspm/theia:v1.14.0
 docker pull whgovspm/spm-ui-upgrade-helper:$VERSION 
 docker tag whgovspm/spm-ui-upgrade-helper:$VERSION spm-ui-upgrade-helper
 docker pull whgovspm/spm-ui-upgrade-helper_nodefront:$VERSION
