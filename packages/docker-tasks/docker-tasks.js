@@ -90,11 +90,11 @@ const dockerTasks = (execFunction = shelljs, props, args) => {
 
   // Handle commands
 
-  if (option === "build") {
+  if (option === "build") { 
     const r0 = validate("imageName");
     if (r0) {
       return r0;
-    }
+    }        
     let r1;
     if (prune) {
       r1 = exec(`docker system prune --force`);
@@ -102,9 +102,9 @@ const dockerTasks = (execFunction = shelljs, props, args) => {
     if (r1) {
       return r1;
     }
-    return exec(`docker build ${additionalArgs} --tag ${props.imageName}:latest .`);
+    exec(`docker-compose down --rmi all`);
+    return exec(`docker-compose build ${additionalArgs}`);
   }
-
   if (option === "prune") {
     return exec(`docker system prune --force ${additionalArgs}`);
   }
@@ -114,22 +114,21 @@ const dockerTasks = (execFunction = shelljs, props, args) => {
     if (r0) {
       return r0;
     }
-    exec(`docker stop ${props.imageName}`);
-    exec(`docker rm ${props.imageName}`);
+    exec(`docker-compose down`);
     const runArgs = props.runArgs || "";
-    return exec(`docker run ${additionalArgs} ${runArgs} --name ${props.imageName} ${props.imageName}:latest`);
-  }
+    return exec(`docker-compose run ${additionalArgs} ${runArgs} --name ${props.imageName} ${props.imageName}`);
+  } 
 
   if (option === "clear") {
     const r0 = validate("imageName");
     if (r0) {
       return r0;
     }
-    const r1 = exec(`docker stop ${props.imageName}`);
+    const r1 = exec(`docker-compose stop ${props.imageName}`);
     if (r1) {
       return r1;
     }
-    return exec(`docker rm ${props.imageName}`);
+    return exec(`docker-compose down`);
   }
 
   if (option === "debug") {
@@ -160,9 +159,15 @@ const dockerTasks = (execFunction = shelljs, props, args) => {
     }
     if (version !== "latest") {
       cmds.push(`docker image tag ${additionalArgs} ${props.imageName}:latest ${props.imageName}:${version}`);
+      cmds.push(`docker image tag ${additionalArgs} ${props.parserImageName}:latest ${props.imageName}:${version}`);
+      cmds.push(`docker image tag ${additionalArgs} ${props.nodeImageName}:latest ${props.imageName}:${version}`);
     }
     cmds.push(`docker image tag ${additionalArgs} ${props.imageName}:latest docker.io/${props.username}/${props.imageName}:${version}`);
+    cmds.push(`docker image tag ${additionalArgs} ${props.parserImageName}:latest docker.io/${props.username}/${props.parserImageName}:${version}`);
+    cmds.push(`docker image tag ${additionalArgs} ${props.nodeImageName}:latest docker.io/${props.username}/${props.nodeImageName}:${version}`);
     cmds.push(`docker image push ${additionalArgs} docker.io/${props.username}/${props.imageName}:${version}`);
+    cmds.push(`docker image push ${additionalArgs} docker.io/${props.username}/${props.parserImageName}:${version}`);
+    cmds.push(`docker image push ${additionalArgs} docker.io/${props.username}/${props.nodeImageName}:${version}`);
 
     for (let i = 0; i < cmds.length; i++) {
       exec(cmds[i]);

@@ -182,6 +182,13 @@ describe("getLinkOptions", () => {
     expect(actual).toThrow();
   });
 
+  test("should return null when a node has no PAGE_ID set", () => {
+    const pageNode= {};
+    const actual = getLinkOptions(pageNode);
+    const expected = [];
+    expect(actual).toEqual(expected);
+  });
+
   test("should return a link object when a PAGE node contains a LINK element", () => {
     const mockGetAttribute = (attribute) => {
       if (attribute === "PAGE_ID") {

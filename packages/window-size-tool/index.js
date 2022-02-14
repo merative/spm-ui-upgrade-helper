@@ -8,7 +8,7 @@ const fileio = { readLines: utils.readLines };
 /**
  * Main method. Will be called via http://localhost:40xx/execute.
  */
-const execute = (overrides) => {
+async function execute (overrides){
   const config = utils.loadConfig(overrides);
   utils.init(config);
 
@@ -18,7 +18,7 @@ const execute = (overrides) => {
   const inputFiles = utils.keepFiles(config.internal.files, "uim", "vim");
   const rules = utils.readJson(config.windowSizeTool.rules);
 
-  const outputFiles = engine.applyRules(
+  await engine.applyRules(
     inputFiles,
     rules,
     sizes,
@@ -27,8 +27,6 @@ const execute = (overrides) => {
     serializer,
     config.windowSizeTool.usePixelWidths
   );
-
-  utils.writeFiles(outputFiles);
 
   console.info("window-size-tool finished");
 };

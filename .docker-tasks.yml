@@ -1,3 +1,5 @@
 imageName: spm-ui-upgrade-helper
+parserImageName: spm-ui-upgrade-helper_beanparser
+nodeImageName: spm-ui-upgrade-helper_nodefront
 runArgs: -p 3000:3000 -p 4000-4004:4000-4004
-username: ibmcom
+username: whgovspm

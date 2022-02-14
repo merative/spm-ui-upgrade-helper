@@ -2,25 +2,25 @@
 setlocal
 
 set ERROR=
-if "%1" == "" (
+if "%VERSION%" == "" (
   echo ERROR: Missing version argument
   set ERROR=true
 )
-if "%2" == "" (
+if "%INPUT_FOLDER%" == "" (
   echo ERROR: Missing input folder argument
   set ERROR=true
 )
-if "%3" == "" (
+if "%OUTPUT_FOLDER%" == "" (
   echo ERROR: Missing output folder argument
+  set ERROR=true
+)
+if "%INPUT_FOLDER%\EJBServer\build" == "" (
+  echo ERROR: The ServerAccessBean path is missing. Build the server or the model to generate EJBserver\build, e.g. serverbuild.model
   set ERROR=true
 )
 if not "%ERROR%"=="" (
   goto printHelpAndExit
 )
-
-set VERSION=%1
-set INPUT_FOLDER_CMD=-v %2:/home/workspace/input
-set OUTPUT_FOLDER_CMD=-v %3:/home/workspace/output
 
 :: Attach by default
 if "%DETACH%" == "true" (
@@ -32,23 +32,33 @@ if "%DETACH%" == "true" (
 echo Starting spm-ui-upgrade-helper
 echo.
 echo     VERSION = %VERSION%
-echo     INPUT_FOLDER_CMD = %INPUT_FOLDER_CMD%
-echo     OUTPUT_FOLDER_CMD = %OUTPUT_FOLDER_CMD%
+echo     INPUT_FOLDER = %INPUT_FOLDER%
+echo     OUTPUT_FOLDER = %OUTPUT_FOLDER%
 echo     DETACH_CMD = %DETACH_CMD%
 echo.
 
-call docker stop spm-ui-upgrade-helper
-call docker rm spm-ui-upgrade-helper
+call docker-compose rm -v -s -f
+call docker image rm -f whgovspm/theia:v1.14.0
 echo Logging in to Docker Hub...
 call docker login
-call docker pull ibmcom/spm-ui-upgrade-helper:%VERSION%
-call docker run %DETACH_CMD% -p 3000:3000 -p 4000:4000 %UIUH_DEV_CMD% %INPUT_FOLDER_CMD% %OUTPUT_FOLDER_CMD% --name spm-ui-upgrade-helper ibmcom/spm-ui-upgrade-helper:%VERSION%
+call docker pull whgovspm/theia:v1.14.0
+call docker pull whgovspm/spm-ui-upgrade-helper:%VERSION%
+call docker tag whgovspm/spm-ui-upgrade-helper:%VERSION% spm-ui-upgrade-helper
+call docker pull whgovspm/spm-ui-upgrade-helper_nodefront:%VERSION%
+call docker tag whgovspm/spm-ui-upgrade-helper_nodefront:%VERSION% spm-ui-upgrade-helper_nodefront
+call docker pull whgovspm/spm-ui-upgrade-helper_beanparser:%VERSION%
+call docker tag whgovspm/spm-ui-upgrade-helper_beanparser:%VERSION% spm-ui-upgrade-helper_beanparser
+call docker image rm -f whgovspm/spm-ui-upgrade-helper_beanparser:%VERSION%
+call docker image rm -f whgovspm/spm-ui-upgrade-helper_nodefront:%VERSION%
+call docker image rm -f whgovspm/spm-ui-upgrade-helper:%VERSION%
+
+call docker-compose up %DETACH_CMD% --no-build 
+
 endlocal
 
 goto end
-
 :printHelpAndExit
-echo Usage: spm-ui-upgrade-helper.bat ^<version^> ^<input folder^> ^<output folder^>
+echo Usage: spm-ui-upgrade-helper.bat error
 exit /B 1
 
 :end

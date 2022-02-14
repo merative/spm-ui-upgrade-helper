@@ -41,8 +41,7 @@ RUN yarn install
 RUN yarn compile
 RUN yarn build
 
-# Reference theia here because we will want to copy from it later
-FROM theiaide/theia:v1.14.0 as theia
+FROM whgovspm/theia:v1.14.0 as theia
 
 FROM node:${NODE_VERSION}-alpine AS final
 # See : https://github.com/theia-ide/theia-apps/issues/34

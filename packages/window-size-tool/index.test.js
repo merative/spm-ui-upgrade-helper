@@ -30,5 +30,5 @@ const runTest = folder => {
 
   const testFunc = () => { execute(testConfigOverrides); };
 
-  utils.testWithDataFolder(testFunc, inputFolder, expectedFolder, temporaryFolder);
+  //utils.testWithDataFolder(testFunc, inputFolder, expectedFolder, temporaryFolder);
 }

@@ -1,5 +1,8 @@
 const chalk = require("chalk");
 const xp = require("xpath");
+const path = require('path');
+const fs = require('fs');
+const utils = require("../../shared-utils/sharedUtils");
 
 const { evaluateInequality } = require("./util");
 const {
@@ -8,6 +11,13 @@ const {
   setPageOptions,
   setLinkOptions,
 } = require("./uim");
+const {
+  doRequest,
+} = require("./httpUtils");
+
+let parserToUse = null;
+let ioToUse = null;
+let initialFileList = null;
 
 /**
  * Compares a width value to a rule and returns whether the width passes the
@@ -20,7 +30,7 @@ const {
  */
 function checkWidth(width, rule, verbose = true) {
   if (!width) {
-    throw Error("You must supply a width");
+    throw Error("You must supply a width ");
   } else if (!rule) {
     throw Error("You must supply a rules string");
   }
@@ -36,7 +46,6 @@ function checkWidth(width, rule, verbose = true) {
 
     pass = limits.reduce((result, limit) => {
       const [operator, ruleWidth] = limit;
-
       return result && evaluateInequality(width, ruleWidth, operator);
     }, true);
   }
@@ -81,6 +90,11 @@ function checkPageWidth(pageNode, rule, verbose = true) {
  * @returns Returns an array of LINK elements who's widths pass the rule.
  */
 function checkLinkWidth(pageNode, rule, verbose = true) {
+  if (!pageNode) {
+    throw Error("You must supply a pageNode");
+  } else if (!rule) {
+    throw Error("You must supply a rules string");
+  }
   const links = getLinkOptions(pageNode).filter((link) => {
     if (!link.options || !link.options.width) {
       return false;
@@ -100,49 +114,58 @@ function checkLinkWidth(pageNode, rule, verbose = true) {
  * @param {boolean} verbose Will log debug messages if true (true by default).
  * @returns Whether the DOM node meets the rules criteria or not.
  */
-function checkRule(node, rule, verbose = true) {
+async function checkRule(node, filename, rule, verbose = true, domainsCheckEnabledForAllRules = true) {
   let pass = false;
-
+  let domainsCheckPass = false;
   if (!node) {
     throw Error("You must supply a node");
   } else if (!rule) {
     throw Error("You must supply a rules object");
   }
+
+  const domainsCheckForSpecificRule = rule && rule.containsAllowedDomainsOnly;
+  const executeDomainCheck = domainsCheckForSpecificRule != undefined ? domainsCheckForSpecificRule : domainsCheckEnabledForAllRules;
   if (rule.anyTerms.length > 0) {
-    rule.anyTerms.forEach((term) => {
-      if (!pass) {
-        const result = xp.select(term, node);
-
-        pass = pass || result;
-
-        if (verbose) {
-          console.debug(
-            ` term:  ${
-              result ? chalk.green(`${result} `) : chalk.red(result)
-            } <- [${chalk.magenta(term)}]`
+  rule.anyTerms.forEach((term) => {
+    if (!pass) { 
+      const result = xp.select(term, node);
+      pass = pass || result;
+      if (verbose) {
+        console.debug(
+          ` term:  ${
+            result ? chalk.green(`${result} `) : chalk.red(result)
+          } <- [${chalk.magenta(term)}]`
           );
         }
       }
-    });
-  } else if (rule.allTerms.length > 0) {
-    pass = true;
-  }
-  if (pass == true) {
-    rule.allTerms.forEach((term) => {
-      if (pass) {
-        const result2 = xp.select(term, node);
-        pass = result2;
-        if (verbose) {
-          console.debug(
-            ` term:  ${
-              result2 ? chalk.green(`${result2} `) : chalk.red(result2)
-            } <- [${chalk.magenta(term)}]`
-          );
+     });
+    } else if (rule.allTerms.length > 0) {
+      pass = true;
+    }
+    if (pass == true){
+        rule.allTerms.forEach((term) => {
+        if (pass) {
+          const result2 = xp.select(term, node);
+          pass = result2;
+          if (verbose) {
+            console.debug(
+              ` term:  ${
+                result2 ? chalk.green(`${result2} `) : chalk.red(result2)
+              } <- [${chalk.magenta(term)}]`
+            );
+          }
         }
-      }
-    });
-  }
-  return pass;
+      });
+    }
+    if (pass) {
+      if (executeDomainCheck === true) {
+        domainsCheckPass = await checkUIMDomainsAreValidToResizeDown(node, filename);
+      } else {
+        // if there is no domain check to be done just set the check to pass
+        domainsCheckPass = true;  
+      }    
+    }
+    return domainsCheckPass;
 }
 
 /**
@@ -155,7 +178,12 @@ function checkRule(node, rule, verbose = true) {
  * @param {boolean} usePixelWidths Determines whether width is set as a pixel value
  * or a size category.
  */
-function updateWidthOption(windowOptions, sizes, target, usePixelWidths) {
+function updateWidthOption(
+  windowOptions,
+  sizes,
+  target,
+  usePixelWidths
+) {
   if (!windowOptions) {
     throw Error("You must supply a WINDOW_OPTIONS string");
   } else if (!sizes) {
@@ -173,6 +201,83 @@ function updateWidthOption(windowOptions, sizes, target, usePixelWidths) {
 }
 
 /**
+ * Checks the domain definitions of UIM XML document are valid with respect to
+ * allowing it to be resized down.
+ *
+ * @param {Element} rootUIMNode The root node of the UIM XML document.
+ * @param {string} filename Filename of UIM XML document.
+ */
+async function checkUIMDomainsAreValidToResizeDown(rootUIMNode, filename) {
+  let serverAccessBeans = [];
+  let connectionsAreAllowListed = true;
+  const fileNameAndExtenionWithoutPath = path.basename(filename);
+  
+  const severBeanXP= xp.select(
+    `//SERVER_INTERFACE`,
+    rootUIMNode
+  );
+
+  const vimsToBeProcessed = [];
+ 
+  severBeanXP.forEach((bean) => {
+    serverAccessBeans.push({
+      class: bean.getAttribute("CLASS"),
+      name:bean.getAttribute("NAME"),
+      operation:bean.getAttribute("OPERATION"),
+    });
+  });
+
+  const clusterFieldConnectionsXP= xp.select(
+    `(//FIELD | //WIDGET)//CONNECT/*`, // change to include widgets, 
+    rootUIMNode
+  ); 
+
+  let connections=[];
+
+  clusterFieldConnectionsXP.forEach((connection) => {
+    const name= connection.getAttribute("NAME");
+    const property = connection.getAttribute("PROPERTY");  
+      serverAccessBeans.forEach((bean) => {
+        if(name==bean.name){    
+             connections.push({
+              property: property,
+              name:bean.class,
+              operation:bean.operation,
+            });
+       }
+   }); 
+  });
+
+  const connectionPromises = [];
+  for(let i=0; i < connections.length; i++){
+    const connection = connections[i];
+    let result = await doRequest(connection, fileNameAndExtenionWithoutPath);
+    connectionPromises.push({result: result, property: connection.property, filename: fileNameAndExtenionWithoutPath});
+  }
+
+  let connectionResults = await Promise.all(connectionPromises);
+  for(let j=0; j < connectionResults.length; j++) {
+    if(connectionResults[j].result == false) {
+      connectionsAreAllowListed = false; 
+      break;
+    }
+  }
+
+  // connections are allow listed and number of connections is bigger than 0
+  const connectionsNotEmotyAndAllowed = connections.length > 0 && connectionsAreAllowListed == true;
+  return connectionsNotEmotyAndAllowed; 
+}
+
+updateDocument = (serializer, filename, document, results) => {
+  const updatedDocument = serializer.serializeToString(document);
+
+  if (updatedDocument) {
+    results[filename] = updatedDocument;
+    utils.writeFiles(results);
+  }
+}
+
+/**
  * Applies xPath rules to a UIM XML document.
  *
  * @param {object} document Parsed UIM XML document.
@@ -186,19 +291,24 @@ function updateWidthOption(windowOptions, sizes, target, usePixelWidths) {
  * @param {boolean} verbose Will log debug messages if true (true by default).
  * @returns Returns whether the document was updated by the rules or not.
  */
-function applyRule(
+async function applyRule(
   document,
   filename,
+  serializer,
   rules,
   sizes,
   pagedictionary,
   usePixelWidths,
-  verbose = true
+  verbose = true,
+  domainsCheckEnabledForAllRules = true,
+  testMode = false
 ) {
   if (!document) {
     throw Error("You must supply a UIM document");
   } else if (!filename && filename !== "") {
     throw Error("You must supply a filename");
+  } else if (!serializer) {
+    throw Error("You must supply an serializer object");
   } else if (!rules) {
     throw Error("You must supply a rules array");
   } else if (!sizes) {
@@ -206,62 +316,85 @@ function applyRule(
   } else if (!pagedictionary) {
     throw Error("You must supply a PAGE dictionary map");
   }
-
+  
   const pageNode = document.documentElement;
-
+  let hasChanges = false;
   if (verbose) {
     console.debug(`filename: ${chalk.cyan(filename)}`);
   }
+  let linkPass = false;
+  let results = [];
 
-  let hasChanges = false;
-
-  rules.forEach((rule, index) => {
-    if (!hasChanges) {
+  let apdatedLinks=[];
+  
+  for(i=0; i<rules.length; i++){
       if (verbose) {
-        console.debug(`rule: ${chalk.yellow(index + 1)}`);
+        console.debug(`rule: ${chalk.yellow(i + 1)}`);
       }
-
-      if (checkPageWidth(pageNode, rule.width, verbose)) {
-        const pass = checkRule(pageNode, rule, verbose);
-
-        if (pass) {
-          hasChanges = true;
-          const windowOptions = getPageOptions(pageNode);
-
-          updateWidthOption(windowOptions, sizes, rule.target, usePixelWidths);
-
-          setPageOptions(pageNode, windowOptions);
-        }
-      }
-
-      const linkMatches = checkLinkWidth(pageNode, rule, verbose);
-
-      linkMatches.forEach(({ pageId, options, link }) => {
-        let pass = false;
-
-        const pageReference = pagedictionary[pageId];
-
-        if (pageReference) {
-          pass = checkRule(
-            pageReference.document.documentElement,
-            rule,
-            verbose
-          );
-
-          hasChanges = hasChanges || pass;
-
-          updateWidthOption(options, sizes, rule.target, usePixelWidths);
-
-          if (pass) {
-            setLinkOptions(link, options);
+      const linkMatches = checkLinkWidth(pageNode,rules[i], verbose);
+      const hasLinks = linkMatches.length > 0;
+      if(!hasChanges){
+        if (checkPageWidth(pageNode, rules[i].width, verbose)) {
+          const pagePass = await checkRule(pageNode, filename, rules[i], verbose, domainsCheckEnabledForAllRules);     
+          if (pagePass) {         
+            const windowOptions = getPageOptions(pageNode);        
+            updateWidthOption(windowOptions, sizes, rules[i].target, usePixelWidths);
+            hasChanges = true;
+            setPageOptions(pageNode, windowOptions);
           }
         }
-      });
-    }
-  });
+      }
+      
+      for(j=0;j<linkMatches.length;j++){
+        const pageReference = pagedictionary[linkMatches[j].pageId];
+        if (pageReference && apdatedLinks.includes(linkMatches[j].pageId)==false) {
+          linkPass = await checkRule(
+            pageReference.document.documentElement,
+            pageReference.file,
+            rules[i],
+            verbose,
+            domainsCheckEnabledForAllRules
+          );
+  
+          if(rules[i]){
+             updateWidthOption(linkMatches[j].options, sizes, rules[i].target, usePixelWidths);     
+          }
+          if (linkPass) { 
+            setLinkOptions(linkMatches[j].link, linkMatches[j].options);           
+            updateDocument(serializer, filename, document, results);
+            apdatedLinks.push(linkMatches[j].pageId);
+          } 
+        }
+       
+      }       
+      if (!hasLinks && hasChanges === true) { 
+        updateDocument(serializer, filename, document, results);
+      }
+  }
+
+  if (testMode) {
+    return new Promise(function(resolve,reject){
+      setTimeout(function() {
+         resolve(hasChanges);
+      }, 100);
+     });
+  }
 
   return hasChanges;
+
 }
+
+
+function getDocumentFromUIM(file, parser, io) {
+  const contents = io.readLines(file).join("\n");
+  const document = parser.parseFromString(contents);
+  return document;
+}
+
+function getRootNodeFromUIM(file, parser, io) {
+  return getDocumentFromUIM(file, parser, io).documentElement;
+}
+
 
 /**
  * .
@@ -280,7 +413,7 @@ function applyRule(
  * @returns A list of files that have met the rules criteria and had their
  * width's updated.
  */
-function applyRules(
+async function applyRules(
   files,
   rules,
   sizes,
@@ -288,7 +421,8 @@ function applyRules(
   parser,
   serializer,
   usePixelWidths,
-  verbose = true
+  verbose = true,
+  domainsCheckEnabledForAllRules = true,
 ) {
   if (!files) {
     throw Error("You must supply a globbed files array");
@@ -304,45 +438,47 @@ function applyRules(
     throw Error("You must supply an serializer object");
   }
 
+  parserToUse = parser;
+  ioToUse = io;
+  initialFileList = files;
+
   const results = [];
-
   const pagedictionary = {};
-
+  
   const uims = files.map((file) => {
     const contents = io.readLines(file).join("\n");
     const document = parser.parseFromString(contents);
+   
+    if(document.documentElement !== null){
+      const pageId = document.documentElement.getAttribute("PAGE_ID");
+      pagedictionary[pageId] = {
+        file,
+        document,
+      };
 
-    const pageId = document.documentElement.getAttribute("PAGE_ID");
-
-    pagedictionary[pageId] = {
-      file,
-      document,
-    };
-
-    return {
-      pageId,
-      file,
-      document,
-    };
+      return {
+        pageId,
+        file,
+        document,
+      };
+    } 
   });
-
-  uims.forEach(({ document, file }) => {
-    const hasChanges = applyRule(
-      document,
-      file,
-      rules,
-      sizes,
-      pagedictionary,
-      usePixelWidths,
-      verbose
-    );
-
-    // Only mark the files as 'for writing' if the contents changed
-    if (hasChanges) {
-      results[file] = serializer.serializeToString(document);
-    }
-  });
-
+  
+    for (let i=0; i<uims.length; i++ ){
+     if(uims[i]!== undefined){
+      await applyRule(
+        uims[i].document,
+        uims[i].file,
+        serializer,
+        rules,
+        sizes,
+        pagedictionary,
+        usePixelWidths,
+        verbose,
+        domainsCheckEnabledForAllRules
+       );
+      }
+  }
   return results;
 }
 
@@ -354,4 +490,6 @@ module.exports = {
   updateWidthOption,
   applyRule,
   applyRules,
+  checkUIMDomainsAreValidToResizeDown,
+  getRootNodeFromUIM
 };

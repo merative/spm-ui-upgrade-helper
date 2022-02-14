@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed Materials - Property of IBM
+  
+  Copyright IBM Corporation 2012. All Rights Reserved.
+ 
+  US Government Users Restricted Rights - Use, duplication or disclosure 
+  restricted by GSA ADP Schedule Contract with IBM Corp.
+-->  
+
+<!-- Copyright 2009 Curam Software Ltd.                                     -->
+<!-- All rights reserved.                                                   -->
+<!-- This software is the confidential and proprietary information of Curam -->
+<!-- Software, Ltd. ("Confidential Information"). You shall not disclose    -->
+<!-- such Confidential Information and shall use it only in accordance with -->
+<!-- in accordance with the terms of the license agreement you entered into -->
+<!-- Software.                                                              -->
+<!-- Description -->
+<!-- =========== -->
+<!-- This page displays the list of classifications for the factor      -->
+<!-- Records.    -->
+<PAGE PAGE_ID="OutcomePlanFactor_recommendations" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file://Curam/UIMSchema.xsd">
+    <SERVER_INTERFACE CLASS="OutcomePlanFactorAdmin" NAME="DISPLAY" OPERATION="viewOutcomePlanFactor" PHASE="DISPLAY" />
+    <SERVER_INTERFACE CLASS="AssessmentConditionAdmin" NAME="ASSESSMENTCONDITIONADMIN" OPERATION="isRecommendationConditionsEnabled" PHASE="DISPLAY" />
+    <PAGE_TITLE>
+        <CONNECT>
+            <SOURCE NAME="TEXT" PROPERTY="Page.Title" />
+        </CONNECT>
+    </PAGE_TITLE>
+    <PAGE_PARAMETER NAME="outcomePlanFactorID" />
+    <PAGE_PARAMETER NAME="outcomePlanAdminID" />
+    <CONNECT>
+        <SOURCE NAME="PAGE" PROPERTY="outcomePlanFactorID" />
+        <TARGET NAME="DISPLAY" PROPERTY="key$factorID" />
+    </CONNECT>
+    <ACTION_SET>
+        <ACTION_CONTROL LABEL="ActionControl.Label.RecommendObjective">
+            <LINK PAGE_ID="OutcomePlanningAdmin_recommendObjectiveFromOutcomePlanFactor" OPEN_MODAL="true">
+                <CONNECT>
+                    <SOURCE NAME="PAGE" PROPERTY="outcomePlanFactorID" />
+                    <TARGET NAME="PAGE" PROPERTY="outcomePlanFactorID" />
+                </CONNECT>
+            </LINK>
+        </ACTION_CONTROL>
+        <ACTION_CONTROL LABEL="ActionControl.Label.RecommendAction">
+            <LINK PAGE_ID="OutcomePlanningAdmin_createRecommendActionFromOutcomePlanFactor" OPEN_MODAL="true">
+                <CONNECT>
+                    <SOURCE NAME="PAGE" PROPERTY="outcomePlanFactorID" />
+                    <TARGET NAME="PAGE" PROPERTY="outcomePlanFactorID" />
+                </CONNECT>
+            </LINK>
+        </ACTION_CONTROL>
+        <ACTION_CONTROL LABEL="ActionControl.Label.RecommendService">
+            <LINK PAGE_ID="OutcomePlanningAdmin_createRecommendServiceFromOutcomePlanFactor" OPEN_MODAL="true">
+                <CONNECT>
+                    <SOURCE NAME="PAGE" PROPERTY="outcomePlanFactorID" />
+                    <TARGET NAME="PAGE" PROPERTY="outcomePlanFactorID" />
+                </CONNECT>
+            </LINK>
+        </ACTION_CONTROL>
+        <ACTION_CONTROL LABEL="ActionControl.Label.RecommendReferral">
+            <LINK PAGE_ID="OutcomePlanningAdmin_createRecommendReferralFromOutcomePlanFactor" OPEN_MODAL="true">
+                <CONNECT>
+                    <SOURCE NAME="PAGE" PROPERTY="outcomePlanFactorID" />
+                    <TARGET NAME="PAGE" PROPERTY="outcomePlanFactorID" />
+                </CONNECT>
+            </LINK>
+        </ACTION_CONTROL>
+        <ACTION_CONTROL LABEL="ActionControl.Label.RecommendGroup">
+            <LINK PAGE_ID="OutcomePlanningAdmin_createRecommendGroupFromOutcomePlanFactor" OPEN_MODAL="true">
+                <CONNECT>
+                    <SOURCE NAME="PAGE" PROPERTY="outcomePlanFactorID" />
+                    <TARGET NAME="PAGE" PROPERTY="outcomePlanFactorID" />
+                </CONNECT>
+            </LINK>
+        </ACTION_CONTROL>
+    </ACTION_SET>
+    <LIST>
+        <ACTION_SET TYPE="LIST_ROW_MENU">
+            <ACTION_CONTROL LABEL="ActionControl.Label.AddConditions">
+                <CONDITION>
+                    <IS_TRUE NAME="ASSESSMENTCONDITIONADMIN" PROPERTY="enabledInd" />
+                </CONDITION>
+                <LINK PAGE_ID="OutcomePlanningAdmin_addConditionToRecommendation" OPEN_MODAL="true">
+                    <CONNECT>
+                        <SOURCE NAME="DISPLAY" PROPERTY="recommendationAdminID" />
+                        <TARGET NAME="PAGE" PROPERTY="recommendationAdminID" />
+                    </CONNECT>
+                </LINK>
+            </ACTION_CONTROL>
+            <SEPARATOR/>
+            <ACTION_CONTROL LABEL="ActionControl.Label.Edit">
+                <LINK URI_SOURCE_NAME="DISPLAY" URI_SOURCE_PROPERTY="editURI" OPEN_MODAL="true"/>
+            </ACTION_CONTROL>
+            <ACTION_CONTROL LABEL="ActionControl.Label.Delete">
+                    <LINK URI_SOURCE_NAME="DISPLAY" URI_SOURCE_PROPERTY="removeURI" OPEN_MODAL="true" WINDOW_OPTIONS="width=450"/>
+            </ACTION_CONTROL>
+        </ACTION_SET>
+        <DETAILS_ROW>
+          <CONDITION>
+              <IS_TRUE NAME="ASSESSMENTCONDITIONADMIN" PROPERTY="enabledInd" />
+          </CONDITION>
+          <INLINE_PAGE PAGE_ID="OutcomePlanningAdmin_viewRecommendationListSummary">
+            <CONNECT>
+              <SOURCE NAME="DISPLAY" PROPERTY="recommendationAdminID"/>
+              <TARGET NAME="PAGE" PROPERTY="recommendationAdminID"/>
+            </CONNECT>
+          </INLINE_PAGE>
+        </DETAILS_ROW>
+        <FIELD LABEL="Field.Label.ActivityName" WIDTH="20">
+            <CONNECT>
+                <SOURCE NAME="DISPLAY" PROPERTY="recommendationName" />
+            </CONNECT>
+        </FIELD>
+        <FIELD LABEL="Field.Label.ActivityType" WIDTH="15">
+            <CONNECT>
+                <SOURCE NAME="DISPLAY" PROPERTY="recommendationRelatedType" />
+            </CONNECT>
+        </FIELD>
+        <FIELD LABEL="Field.Label.Classification" WIDTH="15">
+            <CONNECT>
+                <SOURCE NAME="DISPLAY" PROPERTY="relatedName" />
+            </CONNECT>
+        </FIELD>
+        <FIELD LABEL="Field.Label.Recommendation" WIDTH="15">
+            <CONNECT>
+                <SOURCE NAME="DISPLAY" PROPERTY="recommendationType" />
+            </CONNECT>
+        </FIELD>
+        <FIELD LABEL="Field.Label.Programs" WIDTH="15">
+            <CONNECT>
+                <SOURCE NAME="DISPLAY" PROPERTY="relatedLinksNameDetails" />
+            </CONNECT>
+        </FIELD>
+        <CONTAINER LABEL="Field.Label.Reason" WIDTH="20">
+            <FIELD>
+                <CONNECT>
+                    <SOURCE NAME="DISPLAY" PROPERTY="reason" />
+                </CONNECT>
+            </FIELD>
+            <ACTION_CONTROL IMAGE="LocalizableTextTranslation" LABEL="ActionControl.Label.TextTranslation">
+                <LINK PAGE_ID="OutcomePlanAdmin_viewRecomendationLocalizableTextFromOutcomePlanFactor" OPEN_MODAL="true" WINDOW_OPTIONS="width=800">
+                    <CONNECT>
+                        <SOURCE NAME="DISPLAY" PROPERTY="reasonTextID" />
+                        <TARGET NAME="PAGE" PROPERTY="localizableTextID" />
+                    </CONNECT>
+                    <CONNECT>
+                        <SOURCE NAME="PAGE" PROPERTY="outcomePlanFactorID" />
+                        <TARGET NAME="PAGE" PROPERTY="outcomePlanFactorID" />
+                    </CONNECT>
+                    <CONNECT>
+                        <SOURCE NAME="PAGE" PROPERTY="outcomePlanAdminID" />
+                        <TARGET NAME="PAGE" PROPERTY="outcomePlanAdminID" />
+                    </CONNECT>
+                </LINK>
+            </ACTION_CONTROL>
+        </CONTAINER>
+    </LIST>
+</PAGE>

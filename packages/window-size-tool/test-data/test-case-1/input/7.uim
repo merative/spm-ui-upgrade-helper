@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2010 Curam Software Ltd.                                     -->
+<!-- All rights reserved.                                                   -->
+<!-- This software is the confidential and proprietary information of Curam -->
+<!-- Software, Ltd. ("Confidential Information"). You shall not disclose    -->
+<!-- such Confidential Information and shall use it only in accordance with -->
+<!-- the terms of the license agreement you entered into with Curam         -->
+<!-- Software.                                                              -->
+<PAGE
+  PAGE_ID="CDPDisplayRules_decisionComparison"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="file://Curam/UIMSchema.xsd"
+>
+
+
+  <PAGE_TITLE>
+    <CONNECT>
+      <SOURCE
+        NAME="TEXT"
+        PROPERTY="Page.Title"
+      />
+    </CONNECT>
+  </PAGE_TITLE>
+
+
+  <PAGE_PARAMETER NAME="determinationID"/>
+  <PAGE_PARAMETER NAME="displayDate"/>
+
+
+  <SERVER_INTERFACE
+    CLASS="CaseDetermination"
+    NAME="DISPLAY_CURR"
+    OPERATION="viewDecisionDisplayRulesCategoryXML"
+  />
+
+
+  <SERVER_INTERFACE
+    CLASS="CaseDetermination"
+    NAME="DISPLAY_PREV"
+    OPERATION="viewPreviousDecisionDisplayRulesCategoryXML"
+  />
+
+
+  <!-- Current decision -->
+  <CONNECT>
+    <SOURCE
+      NAME="PAGE"
+      PROPERTY="determinationID"
+    />
+    <TARGET
+      NAME="DISPLAY_CURR"
+      PROPERTY="key$determinationID"
+    />
+  </CONNECT>
+  <CONNECT>
+    <SOURCE
+      NAME="PAGE"
+      PROPERTY="displayDate"
+    />
+    <TARGET
+      NAME="DISPLAY_CURR"
+      PROPERTY="key$date"
+    />
+  </CONNECT>
+  <CONNECT>
+    <SOURCE
+      NAME="TEXT"
+      PROPERTY="CategoryRef"
+    />
+    <TARGET
+      NAME="DISPLAY_CURR"
+      PROPERTY="key$categoryRef"
+    />
+  </CONNECT>
+
+
+  <!-- Previous decision -->
+  <CONNECT>
+    <SOURCE
+      NAME="PAGE"
+      PROPERTY="determinationID"
+    />
+    <TARGET
+      NAME="DISPLAY_PREV"
+      PROPERTY="key$determinationID"
+    />
+  </CONNECT>
+  <CONNECT>
+    <SOURCE
+      NAME="PAGE"
+      PROPERTY="displayDate"
+    />
+    <TARGET
+      NAME="DISPLAY_PREV"
+      PROPERTY="key$date"
+    />
+  </CONNECT>
+  <CONNECT>
+    <SOURCE
+      NAME="TEXT"
+      PROPERTY="CategoryRef"
+    />
+    <TARGET
+      NAME="DISPLAY_PREV"
+      PROPERTY="key$categoryRef"
+    />
+  </CONNECT>
+
+
+  <CLUSTER NUM_COLS="2">
+    <FIELD
+      DOMAIN="SVR_BOOLEAN"
+      LABEL="Field.Label.Previous.Eligible"
+    >
+      <CONNECT>
+        <SOURCE
+          EXTENDED_PATH="/DecisionDetails/BasicCase/isEligibleTimeline"
+          NAME="DISPLAY_PREV"
+          PROPERTY="xmlData"
+        />
+      </CONNECT>
+    </FIELD>
+    <FIELD
+      DOMAIN="SVR_BOOLEAN"
+      LABEL="Field.Label.Current.Eligible"
+    >
+      <CONNECT>
+        <SOURCE
+          EXTENDED_PATH="/DecisionDetails/BasicCase/isEligibleTimeline"
+          NAME="DISPLAY_CURR"
+          PROPERTY="xmlData"
+        />
+      </CONNECT>
+    </FIELD>
+    <FIELD
+      DOMAIN="SVR_BOOLEAN"
+      LABEL="Field.Label.Current.Eligible"
+    >
+      <CONNECT>
+        <SOURCE
+          EXTENDED_PATH="/DecisionDetails/BasicCase/isEligibleTimeline"
+          NAME="DISPLAY_CURR"
+          PROPERTY="xmlData"
+        />
+      </CONNECT>
+    </FIELD>
+  </CLUSTER>
+
+
+</PAGE>

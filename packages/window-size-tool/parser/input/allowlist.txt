@@ -1,0 +1,19 @@
+{ "domains":
+  [
+    {"rootName": "SVR_STRING", "maxLength": "300"},
+    {"rootName": "CODETABLE_CODE"},
+    {"rootName": "SHORT_CODETABLE_CODE"},
+    {"rootName": "SVR_DATE"}, 
+    {"rootName": "SVR_DATETIME"},
+    {"rootName": "SVR_INT8"},
+    {"rootName": "SVR_INT16"},
+    {"rootName": "SVR_INT32"},
+    {"rootName": "SVR_INT64"},
+    {"rootName": "SVR_MONEY"},
+    {"rootName": "INTERNAL_ID"},
+    {"rootName": "SVR_BOOLEAN"},
+    {"rootName": "SVR_FLOAT"},
+    {"rootName": "SVR_DOUBLE"},
+    {"rootName": "SVR_CHAR"}
+  ]
+}

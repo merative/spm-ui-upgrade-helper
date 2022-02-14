@@ -1,0 +1,27 @@
+<!--
+  - Expected: No change.
+  -
+  - Reason: The UIM file contains INLINE_PAGE element
+  -
+  -->
+<?xml version="1.0" encoding="UTF-8"?>
+<PAGE WINDOW_OPTIONS="width=700">
+  <CLUSTER>
+      <FIELD/>
+      <FIELD/>
+  </CLUSTER>
+   <DETAILS_ROW>
+      <INLINE_PAGE PAGE_ID="ISP_viewSanctionOverrideDetails">
+        <CONNECT>
+          <SOURCE
+            NAME="DISPLAY"
+            PROPERTY="sanctionOverrideID"
+          />
+          <TARGET
+            NAME="PAGE"
+            PROPERTY="sanctionOverrideID"
+          />
+        </CONNECT>
+      </INLINE_PAGE>
+    </DETAILS_ROW>
+</PAGE>

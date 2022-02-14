@@ -103,10 +103,11 @@ function getLinkOptions(pageNode) {
   let linkOptions = [];
 
   const links = xp.select(
-    `//LINK[@${WINDOW_OPTIONS_ATTRIBUTE_NAME}]`,
+    `//LINK[@${WINDOW_OPTIONS_ATTRIBUTE_NAME} and @${PAGE_ID_ATTRIBUTE_NAME}]`,
     pageNode
   );
 
+  if(links){
   links.forEach((link) => {
     linkOptions.push({
       pageId: link.getAttribute(PAGE_ID_ATTRIBUTE_NAME),
@@ -114,6 +115,7 @@ function getLinkOptions(pageNode) {
       link,
     });
   });
+}
 
   return linkOptions;
 }
