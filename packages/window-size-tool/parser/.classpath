@@ -8,8 +8,8 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="/Tooling/devenv/ant/lib/ant.jar"/>
 	<classpathentry kind="lib" path="lib/jde-commons.jar"/>
-	<classpathentry kind="lib" path="lib/log4j-api.jar"/>
-	<classpathentry kind="lib" path="lib/log4j-core.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-api-2.17.1.jar"/>
+    <classpathentry kind="lib" path="lib/log4j-core-2.17.1.jar"/>
 	<classpathentry kind="lib" path="lib/omega3-generator.jar"/>
 	<classpathentry kind="lib" path="lib/xercesImpl.jar"/>
 	<classpathentry kind="output" path="bin"/>
