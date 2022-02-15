@@ -1,4 +1,4 @@
-ARG NODE_VERSION=12.18.3
+ARG NODE_VERSION=12.22.7
 FROM node:${NODE_VERSION} AS install-root
 WORKDIR /home/theia
 ADD LICENSE LICENSE
@@ -20,7 +20,7 @@ ADD *.json ./
 
 # vs-upgrade-helper-plugin
 # The plugin does not support being created using lerna. It has to be a standalone project.
-ARG NODE_VERSION=12.18.3
+ARG NODE_VERSION=12.22.7
 FROM node:${NODE_VERSION} AS plugins
 WORKDIR /home/plugins
 ADD packages/vs-upgrade-helper-plugin/ .

@@ -30,8 +30,8 @@ Once installed, you will need to allow Docker Desktop to access certain paths on
     - `clone https://github.com/theia-ide/theia-apps`
     - `cd to the cloned theia project(.../Theia/theia-apps/theia-docker)`
     - `docker build . -t theiaide/theia:v1.14.0`
-    - `docker pull node:12.18.3`
-    - `docker pull node:12.18.3-alpine`
+    - `docker pull node:12.22.7`
+    - `docker pull node:12.22.7-alpine`
 4. Build the container with `yarn build:dev`
 5. Build the acceptance test data with `yarn at:build kitchen-sink`
 6. Start the container with `acceptance-test.bat`/`acceptance-test.sh`
