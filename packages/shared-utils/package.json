@@ -9,7 +9,7 @@
   "dependencies": {
     "fast-glob": "^3.2.7",
     "fs-extra": "^10.0.0",
-    "ignore": "^5.1.8",
+    "ignore": "^5.2.0",
     "shelljs": "^0.8.5"
   },
   "devDependencies": {
