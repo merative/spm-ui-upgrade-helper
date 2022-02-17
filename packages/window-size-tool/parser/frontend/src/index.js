@@ -23,8 +23,8 @@ wserver.get('/ct/:prop/:op/:bean', function(req, res) {
 wserver.get('/complex/:prop/:op/:bean', function(req, res) {
     delegateAndWait('isxmlwidget', req.params, result => res.send(result));
 });
-wserver.get('/whitelisted/:prop/:op/:bean', function(req, res) {
-    delegateAndWait('iswhitelisted', req.params, result => res.send(result));
+wserver.get('/allowlisted/:prop/:op/:bean', function(req, res) {
+    delegateAndWait('isallowlisted', req.params, result => res.send(result));
 });
 
 function delegateAndWait(pathBase, pathParams, callback) {
@@ -41,4 +41,4 @@ function delegateAndWait(pathBase, pathParams, callback) {
         e => console.error(`Problem with the request delegation: ${e.message}`));
     backendReq.end();
 }
-wserver.listen(4005, _ => console.log('Sample bean tool query bridge is ready on localhost:4003...\n/full,/base,/ct,/complex,/whitelisted paths please. '));
+wserver.listen(4005, _ => console.log('Sample bean tool query bridge is ready on localhost:4003...\n/full,/base,/ct,/complex,/allowlisted paths please. '));

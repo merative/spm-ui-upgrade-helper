@@ -11,16 +11,15 @@ let req;
       req = http.get( `http://spm-ui-upgrade-helper_nodefront:4005/full/${connection.property}/${connection.operation}/${connection.name}`, res => {
           res.on('data', d => {
               responseAsJson = JSON.parse(d.toString());  
-              whitelisted = responseAsJson.whitelisted;
+              allowlisted = responseAsJson.allowlisted;
               codeTable = responseAsJson.codetable;  
-              if (whitelisted ==="false" && codeTable === "false"){
+              if (allowlisted ==="false" && codeTable === "false"){
                 newFlag=false;                       
               }
               resolve(newFlag);
             })
           }) 
         req.on('error', error => {
-          console.error('Error',error);
           reject(newFlag);
         }) 
         req.end();
