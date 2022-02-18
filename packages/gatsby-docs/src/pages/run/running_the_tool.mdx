@@ -11,18 +11,32 @@ Warning: Remember that the temporary output folder is wiped when the UI Upgrade 
 </InlineNotification>
 
 1. Run `chmod -R 777 <output folder>`so that Docker can interact with the temporary output folder. For example, `c:\temp\upgrade` or `/tmp/upgrade`.
+
+
 2. Run the tool:
-    - (Windows ™️) `spm-ui-upgrade-helper.bat <version> <input folder> <output folder>` 
-    - (Linux ®️) `./spm-ui-upgrade-helper.sh <version> <input folder> <output folder>` 
-    - Where:
-        - `<version>` is typically "latest".
-        - `<input folder>` is the absolute path to the root of your 7.0.11.0 development environment.
-        - `<output folder>` is the absolute path to your temporary output folder.
-2. Open your browser to http://localhost:3000.
-3. Press `F1` or `cmd + shift + p`.
-4. Type "Run SPM UI Upgrade Helper" and click on the shortcut. The files in `<input folder>` are scanned and the results are placed in `<output folder>`.
-5. Wait a few minutes for the tool to finish.
-6. Click the `Source Control: Git` button on the left sidebar to inspect the changes.
+ - (Windows ™️)<br />
+    Set INPUT_FOLDER=`<INPUT_FOLDER>`<br />
+    Set OUTPUT_FOLDER=`<OUTPUT_FOLDER>`<br />
+    Set VERSION=`<VERSION>`
+   
+    spm-ui-upgrade-helper.bat 
+
+ - (Linux ®️) <br />
+    export INPUT_FOLDER=`<INPUT_FOLDER>`<br />
+    export OUTPUT_FOLDER=`<OUTPUT_FOLDER>`<br />
+    export VERSION=`<VERSION>` 
+    
+    sh spm-ui-upgrade-helper.sh
+
+    VERSION is typically “latest”.<br />
+    INPUT_FOLDER is the absolute path to the root of your 7.0.11.0 development environment. <br />
+    OUTPUT_FOLDER is the absolute path to your temporary output folder. <br />
+
+3. Open your browser to http://localhost:8000.
+4. Press `F1` or `cmd + shift + p`.
+5. Type "Run SPM UI Upgrade Helper" and click on the shortcut. The files in `<input folder>` are scanned and the results are placed in `<output folder>`.
+6. Wait a few minutes for the tool to finish.
+7. Click the `Source Control: Git` button on the left sidebar to inspect the changes.
 
 ![1. Press F1, 2. Type "Run SPM UI Upgrade Helper", 3. Select the shortcut, 4. Wait for the tool to finish, 5. Click "Source Control: Git" to see the output](../../images/upgrade-helper.gif "Running the UI Upgrade Helper tool")
 
