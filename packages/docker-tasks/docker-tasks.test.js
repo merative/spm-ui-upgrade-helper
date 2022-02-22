@@ -219,7 +219,7 @@ test("calling 'release <version>' runs the correct commands", () => {
   ];
   const props = yaml.load(inputConfig.join("\n"));
   const inputArgs = "release 0.0.1".split(" ");
-  const expectedCommands = ["docker image tag foo:latest foo:0.0.1", "docker image tag bar:latest foo:0.0.1", "docker image tag baz:latest foo:0.0.1", "docker image tag foo:latest docker.io/folkforms/foo:0.0.1", "docker image tag bar:latest docker.io/folkforms/bar:0.0.1", "docker image tag baz:latest docker.io/folkforms/baz:0.0.1", "docker image push docker.io/folkforms/foo:0.0.1", "docker image push docker.io/folkforms/bar:0.0.1", "docker image push docker.io/folkforms/baz:0.0.1"];
+  const expectedCommands = ["docker image tag foo:latest foo:0.0.1", "docker image tag bar:latest bar:0.0.1", "docker image tag baz:latest baz:0.0.1", "docker image tag foo:latest docker.io/folkforms/foo:0.0.1", "docker image tag bar:latest docker.io/folkforms/bar:0.0.1", "docker image tag baz:latest docker.io/folkforms/baz:0.0.1", "docker image push docker.io/folkforms/foo:0.0.1", "docker image push docker.io/folkforms/bar:0.0.1", "docker image push docker.io/folkforms/baz:0.0.1"];
   const expectedEchos = [];
   const expectedErrorCode = 0;
 

@@ -6,8 +6,6 @@ const expected = [
   "has-updates-css-2.css",
   "has-updates-css-1.css",
   "has-updates-css-0.css",
-  "invalid-css-file-0.css",
-  "invalid-css-file-1.css",
   "has-updates-css-and-icons-1.css",
   "has-updates-css-and-icons-0.css",
   "Chevron_Down_Blue30_10px.png",
@@ -20,6 +18,9 @@ const expected = [
   "has-updates-icons-0.properties",
   "has-updates-css-6.css",
   "has-updates-css-5.css",
+  "has-updates-1.uim",
+  "has-updates-0.uim",
+  "has-updates-2.uim"
 ].sort();
 
 test('kitchen-sink file list', () => {

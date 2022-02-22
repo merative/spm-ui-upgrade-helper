@@ -43,7 +43,7 @@ test('--start option runs the correct commands', () => {
     "git tag --list v0.10.0",
     "yarn install-all",
     "yarn test",
-    "echo { \"version\": \"0.10.0\" }>version.json",
+    "echo { '\"'version'\"': '\"'0.10.0'\"'}>version.json",
     "yarn build:release",
     "git checkout -b v0.10.0",
     "git push --set-upstream origin v0.10.0",
