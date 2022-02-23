@@ -159,8 +159,8 @@ const dockerTasks = (execFunction = shelljs, props, args) => {
     }
     if (version !== "latest") {
       cmds.push(`docker image tag ${additionalArgs} ${props.imageName}:latest ${props.imageName}:${version}`);
-      cmds.push(`docker image tag ${additionalArgs} ${props.parserImageName}:latest ${props.imageName}:${version}`);
-      cmds.push(`docker image tag ${additionalArgs} ${props.nodeImageName}:latest ${props.imageName}:${version}`);
+      cmds.push(`docker image tag ${additionalArgs} ${props.parserImageName}:latest ${props.parserImageName}:${version}`);
+      cmds.push(`docker image tag ${additionalArgs} ${props.nodeImageName}:latest ${props.nodeImageName}:${version}`);
     }
     cmds.push(`docker image tag ${additionalArgs} ${props.imageName}:latest docker.io/${props.username}/${props.imageName}:${version}`);
     cmds.push(`docker image tag ${additionalArgs} ${props.parserImageName}:latest docker.io/${props.username}/${props.parserImageName}:${version}`);

@@ -29,7 +29,7 @@ const runSpmUiUpgradeHelperTool = async () => {
   const page = utils.getPage();
   await page.focus("div#theia-app-shell");
   await page.keyboard.press('F1');
-  await page.keyboard.type('Run SPM');
+  await page.keyboard.type('Run SPM UI Upgrade Helper');
   await page.keyboard.press('Enter');
 }
 
@@ -38,7 +38,7 @@ const waitForWorkingMessageToAppear = async () => {
 }
 
 const waitForWorkingMessageToDisappear = async () => {
-  await utils.getPage().waitForSelector('div.theia-notification-message', { hidden: true, timeout: 30000 });
+  await utils.getPage().waitForSelector('div.theia-notification-message', { hidden: true, timeout: 40000 });
 }
 
 /**
@@ -50,7 +50,7 @@ const _waitForCorrectNumberOfGitChanges = async (numChanges) => {
   await utils.getPage().waitForFunction(
     `document.getElementsByClassName("theia-badge-decorator-sidebar").length > 0` +
     `&& document.getElementsByClassName("theia-badge-decorator-sidebar")[0].innerText === "${numChanges}"`,
-    { timeout: 10000 }
+    { timeout: 50000 }
   );
 }
 
@@ -59,7 +59,7 @@ const _listGitChanges = async () => {
   let names = [];
   for(let i = 0; i < sps.length; i++) {
     const spanName = await (await sps[i].getProperty('textContent')).jsonValue();
-    names.push(spanName);
+    if (spanName !=="Run SPM UI Upgrade Helper"){names.push(spanName);}
   }
   return names.sort();
 }

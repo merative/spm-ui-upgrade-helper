@@ -8,9 +8,6 @@ const generateExpectedFileList = datasetName => {
   for(let i = 0; i < dataset.cssUpdates; i++) {
     changes.push(`has-updates-css-${i}.css`);
   }
-  for(let i = 0; i < dataset.invalidCssFiles; i++) {
-    changes.push(`invalid-css-file-${i}.css`);
-  }
   for(let i = 0; i < dataset.iconUpdates; i++) {
     changes.push(`has-updates-icons-${i}.properties`);
   }
@@ -20,6 +17,9 @@ const generateExpectedFileList = datasetName => {
   for(let i = 0; i < dataset.iconFiles; i++) {
     changes.push("Chevron_Down_Blue30_10px.png");
     changes.push("chevron--down10-on-dark.svg");
+  }
+  for(let i = 0; i < dataset.windowSizeUpdates; i++) {
+    changes.push(`has-updates-${i}.uim`);
   }
   return changes.sort();
 };

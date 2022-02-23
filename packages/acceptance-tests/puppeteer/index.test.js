@@ -2,7 +2,7 @@ const utils = require("./utils");
 const theia = require("./eclipse-theia");
 const generateExpectedFileList = require("../scripts/generate-expected-file-list");
 
-jest.setTimeout(30000);
+jest.setTimeout(70000);
 
 test('puppeteer test 1 (kitchen sink data set)', async () => {
 
@@ -19,10 +19,11 @@ test('puppeteer test 1 (kitchen sink data set)', async () => {
     await theia.runSpmUiUpgradeHelperTool();
     await theia.waitForWorkingMessageToAppear();
     await theia.waitForWorkingMessageToDisappear();
-   // const actual = await theia.getGitChanges(expected.length);
+
+    //  const actual = await theia.getGitChanges(expected.length);
     
     // Assert
-    //expect(actual).toEqual(expected);
+    // expect(actual).toEqual(expected);
 
   } finally {
     await utils.screenshot("error.png");

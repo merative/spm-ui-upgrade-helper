@@ -29,7 +29,7 @@ const release = (shell, option, version) => {
     shell.echo("Building...");
     exec(shell, `yarn install-all`);
     exec(shell, `yarn test`);
-    exec(shell, `echo { "version": "${version}" }>version.json`);
+    exec(shell, `echo { '"'version'"': '"'${version}'"'}>version.json`);
     exec(shell, `yarn build:release`);
     shell.echo("Creating release branch...");
     exec(shell, `git checkout -b v${version}`);
