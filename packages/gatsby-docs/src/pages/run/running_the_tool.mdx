@@ -6,40 +6,47 @@ Complete the following steps to run the tool and implement any required changes.
 
 <InlineNotification>
 
-Warning: Remember that the temporary output folder is wiped when the UI Upgrade Helper runs. Do not point it at your v8 environment.
+Warning:  Do not point the output folder at your version 8 development environment. This temporary folder is wiped each time that the UI Upgrade Helper runs.
 
 </InlineNotification>
 
-
-1. Run `chmod -R 777 <output folder>`so that Docker can interact with the temporary output folder. For example, `c:\temp\upgrade` or `/tmp/upgrade`.
-
+1. Run `chmod -R 777 <output folder>` so that Docker can interact with the temporary output folder. For example, `c:\temp\upgrade` or `/tmp/upgrade`.
 
 2. Run the tool:
- - (Windows ™️)<br />
-    Set INPUT_FOLDER=`<INPUT_FOLDER>`<br />
-    Set OUTPUT_FOLDER=`<OUTPUT_FOLDER>`<br />
-    Set VERSION=`<VERSION>`
-   
-    spm-ui-upgrade-helper.bat 
 
- - (Linux ®️) <br />
-    export INPUT_FOLDER=`<INPUT_FOLDER>`<br />
-    export OUTPUT_FOLDER=`<OUTPUT_FOLDER>`<br />
+  Windows ™️
+
+   ```batch
+   Set INPUT_FOLDER=`<INPUT_FOLDER>`
+   Set OUTPUT_FOLDER=`<OUTPUT_FOLDER>`
+   Set VERSION=`<VERSION>`
+   spm-ui-upgrade-helper.bat
+   ```
+
+  Linux ®️
+
+   ```bash
+    export INPUT_FOLDER=`<INPUT_FOLDER>
+    export OUTPUT_FOLDER=`<OUTPUT_FOLDER>`
     export VERSION=`<VERSION>` 
-    
     sh spm-ui-upgrade-helper.sh
+    ```
 
-    VERSION is typically “latest”.<br />
-    INPUT_FOLDER is the absolute path to the root of your 7.0.11.0 development environment. <br />
-    OUTPUT_FOLDER is the absolute path to your temporary output folder. <br />
+  Where:
 
-3. Open your browser to http://localhost:3000.
+    `VERSION` is typically “latest”.
+
+    `INPUT_FOLDER` is the absolute path to the root of your 7.0.11.0 development environment.
+    
+    `OUTPUT_FOLDER` is the absolute path to your temporary output folder.
+
+3. Open your browser to [http://localhost:3000](http://localhost:3000).
 4. Press `F1` or `cmd + shift + p`.
 5. Type "Run SPM UI Upgrade Helper" and click on the shortcut. The files in `<input folder>` are scanned and the results are placed in `<output folder>`.
 6. Wait a few minutes for the tool to finish.
 7. Click the `Source Control: Git` button on the left sidebar to inspect the changes.
 
-![1. Press F1, 2. Type "Run SPM UI Upgrade Helper", 3. Select the shortcut, 4. Wait for the tool to finish, 5. Click "Source Control: Git" to see the output](../../images/upgrade-helper.gif "Running the UI Upgrade Helper tool")
+   ![1. Press F1, 2. Type "Run SPM UI Upgrade Helper", 3. Select the shortcut, 4. Wait for the tool to finish, 5. Click "Source Control: Git" to see the output](../../images/upgrade-helper.gif "Running the UI Upgrade Helper tool")
 
 8. For more information about Window Size Tool changes, see [Reviewing Window Size Tool changes](../../setup/tools#reviewing-window-size-tool-changes).
 9. When you are happy with the changes, copy the contents of `<output folder>` into your v8 development environment.
@@ -58,5 +65,5 @@ You can save the logs to a file. For example, by using `docker logs spm-ui-upgra
 - Restart Docker Desktop.
 - Delete `<output folder>` and try again.
 - Make sure you have run `chmod -R 777 <output folder>` so that Docker can write to it.
-- Don't refresh http://localhost:3000/#/home/workspace/output, instead go to http://localhost:3000.
-- To kill the Docker container use `docker stop spm-ui-upgrade-helper` followed by `docker rm spm-ui-upgrade-helper`.
+- Don't refresh [http://localhost:3000/#/home/workspace/output](http://localhost:3000/#/home/workspace/output), but go to [http://localhost:3000](http://localhost:3000).
+- To kill the Docker container, use `docker stop spm-ui-upgrade-helper` followed by `docker rm spm-ui-upgrade-helper`.
