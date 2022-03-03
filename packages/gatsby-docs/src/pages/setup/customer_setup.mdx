@@ -5,7 +5,6 @@ title: Setting up the tools
 Complete the following steps to prepare a development environment to run the tools, and to install and configure the required software
 
 <InlineNotification>
-   
    Note: The UI Upgrade helper is designed to upgrade to version 8 only, and not to upgrade to a more recent IBM Social Program Management version 7.
 
 </InlineNotification>
@@ -14,7 +13,7 @@ Assuming a standard IBM Social Program Management version 7 installation, in mos
 
 ## Initial setup
 
-1. Set up a version 7 development environment with your custom changes, which provides the input data for the tool. For example, 7.0.11. 
+1. Set up a version 7 development environment with your custom changes, which provides the input data for the tool. For example, 7.0.11.
 2. Decide on a temporary output folder, where you can review the suggested changes.
 3. Set up a version 8.0.0 or later development environment, where you can manually apply and test the updates.
 4. Install Docker Desktop for [Windows ™️](https://docs.docker.com/docker-for-windows/install/) or [Mac](https://docs.docker.com/docker-for-mac/install/).
@@ -29,14 +28,15 @@ After installation, you must configure Docker Desktop to provide access to certa
 3. Share the Social Program Management version 7 source code folder that contains the input data. Typically this is the the Social Program Management installation folder, which by default is  `C:\IBM\Curam\Development` or `opt/IBM/Curam/Development`.
 4. Share a temporary output folder to write the modified data, which is wiped when the UI Upgrade Helper runs. For example,  `c:\temp\upgrade` or `/tmp/upgrade`.
 
-> Warning: Do not point at your version 8 development environment. This temporary folder is wiped when the UI Upgrade Helper runs.
+<InlineNotification>
+Warning: Do not point the output folder at your version 8 development environment. This temporary folder is wiped each time that the UI Upgrade Helper runs.
+</InlineNotification>
 
 ![1. Open Docker Desktop, 2. Click the Settings button then Resources then File Sharing, 3. Add the folder you want to share with the Docker container](../../images/docker-volume-sharing.png "Docker volume sharing screenshot")
 
 ## Downloading the tool
 
-1. Run `docker login`. 
-
+1. Run `docker login`.
 
 2. Download the batch file or shell script:
 
@@ -46,13 +46,11 @@ After installation, you must configure Docker Desktop to provide access to certa
 
 3. (Linux ®️) Make the shell script executable with `chmod +x spm-ui-upgrade-helper.sh`
 
+4. Download the docker-compose.yml file:
 
-4. Download docker-compose.yml file: 
-
-   (Windows ™️) `curl -L https://raw.githubusercontent.com/IBM/spm-ui-upgrade-helper/main/docker-compose.yml -o docker-compose.yml` 
+   (Windows ™️) `curl -L https://raw.githubusercontent.com/IBM/spm-ui-upgrade-helper/main/docker-compose.yml -o docker-compose.yml`
   
-   (Linux ®️) `curl -L https://raw.githubusercontent.com/IBM/spm-ui-upgrade-helper/main/docker-compose.yml -o docker-compose.yml` 
-
+   (Linux ®️) `curl -L https://raw.githubusercontent.com/IBM/spm-ui-upgrade-helper/main/docker-compose.yml -o docker-compose.yml`
 
 ## Ignoring files
 
