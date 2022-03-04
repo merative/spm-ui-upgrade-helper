@@ -9,8 +9,6 @@ Complete the following steps to prepare a development environment to run the too
 
 </InlineNotification>
 
-Assuming a standard IBM Social Program Management version 7 installation, in most cases you can run the tools without modification. However, if your installation is nonstandard, you might need to ignore certain files and folders.
-
 ## Initial setup
 
 1. Set up a version 7 development environment with your custom changes, which provides the input data for the tool. For example, 7.0.11.
@@ -21,12 +19,12 @@ Assuming a standard IBM Social Program Management version 7 installation, in mos
 
 ## Configuring Docker Desktop
 
-After installation, you must configure Docker Desktop to provide access to certain folders on the local file system:
+After you install Docker Desktop, you must configure it to provide access to input and output folders for the tool on the local file system:
 
 1. Open Docker Desktop.
 2. Click Settings > Resources > File Sharing.
-3. Share the Social Program Management version 7 source code folder that contains the input data. Typically this is the the Social Program Management installation folder, which by default is  `C:\IBM\Curam\Development` or `opt/IBM/Curam/Development`.
-4. Share a temporary output folder to write the modified data, which is wiped when the UI Upgrade Helper runs. For example,  `c:\temp\upgrade` or `/tmp/upgrade`.
+3. Share the Social Program Management version 7 source code folder that contains the input data. Typically this is the Social Program Management installation folder, which by default is  `C:\IBM\Curam\Development` or `opt/IBM/Curam/Development`.
+4. Share a temporary output folder to write the modified data. For example,  `c:\temp\upgrade` or `/tmp/upgrade`.
 
 <InlineNotification>
 Warning: Do not point the output folder at your version 8 development environment. This temporary folder is wiped each time that the UI Upgrade Helper runs.
@@ -34,25 +32,9 @@ Warning: Do not point the output folder at your version 8 development environmen
 
 ![1. Open Docker Desktop, 2. Click the Settings button then Resources then File Sharing, 3. Add the folder you want to share with the Docker container](../../images/docker-volume-sharing.png "Docker volume sharing screenshot")
 
-## Downloading the tool
-
-1. Run `docker login`.
-
-2. Download the batch file or shell script:
-
-   (Windows ™️) `curl -L https://raw.githubusercontent.com/IBM/spm-ui-upgrade-helper/main/spm-ui-upgrade-helper.bat -o spm-ui-upgrade-helper.bat`
-
-   (Linux ®️) `curl -L https://raw.githubusercontent.com/IBM/spm-ui-upgrade-helper/main/spm-ui-upgrade-helper.sh -o spm-ui-upgrade-helper.sh`
-
-3. (Linux ®️) Make the shell script executable with `chmod +x spm-ui-upgrade-helper.sh`
-
-4. Download the docker-compose.yml file:
-
-   (Windows ™️) `curl -L https://raw.githubusercontent.com/IBM/spm-ui-upgrade-helper/main/docker-compose.yml -o docker-compose.yml`
-  
-   (Linux ®️) `curl -L https://raw.githubusercontent.com/IBM/spm-ui-upgrade-helper/main/docker-compose.yml -o docker-compose.yml`
-
 ## Ignoring files
+
+Assuming a standard IBM Social Program Management version 7 installation, in most cases you can run the tools without modification. However, if your installation is nonstandard, you might need to ignore certain files and folders.
 
 You can ignore any files that you do not want to be affected by the tool by creating a file called `.spm-uiuh-ignore` that contains folders or patterns to ignore.
 
@@ -75,9 +57,7 @@ An example .spm-uiuh-ignore file is shown.
 
 ## The `.spm-uiuh-config` file
 
-You can override the default configuration by creating a `.spm-uiuh-config` file in the root of your 7.0.11.0 development environment.
-
-This can be used to customize the tools.
+If you need to further customize the tool for your specific environment, you can override some of the default configuration by creating a `.spm-uiuh-config` file in the root of your 7.0.11.0 development environment.
 
 The file contents should be JSON and must match the structure of the [default configuration](https://github.com/IBM/spm-ui-upgrade-helper/blob/main/packages/shared-utils/src/config.js). You only need to include the items you wish to override.
 
