@@ -1,18 +1,42 @@
 ---
-title: Running the tools
+title: Running the tool
 ---
 
-Complete the following steps to run the tool and implement any required changes.
+Complete the following steps to configure and run the tool and to review and implement any required changes.
 
-<InlineNotification>
+1. Run `docker login`.
 
-Warning:  Do not point the output folder at your version 8 development environment. This temporary folder is wiped each time that the UI Upgrade Helper runs.
+2. Download the appropriate batch file or shell script for your environment:
 
-</InlineNotification>
+   Windows ™️
 
-1. Run `chmod -R 777 <output_folder>` so that Docker can interact with the temporary output folder. For example, `C:\temp\upgrade` or `/tmp/upgrade`.
+   `curl -L https://raw.githubusercontent.com/IBM/spm-ui-upgrade-helper/main/spm-ui-upgrade-helper.bat -o spm-ui-upgrade-helper.bat`
 
-2. Run the tool:
+   Linux ®️
+   
+   `curl -L https://raw.githubusercontent.com/IBM/spm-ui-upgrade-helper/main/spm-ui-upgrade-helper.sh -o spm-ui-upgrade-helper.sh`
+
+3. (Linux®️ only) Make the shell script executable with `chmod +x spm-ui-upgrade-helper.sh`
+
+4. Download the docker-compose.yml file:
+
+   Windows ™️
+
+   `curl -L https://raw.githubusercontent.com/IBM/spm-ui-upgrade-helper/main/docker-compose.yml -o docker-compose.yml`
+  
+   Linux ®️
+   
+   `curl -L https://raw.githubusercontent.com/IBM/spm-ui-upgrade-helper/main/docker-compose.yml -o docker-compose.yml`
+
+5. Run `chmod -R 777 <output_folder>` so that Docker can interact with the temporary output folder. For example, `C:\temp\upgrade` or `/tmp/upgrade`.
+
+6. Set the required variables and run the batch file or shell script:
+
+   <InlineNotification>
+
+   Warning:  Do not point the output folder at your version 8 development environment. This temporary folder is wiped each time that the UI Upgrade Helper runs.
+
+   </InlineNotification>
 
   Windows ™️
 
@@ -25,31 +49,31 @@ Warning:  Do not point the output folder at your version 8 development environme
 
   Linux ®️
 
-   ```bash
-    export INPUT_FOLDER=`<input_folder>
-    export OUTPUT_FOLDER=`<output_folder>`
-    export VERSION=`<version>` 
-    sh spm-ui-upgrade-helper.sh
-    ```
+  ```bash
+  export INPUT_FOLDER=`<input_folder>
+  export OUTPUT_FOLDER=`<output_folder>`
+  export VERSION=`<version>` 
+  sh spm-ui-upgrade-helper.sh
+  ```
 
   Where:
 
-    `VERSION` is typically “latest”.
+   - `VERSION` is the version of the tool on DockerHub, typically “latest”.
+   - `INPUT_FOLDER` is the absolute path to the input files for the tool. Typically this is the Social Program Management installation folder, which by default is `C:\IBM\Curam\Development` or `opt/IBM/Curam/Development`.
+   - `OUTPUT_FOLDER` is the absolute path to your temporary output folder. For example, `C:\temp\upgrade` or `/tmp/upgrade`.
 
-    `INPUT_FOLDER` is the absolute path to the root of your 7.0.11.0 development environment. Typically this is the the Social Program Management installation folder, which by default is `C:\IBM\Curam\Development` or `opt/IBM/Curam/Development`.
-    
-    `OUTPUT_FOLDER` is the absolute path to your temporary output folder. For example, `C:\temp\upgrade` or `/tmp/upgrade`.
+## Run the tool and review the changes
 
-3. Open your browser to [http://localhost:3000](http://localhost:3000).
+1. Open your browser to [http://localhost:3000/#/home/workspace](http://localhost:3000/#/home/workspace).
 4. Press the F1 key or Cmd + Shift + p.
-5. Type "Run SPM UI Upgrade Helper" and click on the shortcut. The files in the specified input folder are scanned and the results are placed in the specified output folder.
+5. Type "Run SPM UI Upgrade Helper" and click on the shortcut. The files in the `input` folder are scanned and the results are placed in the `output` folder.
 6. Wait a few minutes for the tool to finish.
 7. Click the `Source Control: Git` button on the left sidebar to inspect the changes.
 
    ![1. Press F1, 2. Type "Run SPM UI Upgrade Helper", 3. Select the shortcut, 4. Wait for the tool to finish, 5. Click "Source Control: Git" to see the output](../../images/upgrade-helper.gif "Running the UI Upgrade Helper tool")
 
 8. For more information about Window Size Tool changes, see [Reviewing Window Size Tool changes](../../setup/tools#reviewing-window-size-tool-changes).
-9. When you are happy with the changes, copy the contents of the output folder into your v8 development environment.
+9.  When you are happy with the changes, copy the contents of the `output` folder into your v8 development environment.
 10. Build and test v8.
 
 ## Errors
@@ -60,10 +84,10 @@ You can save the logs to a file. For example, by using `docker logs spm-ui-upgra
 
 ## Troubleshooting
 
-- Make sure you are logged in to Docker (run `docker login`.)
-- Make sure folders are shared in Docker Desktop.
+- Ensure that you are logged in to Docker, (run `docker login`.)
+- Ensure that the correct folders are shared in Docker Desktop.
 - Restart Docker Desktop.
-- Delete `<output folder>` and try again.
-- Make sure you have run `chmod -R 777 <output folder>` so that Docker can write to it.
-- Don't refresh [http://localhost:3000/#/home/workspace/output](http://localhost:3000/#/home/workspace/output), but go to [http://localhost:3000](http://localhost:3000).
+- Delete  the `<output_folder>` and try again.
+- Make sure you have run `chmod -R 777 <output_folder>` so that Docker can write to it.
+- Don't refresh [http://localhost:3000/#/home/workspace/output](http://localhost:3000/#/home/workspace/output), but go to [http://localhost:3000/#/home/workspace](http://localhost:3000/#/home/workspace).
 - To kill the Docker container, use `docker stop spm-ui-upgrade-helper` followed by `docker rm spm-ui-upgrade-helper`.
