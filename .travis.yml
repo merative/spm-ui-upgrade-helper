@@ -8,25 +8,14 @@ env:
   - VER=`node -pe "require('./package.json')['version']"`
 
 
-stages:
-  - tests
-  - documentation
-
-# JOB CONFIGURATION
-validate_common: &validate_common
-  script:
-    - yarn install-all
-    - yarn test
-validate_documentation: &validate_documentation
-  script:
-    - cd packages/gatsby-docs
-    - yarn gatsby:conditional-deploy
-
-# EXTRA BUILD JOBS
 jobs:
-  include:
-    - stage: documentation 
-      if: branch =~ ^main(_\S.\S.\S)?$|^release/v.*$|^feature/.*fluxy$ AND type = push 
-      <<: *validate_documentation
-    - stage: tests
-      <<: *validate_common
+   include:
+     - name: "Tests"
+       script:
+         - yarn install-all
+         - yarn test
+     - name: "Docs"
+       script:
+         - cd packages/gatsby-docs
+         - yarn install
+         - gatsby-docs && yarn gatsby:conditional-deploy
