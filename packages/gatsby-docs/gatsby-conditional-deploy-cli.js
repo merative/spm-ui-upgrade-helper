@@ -13,6 +13,7 @@ program
 const shell = program.opts().dryRun ? utils.dummyShells.dryRunShellJs : shelljs;
 
 const travisBranch = process.env.TRAVIS_BRANCH;
+console.log("we are on branch ",travisBranch);
 if(travisBranch !== "main") {
   console.info("Not checking for documentation changes since branch was not main");
   return 0;
