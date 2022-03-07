@@ -7,6 +7,9 @@ dist: xenial
 env:
   - VER=`node -pe "require('./package.json')['version']"`
 
+script:
+  - yarn install-all
+  - echo "test"
 before_install:
   - yarn install-all
 
@@ -16,17 +19,17 @@ stages:
 
 jobs:
    include:
-  - stage: tests
-      script:
-        - yarn install-all
-        - yarn test
+      - stage: tests
+          script:
+            - yarn install-all
+            - yarn test
   
-  - stage: documentation
-      if: branch = main AND type = cron
-      install:
-        - yarn install-all
-        - npm ci
-      script:
-        - cd packages/gatsby-docs && yarn gatsby:conditional-deploy
+      - stage: documentation
+          if: branch = main AND type = cron
+          install:
+            - yarn install-all
+            - npm ci
+          script:
+            - cd packages/gatsby-docs && yarn gatsby:conditional-deploy
 
   
