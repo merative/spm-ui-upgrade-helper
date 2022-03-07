@@ -8,17 +8,17 @@ env:
   - VER=`node -pe "require('./package.json')['version']"`
 
 jobs:
-  include:
-    - name: "Tests"
+  - stage: Tests
       script:
         - yarn install-all
         - yarn test
-    - name: "Docs"
-      script:
+  
+    - stage: spm_v8_tab_test_cpts
+      if: branch = main AND type = cron
+      install:
         - yarn install-all
+        - npm ci
+      script:
         - cd packages/gatsby-docs && yarn gatsby:conditional-deploy
-    # - name: "DockerImage"
-    #   script:
-    #     - yarn install-all
-    #     - yarn build:release
-    #     # - Puppeteer tests go here
+
+  
