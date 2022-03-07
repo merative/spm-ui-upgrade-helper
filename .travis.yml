@@ -19,13 +19,14 @@ validate_common: &validate_common
     - yarn test
 validate_documentation: &validate_documentation
   script:
-    - cd packages/gatsby-docs && yarn gatsby:conditional-deploy
+    - cd packages/gatsby-docs
+    - yarn gatsby:conditional-deploy
 
 # EXTRA BUILD JOBS
 jobs:
   include:
+      if: branch =~ ^main(_\S.\S.\S)?$|^release/v.*$|^feature/.*fluxy$ AND type = push
+    - stage: documentation  
+      <<: *validate_documentation
     - stage: tests
       <<: *validate_common
-    - stage: documentation
-      if: branch =~ ^main(_\S.\S.\S)?$|^release/v.*$|^feature/.*fluxy$ AND type = push
-      <<: *validate_documentation
