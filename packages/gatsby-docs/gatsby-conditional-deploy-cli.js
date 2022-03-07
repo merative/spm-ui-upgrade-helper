@@ -14,8 +14,9 @@ const shell = program.opts().dryRun ? utils.dummyShells.dryRunShellJs : shelljs;
 
 const travisBranch = process.env.TRAVIS_BRANCH;
 console.log("we are on branch ",travisBranch);
-console.log("test which branch we are using and if we have changes");
+
 if(travisBranch !== "main") {
+  console.info("Not checking for documentation changes since branch was not main");
   return 0;
 }
 
@@ -30,5 +31,4 @@ if(travisBranch !== "main") {
 const mergeBase = shell.exec(`git merge-base HEAD^1 HEAD^2`).stdout.trimEnd();
 const changes = shell.exec(`git diff --name-only ${mergeBase} HEAD^2`).stdout.split("\n");
 
-console.info("Not checking for documentation changes since branch was not main", changes);
 return gatsbyConditionalDeploy(shell, changes);
