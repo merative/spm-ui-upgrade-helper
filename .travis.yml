@@ -6,6 +6,10 @@ dist: xenial
 
 env:
   - VER=`node -pe "require('./package.json')['version']"`
+
+before_install:
+  - yarn install-all
+
 stages:
   - tests
   - documentation
@@ -17,7 +21,7 @@ jobs:
         - yarn install-all
         - yarn test
   
-    - stage: documentation
+  - stage: documentation
       if: branch = main AND type = cron
       install:
         - yarn install-all
