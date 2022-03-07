@@ -25,8 +25,8 @@ validate_documentation: &validate_documentation
 # EXTRA BUILD JOBS
 jobs:
   include:
-      if: branch =~ ^main(_\S.\S.\S)?$|^release/v.*$|^feature/.*fluxy$ AND type = push
-    - stage: documentation  
+    - stage: documentation 
+      if: branch =~ ^main(_\S.\S.\S)?$|^release/v.*$|^feature/.*fluxy$ AND type = push 
       <<: *validate_documentation
     - stage: tests
       <<: *validate_common
