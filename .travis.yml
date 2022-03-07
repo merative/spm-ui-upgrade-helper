@@ -19,7 +19,6 @@ validate_common: &validate_common
     - yarn test
 validate_documentation: &validate_documentation
   script:
-    - yarn test
     - cd packages/gatsby-docs && yarn gatsby:conditional-deploy
 
 # EXTRA BUILD JOBS
