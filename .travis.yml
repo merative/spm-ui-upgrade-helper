@@ -6,14 +6,17 @@ dist: xenial
 
 env:
   - VER=`node -pe "require('./package.json')['version']"`
+stages:
+  - tests
+  - documentation
 
 jobs:
-  - stage: Tests
+  - stage: tests
       script:
         - yarn install-all
         - yarn test
   
-    - stage: spm_v8_tab_test_cpts
+    - stage: documentation
       if: branch = main AND type = cron
       install:
         - yarn install-all
