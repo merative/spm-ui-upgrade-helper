@@ -6,6 +6,8 @@ dist: xenial
 
 env:
   - VER=`node -pe "require('./package.json')['version']"`
+
+
 jobs:
   include:
     - name: "Tests"
