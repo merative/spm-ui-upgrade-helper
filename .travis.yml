@@ -14,5 +14,5 @@ jobs:
         - yarn test
     - name: "Docs"
       script:
-        - yarn install-all
-        - cd packages/gatsby-docs && yarn gatsby:conditional-deploy
+        - cd packages/gatsby-docs && yarn install-all
+        - yarn gatsby:conditional-deploy
