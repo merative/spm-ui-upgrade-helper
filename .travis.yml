@@ -15,6 +15,7 @@ jobs:
         - yarn install-all
         - yarn test
     - name: "Docs"
+      if: branch = main
       script:
         - cd packages/gatsby-docs && yarn install-all
         - yarn gatsby:conditional-deploy
