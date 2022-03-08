@@ -7,6 +7,7 @@ dist: xenial
 env:
   - VER=`node -pe "require('./package.json')['version']"`
 
+
 jobs:
   include:
     - name: "Tests"
@@ -14,6 +15,8 @@ jobs:
         - yarn install-all
         - yarn test
     - name: "Docs"
+      if: branch = master    
       script:
-        - yarn install-all
-        - cd packages/gatsby-docs && yarn gatsby:conditional-deploy
+        - cd packages/gatsby-docs && yarn install
+        - yarn gatsby:conditional-deploy
+     
