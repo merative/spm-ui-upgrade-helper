@@ -7,16 +7,13 @@ dist: xenial
 env:
   - VER=`node -pe "require('./package.json')['version']"`
 
+script:
+  - yarn install-all
+  - yarn test
 
-jobs:
-  include:
-    - name: "Tests"
-      script:
-        - yarn install-all
-        - yarn test
-    - name: "Docs"
-      if: branch = master    
-      script:
-        - cd packages/gatsby-docs && yarn install
-        - yarn gatsby:conditional-deploy
-     
+deploy:
+  - provider: script
+    skip_cleanup: true
+    script: cd packages/gatsby-docs && yarn install && yarn gatsby:conditional-deploy
+    on:
+      branch: feature/travis-3
