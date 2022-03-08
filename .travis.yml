@@ -13,7 +13,9 @@ script:
 
 deploy:
   - provider: script
-    script: cd packages/gatsby-docs && yarn install && yarn gatsby:conditional-deploy
+    skip_cleanup: true
+    script: 
+      - cd packages/gatsby-docs && yarn gatsby:conditional-deploy
     on:
       branch: main
 
