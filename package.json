@@ -26,7 +26,8 @@
     "tar": "6.1.9",
     "json-schema": "0.4.0",
     "ansi-regex": "5.0.1",
-    "node-fetch":"2.6.7"
+    "node-fetch": "2.6.7",
+    "minimist": "1.2.6"
   },
   "devDependencies": {
     "shelljs": "^0.8.5"
