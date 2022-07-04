@@ -5,15 +5,15 @@ title: Setting up the tools
 Complete the following steps to prepare a development environment to run the tools, and to install and configure the required software
 
 <InlineNotification>
-   Note: The UI Upgrade helper is designed to upgrade from Social Program Management version 7 to version 8 only, and not to upgrade from version 7 to a more recent version 7.
+   Note: The UI Upgrade helper is designed to upgrade from Social Program Management version 7 to version 8 only, and not to upgrade to a more recent version 7.
 
 </InlineNotification>
 
 ## Initial setup
 
-1. Set up a version 7 development environment with your custom changes, which provides the input data for the tool.
+1. Set up a v7 development environment with your custom changes, which provides the input data for the tool.
 2. Decide on a temporary output folder, where you can review the suggested changes.
-3. Set up a version 8.0.0 or later development environment, where you can manually apply and test the updates.
+3. Set up a v8.0.0 or later development environment, where you can manually apply and test the updates.
 4. Install Docker Desktop for [Windows ™️](https://docs.docker.com/docker-for-windows/install/) or [Mac](https://docs.docker.com/docker-for-mac/install/).
 5. Install [curl](https://curl.se/download.html).
 
@@ -23,18 +23,18 @@ After you install Docker Desktop, you must configure it to provide access to inp
 
 1. Open Docker Desktop.
 2. Click Settings > Resources > File Sharing.
-3. Share the Social Program Management version 7 source code folder that contains the input data. Typically this is the Social Program Management installation folder, which by default is  `C:\IBM\Curam\Development` or `opt/IBM/Curam/Development`.
+3. Share the Social Program Management v7 source code folder that contains the input data. Typically this is the Social Program Management installation folder, which by default is  `C:\IBM\Curam\Development` or `opt/IBM/Curam/Development`.
 4. Share a temporary output folder to write the modified data. For example,  `c:\temp\upgrade` or `/tmp/upgrade`.
 
 <InlineNotification>
-Warning: Do not point the output folder at your version 8 development environment. This temporary folder is wiped each time that the UI Upgrade Helper runs.
+Warning: Do not point the output folder at your v8 development environment. This temporary folder is wiped each time that the UI Upgrade Helper runs.
 </InlineNotification>
 
 ![1. Open Docker Desktop, 2. Click the Settings button then Resources then File Sharing, 3. Add the folder you want to share with the Docker container](../../images/docker-volume-sharing.png "Docker volume sharing screenshot")
 
 ## Ignoring files
 
-Assuming a standard IBM Social Program Management version 7 installation, in most cases you can run the tools without modification. However, if your installation is nonstandard, you might need to ignore certain files and folders.
+Assuming a standard IBM Social Program Management v7 installation, in most cases you can run the tools without modification. However, if your installation is nonstandard, you might need to ignore certain files and folders.
 
 You can ignore any files that you do not want to be affected by the tool by creating a file called `.spm-uiuh-ignore` that contains folders or patterns to ignore.
 
