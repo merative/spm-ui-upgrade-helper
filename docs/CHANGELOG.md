@@ -13,9 +13,9 @@ Temporary removal of the initial Window Sizing Tool.
 
 ## More information 
 
-For information about IBM Cúram Social Program Management, visit the [IBM Documentation](https://www.ibm.com/docs/en/spm/8.0.1).
+For information about Cúram Social Program Management, visit the [IBM Documentation](https://www.ibm.com/docs/en/spm/8.0.2).
 
-For information about server-side changes, see the [IBM Cúram Social Program Management release notes](https://www-01.ibm.com/support/docview.wss?uid=swg27037963) for your version.
+For information about server-side changes, see the [Cúram Social Program Management release notes](https://www-01.ibm.com/support/docview.wss?uid=swg27037963) for your version.
 
 ## 1.0.3 ![SPM 8.0.0.0](https://img.shields.io/badge/-SPM_8.0.0.0-green) ![SPM 8.0.1](https://img.shields.io/badge/-SPM_8.0.1-green)
 ### Added
