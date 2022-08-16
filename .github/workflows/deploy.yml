@@ -14,13 +14,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 12
+      - name: Change directory
+        path: cd ./packages/gatsby-docs
       - name: Install dependencies
-        run: | 
-          yarn install-all
-      - name: change directory
-        run: |        
-      - name: cd ./packages/gatsby-docs
         run: |
+          yarn install-all
           yarn gatsby:build
           echo Site built and ready to deploy
       - name: Deploy to Github packages
