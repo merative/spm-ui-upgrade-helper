@@ -20,6 +20,7 @@ jobs:
       - name: Install dependencies
         run: |
           yarn install-all
+          yarn global add gatsby-cli
           yarn gatsby:build
           echo Site built and ready to deploy
       - name: Deploy to Github packages
