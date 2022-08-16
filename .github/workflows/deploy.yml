@@ -15,7 +15,8 @@ jobs:
         with:
           node-version: 12
       - name: Change directory
-        path: cd ./packages/gatsby-docs
+        run: |
+          cd ./packages/gatsby-docs
       - name: Install dependencies
         run: |
           yarn install-all
