@@ -14,14 +14,13 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 15.0.1
-      - name: Change directory
-        run: |
-          cd ./packages/gatsby-docs
+     - name: Change directory
+        path: cd ./packages/gatsby-docs
       - name: Install dependencies
         run: |
-          yarn install
+          yarn install-all
           yarn gatsby:build
-          echo Site built and ready to deploy
+          echo Site built and ready to deploy!
       - name: Deploy to Github packages
         # only deploy when pushing to main
         if: ${{(github.event_name == 'push' || github.event_name == 'workflow_dispatch' ) && github.ref_name == 'main'}}
