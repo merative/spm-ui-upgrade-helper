@@ -10,7 +10,7 @@
       - name: Build site
         run: |
           yarn gatsby:build
-          echo Site built and ready to deploy!
+          echo Site built and ready to deploy
       - name: Deploy to Github packages
         # only deploy when pushing to main
         if: ${{(github.event_name == 'push' || github.event_name == 'workflow_dispatch' ) && github.ref_name == 'main'}}
