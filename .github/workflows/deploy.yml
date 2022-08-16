@@ -20,7 +20,7 @@ jobs:
           yarn install-all
       - name: Build site
         run: |
-          yarn run build --prefix-paths
+          yarn build --prefix-paths
           echo Site built and ready to deploy!
       - name: Deploy to Github packages
         # only deploy when pushing to main
