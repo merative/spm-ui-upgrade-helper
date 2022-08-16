@@ -18,12 +18,15 @@ jobs:
       - name: Install dependencies
         run: | 
           yarn install-all
-          yarn test
+      - name: Build site
+        run: |
+          yarn run build --prefix-paths
+          echo Site built and ready to deploy!
       - name: Deploy to Github packages
         # only deploy when pushing to main
         if: ${{(github.event_name == 'push' || github.event_name == 'workflow_dispatch' ) && github.ref_name == 'main'}}
         run: |
-          cd ./public
+          cd ./packages/gatsby-docs
           git init
           git config user.name ${{ github.actor }}
           git config user.email ${{ github.actor }}@users.noreply.github.com
