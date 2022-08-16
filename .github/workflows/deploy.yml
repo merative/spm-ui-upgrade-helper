@@ -1,4 +1,14 @@
-      - name: checkout code
+name: Deploy
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:      
+    - name: checkout code
         uses: actions/checkout@v3
       - name: Install Node.js
         uses: actions/setup-node@v3
@@ -7,7 +17,9 @@
       - name: Install dependencies
         run: | 
           yarn install-all
-      - name: Build site
+      - name: change directory
+        run: |        
+      - name: cd ./packages/gatsby-docs
         run: |
           yarn gatsby:build
           echo Site built and ready to deploy
