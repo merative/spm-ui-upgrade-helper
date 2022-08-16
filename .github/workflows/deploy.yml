@@ -1,11 +1,9 @@
 name: Deploy
-uses: srepollock/gatsby-gh-pages-action@v2.2.0
-
 on: 
-push:
-  branches: [main]
-pull_request:
-workflow_dispatch:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
 
 jobs:
   build-and-deploy:
