@@ -21,7 +21,7 @@ jobs:
           yarn run gatsby --version
       - name: Build Gatsby docs
         run: |
-          yarn gatsby:build
+          yarn gatsby build
           echo Site built and ready to deploy!
       - name: Deploy to Github packages
         # only deploy when pushing to main
