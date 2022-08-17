@@ -17,6 +17,7 @@ jobs:
       - name: Install dependencies
         run: |
           pwd
+          yarn install
           cd packages/gatsby-docs
           pwd
           yarn install
