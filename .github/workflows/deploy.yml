@@ -17,10 +17,10 @@ jobs:
       - name: Install dependencies
         run: |
           cd ./packages/gatsby-docs
-          yarn install
+          yarn install-all
       - name: Build and deploy Gatsby
         run: |
-          npm run build
+          yarn test
           echo Site built and ready to deploy!
       - name: Deploy to Github packages
         # only deploy when pushing to main
