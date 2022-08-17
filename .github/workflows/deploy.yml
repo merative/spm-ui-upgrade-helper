@@ -16,12 +16,11 @@ jobs:
           node-version: 15.0.1
       - name: Install dependencies
         run: |
-          cd packages/gatsby-docs
           yarn install
           yarn run gatsby --version
       - name: Build Gatsby docs
         run: |
-          yarn build
+          yarn build:dev --prefix-paths
           echo Site built and ready to deploy!
       - name: Deploy to Github packages
         # only deploy when pushing to main
