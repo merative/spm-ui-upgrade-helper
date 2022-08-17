@@ -16,9 +16,11 @@ jobs:
           node-version: 15.0.1
       - name: Install dependencies
         run: |
+          pwd
           cd packages/gatsby-docs
-          ls |
+          pwd
           yarn install
+          yarn test
       - name: Build Gatsby docs
         run: |
           yarn gatsby:build
