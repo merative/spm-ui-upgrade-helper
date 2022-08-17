@@ -20,7 +20,7 @@ jobs:
           cd packages/gatsby-docs
           pwd
           yarn install
-          yarn test
+          gatsby --version
       - name: Build Gatsby docs
         run: |
           yarn gatsby:build
