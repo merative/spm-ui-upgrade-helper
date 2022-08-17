@@ -17,7 +17,7 @@ jobs:
       - name: Install dependencies
         run: |
           cd ./packages/gatsby-docs
-          yarn install-all
+          yarn install
       - name: Build and deploy Gatsby
         run: |
           yarn test
