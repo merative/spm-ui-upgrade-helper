@@ -17,14 +17,13 @@ jobs:
       - name: Install dependencies
         run: |
           pwd
-          yarn build:dev
           cd packages/gatsby-docs
           pwd
           yarn install
           yarn run gatsby --version
       - name: Build Gatsby docs
         run: |
-          yarn gatsby:build
+          yarn build:dev --prefix-paths
           echo Site built and ready to deploy!
       - name: Deploy to Github packages
         # only deploy when pushing to main
