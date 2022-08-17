@@ -18,7 +18,9 @@ jobs:
         run: |
           cd ./packages/gatsby-docs
           yarn install
-          yarn run build
+      - name: Build and deploy Gatsby
+        run: |
+          npm run build
           echo Site built and ready to deploy!
       - name: Deploy to Github packages
         # only deploy when pushing to main
