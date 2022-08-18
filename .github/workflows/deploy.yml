@@ -28,11 +28,13 @@ jobs:
         if: ${{(github.event_name == 'push' || github.event_name == 'workflow_dispatch' ) && github.ref_name == 'main'}}
         run: |
           cd packages/gatsby-docs/public
+          git config --global init.defaultBranch main
           pwd
           set -v
           git init
           git config user.name ${{ github.actor }}
           git config user.email ${{ github.actor }}@users.noreply.github.com
+          git branch -b
           git add .
           echo 'Add completed'.
           git commit -m "Deploy commit: ${{ github.sha }}"
