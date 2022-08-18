@@ -37,5 +37,6 @@ jobs:
           git add .
           echo Add completed
           git commit -m "Deploy commit: ${{ github.sha }}"
+          echo Commit completed
           git push -f https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git main:gh-pages
           echo 'Finished deploying the site.'
