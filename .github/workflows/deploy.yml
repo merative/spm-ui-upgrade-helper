@@ -27,7 +27,8 @@ jobs:
         # only deploy when pushing to main
         if: ${{(github.event_name == 'push' || github.event_name == 'workflow_dispatch' ) && github.ref_name == 'main'}}
         run: |
-          cd ./public
+          cd packages/gatsby-docs/public
+          pwd
           git init
           git config user.name ${{ github.actor }}
           git config user.email ${{ github.actor }}@users.noreply.github.com
