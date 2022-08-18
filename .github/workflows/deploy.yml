@@ -34,7 +34,6 @@ jobs:
           git init
           git config user.name ${{ github.actor }}
           git config user.email ${{ github.actor }}@users.noreply.github.com
-          git branch -b
           git add .
           echo 'Add completed'.
           git commit -m "Deploy commit: ${{ github.sha }}"
