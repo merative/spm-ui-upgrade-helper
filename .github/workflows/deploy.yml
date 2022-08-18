@@ -35,8 +35,8 @@ jobs:
           git config user.email ${{ github.actor }}@users.noreply.github.com
           git config --global init.defaultBranch main
           git add .
-          echo Add completed
+          echo 'Add completed'.
           git commit -m "Deploy commit: ${{ github.sha }}"
-          echo Commit completed
+          echo 'Commit completed.'
           git push -f https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git main:gh-pages
           echo 'Finished deploying the site.'
