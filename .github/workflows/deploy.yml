@@ -29,7 +29,7 @@ jobs:
         # only deploy when pushing to main
         if: ${{(github.event_name == 'push' || github.event_name == 'workflow_dispatch' ) && github.ref_name == 'main'}}
         run: |
-          cd packages/gatsby-docs/public
+          cd packages/gatsby-docs
           git config --global init.defaultBranch main
           pwd
           set -v
