@@ -19,7 +19,7 @@ jobs:
       - name: Install dependencies
         run: |
           pwd
-          cd packages/gatsby-docs/public
+          cd packages/gatsby-docs
           pwd
           yarn install
           yarn run gatsby --version
@@ -29,7 +29,7 @@ jobs:
         # only deploy when pushing to main
         if: ${{(github.event_name == 'push' || github.event_name == 'workflow_dispatch' ) && github.ref_name == 'main'}}
         run: |
-          cd packages/gatsby-docs
+          cd packages/gatsby-docs/public
           git config --global init.defaultBranch main
           pwd
           set -v
