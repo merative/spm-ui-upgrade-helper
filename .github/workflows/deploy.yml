@@ -23,7 +23,7 @@ jobs:
           pwd
           yarn install
           yarn run gatsby --version
-          yarn gatsby:build
+          yarn gatsby build --prefix-paths
           echo Site built and ready to deploy!
       - name: Deploy to Github packages
         # only deploy when pushing to main
