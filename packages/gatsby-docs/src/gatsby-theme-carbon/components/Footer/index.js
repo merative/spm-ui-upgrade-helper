@@ -5,6 +5,8 @@ const Content = ({ buildTime }) => (
   <>
     <p>
       Last built: {buildTime}
+      <br />
+      &copy; Merative US L.P. 2021, 2022
     </p>
   </>
 );
