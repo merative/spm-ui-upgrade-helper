@@ -7,7 +7,7 @@ import {
 const Content = ({ buildTime }) => (
   <>
     <p>
-      Docs last updated: {buildTime}
+      Last built: {buildTime}
       <br />
       &copy; Merative US L.P. 2021, 2023
       <br />
