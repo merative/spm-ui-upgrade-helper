@@ -4,15 +4,15 @@ import ResourceLinks from 'gatsby-theme-carbon/src/components/LeftNav/ResourceLi
 const links = [
   {
     title: 'Github',
-    href: 'https://github.com/IBM/spm-ui-upgrade-helper',
+    href: 'https://github.com/merative/spm-ui-upgrade-helper',
   },
   {
-    title: 'IBM Documentation',
-    href: 'https://www.ibm.com/docs/en/spm/8.0.1?topic=product-overview',
+    title: 'Merative documentation',
+    href: 'https://curam-spm-devops.github.io/wh-support-docs/spm/pdf-documentation',
   },
  {
    title: 'Changelog',
-   href: 'https://github.com/IBM/spm-ui-upgrade-helper/releases',
+   href: 'https://github.com/merative/spm-ui-upgrade-helper/releases',
  }
 ];
 

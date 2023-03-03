@@ -17,3 +17,6 @@
 - title: Feedback
   pages:
     - path: /contact/contact_us
+- title: Notices
+  pages:
+    - path: /notices/
