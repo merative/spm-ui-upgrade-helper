@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: "spm-ui-upgrade-helper",
+    title: 'Merative SPM UI Upgrade Helper',
     description: "Merative SPM UI Upgrade Helper",
     keywords: "spm, ui, upgrade, helper, v8"
   },
