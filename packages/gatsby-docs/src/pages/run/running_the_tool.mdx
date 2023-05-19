@@ -18,50 +18,23 @@ Complete the following steps to install, configure, and run the tool and to revi
    `docker load <./spm-ui-upgrade-helper.tar`
 
    Linux ®️
-   
+
    `docker load <./spm-ui-upgrade-helper.tar`
 
 3. Open Docker Desktop and check for the following images.
 
-4. Download the appropriate batch file or shell script for your environment:
+4. Download the docker-compose.yml file:
 
    Windows ™️
 
-   `curl -L https://raw.githubusercontent.com/IBM/spm-ui-upgrade-helper/main/spm-ui-upgrade-helper.bat -o spm-ui-upgrade-helper.bat`
-
-   Linux ®️
-
-   `curl -L https://raw.githubusercontent.com/IBM/spm-ui-upgrade-helper/main/spm-ui-upgrade-helper.sh -o spm-ui-upgrade-helper.sh`
-
-5. (Linux®️ only) Make the shell script executable with `chmod +x spm-ui-upgrade-helper.sh`
-
-6. Download the docker-compose.yml file:
-
-   Windows ™️
-
-   `curl -L curl -L https://raw.githubusercontent.com/merative/spm-ui-upgrade-helper/main/docker-compose.yml -o docker-compose.yml -o docker-compose.yml`
+   `curl -L https://raw.githubusercontent.com/merative/spm-ui-upgrade-helper/main/docker-compose.yml -o docker-compose.yml -o docker-compose.yml`
   
    Linux ®️
 
-   `curl -L curl -L https://raw.githubusercontent.com/merative/spm-ui-upgrade-helper/main/docker-compose.yml -o docker-compose.yml -o docker-compose.yml`
+   `curl -L https://raw.githubusercontent.com/merative/spm-ui-upgrade-helper/main/docker-compose.yml -o docker-compose.yml -o docker-compose.yml`
 
-7. Run `chmod -R 777 <output_folder>` so that Docker can interact with the temporary output folder. For example, `C:\temp\upgrade` or `/tmp/upgrade`.
-8. Run the Docker compose file.
-
-  Windows ™️
-
-   ```batch
-  docker-compose up --no-build 
-   ```
-
-  Linux ®️
-
-  ```bash
-   docker-compose up --no-build 
-  ```
-  In Docker Desktop, you can see the running containers.
-
-1.  Set the required variables and run the batch file or shell script:
+5. Run `chmod -R 777 <output_folder>` so that Docker can interact with the temporary output folder. For example, `C:\temp\upgrade` or `/tmp/upgrade`.
+6. Set the required variables:
 
    <InlineNotification>
 
@@ -75,7 +48,6 @@ Complete the following steps to install, configure, and run the tool and to revi
    Set INPUT_FOLDER=`<input_folder>`
    Set OUTPUT_FOLDER=`<output_folder>`
    Set VERSION=`<version>`
-   spm-ui-upgrade-helper.bat
    ```
 
   Linux ®️
@@ -84,7 +56,6 @@ Complete the following steps to install, configure, and run the tool and to revi
   export INPUT_FOLDER=`<input_folder>`
   export OUTPUT_FOLDER=`<output_folder>`
   export VERSION=`<version>` 
-  sh spm-ui-upgrade-helper.sh
   ```
 
   Where:
@@ -92,6 +63,21 @@ Complete the following steps to install, configure, and run the tool and to revi
    - `VERSION` is the version of the tool on DockerHub -typically `latest`.
    - `INPUT_FOLDER` is the absolute path to the input files for the tool. Typically this is the Social Program Management installation folder, which by default is `C:\IBM\Curam\Development` or `opt/IBM/Curam/Development`.
    - `OUTPUT_FOLDER` is the absolute path to your temporary output folder. For example, `C:\temp\upgrade` or `/tmp/upgrade`.
+7. Run the Docker compose file.
+
+  Windows ™️
+
+   ```batch
+  docker-compose up --no-build 
+   ```
+
+  Linux ®️
+
+  ```bash
+   docker-compose up --no-build 
+  ```
+
+  In Docker Desktop, you can see the running containers.
 
 ## Run the tool and review the changes
 
