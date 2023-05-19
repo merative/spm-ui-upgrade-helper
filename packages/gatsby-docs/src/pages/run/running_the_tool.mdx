@@ -21,7 +21,11 @@ Complete the following steps to install, configure, and run the tool and to revi
 
    `docker load <./spm-ui-upgrade-helper.tar`
 
-3. Open Docker Desktop and check for the following images.
+   ![Terminal output from docker load command](../../images/run-docker-load.png)
+
+3. Open Docker Desktop and check the images.
+
+   ![Docker Desktop showing the four images](../../images/docker-view-images.png)
 
 4. Download the docker-compose.yml file:
 
@@ -33,7 +37,6 @@ Complete the following steps to install, configure, and run the tool and to revi
 
    `curl -L https://raw.githubusercontent.com/merative/spm-ui-upgrade-helper/main/docker-compose.yml -o docker-compose.yml -o docker-compose.yml`
 
-5. Run `chmod -R 777 <output_folder>` so that Docker can interact with the temporary output folder. For example, `C:\temp\upgrade` or `/tmp/upgrade`.
 6. Set the required variables:
 
    <InlineNotification>
@@ -60,10 +63,13 @@ Complete the following steps to install, configure, and run the tool and to revi
 
   Where:
 
-   - `VERSION` is the version of the tool on DockerHub -typically `latest`.
-   - `INPUT_FOLDER` is the absolute path to the input files for the tool. Typically this is the Social Program Management installation folder, which by default is `C:\IBM\Curam\Development` or `opt/IBM/Curam/Development`.
+   - `VERSION` is the version of the tool, typically `latest`.
+   - `INPUT_FOLDER` is the absolute path to the input files for the tool. Typically, the Social Program Management installation folder, which by default is `C:\IBM\Curam\Development` or `opt/IBM/Curam/Development`.
    - `OUTPUT_FOLDER` is the absolute path to your temporary output folder. For example, `C:\temp\upgrade` or `/tmp/upgrade`.
-7. Run the Docker compose file.
+
+5. Run `chmod -R 777 <output_folder>` so that Docker can interact with the temporary output folder. For example, `C:\temp\upgrade` or `/tmp/upgrade`.
+
+6. Run the Docker compose file.
 
   Windows ™️
 
@@ -77,7 +83,11 @@ Complete the following steps to install, configure, and run the tool and to revi
    docker-compose up --no-build 
   ```
 
-  In Docker Desktop, you can see the running containers.
+   ![Docker Desktop showing the four images](../../images/docker-compose.png)
+
+ 8. In Docker Desktop, you can see the containers running.
+
+   ![Docker Desktop showing the containers running](../../images/view_running_containers.png)
 
 ## Run the tool and review the changes
 
