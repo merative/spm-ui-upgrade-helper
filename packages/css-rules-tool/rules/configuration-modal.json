@@ -146,39 +146,39 @@
   "SelectorReplace": [
     {
       "value": "body.curam .modalDialog .in-page-nav-tabContainer",
-      "newValue": "body.curam .bx--modal-content .in-page-nav-tabContainer"
+      "newValue": "body.curam .cds--modal-content .in-page-nav-tabContainer"
     },
     {     
       "value": "body.curam .modalDialog .in-page-nav-tabContainer .dijitTabContainerTop-tabs",
-      "newValue": "body.curam .bx--modal-content .in-page-nav-tabContainer .dijitTabContainerTop-tabs"
+      "newValue": "body.curam .cds--modal-content .in-page-nav-tabContainer .dijitTabContainerTop-tabs"
     },
     {     
       "value": "body.curam .modalDialog .in-page-nav-tabContainer .dijitTabContainerTop-tabs .dijitTab",
-      "newValue": "body.curam .bx--modal-content .in-page-nav-tabContainer .dijitTabContainerTop-tabs .dijitTab"
+      "newValue": "body.curam .cds--modal-content .in-page-nav-tabContainer .dijitTabContainerTop-tabs .dijitTab"
     },
     {     
       "value": "body.curam .modalDialog .in-page-nav-tabContainer.dijitTabContainerTop .dijitTabListWrapper",
-      "newValue": "body.curam .bx--modal-content .in-page-nav-tabContainer.dijitTabContainerTop .dijitTabListWrapper"
+      "newValue": "body.curam .cds--modal-content .in-page-nav-tabContainer.dijitTabContainerTop .dijitTabListWrapper"
     },
     {     
       "value": "body.curam .modalDialog .in-page-nav-tabContainer .dijitTabHover .tabLabel",
-      "newValue": "body.curam .bx--modal-content .in-page-nav-tabContainer .dijitTabHover .tabLabel"
+      "newValue": "body.curam .cds--modal-content .in-page-nav-tabContainer .dijitTabHover .tabLabel"
     },
     {     
       "value": "body.curam .modalDialog .in-page-nav-tabContainer .dijitTabChecked.dijitTabHover .tabLabel",
-      "newValue": "body.curam .bx--modal-content .in-page-nav-tabContainer .dijitTabChecked.dijitTabHover .tabLabel"
+      "newValue": "body.curam .cds--modal-content .in-page-nav-tabContainer .dijitTabChecked.dijitTabHover .tabLabel"
     },
     {     
       "value": "body.curam .modalDialog .in-page-nav-tabContainer .dijitTabChecked .dijitTabInnerDiv .dijitTabContent",
-      "newValue": "body.curam .bx--modal-content .in-page-nav-tabContainer .dijitTabChecked .dijitTabInnerDiv"
+      "newValue": "body.curam .cds--modal-content .in-page-nav-tabContainer .dijitTabChecked .dijitTabInnerDiv"
     },
     {     
       "value": "body.curam .modalDialog .in-page-nav-tabContainer .dijitTabChecked .dijitTabInnerDiv",
-      "newValue": "body.curam .bx--modal-content .in-page-nav-tabContainer .dijitTabChecked .dijitTabInnerDiv"
+      "newValue": "body.curam .cds--modal-content .in-page-nav-tabContainer .dijitTabChecked .dijitTabInnerDiv"
     },
     {     
       "value": "body.curam .modalDialog .uimController .ipnTabController",
-      "newValue": "body.curam .bx--modal-content .uimController .ipnTabController"
+      "newValue": "body.curam .cds--modal-content .uimController .ipnTabController"
     }
   ]
 }

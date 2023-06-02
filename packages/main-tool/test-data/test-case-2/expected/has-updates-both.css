@@ -11,13 +11,13 @@
 /*
  * css-rules-tool:
  * Old CSS selector: div.cluster td.top
- * New CSS selector: div.bx--cluster .top
+ * New CSS selector: div.cds--cluster .top
  *
  * icon-replacer-tool:
  * Old background-image: "../../calendar__week20--enabled.svg"
  * New background-image: "../../calendar__week20--enabled.svg"
  */
 
-.soria div.bx--cluster .top {
+.soria div.cds--cluster .top {
   background-image: "../../calendar__week20--enabled.svg";
 }
