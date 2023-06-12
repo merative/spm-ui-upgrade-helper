@@ -1,36 +1,43 @@
 ---
-title: Running the tool
+title: Install and run the tool
 ---
 
-Complete the following steps to configure and run the tool and to review and implement any required changes.
+The UI Upgrade Helper is available for customers from SPM Software Downloads on [Merative Support](https://merative.my.site.com/mysupport/s/).
 
-1. Run `docker login`.
+You must be a technical contact to download software, open a support case if you need access. Select **SPM Software Download** and enter your technical contact credentials to download the software. 
 
-2. Download the appropriate batch file or shell script for your environment:
+The UI Upgrade Helper is available as an internal download for Merative employees.
+
+Complete the following steps to install, configure, and run the tool and to review and implement any required changes.
+
+1. Download `spm-ui-upgrade-helper.tar`.
+2. Load the Docker images:
 
    Windows ™️
 
-   `curl -L https://raw.githubusercontent.com/IBM/spm-ui-upgrade-helper/main/spm-ui-upgrade-helper.bat -o spm-ui-upgrade-helper.bat`
+   `docker load <./spm-ui-upgrade-helper.tar`
 
    Linux ®️
-   
-   `curl -L https://raw.githubusercontent.com/IBM/spm-ui-upgrade-helper/main/spm-ui-upgrade-helper.sh -o spm-ui-upgrade-helper.sh`
 
-3. (Linux®️ only) Make the shell script executable with `chmod +x spm-ui-upgrade-helper.sh`
+   `docker load <./spm-ui-upgrade-helper.tar`
+
+   ![Terminal output from docker load command](../../images/run-docker-load.png)
+
+3. Open Docker Desktop and check the images.
+
+   ![Docker Desktop showing the four images](../../images/docker-view-images.png)
 
 4. Download the docker-compose.yml file:
 
    Windows ™️
 
-   `curl -L https://raw.githubusercontent.com/IBM/spm-ui-upgrade-helper/main/docker-compose.yml -o docker-compose.yml`
+   `curl -L https://raw.githubusercontent.com/merative/spm-ui-upgrade-helper/main/docker-compose.yml -o docker-compose.yml -o docker-compose.yml`
   
    Linux ®️
-   
-   `curl -L https://raw.githubusercontent.com/IBM/spm-ui-upgrade-helper/main/docker-compose.yml -o docker-compose.yml`
 
-5. Run `chmod -R 777 <output_folder>` so that Docker can interact with the temporary output folder. For example, `C:\temp\upgrade` or `/tmp/upgrade`.
+   `curl -L https://raw.githubusercontent.com/merative/spm-ui-upgrade-helper/main/docker-compose.yml -o docker-compose.yml -o docker-compose.yml`
 
-6. Set the required variables and run the batch file or shell script:
+6. Set the required variables:
 
    <InlineNotification>
 
@@ -44,23 +51,43 @@ Complete the following steps to configure and run the tool and to review and imp
    Set INPUT_FOLDER=`<input_folder>`
    Set OUTPUT_FOLDER=`<output_folder>`
    Set VERSION=`<version>`
-   spm-ui-upgrade-helper.bat
    ```
 
   Linux ®️
 
   ```bash
-  export INPUT_FOLDER=`<input_folder>
+  export INPUT_FOLDER=`<input_folder>`
   export OUTPUT_FOLDER=`<output_folder>`
   export VERSION=`<version>` 
-  sh spm-ui-upgrade-helper.sh
   ```
 
   Where:
 
-   - `VERSION` is the version of the tool on DockerHub -typically `latest`.
-   - `INPUT_FOLDER` is the absolute path to the input files for the tool. Typically this is the Social Program Management installation folder, which by default is `C:\IBM\Curam\Development` or `opt/IBM/Curam/Development`.
+   - `VERSION` is the version of the tool, typically `latest`.
+   - `INPUT_FOLDER` is the absolute path to the input files for the tool. Typically, the Social Program Management installation folder, which by default is `C:\IBM\Curam\Development` or `opt/IBM/Curam/Development`.
    - `OUTPUT_FOLDER` is the absolute path to your temporary output folder. For example, `C:\temp\upgrade` or `/tmp/upgrade`.
+
+5. Run `chmod -R 777 <output_folder>` so that Docker can interact with the temporary output folder. For example, `C:\temp\upgrade` or `/tmp/upgrade`.
+
+6. Run the Docker compose file.
+
+  Windows ™️
+
+   ```batch
+  docker-compose up --no-build 
+   ```
+
+  Linux ®️
+
+  ```bash
+   docker-compose up --no-build 
+  ```
+
+   ![Docker Desktop showing the four images](../../images/docker-compose.png)
+
+ 8. In Docker Desktop, you can see the containers running.
+
+   ![Docker Desktop showing the containers running](../../images/view_running_containers.png)
 
 ## Run the tool and review the changes
 
