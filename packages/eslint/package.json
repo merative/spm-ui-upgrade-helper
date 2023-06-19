@@ -3,6 +3,9 @@
     "version": "1.0.0",
     "main": "index.js",
     "devDependencies": {
-        "eslint": "^7.17.0"
+        "eslint": "^8.0.0"
+    },
+    "resolutions":{
+        "minimatch":"3.0.5"
     }
 }

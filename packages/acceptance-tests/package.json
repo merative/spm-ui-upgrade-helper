@@ -16,6 +16,8 @@
     "shelljs": "^0.8.5"
   },
   "resolutions": {
-    "node-fetch":"2.6.7"
+    "node-fetch":"2.6.7",
+    "ansi-regex":"5.0.1",
+    "minimatch":"3.0.5"
   }
 }

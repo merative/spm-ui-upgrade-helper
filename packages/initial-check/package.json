@@ -13,5 +13,9 @@
   },
   "devDependencies": {
     "jest": "^27.0.6"
+  },
+  "resolutions":{
+    "ansi-regex":"5.0.1",
+    "minimatch":"3.0.5"
   }
 }
