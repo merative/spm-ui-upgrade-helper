@@ -22,13 +22,10 @@
     "release": "node packages/release/release-cli.js"
   },
   "resolutions": {
-    "@types/react": "^16.8.0",
-    "tar": "6.1.9",
-    "json-schema": "0.4.0",
-    "ansi-regex": "5.0.1",
-    "node-fetch": "2.6.7",
-    "minimist": "1.2.6"
-  },
+    "parse-url": "^8.1.0",
+    "shell-quote": "^1.7.3",
+    "parse-path": "^5.0.0",
+    "minimatch": "3.0.5"  },
   "devDependencies": {
     "shelljs": "^0.8.5"
   },

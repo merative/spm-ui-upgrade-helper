@@ -19,6 +19,9 @@
     "xmldom": "^0.6.0",
     "xpath": "0.0.32"
   },
+  "resolutions":{
+    "minimatch":"3.0.5"
+  },
   "devDependencies": {
     "fs-extra": "^10.0.0",
     "jest": "^27.0.6"
