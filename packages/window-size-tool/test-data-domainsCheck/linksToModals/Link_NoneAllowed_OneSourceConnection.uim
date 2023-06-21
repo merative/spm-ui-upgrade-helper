@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Licensed Materials - Property of IBM
- 
-  Copyright IBM Corporation 2012, 2017. All Rights Reserved.
-
-  US Government Users Restricted Rights - Use, duplication or disclosure 
-  restricted by GSA ADP Schedule Contract with IBM Corp.
+  Copyright Merative US L.P. 2008, 2017
 -->
-<!-- Copyright 2008, 2010-2011 Curam Software Ltd.                               -->
-<!-- All rights reserved.                                                   -->
-<!-- This software is the confidential and proprietary information of Curam -->
-<!-- Software, Ltd. ("Confidential Information"). You shall not disclose    -->
-<!-- such Confidential Information and shall use it only in accordance with -->
-<!-- the terms of the license agreement you entered into with Curam         -->
-<!-- Software.                                                              -->
 <!-- Description                                                            -->
 <!-- ===========                                                            -->
 <!-- This page provides a user with a list of all duplicates created for    -->
