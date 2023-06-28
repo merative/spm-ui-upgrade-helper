@@ -5,8 +5,7 @@
   "description": "Main tool that runs the other tools.",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js",
-    "test": "jest"
+    "start": "nodemon server.js"
   },
   "dependencies": {
     "express": "^4.17.1",

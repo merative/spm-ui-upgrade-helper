@@ -5,8 +5,7 @@
   "description": "Applies rules changes to CSS files.",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js",
-    "test": "jest"
+    "start": "nodemon server.js"
   },
   "dependencies": {
     "css": "^3.0.0",
