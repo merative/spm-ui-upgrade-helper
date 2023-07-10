@@ -2,12 +2,18 @@
 title: Setting up the tools
 ---
 
-> **Apologies, the UI Upgrade Helper is temporarily unavailable during a transition from IBM hosting services.**
+> **Apologies, the UI Upgrade Helper will soon be temporarily unavailable for download during a transition from IBM hosting services.**
+
+<InlineNotification>
+
+   **Note:** In Social Program Management 8.1, Carbon was updated from v10 to v11. In Carbon v11, the CSS class name prefix "bx" was changed to "cds". For example, `bx--cluster` was changed to `cds--cluster`. If you are upgrading to Social Program Management 8.1 or later and have custom code, you must review your CSS to see if you are affected.
+
+</InlineNotification>
 
 Complete the following steps to prepare a development environment to run the tools, and to install and configure the required software
 
 <InlineNotification>
-   Note: The UI Upgrade helper is designed to upgrade from Social Program Management version 7 to version 8 only, and not to upgrade to a more recent version 7.
+   **Note:** The UI Upgrade helper is designed to help with an upgrade from Social Program Management v7 to v8 only. Do not use to upgrade from v7 to a more recent release of v7.
 
 </InlineNotification>
 
@@ -15,7 +21,7 @@ Complete the following steps to prepare a development environment to run the too
 
 1. Set up a v7 development environment with your custom changes, which provides the input data for the tool.
 2. Decide on a temporary output folder, where you can review the suggested changes.
-3. Set up a v8.0.0 or later development environment, where you can manually apply and test the updates.
+3. Set up a v8.0.0 or later development environment, where you can manually apply and test the updates. For v8.1 or later, ensure that you review the CSS in your custom code as per the note above.
 4. Install Docker Desktop for [Windows ™️](https://docs.docker.com/docker-for-windows/install/) or [Mac](https://docs.docker.com/docker-for-mac/install/).
 5. Install [curl](https://curl.se/download.html).
 
