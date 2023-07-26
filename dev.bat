@@ -31,6 +31,7 @@ echo.
 echo     VERSION = %VERSION%
 echo     INPUT_FOLDER = %INPUT_FOLDER%
 echo     OUTPUT_FOLDER= %OUTPUT_FOLDER%
+echo     CURAM_VERSION= %CURAM_VERSION%
 echo.
 
 call docker-compose rm -f -s -v 

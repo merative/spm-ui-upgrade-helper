@@ -13,6 +13,8 @@ services:
     volumes:
       - ${INPUT_FOLDER}:/home/workspace/input
       - ${OUTPUT_FOLDER}:/home/workspace/output
+    environment:
+      - CURAM_VERSION=${CURAM_VERSION}
   beanparser:
     build: 
       context: packages/window-size-tool/parser

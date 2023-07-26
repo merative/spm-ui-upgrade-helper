@@ -1,0 +1,1406 @@
+{
+  "SelectorRemove": [
+    { "value": "body.curam.basic div#content .action-set.blue-action-set a:focus .middle" },
+    { "value": "body.modal #mainForm div.cluster" },
+    { "value": "body.curam-internal-app div.cluster h3" },
+    { "value": "div.cluster h3" },
+    { "value": ".rtl div.cluster h3" },
+    { "value": ".rtl div.cluster h3.desc-header" },
+    { "value": "body.high-contrast div.cluster h3" },
+    { "value": ".rtl textarea" },
+    { "value": "body.rtl textarea" },
+    { "value": ".tab div.cluster" },
+    { "value": "div.wizard-cluster" },
+    { "value": "div.tab .cluster td" },
+    { "value": ".cluster td.codetable" },
+    { "value": ".soria div.list table" },
+    { "value": "body.curam.soria div.list table" },
+    { "value": "body#Curam_CCSIntake_createAllegation1 #mainForm div.cluster div.cluster" },
+    { "value": "#mainForm div.cluster" },
+    { "value": "#mainForm div.cluster div.cluster" },
+    { "value": ".cluster-wizard .first" },
+    { "value": "tbody td.field textarea" },
+    { "value": "body.curam.soria textarea" },
+    { "value": ".soria div.cluster table td" },
+    { "value": ".soria div.cluster table td div" },
+    { "value": "div.wizard-cluster td.field" },
+    { "value": ".cluster td select.codetable" },
+    { "value": "div.outer-cluster-borderless" },
+    { "value": "div.outer-cluster-borderless-nospace-right-margin" },
+    { "value": "div.outer-cluster-borderless-no-margin-no-padding" },
+    { "value": "div.outer-cluster-borderless-nospace > table > tbody > tr > td" },
+    { "value": "div.outer-cluster-borderless-rightlabel" },
+    { "value": "div.outer-cluster-borderless-rightlabel>table" },
+    { "value": "div.outer-cluster-borderless-rightlabel>table>tbody>tr>td+td" },
+    { "value": "div.outer-cluster-borderless-rightlabel div.cluster" },
+    { "value": "div.outer-cluster-borderless-rightlabel div.list" },
+    { "value": "div.outer-cluster-borderless-rightlabel .label" },
+    { "value": ".cluster td.cluster-pad-first" },
+    { "value": "div.tab .cluster td.container" },
+    { "value": "tbody td.field textarea:focus" },
+    { "value": "div.tab .cluster table td.label" },
+    { "value": "div.tab .cluster table td.field" },
+    { "value": ".soria .cluster td.time.codetable" },
+    { "value": "div.tab .cluster table td.changed" },
+    { "value": ".cluster-wizard li div.sectionText" },
+    { "value": "div.outer-cluster-borderless>table" },
+    { "value": "body.curam.soria div.cluster table" },
+    { "value": ".soria div.cluster table td.regionR1" },
+    { "value": ".soria .cluster .checkboxed-list div" },
+    { "value": "body.curam.rtl .cluster td.codetable" },
+    { "value": "div.tab div.cluster, div.tab div.list" },
+    { "value": "body.details.high-contrast .top .left" },
+    { "value": "body.curam.soria div.cluster table td" },
+    { "value": "body.curam.soria div.cluster table tr" },
+    { "value": "body.rtl.curam.soria div.cluster table" },
+    { "value": "body.details.high-contrast .bottom .left" },
+    { "value": "body.soria.zh div.header-wrapper h3 span" },
+    { "value": "body.soria.ja div.header-wrapper h3 span" },
+    { "value": "body.soria.ko div.header-wrapper h3 span" },
+    { "value": ".cluster .codetable-hierarchy-container td" },
+    { "value": "div.cluster div.cluster, .cluster div.list" },
+    { "value": "div.outer-cluster-borderless div.cluster td" },
+    { "value": "body.curam.soria div.cluster p.description" },
+    { "value": "div.outer-cluster-borderless div.cluster td" },
+    { "value": "body.soria.zh-TW div.header-wrapper h3 span" },
+    { "value": "body.soria.zh-HK div.header-wrapper h3 span" },
+    { "value": "body.soria.zh-CN div.header-wrapper h3 span" },
+    { "value": "body.soria.zh-SG div.header-wrapper h3 span" },
+    { "value": "body.soria.ko-KR div.header-wrapper h3 span" },
+    { "value": "body.soria div.list, body.soria div.cluster" },
+    { "value": "body.curam.soria div.cluster table tr table" },
+    { "value": "body.curam.soria div.cluster table th.label" },
+    { "value": "body.curam.soria div.cluster table td.field" },
+    { "value": "body.curam.soria div.cluster td.top div.list" },
+    { "value": "div.cluster div.cluster, div.cluster div.list" },
+    { "value": "body.curam.soria div.cluster table td.address" },
+    { "value": "div.outer-cluster-borderless>table>tbody>tr>td" },
+    { "value": "body.details.high-contrast .top .center .right" },
+    { "value": "body#Curam_user-prefs-editor div.cluster table" },
+    { "value": "body.curam.soria div.cluster div.cluster table" },
+    { "value": "body.curam.soria div.cluster table td.container" },
+    { "value": "body.curam.soria div.cluster table td.codetable" },
+    { "value": "body.curam.soria div.cluster table td.last-cell" },
+    { "value": "body.curam.soria div.cluster div.header-wrapper" },
+    { "value": "body.curam.soria div.cluster td.top div.cluster" },
+    { "value": "body.rtl.curam.soria div.cluster table tr table" },
+    { "value": "body.curam.soria.basic.details div.cluster table" },
+    { "value": "body.rtl.curam.soria div.cluster td.top div.list" },
+    { "value": ".soria div.cluster table td.field.last-cell.right" },
+    { "value": "div.outer-cluster-borderless>table>tbody>tr>td+td" },
+    { "value": "body.mobile.curam.soria div.cluster p.description" },
+    { "value": "body.details.high-contrast .bottom .center .right" },
+    { "value": "body.soria div.cluster table.rates-table td.header" },
+    { "value": "body#Curam_user-prefs-editor #mainForm div.cluster" },
+    { "value": "body.soria.high-contrast div.cluster table td.label" },
+    { "value": "body.curam.soria div#content div.cluster table td a " },
+    { "value": "body.curam.soria div.cluster div.list table td.field" },
+    { "value": "body.curam#Curam_user-prefs-editor div.cluster table" },
+    { "value": "body.rtl.curam.soria div.cluster td.top div.clusters" },
+    { "value": ".soria div.list table td.codetable table.dijitSelect," },
+    { "value": "body.curam.soria div.cluster td.top.last-col div.list" },
+    { "value": ".soria div.cluster.is-collapsed div.header-wrapper h3," },
+    { "value": "body.curam.soria div.cluster td.top.first-col div.list" },
+    { "value": "body.curam.soria div.cluster div.cluster-with-no-header" },
+    { "value": ".soria div.cluster .evidence-comparison table tr td.field" },
+    { "value": "body.curam.soria div.cluster td.top.last-col div.cluster" },
+    { "value": "body.curam.soria div.cluster div.list table td.codetable" },
+    { "value": "body.curam#Curam_user-prefs-editor #mainForm div.cluster" },
+    { "value": "body.rtl.curam.soria div.cluster table tr th:first-child" },
+    { "value": "body.rtl.curam.soria div.cluster table tr td:first-child" },
+    { "value": "body.curam.rtl#Curam_user-prefs-editor div.cluster table" },
+    { "value": "body.curam.soria div#content div.cluster table td a:hover" },
+    { "value": "body.curam.soria div#content div.cluster table td a:focus" },
+    { "value": "body.curam.soria div.cluster td.top.first-col div.cluster" },
+    { "value": "body.curam.soria div.cluster div.cluster table tr td.top " },
+    { "value": "body.curam.soria.context-panel div.cluster table th.label" },
+    { "value": "body.curam.soria.context-panel div.cluster table td.field" },
+    { "value": "body.rtl.curam.soria div.cluster td.top.last-col div.list" },
+    { "value": "body.curam.soria div.cluster table tbody td.field textarea" },
+    { "value": "body.rtl.curam.soria div.cluster td.top.first-col div.list" },
+    { "value": "body.curam.soria div.cluster div.list div.header-wrapper h3" },
+    { "value": "body.rtl.curam.soria div.cluster td.top.last-col div.cluster" },
+    { "value": "body.curam.rtl#Curam_user-prefs-editor #mainForm div.cluster" },
+    { "value": "body#Curam_user-prefs-editor div.prefs-cluster span.read-only" },
+    { "value": "body.curam.soria div.cluster table td div.checkboxed-list div" },
+    { "value": "body.rtl.curam.soria div.cluster td.top.first-col div.cluster" },
+    { "value": ".soria div.cluster.is-collapsed div.header-wrapper h3.collapse" },
+    { "value": ".soria div.cluster.is-collapsed div.header-wrapper h3.collapse +" },
+    { "value": "body.curam.soria.basic.details.context-panel div.cluster table" },
+    { "value": "body.curam.soria.details div.cluster div.header-wrapper ~ table" },
+    { "value": "body.curam.soria div.cluster td.top.first-col.last-col div.list" },
+    { "value": "body.rtl.curam.soria div.cluster div.list div.header-wrapper h3" },
+    { "value": "body.curam.soria div.cluster table tbody td.field textarea:hover" },
+    { "value": "body.curam.basic div#content .action-set.blue-action-set a:focus" },
+    { "value": "div.tempContentPanelFrameWrapper div.cluster table td.skip-field" },
+    { "value": "body.curam.soria div.cluster table tbody td.field textarea:focus" },
+    { "value": "body#Curam_user-prefs-editor #mainForm div.cluster table td.field" },
+    { "value": "body.rtl.curam.soria div.cluster div.list table tr td:first-child" },
+    { "value": "body.curam.soria.rtl div.cluster div.list table tr td:first-child" },
+    { "value": "body.curam.soria div.cluster td.top.first-col.last-col div.cluster" },
+    { "value": "body.rtl.curam.soria.smart-panel div.cluster div.header-wrapper h3" },
+    { "value": "body.curam.soria.list-inline-page div.cluster div.header-wrapper h3" },
+    { "value": "body.rtl.curam.soria.details div.cluster div.header-wrapper ~ table" },
+    { "value": ".soria div.cluster.is-collapsed table td.field div.header-wrapper h3" },
+    { "value": "body.curam.soria.rtl div.cluster table tbody td.field textarea:hover" },
+    { "value": "body.curam.soria.rtl div.cluster table tbody td.field textarea:focus" },
+    { "value": "body.curam#Curam_user-prefs-editor div.prefs-cluster td.field select" },
+    { "value": ".soria div.cluster .evidence-comparison table tr th.field.last-header" },
+    { "value": "body.curam.soria.rtl div.cluster table tbody td.field textarea:focus " },
+    { "value": "body.curam.soria div.cluster div.header-wrapper .grouptoggleArrow img" },
+    { "value": "body.curam.soria div.cluster div.cluster .list table thead tr th span" },
+    { "value": "body.rtl.curam.soria div.cluster div.header-wrapper .grouptoggleArrow" },
+    { "value": ".soria div.list table td.codetable table.dijitSelect .dijitArrowButton" },
+    { "value": ".soria div.list table td.codetable table.dijitSelect .dijitSelectLabel" },
+    { "value": ".soria div.cluster .evidence-comparison table tr th.field.first-header" },
+    { "value": "body.rtl.curam.soria div.cluster div.cluster table tr td.top.first-col" },
+    { "value": "body.soria div.cluster table.rates-table tr.header td.sub-column-header" },
+    { "value": "body.curam.soria div.cluster div.header-wrapper .grouptoggleArrow:hover" },
+    { "value": "body.curam.soria div.cluster div.header-wrapper .grouptoggleArrow:focus" },
+    { "value": "body.curam.soria div.cluster div.cluster-with-no-header table tr td.top" },
+    { "value": "body.curam.soria div.cluster div.cluster div.header-wrapper h3.collapse" },
+    { "value": "body.soria.high-contrast .cluster .calendar tr td.current-month-selected" },
+    { "value": "body.curam.rtl#Curam_user-prefs-editor div.prefs-cluster td.field select" },
+    { "value": "body.soria div#content div.cluster table.rates-table tbody tr.header th a" },
+    { "value": "body.details.context-panel div.cluster.cluster-with-no-header.label-field" },
+    { "value": "body.curam.soria div.cluster div.list table tr td.multiselect:first-child" },
+    { "value": "body.curam.soria div.cluster div.list div.header-wrapper .grouptoggleArrow" },
+    { "value": "body.curam.soria.context-panel .cluster.cluster-with-no-header.label-field" },
+    { "value": "div.tempContentPanelFrameWrapper div.cluster table td.skip-field.last-cell" },
+    { "value": "body.curam#Curam_user-prefs-editor div.prefs-cluster td.field select:hover" },
+    { "value": "body.curam#Curam_user-prefs-editor div.prefs-cluster td.field select:focus" },
+    { "value": "body.rtl.curam.soria.details.smart-panel div.cluster-wrapper table.cluster" },
+    { "value": "body.curam.soria div#content div.cluster table .meeting-view.multi-select a" },
+    { "value": "body.rtl.curam.soria div.cluster div.cluster div.header-wrapper h3.collapse" },
+    { "value": ".soria div.cluster table td.codetable table.dijitSelect .dijitButtonContents" },
+    { "value": "body.curam.soria div.cluster.cluster-with-no-header td.top.last-col div.list" },
+    { "value": "body.curam.soria.list-inline-page div.cluster div.header-wrapper h3.collapse" },
+    { "value": "body.curam.soria div.cluster div.cluster div.header-wrapper .grouptoggleArrow" },
+    { "value": "body.curam.soria div.cluster.cluster-with-no-header td.top.first-col div.list" },
+    { "value": "body.curam.soria div.cluster.is-collapsed div.header-wrapper .grouptoggleArrow" },
+    { "value": "body.rtl.curam.soria div.cluster div.list div.header-wrapper .grouptoggleArrow" },
+    { "value": "body.curam.rtl#Curam_user-prefs-editor div.prefs-cluster td.field select:hover" },
+    { "value": "body.curam.rtl#Curam_user-prefs-editor div.prefs-cluster td.field select:focus" },
+    { "value": ".soria div.list table td.codetable table.dijitSelectActive .dijitButtonContents" },
+    { "value": ".soria div.cluster table td.codetable table.codetable-hierarchy-container tr td" },
+    { "value": "body.curam.soria div.cluster div.header-wrapper .grouptoggleArrow img.hoverIcon" },
+    { "value": "body.curam.soria div.cluster.cluster-with-no-header td.top.last-col div.cluster" },
+    { "value": "body.curam.soria div.cluster.cluster-with-no-header td.top.first-col div.cluster" },
+    { "value": "body.curam.soria div.cluster .meeting-view.single-select table tr th:first-child" },
+    { "value": "body.curam#Curam_user-prefs-editor div.prefs-cluster td.field select::-ms-expand" },
+    { "value": "body.rtl.curam.soria div.cluster.cluster-with-no-header td.top.last-col div.list" },
+    { "value": ".soria div.cluster table td.codetable table.dijitSelectHover .dijitButtonContents" },
+    { "value": "body.curam.soria div.cluster div.header-wrapper .grouptoggleArrow img.defaultIcon" },
+    { "value": "body.curam.soria div#content div.cluster table .meeting-view.multi-select a:hover" },
+    { "value": "body.curam.soria div#content div.cluster table .meeting-view.multi-select a:focus" },
+    { "value": "body.rtl.curam.soria.details div.cluster div div.header-wrapper .grouptoggleArrow" },
+    { "value": "body.rtl.curam.soria div.cluster div.cluster div.header-wrapper .grouptoggleArrow" },
+    { "value": "body.rtl.curam.soria div.cluster.cluster-with-no-header td.top.first-col div.list" },
+    { "value": "body.rtl.curam.soria.smart-panel div.cluster div.header-wrapper .grouptoggleArrow" },
+    { "value": ".soria div.cluster table td.codetable table.dijitSelectOpened .dijitButtonContents" },
+    { "value": "body.curam.soria.list-inline-page div.cluster table td.field div.header-wrapper h3" },
+    { "value": "body.rtl.curam.soria div.cluster.is-collapsed div.header-wrapper .grouptoggleArrow" },
+    { "value": "body.soria div.cluster table.rates-table tr.header td.sub-column-header:first-child" },
+    { "value": "body.curam.soria div.cluster div div.header-wrapper h3.collapse span.collapse-title" },
+    { "value": "body.rtl.curam.soria div.cluster.cluster-with-no-header td.top.last-col div.cluster" },
+    { "value": ".soria div.cluster table td.codetable table.vertical-codetable-hierarchy tr td.label" },
+    { "value": "body.curam.soria div.cluster.is-collapsed div.header-wrapper .grouptoggleArrow:hover" },
+    { "value": "body.rtl.curam.soria div.cluster table td.field div.header-wrapper .grouptoggleArrow" },
+    { "value": "body.rtl.curam.soria div.cluster.cluster-with-no-header td.top.first-col div.cluster" },
+    { "value": "body.rtl.curam.soria div.cluster .meeting-view.single-select table tr th:first-child" },
+    { "value": "body.curam.soria div.cluster div.header-wrapper .grouptoggleArrow:hover img.hoverIcon" },
+    { "value": "body.curam.soria div.cluster div.header-wrapper .grouptoggleArrow:focus img.hoverIcon" },
+    { "value": ".soria div.cluster table td.codetable table.dijitSelect .mobileSelect .dijitArrowButton" },
+    { "value": "body.curam.soria div.cluster div.header-wrapper .grouptoggleArrow:hover img.defaultIcon" },
+    { "value": "body.curam.soria div.cluster div.header-wrapper .grouptoggleArrow:focus img.defaultIcon" },
+    { "value": ".soria div.cluster table td.codetable table.horizontal-codetable-hierarchy thead tr th" },
+    { "value": "body.rtl.curam.soria div.cluster.is-collapsed div.header-wrapper .grouptoggleArrow:hover" },
+    { "value": "body.rtl.curam.soria div.cluster.is-collapsed div.header-wrapper .grouptoggleArrow:focus" },
+    { "value": "body.curam.soria div.action-set, body.curam.soria.details div.cluster-wrapper table.cluster" },
+    { "value": "body.rtl.curam.soria div.cluster p.description, body.rtl.curam.soria div.list p.description" },
+    { "value": ".soria div.cluster table tr table.codetable-hierarchy-container.horizontal-codetable-hierarchy" },
+    { "value": "body.rtl.curam.soria.details div.cluster.is-collapsed div div.header-wrapper .grouptoggleArrow" },
+    { "value": "html.dj_ie10 .soria div.cluster.is-collapsed div.header-wrapper h3.collapse + .grouptoggleArrow" },
+    { "value": ".soria div.cluster table td.codetable table.dijitSelect .dijitArrowButton .dijitArrowButtonInner" },
+    { "value": "body.rtl.curam.soria.smart-panel div.cluster table td.field div.header-wrapper .grouptoggleArrow" },
+    { "value": "body.curam.soria div.details-cluster-wrapper div.cluster div div.header-wrapper .grouptoggleArrow" },
+    { "value": "body.curam.soria div.cluster.init-collapsed.is-collapsed div.header-wrapper h3.collapse + .grouptoggleArrow" },
+    { "value": ".soria div.cluster table td.codetable table.codetable-hierarchy-container.vertical-codetable-hierarchy tr td" },
+    { "value": "body.curam.soria.details div.details-cluster-wrapper, body.curam.soria div.list, body.curam.soria div.cluster" },
+    { "value": ".soria div.cluster table td.codetable table.codetable-hierarchy-container.horizontal-codetable-hierarchy tr td" },
+    { "value": "html.dj_ie10 .soria div.cluster.init-collapsed.is-collapsed div.header-wrapper h3.collapse + .grouptoggleArrow" },
+    { "value": "html.dj_ie10 .soria div.cluster.is-collapsed table td.field div.header-wrapper h3.collapse + .grouptoggleArrow" },
+    { "value": "body.curam.soria div.details-cluster-wrapper div.cluster.is-collapsed div div.header-wrapper .grouptoggleArrow" },
+    { "value": "body.curam.soria div.cluster div.header-wrapper h3.collapse, body.curam.soria div.cluster div.header-wrapper h3" },
+    { "value": "body.rtl.curam.soria div.cluster.init-collapsed.is-collapsed div.header-wrapper h3.collapse + .grouptoggleArrow" },
+    { "value": "body.curam.soria div.cluster div table td.top div.cluster div div.header-wrapper h3.collapse span.collapse-title" },
+    { "value": "html.dj_ie10 .soria div.details-cluster-wrapper div.cluster.is-collapsed div div.header-wrapper .grouptoggleArrow" },
+    { "value": ".soria div.cluster table td.codetable table.codetable-hierarchy-container.vertical-codetable-hierarchy tr td.label " },
+    { "value": "body.curam.soria div.cluster div table td.last-col div.cluster div div.header-wrapper h3.collapse span.collapse-title" },
+    { "value": "body.curam.soria div.cluster div table td.first-col div.cluster div div.header-wrapper h3.collapse span.collapse-title" },
+    { "value": "body.rtl.curam.soria div.cluster div.header-wrapper h3.collapse, body.rtl.curam.soria div.cluster div.header-wrapper h3" },
+    { "value": "body.curam.soria div.cluster div table tbody tr td.first-col div.list div div.header-wrapper h3.collapse span.collapse-title" }
+  ],
+  "SelectorReplace": [
+    {
+      "value": "div.cluster h3.desc-header",
+      "newValue": "div .desc-header"
+    },
+    {
+      "value": ".details .cds--cluster h3, .details .list h3",
+      "newValue": ".details .list h3"
+    },
+    {
+      "value": "body.modal div.list, body.modal div.cds--cluster",
+      "newValue": "body.modal div.list"
+    },
+    {
+      "value": ".soria div.cluster",
+      "newValue": ".soria div.cds--cluster"
+    },
+    {
+      "value": ".details .cluster td",
+      "newValue": ".details .cds--cluster .cds--col"
+    },
+    {
+      "value": "div.cluster, div.list",
+      "newValue": "div.list"
+    },
+    {
+      "value": ".cluster p.description",
+      "newValue": ".list p.description"
+    },
+    {
+      "value": ".details table.cluster",
+      "newValue": ".details .cluster-header"
+    },
+    {
+      "value": "body.soria div.cluster",
+      "newValue": "body.soria div.cds--cluster"
+    },
+    {
+      "value": "body.modal div.cluster",
+      "newValue": "body.modal div.cds--cluster"
+    },
+    {
+      "value": ".soria .cluster h3 + div",
+      "newValue": ".soria .cds--cluster h3 + div"
+    },
+    {
+      "value": ".soria div.cluster table",
+      "newValue": ".soria div.cds--cluster .cds--grid"
+    },
+    {
+      "value": ".details table.cluster th",
+      "newValue": ".details .cds--cluster .cds--col"
+    },
+    {
+      "value": ".details table.cluster td",
+      "newValue": ".details .cds--cluster .cds--col"
+    },
+    {
+      "value": ".soria div.cluster td.top",
+      "newValue": ".soria div.cds--cluster .top"
+    },
+    {
+      "value": ".details div.cluster table",
+      "newValue": ".details div.cds--cluster"
+    },
+    {
+      "value": ".details .cluster h3 + div",
+      "newValue": ".details .cds--cluster h3 + div"
+    },
+    {
+      "value": ".soria .cluster h3 + table",
+      "newValue": ".soria .cds--cluster h3 + table"
+    },
+    {
+      "value": ".soria .cluster .tabHeader",
+      "newValue": ".soria .cds--cluster .tabHeader"
+    },
+    {
+      "value": ".soria div.cluster div.list",
+      "newValue": ".soria div.cds--cluster div.list"
+    },
+    {
+      "value": ".soria .cluster .tabContent",
+      "newValue": ".soria .cds--cluster .tabContent"
+    },
+    {
+      "value": ".soria .cluster .calendar td",
+      "newValue": ".soria .calendar td"
+    },
+    {
+      "value": ".soria .cluster .calendar tr",
+      "newValue": ".soria .calendar tr"
+    },
+    {
+      "value": ".details .cluster h3 + table",
+      "newValue": ".details .cds--cluster h3 + table"
+    },
+    {
+      "value": ".soria .cluster td.codetable",
+      "newValue": ".soria .cds--cluster .codetable"
+    },
+    {
+      "value": ".soria .cluster #tab1-answer",
+      "newValue": ".soria .cds--cluster #tab1-answer"
+    },
+    {
+      "value": ".soria .cluster #tab2-answer",
+      "newValue": ".soria .cds--cluster #tab2-answer"
+    },
+    {
+      "value": ".soria .cluster #tab3-answer",
+      "newValue": ".soria .cds--cluster #tab3-answer"
+    },
+    {
+      "value": ".details div.cluster table td",
+      "newValue": ".details div.cds--cluster .cds--col"
+    },
+    {
+      "value": ".soria .cluster th.label span",
+      "newValue": ".soria .cds--cluster .label span"
+    },
+    {
+      "value": ".details .cluster td, .list td",
+      "newValue": ".details .cds--cluster .cds--col, .list td"
+    },
+    {
+      "value": ".soria div.cluster div.cluster",
+      "newValue": ".soria div.cds--cluster div.cds--cluster"
+    },
+    {
+      "value": ".soria .cluster .tabHeader span",
+      "newValue": ".soria .cds--cluster .tabHeader span"
+    },
+    {
+      "value": ".cluster-wizard li.sectionNormal",
+      "newValue": ".cluster-wizard li div.sectionText"
+    },
+    {
+      "value": ".soria div.cluster p.description",
+      "newValue": ".soria div.list p.description"
+    },
+    {
+      "value": ".details div.cluster h3.collapse",
+      "newValue": ".details div.cds--cluster h3.collapse"
+    },
+    {
+      "value": ".soria .cluster div.accordionTab",
+      "newValue": ".soria .cds--cluster div.accordionTab"
+    },
+    {
+      "value": ".soria div.cluster table td.user",
+      "newValue": ".soria div.cluster table .cds--col.user"
+    },
+    {
+      "value": "body.details .cluster .top .left",
+      "newValue": "body.details .cds--cluster .top .left"
+    },
+    {
+      "value": "body.soria #mainForm div.cluster",
+      "newValue": "body.soria #mainForm div.cds--cluster"
+    },
+    {
+      "value": ".cluster .calendar .tr a.selected",
+      "newValue": ".calendar .tr a.selected"
+    },
+    {
+      "value": ".details div.label-field th.label",
+      "newValue": ".details div.label-field .label"
+    },
+    {
+      "value": ".soria div.cluster table td.field",
+      "newValue": ".soria div.cds--cluster .field"
+    },
+    {
+      "value": ".soria div.cluster div.list table",
+      "newValue": ".soria div.cds--cluster div.list .cds--grid"
+    },
+    {
+      "value": ".soria .cluster table.tab-answers",
+      "newValue": ".soria .cds--cluster .tab-answers"
+    },
+    {
+      "value": ".soria .cluster h3 + p.description",
+      "newValue": ".soria .cds--cluster h3 + p.description"
+    },
+    {
+      "value": ".soria div.cluster .header-wrapper",
+      "newValue": ".soria div.cds--cluster .header-wrapper"
+    },
+    {
+      "value": ".soria .cluster div.tabHeaderHover",
+      "newValue": ".soria .cds--cluster div.tabHeaderHover"
+    },
+    {
+      "value": ".soria div.cluster table td.user12",
+      "newValue": ".soria div.cluster table .cds--col.user12"
+    },
+    {
+      "value": "body.details .cluster .top .center",
+      "newValue": "body.details .cds--cluster .top .center"
+    },
+    {
+      "value": ".soria div.cluster table.dayView td",
+      "newValue": ".soria table.dayView td"
+    },
+    {
+      "value": ".details div.cluster table th.label",
+      "newValue": ".details div.cds--cluster .label"
+    },
+    {
+      "value": ".soria div.cluster td.top div.list ",
+      "newValue": ".soria div.cds--cluster .top div.list"
+    },
+    {
+      "value": ".soria .cluster .dijitValidationIcon",
+      "newValue": ".soria .cds--cluster .dijitValidationIcon"
+    },
+    {
+      "value": ".details .cluster th.label, .list td",
+      "newValue": ".details .cds--cluster .label, .list td"
+    },
+    {
+      "value": ".details .cluster h3 + p.description",
+      "newValue": ".details .cds--cluster h3 + p.description"
+    },
+    {
+      "value": ".soria div.list table td.field.right",
+      "newValue": ".soria div.list table td.field.right"
+    },
+    {
+      "value": ".soria div.cluster table#MeetingView",
+      "newValue": ".soria div.cds--cluster #MeetingView"
+    },
+    {
+      "value": ".soria div.cluster table td.regionR2",
+      "newValue": ".soria div.cds--cluster .cds--col.regionR1"
+    },
+    {
+      "value": ".soria div.cluster table td.regionR3",
+      "newValue": ".soria div.cds--cluster .cds--col.regionR2"
+    },
+    {
+      "value": ".soria div.cluster table td.regionR4",
+      "newValue": ".soria div.cds--cluster .cds--col.regionR3"
+    },
+    {
+      "value": ".soria div.cluster table td.regionR5",
+      "newValue": ".soria div.cds--cluster .cds--col.regionR4"
+    },
+    {
+      "value": "body.agenda-player .cluster th.label",
+      "newValue": "body.agenda-player .cds--cluster .cds--col.label"
+    },
+    {
+      "value": "body.details div.cluster div.cluster",
+      "newValue": "body.details div.cds--cluster div.cds--cluster"
+    },
+    {
+      "value": ".soria .cluster table.tab-description",
+      "newValue": ".soria .cds--cluster .tab-description"
+    },
+    {
+      "value": ".soria div.cluster table td.container",
+      "newValue": ".soria div.cds--cluster .container"
+    },
+    {
+      "value": ".soria div.cluster td.top div.cluster",
+      "newValue": ".soria div.cds--cluster .top div.cds--cluster"
+    },
+    {
+      "value": ".soria .cluster .tab-answers thead th",
+      "newValue": ".soria .cds--cluster .tab-answers .cds--col"
+    },
+    {
+      "value": ".soria .cluster .tab-answers tbody td",
+      "newValue": ".soria .cds--cluster .tab-answers .cds--col"
+    },
+    {
+      "value": "div.outer-cluster-borderless div.list",
+      "newValue": "cluster span.popup-field input, span.popup-field textarea"
+    },
+    {
+      "value": "body.soria div.cluster-with-no-header",
+      "newValue": "body.soria div.cds--cluster-with-no-header"
+    },
+    {
+      "value": "div.cluster div.cluster-no-border-all",
+      "newValue": "cds--cluster div.cluster-no-border-all"
+    },
+    {
+      "value": ".details .cluster td.cluster-pad-first",
+      "newValue": ".details .cds--cluster .cluster-pad-first"
+    },
+    {
+      "value": ".details div.cluster table td.field h3",
+      "newValue": ".details div.cds--cluster .field h3"
+    },
+    {
+      "value": ".soria div.cluster table td.last-cell ",
+      "newValue": ".soria div.cds--cluster .last-cell"
+    },
+    {
+      "value": ".soria .cluster td.codetable.last-cell",
+      "newValue": ".soria .cds--cluster .codetable.last-cell"
+    },
+    {
+      "value": ".soria div.cluster table td.field.left",
+      "newValue": ".soria div.cds--cluster .field.left"
+    },
+    {
+      "value": ".soria .cluster div.tab-answers-header",
+      "newValue": ".soria .cds--cluster div.tab-answers-header"
+    },
+    {
+      "value": ".soria .cluster .tab-description-value",
+      "newValue": ".soria .cds--cluster .tab-description-value"
+    },
+    {
+      "value": ".soria .cluster .calendar table.dayView",
+      "newValue": ".soria .calendar table.dayView"
+    },
+    {
+      "value": ".soria .cluster .calendar td.next-month",
+      "newValue": ".soria .calendar td.next-month"
+    },
+    {
+      "value": ".details .cluster h3, .details .list h3",
+      "newValue": ".details .cds--cluster h3, .details .list h3"
+    },
+    {
+      "value": ".soria div.cluster table td.field.right",
+      "newValue": ".soria div.cds--cluster .field.right"
+    },
+    {
+      "value": ".soria div.cluster table div.list table",
+      "newValue": ".soria div.cds--cluster div.list .cds--grid"
+    },
+    {
+      "value": ".soria .cluster table.tab-answers thead",
+      "newValue": ".soria .cds--cluster .tab-answers thead"
+    },
+    {
+      "value": ".soria .cluster .calendar table.dayView ",
+      "newValue": ".soria .calendar table.dayView"
+    },
+    {
+      "value": ".soria .cluster .calendar .tr a.selected",
+      "newValue": ".soria .calendar .tr a.selected"
+    },
+    {
+      "value": ".soria div.cluster div.header-wrapper h3",
+      "newValue": ".soria div.cds--cluster div.header-wrapper h3"
+    },
+    {
+      "value": ".soria div.cluster table td.field.center",
+      "newValue": ".soria div.cds--cluster .field.center"
+    },
+    {
+      "value": "div.outer-cluster-borderless div.cluster",
+      "newValue": ".cluster-wizard .first "
+    },
+    {
+      "value": "body.soria div.cluster table.rates-table",
+      "newValue": "body.soria .rates-table"
+    },
+    {
+      "value": "body.details .cluster .top .center .right",
+      "newValue": "body.details .cds--cluster .top .center .right"
+    },
+    {
+      "value": ".soria .cluster .calendar td.current-month",
+      "newValue": ".soria .calendar td.current-month"
+    },
+    {
+      "value": ".details div.cluster-wrapper table.cluster",
+      "newValue": ".details div.cluster-wrapper .cds--cluster"
+    },
+    {
+      "value": ".soria .cluster table, .soria .list table ",
+      "newValue": ".soria .cds--cluster h3 + p.description"
+    },
+    {
+      "value": ".soria div.cluster table td.container.left",
+      "newValue": ".soria div.cds--cluster .container.left"
+    },
+    {
+      "value": ".soria div.cluster table td.codetable.left",
+      "newValue": ".soria div.cds--cluster .codetable.left"
+    },
+    {
+      "value": ".soria div.cluster table td.last-cell.left",
+      "newValue": ".soria div.cds--cluster .last-cell.left"
+    },
+    {
+      "value": ".details .details-cluster-wrapper .cluster",
+      "newValue": ".details .details-cluster-wrapper .cds--cluster"
+    },
+    {
+      "value": ".soria .cluster div.tab-description-header",
+      "newValue": ".soria .cds--cluster div.tab-description-header"
+    },
+    {
+      "value": "body.details.list-inline-page .top .center",
+      "newValue": "body.details.list-inline-page .top .center"
+    },
+    {
+      "value": "body.soria div.cluster table.rates-table a",
+      "newValue": "body.soria .rates-table a"
+    },
+    {
+      "value": ".soria .cluster .calendar td.previous-month",
+      "newValue": ".soria .calendar td.previous-month"
+    },
+    {
+      "value": ".details .no-round-corners-wrapper .cluster",
+      "newValue": ".details .no-round-corners-wrapper .cds--cluster"
+    },
+    {
+      "value": ".soria div.cluster table td.container.right",
+      "newValue": ".soria div.cds--cluster .container.right"
+    },
+    {
+      "value": ".soria div.cluster table td.codetable.right",
+      "newValue": ".soria div.cds--cluster .codetable.right"
+    },
+    {
+      "value": ".soria div.cluster table td.last-cell.right",
+      "newValue": ".soria div.cds--cluster .last-cell.right"
+    },
+    {
+      "value": ".soria .cluster td.container span.container",
+      "newValue": ".soria .cds--cluster .container span.container"
+    },
+    {
+      "value": ".soria div.cluster div div.header-wrapper p",
+      "newValue": ".soria div.cds--cluster div div.header-wrapper p"
+    },
+    {
+      "value": ".soria div.cluster td.top.last-col div.list",
+      "newValue": ".soria div.cds--cluster .top.last-col div.list"
+    },
+    {
+      "value": "body.soria .cluster .calendar th.dayViewRow",
+      "newValue": "body.soria .calendar tbody tr td.dayViewRow"
+    },
+    {
+      "value": "body.soria div.cluster table.rates-table td",
+      "newValue": "body.soria div.cluster table.rates-table tbody tr.header th"
+    },
+    {
+      "value": ".soria div.cluster table.dayView tbody tr th",
+      "newValue": ".soria table.dayView tbody tr th"
+    },
+    {
+      "value": ".soria div.cluster table td.container.center",
+      "newValue": ".soria div.cds--cluster .container.center"
+    },
+    {
+      "value": ".soria div.cluster table td.codetable.center",
+      "newValue": ".soria div.cds--cluster .codetable.center"
+    },
+    {
+      "value": ".soria div.cluster table td.last-cell.center",
+      "newValue": ".soria div.cds--cluster .last-cell.center"
+    },
+    {
+      "value": ".soria div.cluster div div.header-wrapper h3",
+      "newValue": ".soria div.cds--cluster div div.header-wrapper h3"
+    },
+    {
+      "value": ".soria div.cluster td.top.first-col div.list",
+      "newValue": ".soria div.cds--cluster .top.first-col div.list"
+    },
+    {
+      "value": ".soria .cluster .tabContent .tab-description",
+      "newValue": ".soria .cds--cluster .tabContent .tab-description"
+    },
+    {
+      "value": "body.soria div.cluster table.rates-table img",
+      "newValue": "body.soria .rates-table img"
+    },
+    {
+      "value": "body.rtl.curam.soria.smart-panel div.cluster",
+      "newValue": "body.rtl.curam.soria.smart-panel div.list"
+    },
+    {
+      "value": "body.soria div#content div.cluster table td a",
+      "newValue": "body.soria div#content div.cds--cluster .cds--col a"
+    },
+    {
+      "value": ".soria div.cluster td.top.last-col div.cluster",
+      "newValue": ".soria div.cds--cluster .top.last-col div.cds--cluster"
+    },
+    {
+      "value": ".soria div.cluster table td.last-cell textarea",
+      "newValue": ".soria div.cds--cluster table td.last-cell textarea"
+    },
+    {
+      "value": ".soria div.cluster table td.container.last-cell",
+      "newValue": ".soria div.cds--cluster .container.last-cell"
+    },
+    {
+      "value": ".soria div.cluster td.top.first-col div.cluster",
+      "newValue": ".soria div.cds--cluster .top.first-col div.cds--cluster"
+    },
+    {
+      "value": "body.details div.cluster, body.details div.list",
+      "newValue": "body.details div.cds--cluster, body.details div.list"
+    },
+    {
+      "value": "body.details div.cluster-wrapper table.cluster,",
+      "newValue": "body.details div.cluster-wrapper table.cds--cluster"
+    },
+    {
+      "value": ".soria div.cluster div.list table td.field.right",
+      "newValue": ".soria div.cds--cluster div.list .field.right"
+    },
+    {
+      "value": ".soria div.cluster table td span.container.right",
+      "newValue": ".soria div.cds--cluster span.container.right"
+    },
+    {
+      "value": ".soria div.cluster table td.field.last-cell.left",
+      "newValue": ".soria div.cds--cluster .field.last-cell.left"
+    },
+    {
+      "value": ".meeting-view.single-select tbody tr td.schedule",
+      "newValue": ".meeting-view.single-select .cds--col.schedule"
+    },
+    {
+      "value": ".soria div.cluster table td.field.last-cell.right",
+      "newValue": ".soria div.cds--cluster .field.last-cell.right"
+    },
+    {
+      "value": "body.soria div.cluster-with-no-header div.cluster",
+      "newValue": "body.soria div.cluster-with-no-header div.cds--cluster"
+    },
+    {
+      "value": "body.soria div.cluster table.rates-table a:hover",
+      "newValue": "body.soria .rates-table a:hover"
+    },
+    {
+      "value": ".soria div.cluster div.header-wrapper h3.collapse",
+      "newValue": ".soria div.cluster div.header-wrapper h3"
+    },
+    {
+      "value": "body.curam.soria .cluster .calendar td.next-month",
+      "newValue": "body.curam.soria .calendar td.next-month"
+    },
+    {
+      "value": "body.curam.soria .cluster .calendar table.dayView",
+      "newValue": "body.curam.soria .calendar table.dayView"
+    },
+    {
+      "value": ".soria div.cluster table td.field.last-cell.center",
+      "newValue": ".soria div.cds--cluster .field.last-cell.center"
+    },
+    {
+      "value": "body div.cluster ul.pagination-control-list select",
+      "newValue": "body div.cds--cluster ul.pagination-control-list select"
+    },
+    {
+      "value": "body.soria div.cluster table.rates-table a:visited",
+      "newValue": "body.soria .rates-table a:visited"
+    },
+    {
+      "value": ".soria div.cluster table td div.checkboxed-list div",
+      "newValue": ".soria div.cds--cluster .checkboxed-list div"
+    },
+    {
+      "value": ".soria div.cluster.cluster-with-no-header div table",
+      "newValue": ".soria div.cds--cluster.cluster-with-no-header div .cds--grid"
+    },
+    {
+      "value": "body.soria div#content div.cluster table.dayView td",
+      "newValue": "body.soria div#content table.dayView td"
+    },
+    {
+      "value": "div.cluster div.scrollable, div.list div.scrollable",
+      "newValue": "div.list div.scrollable"
+    },
+    {
+      "value": "body.soria div#content div.cluster table td a:hover",
+      "newValue": "body.soria div#content div.cds--cluster .cds--col a:hover"
+    },
+    {
+      "value": "body.soria div.cluster table.rates-table .cell-text",
+      "newValue": "body.soria .rates-table .cell-text"
+    },
+    {
+      "value": ".soria div.cluster table td.container.last-cell.left",
+      "newValue": ".soria div.cds--cluster .container.last-cell.left"
+    },
+    {
+      "value": "body.soria .cluster .calendar tbody tr td.dayViewRow",
+      "newValue": "body.soria .calendar th.dayViewRow"
+    },
+    {
+      "value": "body.soria div.cluster table tbody td.field textarea",
+      "newValue": "body.soria div.cds--cluster .field textarea"
+    },
+    {
+      "value": "body.curam.soria .cluster .calendar td.current-month",
+      "newValue": "body.curam.soria .calendar td.current-month"
+    },
+    {
+      "value": "body.curam.soria .cluster .calendar table.dayView tr",
+      "newValue": "body.curam.soria .calendar table.dayView tr"
+    },
+    {
+      "value": ".details table.cluster th,table.list table.cluster td",
+      "newValue": ".details .cds--cluster .cds--col,table.list table.cluster td"
+    },
+    {
+      "value": ".soria div.cluster table td.container.last-cell.right",
+      "newValue": ".soria div.cds--cluster .container.last-cell.right"
+    },
+    {
+      "value": ".soria div.cluster table td.codetable.last-cell.right",
+      "newValue": ".soria div.cds--cluster .codetable.last-cell.right"
+    },
+    {
+      "value": ".soria div.cluster table td.codetable.last-cell.left,",
+      "newValue": ".soria div.cds--cluster .codetable.last-cell.left"
+    },
+    {
+      "value": ".soria div.cluster td.top.first-col.last-col div.list",
+      "newValue": ".soria div.cds--cluster .top.first-col.last-col div.list"
+    },
+    {
+      "value": "body.soria div.cluster table.rates-table tr.header td",
+      "newValue": "body.soria .rates-table .header"
+    },
+    {
+      "value": "body.rtl.curam.soria .cluster .calendar td.next-month",
+      "newValue": "body.rtl.curam.soria .calendar td.next-month"
+    },
+    {
+      "value": "body.rtl.curam.soria .cluster .calendar table.dayView",
+      "newValue": "body.rtl.curam.soria .calendar table.dayView"
+    },
+    {
+      "value": "body.curam.soria .cluster .calendar td.previous-month",
+      "newValue": "body.curam.soria .calendar td.previous-month"
+    },
+    {
+      "value": ".soria .cluster .calendar tr td.current-month-selected",
+      "newValue": ".soria .calendar tr td.current-month-selected"
+    },
+    {
+      "value": ".soria div.cluster table td.codetable table.dijitSelec",
+      "newValue": ".soria div.list table td.codetable table.dijitSelect"
+    },
+    {
+      "value": ".soria div.cluster table td.container.last-cell.center",
+      "newValue": ".soria div.cds--cluster .container.last-cell.center"
+    },
+    {
+      "value": ".soria div.cluster table td.codetable.last-cell.center",
+      "newValue": ".soria div.cds--cluster .codetable.last-cell.center"
+    },
+    {
+      "value": "body.soria div.cluster table.rates-table tr.header img",
+      "newValue": "body.soria .rates-table .header img"
+    },
+    {
+      "value": "body.soria div.cluster table.rates-table td.empty-cell",
+      "newValue": "body.soria .rates-table .empty-cell"
+    },
+    {
+      "value": ".soria div.cluster table td.field div.header-wrapper h3",
+      "newValue": ".soria div.cds--cluster .field div.header-wrapper h3"
+    },
+    {
+      "value": ".soria div.cluster div.header-wrapper h3.collapse-title",
+      "newValue": ".soria div.cds--cluster div.header-wrapper h3.collapse-title"
+    },
+    {
+      "value": ".soria .cluster .tab-description .tab-description-label",
+      "newValue": ".soria .cds--cluster .tab-description .tab-description-label"
+    },
+    {
+      "value": "body.soria div.cluster table.rates-table td.row-header ",
+      "newValue": "body.soria .rates-table .row-header"
+    },
+    {
+      "value": "body.curam.soria div.list, body.curam.soria div.cluster",
+      "newValue": "body.curam.soria div.list"
+    },
+    {
+      "value": ".soria .cluster .calendar .current-month-selected a:link",
+      "newValue": ".soria .calendar .current-month-selected a:link"
+    },
+    {
+      "value": ".soria div.cluster div.header-wrapper h3 .collapse-title",
+      "newValue": ".soria div.cds--cluster div.header-wrapper h3 .collapse-title"
+    },
+    {
+      "value": ".soria div.cluster table div.list.list-with-header table",
+      "newValue": ".soria div.cds--cluster div.list.list-with-header .cds--grid"
+    },
+    {
+      "value": ".soria div.cluster td.top.first-col.last-col div.cluster",
+      "newValue": ".soria div.cds--cluster .top.first-col.last-col div.cds--cluster"
+    },
+    {
+      "value": "body.soria div#content div.cluster table th.dayViewRow a",
+      "newValue": "body.soria div#content table th.dayViewRow a"
+    },
+    {
+      "value": "body.rtl.curam.soria .cluster .calendar td.current-month",
+      "newValue": "body.rtl.curam.soria .calendar td.current-month"
+    },
+    {
+      "value": ".soria div.cluster .evidence-comparison table tr th.field",
+      "newValue": ".soria .evidence-comparison .field"
+    },
+    {
+      "value": "body.soria div#content div.cluster table.rates-table td a",
+      "newValue": "body.soria div#content .rates-table .cds--col a"
+    },
+    {
+      "value": "body.rtl.curam.soria .cluster .calendar td.previous-month",
+      "newValue": "body.rtl.curam.soria .calendar td.previous-month"
+    },
+    {
+      "value": "body.curam.soria div#content div.cluster table.dayView td",
+      "newValue": "body.curam.soria div#content table.dayView td"
+    },
+    {
+      "value": "body.soria div.cluster table.rates-table td span.cell-span",
+      "newValue": "body.soria .rates-table .cds--col span.cell-span"
+    },
+    {
+      "value": "body.soria div.cluster table.rates-table td.sub-row-header",
+      "newValue": "body.soria .rates-table .sub-row-header"
+    },
+    {
+      "value": "body.soria div.cluster table.rates-table tbody tr.header th",
+      "newValue": "body.soria .rates-table tbody .header .cds--col"
+    },
+    {
+      "value": ".soria div.cluster div.header-wrapper h3 + .grouptoggleArrow",
+      "newValue": ".soria div.cds--cluster div.header-wrapper h3 + .grouptoggleArrow"
+    },
+    {
+      "value": ".soria div.cluster .evidence-comparison table tr .field span",
+      "newValue": ".soria .evidence-comparison .field span"
+    },
+    {
+      "value": "body.soria div#content div.cluster table.dayView tbody tr th",
+      "newValue": "body.soria div#content table.dayView td"
+    },
+    {
+      "value": "body.soria div.cluster table.rates-table td.sub-column-heade",
+      "newValue": "body.soria .rates-table .cds--col.sub-column-header"
+    },
+    {
+      "value": "body.soria div.cluster table.rates-table tr.header td.header",
+      "newValue": "body.soria .rates-table .header .cds--col"
+    },
+    {
+      "value": "div.tab div.cluster, div.tab div.list, div.tab div.action-set",
+      "newValue": "div.tab div.list, div.tab div.action-set"
+    },
+    {
+      "value": ".soria div.cluster .evidence-comparison table tr th.field span",
+      "newValue": ".soria .evidence-comparison .field span"
+    },
+    {
+      "value": "body#Curam_user-prefs-editor div.prefs-cluster td.field select",
+      "newValue": "body#Curam_user-prefs-editor div.prefs-cluster td.field select"
+    },
+    {
+      "value": "div.cluster.collapse h3.collapse, div.list.collapse h3.collapse",
+      "newValue": "div.list.collapse h3.collapse"
+    },
+    {
+      "value": "body.soria div.cluster table.rates-table tr.rates-table-body td",
+      "newValue": "body.soria .rates-table .rates-table-body .cds--col"
+    },
+    {
+      "value": ".details div.cluster, .details div.list, .details div.action-set",
+      "newValue": ".details div.cds--cluster, .details div.list, .details div.action-set"
+    },
+    {
+      "value": ".soria div.cluster div div.header-wrapper h3 span.collapse-title",
+      "newValue": ".soria div.cds--cluster div div.header-wrapper h3 span.collapse-title"
+    },
+    {
+      "value": "body.soria div#content div.cluster div.calendar table.dayView td",
+      "newValue": "body.soria div#content div.calendar table.dayView td"
+    },
+    {
+      "value": "body.soria div.cluster table tbody td.codetable select.codetable",
+      "newValue": "body.soria div.cds--cluster .codetable select.codetable"
+    },
+    {
+      "value": "body.soria div.cluster table.rates-table td span.sub-column-span",
+      "newValue": "body.soria .rates-table .cds--col span.sub-column-span"
+    },
+    {
+      "value": "body.curam.soria .cluster .calendar tr td.current-month-selected",
+      "newValue": "body.curam.soria .calendar tr td.current-month-selected"
+    },
+    {
+      "value": "body.curam.soria .cluster .calendar table.dayView tr:first-child",
+      "newValue": "body.curam.soria .calendar table.dayView tr:first-child"
+    },
+    {
+      "value": ".soria div.cluster.cluster-with-no-header td.top.last-col div.list",
+      "newValue": ".soria div.cds--cluster.cluster-with-no-header .top.last-col div.list"
+    },
+    {
+      "value": "body.soria div.cluster table.rates-table tbody tr.header th.header",
+      "newValue": "body.soria .rates-table .header .cds--col"
+    },
+    {
+      "value": "body.curam.soria div#content div.cluster table.dayView tbody tr th",
+      "newValue": "body.curam.soria div#content table.dayView tbody tr th"
+    },
+    {
+      "value": "div.cluster.uncollapse h3.collapse, div.list.uncollapse h3.collapse",
+      "newValue": "div.list.uncollapse h3.collapse"
+    },
+    {
+      "value": ".soria div.cluster div.header-wrapper h3.collapse + .grouptoggleArrow",
+      "newValue": ".soria div.cds--cluster div.header-wrapper h3.collapse + .grouptoggleArrow"
+    },
+    {
+      "value": ".soria div.cluster.cluster-with-no-header td.top.last-col div.cluster",
+      "newValue": ".soria div.cds--cluster.cluster-with-no-header .top.last-col div.cds--cluster"
+    },
+    {
+      "value": ".soria div.cluster .evidence-comparison table thead tr th.last-header",
+      "newValue": ".soria .evidence-comparison .last-header"
+    },
+    {
+      "value": ".soria div.cluster.cluster-with-no-header td.top.first-col div.cluster",
+      "newValue": ".soria div.cluster.cluster-with-no-header td.top.first-col div.list"
+    },
+    {
+      "value": ".soria div.cluster .evidence-comparison table thead tr th.first-header",
+      "newValue": ".soria .evidence-comparison .first-header"
+    },
+    {
+      "value": "body.soria div.cluster table.rates-table tbody tr.header td.empty-cell",
+      "newValue": "body.soria .rates-table .header .empty-cell"
+    },
+    {
+      "value": ".soria div.cluster table td.field div.header-wrapper h3 .collapse-title",
+      "newValue": ".soria div.cds--cluster .field div.header-wrapper h3 .collapse-title"
+    },
+    {
+      "value": ".soria div.cluster table div.list.list-with-header div.scrollable table",
+      "newValue": ".soria div.cds--cluster div.list.list-with-header div.scrollable .cds--grid"
+    },
+    {
+      "value": "body.soria div#content div.cluster table.rates-table tbody tr.header th",
+      "newValue": "body.soria div#content .rates-table .header .cds--col"
+    },
+    {
+      "value": "body.curam.soria.details div.cluster, body.curam.soria.details div.list",
+      "newValue": "body.curam.soria.details div.list"
+    },
+    {
+      "value": ".soria div.list table td.field div.header-wrapper h3 + .grouptoggleArrow",
+      "newValue": ".soria div.list .field div.header-wrapper h3 + .grouptoggleArrow"
+    },
+    {
+      "value": ".soria div.details-cluster-wrapper div.cluster div div.header-wrapper h3",
+      "newValue": ".soria div.details-cluster-wrapper div.cds--cluster div div.header-wrapper h3"
+    },
+    {
+      "value": ".soria div.cluster .evidence-comparison table tr .field.last-header span",
+      "newValue": ".soria .evidence-comparison .field.last-header span"
+    },
+    {
+      "value": "body.curam.soria .cluster .calendar table.dayView tbody tr td.dayViewRow",
+      "newValue": "body.curam.soria .calendar table.dayView tbody tr td.dayViewRow"
+    },
+    {
+      "value": ".soria div.cluster table td.codetable table.dijitSelect .dijitArrowButton",
+      "newValue": ".soria div.list table td.codetable table.dijitSelect .dijitArrowButton"
+    },
+    {
+      "value": ".soria div.cluster table td.codetable table.dijitSelect .dijitSelectLabel",
+      "newValue": ".soria div.list table td.codetable table.dijitSelect .dijitSelectLabel"
+    },
+    {
+      "value": ".soria div.cluster div div.header-wrapper h3.collapse span.collapse-title",
+      "newValue": ".soria div.cds--cluster div div.header-wrapper h3.collapse span.collapse-title"
+    },
+    {
+      "value": "body.soria div#content div.cluster div.calendar table.dayView tbody tr td",
+      "newValue": "body.soria div#content div.calendar table.dayView tbody tr td"
+    },
+    {
+      "value": "body.soria div#content div.cluster table.dayView tbody tr td.dayViewRow a",
+      "newValue": "body.soria div#content table.dayView tbody tr td.dayViewRow a"
+    },
+    {
+      "value": "body.soria div.cluster table.rates-table tr.rates-table-body td.last-cell",
+      "newValue": "body.soria .rates-table .rates-table-body .last-cell"
+    },
+    {
+      "value": "body.soria div#content div.cluster table.rates-table tbody tr.header th a ",
+      "newValue": "body.soria div#content .rates-table .header .cds--col a"
+    },
+    {
+      "value": "body.soria div.cluster table.rates-table tr.rates-table-body td.row-header",
+      "newValue": "body.soria .rates-table .rates-table-body .row-header"
+    },
+    {
+      "value": ".soria div.cluster table td.field div.header-wrapper h3 + .grouptoggleArrow",
+      "newValue": ".soria div.cds--cluster .field div.header-wrapper h3 + .grouptoggleArrow"
+    },
+    {
+      "value": "body.soria div#content div.cluster div.calendar table.dayView th.dayViewRow",
+      "newValue": "body.soria div#content div.calendar table.dayView th.dayViewRow"
+    },
+    {
+      "value": "body.soria div#content div.cluster table td a.list-details-row-toggle:hover",
+      "newValue": "body.soria div#content div.cds--cluster .cds--col a.list-details-row-toggle:hover"
+    },
+    {
+      "value": ".soria div.cluster.cluster-with-no-header td.top.first-col.last-col div.list",
+      "newValue": ".soria div.cds--cluster.cluster-with-no-header .top.first-col.last-col div.list"
+    },
+    {
+      "value": "body.rtl.curam.soria .cluster .calendar table.dayView tbody tr td.dayViewRow",
+      "newValue": "body.rtl.curam.soria .calendar table.dayView tbody tr td.dayViewRow"
+    },
+    {
+      "value": "body.soria div.cluster table.rates-table tbody tr.header th.sub-column-header",
+      "newValue": "body.soria .rates-table .header .sub-column-header"
+    },
+    {
+      "value": "body.soria div.cluster table.rates-table tr.header:first-child td.last-header",
+      "newValue": "body.soria .rates-table .header:first-child .cds--col.last-header"
+    },
+    {
+      "value": "body.soria div.cluster table.rates-table tr.header:first-child td:first-child",
+      "newValue": "body.soria .rates-table .header:first-child .cds--col:first-child"
+    },
+    {
+      "value": ".soria div.cluster.cluster-with-no-header td.top.first-col.last-col div.cluster",
+      "newValue": ".soria div.cds--cluster.cluster-with-no-header .top.first-col.last-col div.cds--cluster"
+    },
+    {
+      "value": "body.soria .cluster div.cluster-with-no-header div.cluster-with-no-header table",
+      "newValue": "body.soria .cds--cluster div.cluster-with-no-header div.cluster-with-no-header .cds--grid"
+    },
+    {
+      "value": "body.curam.soria div#content div.cluster .meeting-view.single-select table td a",
+      "newValue": "body.curam.soria div#content .meeting-view.single-select .cds--col a"
+    },
+    {
+      "value": "body.curam.soria div#content div.cluster table.dayView tbody tr td.dayViewRow a",
+      "newValue": "body.curam.soria div#content table.dayView tbody tr td.dayViewRow a"
+    },
+    {
+      "value": "body.curam.soria div.cluster .meeting-view.single-select table tr td:first-child",
+      "newValue": "body.curam.soria .meeting-view.single-select table .cds--col:first-child"
+    },
+    {
+      "value": ".soria div.list table td.field div.header-wrapper h3.collapse + .grouptoggleArrow",
+      "newValue": ".soria div.list .field div.header-wrapper h3.collapse + .grouptoggleArrow"
+    },
+    {
+      "value": ".soria div.cluster table td.codetable table.dijitSelectActive .dijitButtonContents",
+      "newValue": ".soria div.list table td.codetable table.dijitSelectActive .dijitButtonContents"
+    },
+    {
+      "value": ".soria div.cluster.is-collapsed div.header-wrapper h3.collapse + .grouptoggleArrow",
+      "newValue": ".soria div.cds--cluster.is-collapsed div.header-wrapper h3.collapse + .grouptoggleArrow"
+    },
+    {
+      "value": ".soria div.cluster table td.field div.header-wrapper h3.collapse + .grouptoggleArrow",
+      "newValue": ".soria div.cds--cluster .field div.header-wrapper h3.collapse + .grouptoggleArrow"
+    },
+    {
+      "value": "body.soria div#content div.cluster div.calendar table.dayView td.all-day-events-cell",
+      "newValue": "body.soria div#content div.calendar table.dayView td.all-day-events-cell"
+    },
+    {
+      "value": "body.soria div#content div.cluster div.calendar table.dayView tbody tr td.dayViewRow",
+      "newValue": "body.soria div#content div.calendar table.dayView tbody tr td.dayViewRow"
+    },
+    {
+      "value": "body.rtl.curam.soria div.cluster .meeting-view.single-select table tr td:first-child",
+      "newValue": "body.rtl.curam.soria .cds--cluster .meeting-view.single-select .cds--col:first-child"
+    },
+    {
+      "value": "body.curam.soria div.cluster.is-collapsed div.header-wrapper .grouptoggleArrow:focus",
+      "newValue": "body.curam.soria div.list.is-collapsed div.header-wrapper .grouptoggleArrow:focus"
+    },
+    {
+      "value": ".soria div.cluster.cluster-with-no-header table div.cluster.cluster-with-header table",
+      "newValue": ".soria div.cds--cluster.cluster-with-no-header .cds--grid div.cds--cluster.cluster-with-header .cds--grid"
+    },
+    {
+      "value": "body.soria div#content div.cluster div.calendar table.dayView td.first-calendar-field",
+      "newValue": "body.soria div#content div.calendar table.dayView td.first-calendar-field"
+    },
+    {
+      "value": "body.soria div#content div.cluster div.calendar table.dayView tbody tr td.dayViewRow",
+      "newValue": "body.soria div#content div.calendar table.dayView tbody tr td.dayViewRow"
+    },
+    {
+      "value": "body.soria div#content div.cluster div.calendar table.week-view td.last-calendar-field",
+      "newValue": "body.soria div#content div.calendar table.week-view td.last-calendar-field"
+    },
+    {
+      "value": ".soria div.details-cluster-wrapper div.cluster div div.header-wrapper .grouptoggleArrow",
+      "newValue": ".soria div.details-cluster-wrapper div.cds--cluster div div.header-wrapper .grouptoggleArrow"
+    },
+    {
+      "value": "body.soria div#content div.cluster div.calendar table.week-view td.first-calendar-field",
+      "newValue": "body.soria div#content div.calendar table.week-view td.first-calendar-field "
+    },
+    {
+      "value": "body.curam.soria div#content div.cluster div.calendar table.week-view td.week-empty-cell",
+      "newValue": "body.curam.soria div#content div.calendar table.week-view td.week-empty-cell"
+    },
+    {
+      "value": "body.soria div.cluster table.rates-table tbody tr.header th.sub-column-header:first-child",
+      "newValue": "body.soria .rates-table .header .sub-column-header:first-child"
+    },
+    {
+      "value": ".soria div.details-cluster-wrapper div.cluster div div.header-wrapper h3 span.collapse-title",
+      "newValue": ".soria div.details-cluster-wrapper div.cds--cluster div div.header-wrapper h3 span.collapse-title"
+    },
+    {
+      "value": "body.rtl.curam.soria div#content div.cluster div.calendar table.week-view td.week-empty-cell",
+      "newValue": "body.rtl.curam.soria div#content div.calendar table.week-view td.week-empty-cell"
+    },
+    {
+      "value": "body.curam.soria div#content div.cluster div.calendar table.week-view td.last-calendar-field",
+      "newValue": "body.curam.soria div#content div.calendar table.week-view td.last-calendar-field"
+    },
+    {
+      "value": "body.soria div#content div.cluster div.calendar table.dayView tbody tr th.all-day-events-cell",
+      "newValue": "body.soria div#content div.calendar table.dayView tbody tr th.all-day-events-cell"
+    },
+    {
+      "value": "body.rtl.curam.soria div.action-set, body.rtl.curam.details div.cluster-wrapper table.cluster",
+      "newValue": "body.rtl.curam.soria div.action-set"
+    },
+    {
+      "value": "body.curam.soria div#content div.cluster div.calendar table.week-view td.first-calendar-field",
+      "newValue": "body.curam.soria div#content div.calendar table.week-view td.first-calendar-field"
+    },
+    {
+      "value": "body.soria div#content div.cluster div.calendar table.dayView tbody tr th.first-calendar-field",
+      "newValue": "body.soria div#content div.calendar table.dayView tbody tr th.first-calendar-field"
+    },
+    {
+      "value": "body.soria div#content div.cluster div.calendar table.dayView tbody tr th.no-all-day-events-cell",
+      "newValue": "body.soria div#content div.calendar table.dayView tbody tr th.no-all-day-events-cell"
+    },
+    {
+      "value": "body.rtl.curam.soria div#content div.cluster div.calendar table.week-view td.last-calendar-field",
+      "newValue": "body.rtl.curam.soria div#content div.calendar table.week-view td.last-calendar-field"
+    },
+    {
+      "value": ".soria div.cluster.init-collapsed.is-collapsed div.header-wrapper h3.collapse + .grouptoggleArrow",
+      "newValue": ".soria div.cds--cluster.init-collapsed.is-collapsed div.header-wrapper h3.collapse + .grouptoggleArrow"
+    },
+    {
+      "value": ".soria div.cluster.is-collapsed table td.field div.header-wrapper h3.collapse + .grouptoggleArrow",
+      "newValue": ".soria div.cds--cluster.is-collapsed .field div.header-wrapper h3.collapse + .grouptoggleArrow"
+    },
+    {
+      "value": "body.soria div#content div.cluster div.calendar table.dayView tbody tr th.no-all-day-events-cell ",
+      "newValue": "body.soria div#content div.calendar table.dayView tbody tr th.no-all-day-events-cell"
+    },
+    {
+      "value": "body.soria div#content div.cluster div.calendar table.monthView td.next-month.last-calendar-field",
+      "newValue": "body.soria div#content div.calendar table.monthView td.next-month.last-calendar-field"
+    },
+    {
+      "value": "body.rtl.curam.soria div#content div.cluster div.calendar table.week-view td.first-calendar-field",
+      "newValue": "body.rtl.curam.soria div#content div.calendar table.week-view td.first-calendar-field"
+    },
+    {
+      "value": "body.soria div#content div.cluster div.calendar table.monthView td.next-month.first-calendar-field",
+      "newValue": "body.soria div#content div.calendar table.monthView td.next-month.first-calendar-field"
+    },
+    {
+      "value": ".soria div.details-cluster-wrapper div.cluster.is-collapsed div div.header-wrapper .grouptoggleArrow",
+      "newValue": ".soria div.details-cluster-wrapper div.cds--cluster.is-collapsed div div.header-wrapper .grouptoggleArrow"
+    },
+    {
+      "value": "body.soria div#content div.cluster div.calendar table.monthView td.current-month.last-calendar-field",
+      "newValue": "body.soria div#content div.calendar table.monthView td.current-month.last-calendar-field"
+    },
+    {
+      "value": "body.soria div#content div.cluster div.calendar table.monthView td.current-month.first-calendar-field",
+      "newValue": "body.soria div#content div.calendar table.monthView td.current-month.first-calendar-field,"
+    },
+    {
+      "value": "body.soria div#content div.cluster div.calendar table.monthView td.previous-month.last-calendar-field",
+      "newValue": "body.soria div#content div.calendar table.monthView td.previous-month.last-calendar-field"
+    },
+    {
+      "value": ".soria div.cluster div table td.top div.cluster div div.header-wrapper h3.collapse span.collapse-title",
+      "newValue": ".soria div.cds--cluster .top div.cds--cluster div div.header-wrapper h3.collapse span.collapse-title"
+    },
+    {
+      "value": "body.soria div#content div.cluster div.calendar table.monthView td.previous-month.first-calendar-field,",
+      "newValue": "body.soria div#content div.calendar table.monthView td.previous-month.first-calendar-field"
+    },
+    {
+      "value": ".soria div.cluster div table tbody tr td div.cluster div div.header-wrapper h3.collapse span.collapse-title",
+      "newValue": ".soria div.cds--cluster div.header-wrapper h3.collapse span.collapse-title"
+    },
+    {
+      "value": ".soria div.cluster div table td.last-col div.cluster div div.header-wrapper h3.collapse span.collapse-title",
+      "newValue": ".soria div.cds--cluster .last-col div.cds--cluster div div.header-wrapper h3.collapse span.collapse-title"
+    },
+    {
+      "value": ".soria div.cluster div table td.first-col div.cluster div div.header-wrapper h3.collapse span.collapse-title",
+      "newValue": ".soria div.cds--cluster .first-col div.cds--cluster .header-wrapper h3.collapse span.collapse-title"
+    },
+    {
+      "value": "body.soria div#content div.cluster div.calendar table.monthView td.current-month-selected.last-calendar-field",
+      "newValue": "body.soria div#content div.calendar table.monthView td.current-month-selected.last-calendar-field "
+    },
+    {
+      "value": "body.soria div#content div.cluster div.calendar table.monthView th.calendar-heading.last-calendar-header-field",
+      "newValue": "body.soria div#content div.calendar table.monthView th.calendar-heading.last-calendar-header-field"
+    },
+    {
+      "value": "body.soria div#content div.cluster div.calendar table.monthView th.calendar-heading.first-calendar-header-field",
+      "newValue": "body.soria div#content div.calendar table.monthView th.calendar-heading.first-calendar-header-field"
+    },
+    {
+      "value": ".soria div.cluster div table tbody tr td.first-col div.list div div.header-wrapper h3.collapse span.collapse-title",
+      "newValue": ".soria div.cds--cluster .first-col div.list div div.header-wrapper h3.collapse span.collapse-title"
+    },
+    {
+      "value": "body.rtl.curam.details div.details-cluster-wrapper, body.rtl.curam.soria div.list, body.rtl.curam.soria div.cluster",
+      "newValue": "body.rtl.curam.details div.details-cluster-wrapper, body.rtl.curam.soria div.list"
+    },
+    {
+      "value": "body.curam.soria #mainForm div.cluster, body.curam.soria #mainForm div.list, body.curam.soria #mainForm div.action-set",
+      "newValue": "body.curam.soria div.list"
+    },
+    {
+      "value": "body.curam.soria div.cluster table td.field div.header-wrapper h3, body.curam.soria div.list table td.field div.header-wrapper h3",
+      "newValue": "body.curam.soria div.list table td.field div.header-wrapper h3"
+    },
+    {
+      "value": "body.rtl.curam.soria #mainForm div.cluster, body.rtl.curam.soria #mainForm div.list, body.rtl.curam.soria #mainForm div.action-set",
+      "newValue": "body.rtl.curam.soria #mainForm div.list, body.rtl.curam.soria #mainForm div.action-set"
+    },
+    {
+      "value": "body.rtl.curam.soria div.cluster table td.field div.header-wrapper h3, body.rtl.curam.soria div.list table td.field div.header-wrapper h3",
+      "newValue": "body.rtl.curam.soria div.list table td.field div.header-wrapper h3"
+    }
+  ]
+}

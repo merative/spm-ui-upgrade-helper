@@ -18,6 +18,7 @@ const loadConfig = (overrides = {}) => {
     cssRulesTool: {
       // Folder where CSS rules are located
       rulesFolder: "../css-rules-tool/rules",
+      rulesFolderCds:"../css-rules-tool/rulesCds"
     },
     // icon-replacer-tool options
     iconReplacerTool: {

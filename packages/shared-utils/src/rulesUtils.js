@@ -5,7 +5,12 @@ const filesAndFolders = require("./filesAndFolders");
  */
 const loadRules = config => {
   const rulesJson = [];
-  const rulesFiles = filesAndFolders.glob(`${config.cssRulesTool.rulesFolder}/*.json`);
+  console.log("Curam version ",process.env.CURAM_VERSION);
+  if(process.env.CURAM_VERSION == "8.1.0.0"){
+    rulesFiles = filesAndFolders.glob(`${config.cssRulesTool.rulesFolderCds}/*.json`);
+  }else{
+    rulesFiles = filesAndFolders.glob(`${config.cssRulesTool.rulesFolder}/*.json`);
+  }
   rulesFiles.forEach(file => rulesJson.push(readRulesFile(file)));
   return mergeAndSortRules(rulesJson);
 }
