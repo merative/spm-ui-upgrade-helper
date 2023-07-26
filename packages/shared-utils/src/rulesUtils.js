@@ -5,7 +5,6 @@ const filesAndFolders = require("./filesAndFolders");
  */
 const loadRules = config => {
   const rulesJson = [];
-  console.log("Curam version ",process.env.CURAM_VERSION);
   if(process.env.CURAM_VERSION == "8.1.0.0"){
     rulesFiles = filesAndFolders.glob(`${config.cssRulesTool.rulesFolderCds}/*.json`);
   }else{
