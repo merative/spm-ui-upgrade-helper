@@ -4,7 +4,7 @@ const { loadRules } = require("./rulesUtils");
 let info = console.info;
 beforeEach(() => {
   console.info = () => {};
-  process.env.CURAM_VERSION="8.3";
+  process.env.CURAM_VERSION="8.0.1.0";
 });
 
 afterEach(() => {

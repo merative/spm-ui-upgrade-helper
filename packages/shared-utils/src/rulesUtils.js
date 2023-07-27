@@ -5,7 +5,11 @@ const filesAndFolders = require("./filesAndFolders");
  */
 const loadRules = config => {
   const rulesJson = [];
-  if(process.env.CURAM_VERSION == "8.1.0.0"){
+  const curamVersion = process.env.CURAM_VERSION;
+  const regex = new RegExp("([8].[1-9].[0-9].[0-9]|[9].[0-9].[0-9].[0-9])");
+  const newVersion=regex.test(curamVersion);
+  
+  if(newVersion == true){
     rulesFiles = filesAndFolders.glob(`${config.cssRulesTool.rulesFolderCds}/*.json`);
   }else{
     rulesFiles = filesAndFolders.glob(`${config.cssRulesTool.rulesFolder}/*.json`);
