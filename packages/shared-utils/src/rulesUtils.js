@@ -6,7 +6,7 @@ const filesAndFolders = require("./filesAndFolders");
 const loadRules = config => {
   const rulesJson = [];
   const curamVersion = process.env.CURAM_VERSION;
-  const regex = new RegExp("[8].[1-9].[0-9].[0-9]");
+  const regex = new RegExp("^[8].[1-9].[0-9].[0-9]");
   const newVersion=regex.test(curamVersion);
   
   if(newVersion == true){
