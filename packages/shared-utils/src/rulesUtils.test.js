@@ -4,6 +4,7 @@ const { loadRules } = require("./rulesUtils");
 let info = console.info;
 beforeEach(() => {
   console.info = () => {};
+  process.env.CURAM_VERSION="8.0.1.0";
 });
 
 afterEach(() => {
@@ -12,7 +13,7 @@ afterEach(() => {
 
 test('ruleUtils test', () => {
   const overrides = {
-    cssRulesTool: {
+    cssRulesTool: {      
       rulesFolder: "./src/test-data/rulesUtils/rulesFolder",
     },
     logLevel: "quiet",

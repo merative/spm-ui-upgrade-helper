@@ -34,6 +34,7 @@ echo     VERSION = $VERSION
 echo     INPUT_FOLDER = $INPUT_FOLDER
 echo     OUTPUT_FOLDER = $OUTPUT_FOLDER
 echo     DETACH_CMD = $DETACH_CMD
+echo     CURAM_VERSION = $CURAM_VERSION
 echo     
 
 docker-compose rm -v -s -f

@@ -29,12 +29,13 @@ if "%DETACH%" == "true" (
   set DETACH_CMD=
 )
 
+
 echo Starting spm-ui-upgrade-helper
 echo.
 echo     VERSION = %VERSION%
 echo     INPUT_FOLDER = %INPUT_FOLDER%
 echo     OUTPUT_FOLDER = %OUTPUT_FOLDER%
-echo     DETACH_CMD = %DETACH_CMD%
+echo     CURAM_VERSION = %CURAM_VERSION%
 echo.
 
 call docker-compose rm -v -s -f

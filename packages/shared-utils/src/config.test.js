@@ -6,6 +6,7 @@ test('config test with defaults', () => {
     logLevel: "normal",
     cssRulesTool: {
       rulesFolder: "../css-rules-tool/rules",
+      rulesFolderCds: "../css-rules-tool/rulesCds",
     },
     iconReplacerTool: {
       exclude: ["zip", "class", "jpg", "jpeg", "gif", "png"],
@@ -37,6 +38,7 @@ test('config test with all overrides', () => {
     logLevel: "quiet",
     cssRulesTool: {
       rulesFolder: "ccc",
+      rulesFolderCds: "cccddd",
     },
     iconReplacerTool: {
       exclude: "ggg",
@@ -68,6 +70,7 @@ test('config test with some overrides', () => {
     logLevel: "quiet",
     cssRulesTool: {
       rulesFolder: "../some-rules-folder",
+      rulesFolderCds: "../some-rules-folderCds",
     },
     internal: {
       ignorePatternsFile: "eee",
@@ -79,6 +82,7 @@ test('config test with some overrides', () => {
     logLevel: "quiet",
     cssRulesTool: {
       rulesFolder: "../some-rules-folder",
+      rulesFolderCds: "../some-rules-folderCds"
     },
     iconReplacerTool: {
       exclude: ["zip", "class", "jpg", "jpeg", "gif", "png"],
