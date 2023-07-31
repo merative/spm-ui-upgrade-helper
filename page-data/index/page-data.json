@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---src-pages-index-mdx",
+    "path": "/",
+    "result": {"pageContext":{"frontmatter":{"description":"","title":""},"relativePagePath":"/index.mdx","titleType":"page","MdxNode":{"id":"fdaa7f8f-23c5-54e6-9529-77deb5df4077","children":[],"parent":"480c96d7-2db1-5c3e-b53d-43c8bb1bd19b","internal":{"content":"import HomepageTemplate from '../gatsby-theme-carbon/components/Homepage';\n\nexport default  HomepageTemplate;\n","type":"Mdx","contentDigest":"e9fd07b86b62dcc47a870b1a9749580d","owner":"gatsby-plugin-mdx","counter":81},"frontmatter":{"description":"","title":""},"exports":{},"rawBody":"import HomepageTemplate from '../gatsby-theme-carbon/components/Homepage';\n\nexport default  HomepageTemplate;\n","fileAbsolutePath":"/home/runner/work/spm-ui-upgrade-helper/spm-ui-upgrade-helper/packages/gatsby-docs/src/pages/index.mdx"}}},
+    "staticQueryHashes": ["137577622","2102389209","2746626797","3018647132","3037994772","768070550"]}

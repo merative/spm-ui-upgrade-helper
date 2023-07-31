@@ -1,0 +1,5 @@
+{
+    "componentChunkName": "component---src-pages-dev-tests-md",
+    "path": "/dev/tests/",
+    "result": {"pageContext":{"frontmatter":{"title":"Tests"},"relativePagePath":"/dev/tests.md","titleType":"page","MdxNode":{"id":"8e8ce9a0-84ce-5280-80b6-264f287d5315","children":[],"parent":"424da019-a3d4-5fec-9a2b-ef88a3a1575f","internal":{"content":"---\ntitle: Tests\n---\n\nTo run all tests, run `yarn test` from the root folder.\n\nYou can also run `yarn test` inside each package folder.\n","type":"Mdx","contentDigest":"1f40376300fac1b6d743ab864a4f4e2c","owner":"gatsby-plugin-mdx","counter":96},"frontmatter":{"title":"Tests"},"exports":{},"rawBody":"---\ntitle: Tests\n---\n\nTo run all tests, run `yarn test` from the root folder.\n\nYou can also run `yarn test` inside each package folder.\n","fileAbsolutePath":"/home/runner/work/spm-ui-upgrade-helper/spm-ui-upgrade-helper/packages/gatsby-docs/src/pages/dev/tests.md"}}},
+    "staticQueryHashes": ["1364590287","137577622","2102389209","2456312558","2746626797","3018647132","3037994772","768070550"]}
